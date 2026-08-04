@@ -1,0 +1,5 @@
+Created the physics autoformalization in [problem_IPhO_2026_3_B_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:262).
+
+It includes dimensionful quantities, explicit thermodynamic/differential laws, endpoint readouts, and the faithful temperature-change target. `lake env lean` succeeds with only the expected `sorry` warning.
+
+The audit is recorded in [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_2.lean.md). Blueprint marking is deferred to the project’s deterministic `\leanok` sync as required locally.

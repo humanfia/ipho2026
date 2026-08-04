@@ -1,0 +1,7 @@
+Iteration 012 planning is complete.
+
+- No prover dispatched: all three unresolved targets are Review-exhausted 3/3.
+- No new contract revisions, retries, dependency gaps, or coverage debt appeared.
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md).
+- Wrote [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-012/plan.md) and [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-012/objectives.md).
+- Strategy, blueprints, memory, and task ledgers remain unchanged.

@@ -1,0 +1,6 @@
+Completed the physics autoformalization.
+
+- Lean model: [problem_IPhO_2026_3_C_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_C_3.lean)
+- Audit/report: [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_3.lean.md)
+
+Verification: `lake env lean` passes with no errors and exactly one expected `sorry` warning. The blueprint remains untouched per prover permissions; the report records the required `\lean{...}` association for sync.

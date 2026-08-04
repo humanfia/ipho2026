@@ -1,0 +1,6 @@
+Iteration 044 planning is complete.
+
+- Recorded the 3/3 proof-Review gate and no-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-044/plan.md).
+- Documented excluded targets in [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-044/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to reference iteration 044.
+- Strategy, blueprints, memory, notice board, and task ledgers remain unchanged.

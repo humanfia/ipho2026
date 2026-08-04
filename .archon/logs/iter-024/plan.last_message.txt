@@ -1,0 +1,6 @@
+Iteration 024 planning is complete.
+
+- Recorded the mechanical no-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-024/plan.md).
+- Recorded all three exhausted targets in [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-024/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to reference iteration 024.
+- Left strategy, blueprints, ledgers, memory, and Lean files unchanged.

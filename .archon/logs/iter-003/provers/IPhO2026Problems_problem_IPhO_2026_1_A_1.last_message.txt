@@ -1,0 +1,8 @@
+Completed [problem_IPhO_2026_1_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:214) with no remaining `sorry`.
+
+- The theorem signature is unchanged.
+- Lean diagnostics and standalone compilation pass.
+- Full `lake build` passes.
+- Axiom/source audit is clean.
+
+Details are recorded in the [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_A_1.lean.md:1).

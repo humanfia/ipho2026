@@ -1,0 +1,6 @@
+Created the faithful physics autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_B_1.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_1.lean.md)
+
+Verification passes with no errors and exactly five expected `sorry` warnings. The blueprint remains untouched per prover permissions; the report records the needed `\lean{...}` association.

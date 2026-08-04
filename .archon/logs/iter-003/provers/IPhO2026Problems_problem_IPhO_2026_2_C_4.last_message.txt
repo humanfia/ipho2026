@@ -1,0 +1,7 @@
+Completed the proof with no remaining `sorry`.
+
+- Proof: [problem_IPhO_2026_2_C_4.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_C_4.lean:103)
+- Result report: [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_4.lean.md)
+- `lake env lean` and `lake build` pass.
+- Axiom scan found only standard foundational axioms.
+- Blueprint theorem is ready for automatic `\leanok` synchronization.

@@ -1,0 +1,11 @@
+# Review: solved
+- Target: `IPhO_2026_3_C_4_elapsedTime`.
+- Exact-file preflight passes with zero `sorry`.
+- Source inspection and `lean_verify` show no admit, custom axiom, or laundering.
+- The theorem signature matches the pre-edit contract recorded in the trace.
+- Power balance and the Carnot ratio yield the stated cooling ODE.
+- The logarithmic potential argument proves the blueprint's exact elapsed-time formula.
+- Dimensioned readouts and coherent-unit roles are preserved.
+- Unused cycle-context hypotheses are redundant after assuming the run-level laws.
+- This is an exact symbolic answer; answer choice and numerical tolerance are inapplicable.
+- The current trace and newest matching task result agree with the proof and preflight.

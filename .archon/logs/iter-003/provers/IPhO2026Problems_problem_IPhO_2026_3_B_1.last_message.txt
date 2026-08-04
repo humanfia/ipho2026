@@ -1,0 +1,6 @@
+Completed the assigned proof with no remaining `sorry`.
+
+- Proof: [problem_IPhO_2026_3_B_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:120)
+- Report: [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_1.lean.md)
+
+Verification passed with `lake env lean`, `lake build`, source scanning, and axiom checking. Only the expected unused endpoint-nonnegativity warnings remain.

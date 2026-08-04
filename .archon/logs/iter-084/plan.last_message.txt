@@ -1,0 +1,3 @@
+Iteration 084 planning is complete.
+
+No prover was dispatched: all three unresolved targets are Review-exhausted 3/3 with unchanged contracts. Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) and wrote the bounded [plan](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-084/plan.md) and [objectives](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-084/objectives.md) sidecars.

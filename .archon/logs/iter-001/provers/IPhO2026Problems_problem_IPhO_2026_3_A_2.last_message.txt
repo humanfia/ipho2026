@@ -1,0 +1,6 @@
+Completed the autoformalization.
+
+- Created [problem_IPhO_2026_3_A_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_A_2.lean).
+- Wrote the required [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_2.lean.md).
+- Lean compilation succeeds with exactly the expected theorem `sorry` warning and no errors.
+- The blueprint remained untouched per prover permissions; the result records the theorem name for synchronization.

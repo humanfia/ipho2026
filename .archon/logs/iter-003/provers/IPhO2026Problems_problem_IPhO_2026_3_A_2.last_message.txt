@@ -1,0 +1,6 @@
+Completed the proof with no remaining `sorry`.
+
+- Updated [problem_IPhO_2026_3_A_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_A_2.lean)
+- `lake env lean` and `lake build` pass
+- Axiom/source audit is clean
+- Wrote the [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_2.lean.md)

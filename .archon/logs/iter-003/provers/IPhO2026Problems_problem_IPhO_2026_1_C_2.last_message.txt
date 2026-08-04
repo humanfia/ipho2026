@@ -1,0 +1,8 @@
+Proved the C.2 theorem with exact rational square-root bounds.
+
+- [Lean proof](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:204): 1 sorry → 0.
+- `lake env lean` and `lake build` pass.
+- No suspicious axioms or escape hatches.
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_2.lean.md)
+
+The only warning is the frozen, unused `physics` hypothesis.

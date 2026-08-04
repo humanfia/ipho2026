@@ -1,0 +1,6 @@
+Completed `adiabatic_temperature_change` with an honest invariant and mean-value-theorem proof.
+
+- [Lean proof](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_B_2.lean)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_3_B_2.lean.md)
+
+Verification passes with no `sorry`, `admit`, unsafe axioms, or diagnostics. The theorem signature is unchanged.

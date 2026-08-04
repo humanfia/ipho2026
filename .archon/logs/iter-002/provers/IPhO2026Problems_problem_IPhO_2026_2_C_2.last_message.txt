@@ -1,0 +1,7 @@
+Completed the physics autoformalization in [problem_IPhO_2026_2_C_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_C_2.lean).
+
+- Added Physlib dimensioned physical lengths and a named Figure 2g unit projection.
+- Preserved both `O(Δθ²)` target contracts.
+- Kept exactly the three required `sorry` bodies.
+- Lean compilation succeeds with only those expected warnings.
+- Recorded the audit and grounding details in [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_2.lean.md).

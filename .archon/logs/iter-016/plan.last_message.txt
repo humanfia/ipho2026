@@ -1,0 +1,5 @@
+Iteration 016 planning is complete.
+
+- Recorded the mechanical no-dispatch gate in [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md).
+- Wrote [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-016/plan.md) and [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-016/objectives.md).
+- No prover assigned: all three unresolved targets are Review-exhausted 3/3, with no contract revision restoring eligibility.

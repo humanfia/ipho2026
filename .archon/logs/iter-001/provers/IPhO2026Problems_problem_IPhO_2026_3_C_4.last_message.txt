@@ -1,0 +1,8 @@
+Created the faithful physics autoformalization:
+
+- [problem_IPhO_2026_3_C_4.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_C_4.lean)
+- [task result audit](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_4.lean.md)
+
+It models dimensioned quantities, Figure 3b, the equation of state, Carnot heat-flow ratio, power balance, heat-capacity cooling law, and the requested elapsed-time conclusion.
+
+`lake env lean` succeeds with only the expected `sorry` warning. The blueprint was left unchanged per prover permissions; the report records the required `\lean{...}` association.

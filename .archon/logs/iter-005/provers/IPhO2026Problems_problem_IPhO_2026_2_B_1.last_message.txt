@@ -1,0 +1,3 @@
+Partial result recorded at [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_2_B_1.lean.md).
+
+The Lean file compiles, but `radiusAtIncidence_from_figure2f` remains honestly blocked: the frozen contract has no law connecting the abstract limiting/tangent path predicates to the required sinusoidal radius equation. The downstream coefficient proof is otherwise complete. A minimal redraft is documented.

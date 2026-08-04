@@ -1,0 +1,7 @@
+Iteration 032 planning is complete.
+
+- Recorded the mechanical zero-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-032/plan.md).
+- Documented all three exhausted targets in [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-032/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to reference iteration 032.
+
+No strategy, blueprint, ledger, memory, or Lean changes were warranted.

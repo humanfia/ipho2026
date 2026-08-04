@@ -1,0 +1,6 @@
+Completed the assigned proof with no remaining `sorry`.
+
+- Proof: [problem_IPhO_2026_4_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_A_1.lean:270)
+- Result report: [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_A_1.lean.md)
+- `lake env lean` and full `lake build` pass.
+- Axiom verification found only standard foundational axioms and no suspicious patterns.

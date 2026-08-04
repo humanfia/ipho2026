@@ -1,0 +1,6 @@
+Completed the C.1 autoformalization redraft.
+
+- Added the missing factor `2` to both threshold discriminants in [problem_IPhO_2026_1_C_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:147).
+- Preserved all dimensioned quantities, conservation laws, and minimum-feasibility assumptions.
+- `lake build IPhO2026Run` succeeds; only the expected `sorry` warning remains.
+- Wrote the required audit to [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/problem_IPhO_2026_1_C_1.lean.md:1).

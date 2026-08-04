@@ -1,0 +1,9 @@
+Created the physics autoformalization in [problem_IPhO_2026_4_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_A_1.lean:204).
+
+- Uses Physlib dimensional quantities and an abstract mole/population interface.
+- Separates setup, readouts, governing laws, and target conclusions.
+- Preserves official numerical estimates without assuming them.
+- Compiles successfully with only the expected `sorry` warning.
+- Recorded audits and grounding gaps in the [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_A_1.lean.md:1).
+
+Figure 17’s numeric dimensions were unavailable in the supplied image, so they remain symbolic. The blueprint was left untouched per prover-role permissions.

@@ -1,0 +1,6 @@
+Review completed with status **partial**. The proof compiles and is algebraically sound, but does not propagate the supplied uncertainty.
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/attempt-1/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/attempt-1/summary.md)
+
+Both files were validated and flushed to disk.

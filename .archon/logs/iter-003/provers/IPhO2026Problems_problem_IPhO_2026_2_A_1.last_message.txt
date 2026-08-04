@@ -1,0 +1,6 @@
+Completed `threshold_formula` with no remaining `sorry`.
+
+- [Lean proof](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:170)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_A_1.lean.md)
+
+Verification passed with both `lake env lean …` and `lake build`. Trust scan found only standard imported axioms.

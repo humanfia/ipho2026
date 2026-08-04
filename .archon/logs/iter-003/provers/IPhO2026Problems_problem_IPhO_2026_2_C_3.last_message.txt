@@ -1,0 +1,6 @@
+Completed the proof of `limitingIntersectionCoordinates` with no remaining `sorry`.
+
+- Proof: [problem_IPhO_2026_2_C_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_C_3.lean:85)
+- Report: [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_3.lean.md)
+- Direct Lean check and `lake build` both pass.
+- No diagnostics, suspicious axioms, or redraft needed.

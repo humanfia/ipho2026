@@ -1,0 +1,1 @@
+- Proof work is mechanically blocked at 25/28; revise the contracts for `1_B_2`, `2_B_1`, and `4_B_6` and renew their Review eligibility to resume.

@@ -1,0 +1,7 @@
+Closed the sole `sorry` in [problem_IPhO_2026_2_C_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_C_1.lean:74).
+
+- `lake env lean`: passed
+- `lake build`: passed
+- No `sorry`, axioms, or escape hatches remain
+- Only warning: unused `h_strike_on_mirror` hypothesis
+- Results recorded in [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_1.lean.md)

@@ -1,0 +1,6 @@
+Created the physics autoformalization:
+
+- [Lean module](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_C_6.lean:1)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_6.lean.md:1)
+
+Verification passed with only the expected target-theorem `sorry` warning. Blueprint editing was left to marker sync per prover permissions.

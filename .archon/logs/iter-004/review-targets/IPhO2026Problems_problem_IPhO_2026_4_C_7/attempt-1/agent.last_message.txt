@@ -1,0 +1,1 @@
+Review completed with status `solved`. Both authorized artifacts were written, validated, and synced to disk.

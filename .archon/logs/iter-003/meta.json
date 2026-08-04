@@ -1,0 +1,273 @@
+{
+  "iteration": 3,
+  "stage": "prover",
+  "mode": "parallel",
+  "startedAt": "2026-07-26T18:51:02Z",
+  "plan": {
+    "status": "done",
+    "deterministic": true,
+    "deterministicCandidates": [
+      "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+      "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean",
+      "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+      "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean",
+      "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+      "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean",
+      "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean"
+    ],
+    "promptOriginalChars": 1497,
+    "promptCompressedChars": 1497,
+    "promptCompressionOmittedChars": 0,
+    "promptCompressionChanged": false,
+    "sessionId": "019f9fc4-388b-7b12-a60e-788235d58a3a",
+    "durationSecs": 263
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 28
+  },
+  "prover": {
+    "status": "done",
+    "durationSecs": 1352
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_1_A_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e393-74c0-a095-7d31d6e12964"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e3e0-7560-979d-5f10dd3c131c"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e4ac-7dc3-b074-bb09d256c9a4"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e361-78f2-868e-e4e59df7998f"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e36f-7022-95d5-009b8e108584"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_A_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e2b6-7910-8837-4fe506ff466a"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e39c-79d2-8a60-4da744d669fb"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e36f-7912-a337-07529112a468"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_3": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e3e9-7c61-bbf8-0a580e3febb5"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e4af-70d3-ba70-fdaa3b708a1e"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e4b4-7733-b146-1284c326b2a7"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_3": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e2ba-7650-a95a-8d4c487b6365"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_4": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e7cf-7ae2-9acf-b033e51d0388"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_A_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e5d8-7952-bed4-d336e4ad59d1"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_A_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e343-74c3-bd01-af5b94f73cb2"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_A_3": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e408-7c60-aa11-292b1b45c30c"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e33f-7202-8b07-3fc97dce171b"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e408-77a1-8852-8cdb851a1e74"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e63c-7450-a98f-8fc2176fcd5d"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_3": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e305-7ea3-b135-c071d61e070d"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_4": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e3e5-7e92-a6bc-490116393a14"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_5": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e38c-7c21-a4b5-ba693d86a3e7"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_A_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e898-74d1-a8c1-e420eadbb546"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_A_5": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e4b9-7540-ab22-b537ed4b8127"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_B_4": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e772-7450-b7a6-356e2f148cb0"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_B_6": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-ea8c-71f3-905b-62a2bae6172c"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_C_6": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e44c-7e71-b575-0e3aa85aa85b"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_C_7": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019f9fc8-e29c-7f42-a489-abf73df7459b"
+    }
+  },
+  "review": {
+    "status": "done",
+    "deterministic": true,
+    "preflightJobs": 28,
+    "preflightDurationSecs": 35.881,
+    "preflightPassed": 28,
+    "preflightFailed": 0,
+    "preflightPath": "/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/review-preflight.md",
+    "candidatePackPath": "/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/deterministic-review-candidates.md",
+    "parallelTargetEnabled": true,
+    "parallelTargetRequestedJobs": 28,
+    "parallelTargetTargets": 28,
+    "parallelTargetReviewed": 28,
+    "parallelTargetUnresolved": 0,
+    "parallelTargetRounds": [
+      {
+        "attempt": 1,
+        "jobs": 28,
+        "submitted": 28,
+        "completed": 28,
+        "failed": 0
+      }
+    ],
+    "parallelTargetDurationSecs": 262.423,
+    "parallelTargetReport": "/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/parallel-review.json",
+    "durationSecs": 298,
+    "physicsBlockers": 0,
+    "physicsDoctorBlockers": 0,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "proofGateEnabled": true,
+    "proofGateSolved": 23,
+    "proofGateRetry": 5,
+    "proofGateExhausted": 0,
+    "proofGateReviewed": 28
+  },
+  "sorry_count": 4,
+  "finalize": {
+    "innerGit": {
+      "sha": "057ed96"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-26T19:24:14Z",
+  "wallTimeSecs": 1992
+}

@@ -1,0 +1,6 @@
+Iteration 095 plan completed.
+
+- No prover dispatched: all three unresolved targets are Review-exhausted 3/3.
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md).
+- Created [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-095/plan.md) and [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-095/objectives.md).
+- Strategy, ledgers, blueprints, memory, and notice board remain unchanged.

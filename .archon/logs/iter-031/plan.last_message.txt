@@ -1,0 +1,6 @@
+Iteration 031 plan completed.
+
+- No prover dispatch: all three unresolved targets are Review-exhausted 3/3.
+- Recorded the mechanical gate in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-031/plan.md) and [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-031/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to iteration 031.
+- Strategy, blueprints, ledgers, memory, and notice board remain unchanged.

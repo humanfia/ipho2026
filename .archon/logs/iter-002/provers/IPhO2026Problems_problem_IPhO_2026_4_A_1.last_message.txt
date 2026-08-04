@@ -1,0 +1,6 @@
+Completed the physics autoformalization.
+
+- Updated [problem_IPhO_2026_4_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_A_1.lean:252) with typed readouts, corrected mass interval, symbolic formulas, and numerical inventory target.
+- Wrote the required [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_A_1.lean.md).
+- `lake env lean` passes with only the intentional theorem `sorry` warning.
+- No other Lean files or project-state files were edited.

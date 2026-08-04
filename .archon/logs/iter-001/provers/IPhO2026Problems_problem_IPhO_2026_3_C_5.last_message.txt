@@ -1,0 +1,6 @@
+Completed the physics autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:140)
+- [Task result and faithfulness audit](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_5.lean.md:1)
+
+`lake env lean` succeeds with only the expected autoformalization `sorry` warning. The unavailable `archon` dependency-graph command is documented in the report.

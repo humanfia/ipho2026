@@ -1,0 +1,12 @@
+Proved `magnetization_state1_eq_sqrt` with no remaining `sorry`.
+
+- [Lean proof](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_C_2.lean:178)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_2.lean.md)
+
+Verification passed:
+
+- `lake env lean ...`
+- `lake build IPhO2026Run`
+- No suspicious axioms or escape hatches
+- No redraft needed
+- Blueprint theorem is ready for automatic `\leanok` synchronization.

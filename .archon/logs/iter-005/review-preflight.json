@@ -1,0 +1,39 @@
+{
+  "iteration": 5,
+  "jobs": 3,
+  "duration_secs": 156.186,
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 156.164,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:387:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:791:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:803:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:815:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:827:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:839:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:851:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:863:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:875:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:887:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:899:39: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:963:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:975:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:987:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:999:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1011:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1023:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1035:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1047:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1059:38: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\nIPhO2026Probl\n... [truncated]"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 5.829,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean:232:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 0,
+      "duration_secs": 9.356,
+      "diagnostics": ""
+    }
+  ]
+}

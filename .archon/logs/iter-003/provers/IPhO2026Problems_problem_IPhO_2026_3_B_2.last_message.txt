@@ -1,0 +1,6 @@
+Implemented and verified the strongest compiling partial proof in the assigned file.
+
+- Derived the adiabatic interior energy balance and endpoint positivity facts.
+- Preserved the theorem signature.
+- `lake env lean` passes with one remaining focused `sorry`.
+- Recorded the missing calculus imports and exact errors in the required [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_2.lean.md).

@@ -1,0 +1,7 @@
+# Recommendations
+
+- `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean` — One active `sorry` discharges the theorem conclusion. In particular, no proved bridge identifies the nonzero limiting relative velocity with the outgoing conic-asymptote branch, and no rigorous numerical enclosure for -arcsin(2/7) is present.
+- `IPhO2026Problems/problem_IPhO_2026_2_B_1.lean` — `problem_IPhO_2026_2_B_1` transitively depends on the active `sorry` in `radiusAtIncidence_from_figure2f`. `ValidSolarCookerPhysics` only asserts existence of an abstract limiting tangent path; no definition or law connects `isLimitingPathForRadius` or `isTangentToContainer` to the claimed sine radius equation, so the geometry lemma is not derivable from the current hypotheses.
+- `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` — One active `sorry` remains in `adiabatic_temperature_change`, so zero-sorry verification and the claimed endpoint theorem proof fail.
+- `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean` — The theorem weakens the physical meaning of the recorded answer “2190 ± 110 kJ/kg”: ±110 is treated solely as a tolerance around the central L_v readout, not as the uncertainty obtained from the B.5 ±2 kJ/mol estimate.
+- `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` — `acrylicConductivity_from_radial_fourier` contains an active `sorry` for the endpoint logarithmic integration identity, so zero-sorry proof verification fails.

@@ -1,0 +1,6 @@
+The B.6 theorem is fully proved with no `sorry` or signature changes.
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_B_6.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/problem_IPhO_2026_4_B_6.lean.md)
+
+Verified with direct Lean compilation, `lake build`, LSP diagnostics, and axiom/source scanning.

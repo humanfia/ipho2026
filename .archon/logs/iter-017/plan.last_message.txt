@@ -1,0 +1,6 @@
+Iteration 017 planning is complete.
+
+- Recorded the bounded [plan](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-017/plan.md).
+- Recorded [objectives](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-017/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to the iteration 017 zero-dispatch mechanical gate.
+- Strategy, blueprints, ledgers, memory, and notice board remain unchanged.

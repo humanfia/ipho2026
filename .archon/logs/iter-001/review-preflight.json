@@ -1,0 +1,264 @@
+{
+  "iteration": 1,
+  "jobs": 28,
+  "duration_secs": 29.966,
+  "summary": {
+    "total": 28,
+    "passed": 28,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 28.682,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:214:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 5,
+      "duration_secs": 22.799,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:297:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:307:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:320:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:329:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:344:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 22.647,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:386:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 19.187,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:147:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 29.948,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:203:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 29.487,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:159:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 2,
+      "duration_secs": 20.807,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean:232:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_2_B_1.lean:247:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 21.31,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean:143:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 18.97,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean:74:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 18.001,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean:51:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 3,
+      "duration_secs": 19.599,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:63:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_2_C_2.lean:77:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_2_C_2.lean:93:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 27.099,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean:56:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 17.864,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean:103:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 20.67,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:222:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 29.172,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean:192:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 28.677,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean:128:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 22.366,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:120:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 21.48,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:262:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 19.356,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean:178:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 20.176,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean:190:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 17.622,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean:212:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 19.582,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:140:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 18.697,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean:204:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 28.628,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:248:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 20.908,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean:138:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 28.416,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:191:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 26.782,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean:238:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 20.721,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:215:8: warning: declaration uses `sorry`"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "complete": true,
+  "requested_jobs": 28,
+  "targets": 3,
+  "reviewed": 3,
+  "unresolved": [],
+  "rounds": [
+    {
+      "attempt": 1,
+      "jobs": 3,
+      "submitted": 3,
+      "completed": 3,
+      "failed": 0
+    }
+  ],
+  "session_dir": "/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/proof-journal/sessions/session_5"
+}

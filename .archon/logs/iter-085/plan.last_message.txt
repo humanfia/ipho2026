@@ -1,0 +1,5 @@
+Iteration 085 planning is complete.
+
+- No prover dispatched: all three unresolved targets are Review-exhausted 3/3.
+- No new results, hints, contract changes, or fallback actions were found.
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) and wrote the [plan](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-085/plan.md) and [objectives](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-085/objectives.md) sidecars.

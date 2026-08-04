@@ -1,0 +1,7 @@
+Iteration 100 planning is complete.
+
+- Recorded the mechanical no-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-100/plan.md).
+- Added empty prover objectives in [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-100/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to point to iteration 100.
+
+All three remaining targets remain Review-exhausted 3/3 under unchanged contracts.

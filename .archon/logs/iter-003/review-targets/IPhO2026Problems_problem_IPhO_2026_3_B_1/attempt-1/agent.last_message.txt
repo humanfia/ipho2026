@@ -1,0 +1,1 @@
+Review completed with status `solved`. Both required artifacts were written and validated: one JSONL record and a 9-line summary.

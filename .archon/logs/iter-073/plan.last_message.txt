@@ -1,0 +1,6 @@
+Iteration 073 plan completed.
+
+- No prover dispatched: all three unresolved targets are Review-exhausted 3/3.
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md).
+- Wrote the bounded [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-073/plan.md) and [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-073/objectives.md).
+- Re-entry still requires user-authored contract revisions restoring Review eligibility.

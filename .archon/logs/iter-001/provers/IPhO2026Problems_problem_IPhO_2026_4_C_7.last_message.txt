@@ -1,0 +1,6 @@
+Created the compiling autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_C_7.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_7.lean.md)
+
+`lake env lean` succeeds with only the required theorem `sorry` warning. The declaration is ready for automated `\leanok` synchronization.

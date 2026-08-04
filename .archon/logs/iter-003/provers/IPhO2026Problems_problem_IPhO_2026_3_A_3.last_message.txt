@@ -1,0 +1,11 @@
+Proved `materialWork_eq_mu0_mul_volume_mul_H_mul_dM` in [problem_IPhO_2026_3_A_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_A_3.lean:128).
+
+Verification passed:
+
+- No remaining `sorry` or escape hatches
+- Lean diagnostics clean
+- Standalone compilation passed
+- `lake build` passed
+- Axiom audit clean
+
+Result recorded in [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_3_A_3.lean.md).

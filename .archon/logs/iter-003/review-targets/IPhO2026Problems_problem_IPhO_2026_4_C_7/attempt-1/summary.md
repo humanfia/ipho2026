@@ -1,0 +1,11 @@
+# Review: partial
+- Reviewed declaration: `acrylicConductivity_from_radial_fourier`.
+- Deterministic preflight compiles, but reports one active `sorry`.
+- The gap is `ΔT = coefficient * (log r₂ - log r₁)` in `hendpoint`.
+- The theorem signature preserves the blueprint's symbolic conductivity formula.
+- Dimension tags, SI readouts, geometry, Fourier sign, and boundary laws are faithful.
+- No weakening, trivialization, admit, or axiom laundering was found.
+- `previousPart` and its C.6 tolerance are unused; no C.7 numerical tolerance is claimed.
+- The current trace and newest task result consistently report a partial proof.
+- A full proof was tested only with the two missing Log.Deriv/MeanValue imports.
+- Repair: add those imports, insert the validated comparison-profile proof, and require zero sorries.

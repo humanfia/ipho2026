@@ -1,0 +1,6 @@
+Completed the physics-grounded redraft.
+
+- [Lean formalization](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_A_1.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_A_1.lean.md)
+
+`lake env lean` passes with only the required `sorry` warning. Blueprint markers were left to the deterministic sync as required.

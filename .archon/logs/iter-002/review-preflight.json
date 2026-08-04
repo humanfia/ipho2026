@@ -1,0 +1,75 @@
+{
+  "iteration": 2,
+  "jobs": 7,
+  "duration_secs": 9.754,
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 4.643,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:147:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 9.749,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:204:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 9.246,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:170:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 3,
+      "duration_secs": 4.493,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:81:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_2_C_2.lean:95:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_2_C_2.lean:112:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 9.198,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean:85:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 9.036,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean:191:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 9.131,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean:252:8: warning: declaration uses `sorry`"
+    }
+  ]
+}

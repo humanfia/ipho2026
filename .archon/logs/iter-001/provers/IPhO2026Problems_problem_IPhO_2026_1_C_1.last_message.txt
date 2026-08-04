@@ -1,0 +1,5 @@
+Autoformalization completed in [problem_IPhO_2026_1_C_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:1).
+
+It compiles successfully with only the required `sorry` warning. The detailed audit is in [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.lean.md:1).
+
+I flagged a likely factor-of-two error in the blueprint’s recorded square-root formula. The blueprint was left untouched per prover write permissions; marker sync can add `\leanok`.

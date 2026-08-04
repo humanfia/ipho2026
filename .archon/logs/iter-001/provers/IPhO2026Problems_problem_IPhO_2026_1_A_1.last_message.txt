@@ -1,0 +1,8 @@
+Created the physics autoformalization in [problem_IPhO_2026_1_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:1).
+
+- Uses Physlib dimension-tagged SI quantities.
+- Separates figure data, hydrostatic laws, and target conclusions.
+- `lake env lean` passes with only the required `sorry` warning.
+- Audit and grounding details are in [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_A_1.lean.md:1).
+
+The report notes that the prescribed module is not registered under the project’s `IPhO2026Run` Lake library target.

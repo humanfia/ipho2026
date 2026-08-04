@@ -1,0 +1,6 @@
+Review completed with status `partial`.
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-004/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_1/attempt-1/milestones.jsonl): valid single JSON line
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-004/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_1/attempt-1/summary.md): 11 lines
+
+Both files were flushed to disk.

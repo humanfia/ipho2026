@@ -1,0 +1,11 @@
+# Proof Review: partial
+- Reviewed `latentHeatPerUnitMass_from_molarEstimate` only.
+- Supplied preflight passes: compilation succeeds, with zero sorries and no diagnostics.
+- The current trace also finds no suspicious axioms/patterns and matches the newest task result.
+- The proof soundly derives `L_v = Q_v/M₀` from the one-mole mass and energy laws.
+- Its dimensions and `/1000` conversion from J/kg to kJ/kg are appropriate.
+- The numerical conjunct only shows the central value 2166.67 lies within 2190 ± 110.
+- It never uses the B.5 uncertainty `2000 J/mol`, so ±110 is not propagated uncertainty.
+- Thus the theorem contract is physically weakened despite its complete Lean proof.
+- Repair: model central and uncertainty separately and prove each is divided by `M₀`.
+- Justify the rounded 2190 and 110 with explicit rounding/unrounded-data hypotheses.

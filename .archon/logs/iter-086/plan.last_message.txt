@@ -1,0 +1,7 @@
+Iteration 086 planning is complete.
+
+- Recorded the mechanical no-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-086/plan.md).
+- Added [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-086/objectives.md).
+- Advanced the iteration pointer in [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md).
+
+All three unresolved targets remain Review-exhausted 3/3; no prover was scheduled.

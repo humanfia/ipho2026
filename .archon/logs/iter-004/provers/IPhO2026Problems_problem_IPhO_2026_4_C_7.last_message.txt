@@ -1,0 +1,7 @@
+Completed the proof in [problem_IPhO_2026_4_C_7.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:311).
+
+- Replaced the sole `sorry` with the logarithmic-profile derivative proof.
+- Added the required Mathlib logarithm derivative import.
+- `lake env lean ...` and `lake build` pass.
+- No `sorry`, unsafe axioms, or proof escape hatches remain.
+- Recorded results in [the task report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_4_C_7.lean.md:1).

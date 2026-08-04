@@ -1,0 +1,6 @@
+Implemented the coefficient proof in [problem_IPhO_2026_2_B_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_B_1.lean:232).
+
+- Proved `problem_IPhO_2026_2_B_1` using angles `π/2` and `π/4`.
+- One focused `sorry` remains in `radiusAtIncidence_from_figure2f`: the abstract physics contract lacks a law connecting limiting tangent paths to the claimed radius formula.
+- Direct Lean compilation succeeds with only that expected warning.
+- Recorded the redraft requirement in [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_1.lean.md).

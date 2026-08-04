@@ -1,0 +1,11 @@
+Partial proof completed and documented.
+
+- Lean file compiles successfully.
+- Certified \(e=7/2\) and the exact `-16.60°` rounding bound.
+- One focused `sorry` remains for identifying the limiting velocity with the clockwise outgoing conic branch.
+- No prohibited proof shortcuts were introduced.
+
+Files:
+
+- [problem_IPhO_2026_1_B_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:387)
+- [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_1_B_2.lean.md)

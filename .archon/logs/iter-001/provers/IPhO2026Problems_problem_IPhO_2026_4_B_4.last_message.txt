@@ -1,0 +1,6 @@
+Completed the B.4 autoformalization.
+
+- Created [problem_IPhO_2026_4_B_4.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_B_4.lean), faithfully modeling dimensionful quantities, Figure 19 geometry, pressure laws, ideal-gas behavior, and the target formula.
+- Wrote the required [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_B_4.lean.md).
+- Verification succeeds with exactly one expected `sorry` warning.
+- The blueprint was not edited per prover write restrictions; the result records the required `\lean{...}` mapping for the authorized sync phase.

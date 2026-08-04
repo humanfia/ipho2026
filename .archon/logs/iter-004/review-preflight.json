@@ -1,0 +1,57 @@
+{
+  "iteration": 4,
+  "jobs": 5,
+  "duration_secs": 22.107,
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 22.095,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:386:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 1,
+      "duration_secs": 5.733,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean:232:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 0,
+      "duration_secs": 21.134,
+      "diagnostics": ""
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 0,
+      "duration_secs": 9.254,
+      "diagnostics": ""
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 0,
+      "duration_secs": 6.728,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:219:5: warning: Variable name `previousPart` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+    }
+  ]
+}

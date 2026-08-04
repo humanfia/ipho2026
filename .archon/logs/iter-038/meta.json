@@ -1,0 +1,53 @@
+{
+  "iteration": 38,
+  "stage": "prover",
+  "mode": "parallel",
+  "startedAt": "2026-07-26T22:12:03Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa07c-57d1-7851-aba1-4016c60c9987",
+    "durationSecs": 85
+  },
+  "planValidate": {
+    "status": "ok_intentional_skip",
+    "objectives": 0
+  },
+  "prover": {
+    "status": "done",
+    "durationSecs": 0
+  },
+  "review": {
+    "status": "done",
+    "parallelTargetEnabled": true,
+    "parallelTargetRequestedJobs": 28,
+    "parallelTargetTargets": 0,
+    "parallelTargetReviewed": 0,
+    "parallelTargetUnresolved": 0,
+    "parallelTargetRounds": [],
+    "parallelTargetDurationSecs": 0.001,
+    "parallelTargetReport": "/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-038/parallel-review.json",
+    "durationSecs": 0,
+    "physicsBlockers": 0,
+    "physicsDoctorBlockers": 0,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "proofGateEnabled": true,
+    "proofGateSolved": 0,
+    "proofGateRetry": 0,
+    "proofGateExhausted": 0,
+    "proofGateReviewed": 0
+  },
+  "sorry_count": 2,
+  "finalize": {
+    "innerGit": {
+      "sha": "6b8a970"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-26T22:14:09Z",
+  "wallTimeSecs": 125
+}

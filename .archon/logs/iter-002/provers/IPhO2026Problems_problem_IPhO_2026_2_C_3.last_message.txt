@@ -1,0 +1,6 @@
+Completed the C.3 physics redraft.
+
+- Added Physlib-backed physical lengths and a shared Figure 2g projection.
+- Preserved C.1/C.2 assumptions, neighboring-ray incidence, and both punctured-neighborhood limits.
+- Verified with `lake env lean`: no errors, only the required `sorry` warning.
+- Recorded the faithfulness audit and grounding details in the [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_3.lean.md).

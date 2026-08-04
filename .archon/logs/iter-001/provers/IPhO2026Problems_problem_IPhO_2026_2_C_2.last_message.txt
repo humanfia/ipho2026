@@ -1,0 +1,6 @@
+Created the physics autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_C_2.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_2.lean.md)
+
+Verified with `lake env lean`; compilation succeeds with exactly three expected `sorry` warnings. The blueprint remains untouched for automatic `\leanok` synchronization.

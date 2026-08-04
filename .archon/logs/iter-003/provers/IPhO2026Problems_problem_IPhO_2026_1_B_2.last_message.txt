@@ -1,0 +1,6 @@
+The theorem remains honestly partial with one focused `sorry`; its signature is unchanged.
+
+- [Lean proof](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:386) records the available conic and limit facts.
+- The missing hypothesis is the outgoing-branch relation connecting `uInfinity` to the conic asymptote direction.
+- [Task result and redraft request](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.lean.md) proposes the general `−arcsin(1/ε)` law.
+- `lake env lean ...` exits successfully with only the expected `sorry` warning.

@@ -1,0 +1,8 @@
+Completed the physics autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:1)
+- [Task result and faithfulness audit](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_2.lean.md:1)
+
+Verification passes with exactly one expected `sorry` warning.
+
+The report flags that the blueprint’s C.1 formula appears to omit a factor of `2`; the quoted formula is incompatible with the recorded C.2 numerical answer.

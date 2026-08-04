@@ -1,0 +1,7 @@
+Iteration 037 plan is complete and validated.
+
+- [Plan](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-037/plan.md)
+- [Objectives](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-037/objectives.md)
+- [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md)
+
+No prover is dispatched: all three unresolved targets are Review-exhausted at 3/3 and require user-authored contract revisions.

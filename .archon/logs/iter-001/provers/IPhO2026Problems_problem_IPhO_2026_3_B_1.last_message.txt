@@ -1,0 +1,6 @@
+Completed the physics autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_B_1.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_1.lean.md)
+
+`lake env lean` succeeds with exactly one expected `sorry` warning for the target theorem. The blueprint was left unchanged per prover write restrictions; the report records the required `\lean{...}` mapping for synchronization.

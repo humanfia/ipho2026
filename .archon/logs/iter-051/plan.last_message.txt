@@ -1,0 +1,7 @@
+Iteration 051 planning is complete.
+
+- Recorded the mechanical no-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-051/plan.md).
+- Documented all three exhausted targets in [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-051/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to reference iteration 051.
+
+No strategy, blueprint, ledger, memory, or Lean changes were warranted.

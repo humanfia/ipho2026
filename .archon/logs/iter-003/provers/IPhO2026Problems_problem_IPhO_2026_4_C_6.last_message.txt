@@ -1,0 +1,6 @@
+Closed the sole `sorry` in [problem_IPhO_2026_4_C_6.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_C_6.lean:238).
+
+- Proved the reciprocal slope identity using positivity and `field_simp`.
+- `lake env lean` and `lake build` pass.
+- No remaining `sorry`, `admit`, or added axioms.
+- Wrote the required [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_6.lean.md).

@@ -1,0 +1,7 @@
+Completed [problem_IPhO_2026_4_A_5.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_A_5.lean).
+
+- Closed the sole `sorry` without changing the theorem signature.
+- Direct Lean compilation and `lake build` succeed.
+- No prohibited proof escapes remain.
+- No redraft is needed.
+- Recorded details in [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_4_A_5.lean.md).

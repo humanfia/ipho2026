@@ -1,0 +1,7 @@
+Iteration 075 planning is complete.
+
+- Recorded the mechanical no-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-075/plan.md).
+- Wrote [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-075/objectives.md).
+- Advanced the sidecar pointer in [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md).
+
+All three unresolved targets remain proof-Review-exhausted 3/3; no prover was dispatched.

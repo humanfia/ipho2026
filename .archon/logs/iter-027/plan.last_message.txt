@@ -1,0 +1,6 @@
+Iteration 027 planning is complete.
+
+- Recorded the mechanical no-dispatch decision in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-027/plan.md).
+- Documented all three exhausted targets in [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-027/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to reference iteration 027.
+- Strategy, ledgers, blueprint, memory, and notice board remain unchanged.

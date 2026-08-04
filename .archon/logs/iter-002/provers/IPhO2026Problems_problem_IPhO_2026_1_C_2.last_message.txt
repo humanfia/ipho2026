@@ -1,0 +1,6 @@
+Corrected the C.1 threshold radicand to include the conservation-law factor \(2\). The corrected expression propagates through `QuotedPreviousPartC1Result` while preserving the C.2 rounding target.
+
+- [Lean formalization](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:159)
+- [Assumption/target and grounding report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_2.lean.md:1)
+
+`lake env lean` succeeds with only the required target-theorem `sorry` warning.

@@ -1,0 +1,11 @@
+# Review verdict: partial
+- Reviewed declaration: `problem_IPhO_2026_2_B_1`.
+- Deterministic preflight compiles, but reports one active `sorry`.
+- The `sorry` is in `radiusAtIncidence_from_figure2f`, a dependency of the target.
+- The target's π/2 and π/4 coefficient extraction is algebraically valid and closed.
+- Signatures are unchanged; no admit, axiom laundering, or trivialized conclusion appears.
+- Length dimensions and the exact answer α = R, β = -R/2 match the blueprint.
+- No numerical tolerance is relevant to this symbolic result.
+- The abstract limiting/tangency predicates do not imply the required sine radius law.
+- The prover trace and newest task result agree and honestly report this blocker.
+- Repair the physics contract/definitions, prove the geometry lemma, and remove the sorry.

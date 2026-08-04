@@ -1,0 +1,7 @@
+Closed the sole `sorry` in [problem_IPhO_2026_3_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:247).
+
+- Sorry count: 1 → 0
+- `lake env lean …` passes with only unused-hypothesis warnings.
+- No new declarations, axioms, or redraft needed.
+- Report written to [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_1.lean.md:1).
+- Blueprint marker is ready for the project’s deterministic synchronization.

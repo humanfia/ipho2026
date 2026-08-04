@@ -1,0 +1,6 @@
+Review completed with status `solved`.
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_5/attempt-1/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_5/attempt-1/summary.md)
+
+Both files were synced and validated; the JSONL contains exactly one valid object line and the summary is 10 lines.

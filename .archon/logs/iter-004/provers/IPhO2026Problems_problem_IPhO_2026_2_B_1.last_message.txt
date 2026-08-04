@@ -1,0 +1,6 @@
+The frozen contract is formally false, so the remaining `sorry` cannot be soundly closed.
+
+- Constructed a type-checked countermodel satisfying all hypotheses while refuting both conclusions.
+- Preserved the focused partial proof.
+- Direct Lean compilation succeeds with exactly the expected `sorry` warning.
+- Recorded the blocker and minimal redraft in [task results](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_1.lean.md).

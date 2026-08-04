@@ -1,0 +1,7 @@
+Iteration 002 planning is complete.
+
+- Queued seven bounded `physics-formalize` retries in [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md).
+- Corrected the C.1 missing factor `2` and E1 A.1’s `0.94 g` typo (`0.094 g`) in the blueprints.
+- Added exact blueprint coverage for all 498 physics declarations; structural checks found no missing mappings, duplicates, or broken `\uses{}`.
+- Updated task ledgers, strategy, memory, and [iteration plan](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-002/plan.md).
+- Deferred only the unrelated isolated `hello` bootstrap for later removal or privatization.

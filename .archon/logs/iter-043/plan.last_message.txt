@@ -1,0 +1,8 @@
+Iteration 043 planning is complete.
+
+- No prover dispatch: all three unresolved targets are Review-exhausted 3/3.
+- Recorded rationale in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-043/plan.md).
+- Recorded exclusions in [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-043/objectives.md).
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) to point to iteration 043.
+
+Strategy, blueprints, memory, ledgers, and notices remain unchanged.

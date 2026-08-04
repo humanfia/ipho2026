@@ -1,0 +1,6 @@
+Created the compiling physics formalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_B_3.lean)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_3.lean.md)
+
+`lake env lean` succeeds with exactly one expected `sorry` warning. No other Lean or project-state files were edited.

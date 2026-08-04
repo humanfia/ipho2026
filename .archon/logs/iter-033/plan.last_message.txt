@@ -1,0 +1,9 @@
+Iteration 033 is planned with no prover dispatch due to the 3/3 proof-Review retry gate.
+
+Updated:
+
+- [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md)
+- [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-033/plan.md)
+- [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-033/objectives.md)
+
+Strategy, blueprints, task ledgers, memory, and notice board remain unchanged.

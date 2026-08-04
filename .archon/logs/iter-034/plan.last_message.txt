@@ -1,0 +1,6 @@
+Iteration 034 planning is complete.
+
+- No prover dispatched: all three unresolved targets are Review-exhausted 3/3.
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md), [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-034/plan.md), and [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-034/objectives.md).
+- Strategy, ledgers, blueprint, and notice board remain unchanged.
+- Re-entry requires user-authored contract revisions restoring Review eligibility.

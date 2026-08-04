@@ -1,0 +1,3 @@
+Iteration 042 is planned and recorded in [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-042/plan.md).
+
+No prover was dispatched: all three unresolved targets are Review-exhausted 3/3. [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) and the user notice now reflect the mechanical contract-revision blocker.

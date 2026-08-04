@@ -1,0 +1,6 @@
+Completed the B.6 autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:1)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_B_6.lean.md:1)
+
+`lake env lean` succeeds with only the expected target-theorem `sorry` warning. The blueprint marker was left for deterministic `\leanok` synchronization, as required by prover permissions.

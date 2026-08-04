@@ -1,0 +1,7 @@
+Iteration 008 planning is complete.
+
+- [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROGRESS.md) records no prover dispatch due to the 3/3 retry gate.
+- [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-008/plan.md) reconciles the unchanged contracts and blocker.
+- [objectives.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-008/objectives.md) records each frontier node’s ineligibility.
+
+Strategy, blueprints, and task ledgers remain unchanged.

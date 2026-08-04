@@ -1,0 +1,6 @@
+Created the faithful by-`sorry` physics formalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_A_1.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_1.lean.md)
+
+Verification: `lake env lean` exits 0 with exactly one expected `sorry` warning. The blueprint was left untouched per prover permissions; the report records the needed `\lean{...}` mapping for synchronization.

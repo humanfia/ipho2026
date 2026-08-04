@@ -1,0 +1,7 @@
+Completed the autoformalization redraft.
+
+- Added explicit `import Mathlib` to [problem_IPhO_2026_3_C_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_C_3.lean:1).
+- Preserved all physical types, assumptions, data, tolerances, and theorem signatures.
+- Compilation succeeds with exactly one expected `sorry` warning.
+- Wrote the required [task-result audit](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_3.lean.md:1).
+- Left blueprint marker management to the project’s synchronization process.

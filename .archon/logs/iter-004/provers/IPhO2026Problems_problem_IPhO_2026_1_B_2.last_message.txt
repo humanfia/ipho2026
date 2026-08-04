@@ -1,0 +1,11 @@
+Partial proof completed and documented.
+
+- Lean file compiles with one focused `sorry`.
+- Proved the physical algebra through `eccentricity = 7/2` and asymptotic polar cosine `2/7`.
+- Remaining blocker: connecting the outgoing displacement asymptote to the signed limiting-velocity direction, plus the arcsine numerical enclosure.
+- No prohibited axioms or proof shortcuts introduced.
+
+Files:
+
+- [problem_IPhO_2026_1_B_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:386)
+- [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.lean.md)

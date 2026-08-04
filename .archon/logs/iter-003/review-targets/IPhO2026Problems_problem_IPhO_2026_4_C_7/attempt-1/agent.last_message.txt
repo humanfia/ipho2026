@@ -1,0 +1,4 @@
+Review completed with status `partial`. Both required artifacts were validated and synced to disk:
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_4_C_7/attempt-1/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_4_C_7/attempt-1/summary.md)

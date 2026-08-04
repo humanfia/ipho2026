@@ -1,0 +1,11 @@
+# Review verdict: partial
+- Reviewed declaration: `problem_IPhO_2026_2_B_1`.
+- Preflight compiles, but one active `sorry` remains in `radiusAtIncidence_from_figure2f`.
+- No axiom/admit laundering, signature weakening, or trivialized conclusion was found.
+- Dimensional lengths and the exact answer `α = R`, `β = -R/2` match the blueprint.
+- The target's `π/2` and `π/4` coefficient extraction is sound conditional on the helper.
+- The physics contract never connects abstract limiting/tangency predicates to the sine radius law.
+- The trace type-checks a countermodel satisfying all hypotheses while refuting helper and target.
+- The newest task result agrees with the trace and honestly reports this blocker.
+- No numerical tolerance is relevant to this exact symbolic result.
+- Add the missing governing radius law, prove the helper, and remove its `sorry`.

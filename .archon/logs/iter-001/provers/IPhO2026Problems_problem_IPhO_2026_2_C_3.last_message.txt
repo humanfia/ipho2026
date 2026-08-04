@@ -1,0 +1,6 @@
+Autoformalization completed.
+
+- Created [problem_IPhO_2026_2_C_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_C_3.lean).
+- Wrote the required [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_3.lean.md).
+- `lake env lean` succeeds with exactly the expected single `sorry` warning.
+- Blueprint marker readiness is documented; the blueprint was not edited per prover permissions.

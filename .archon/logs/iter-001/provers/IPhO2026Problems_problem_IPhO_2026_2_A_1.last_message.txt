@@ -1,0 +1,6 @@
+Created the faithful physics autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_2_A_1.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_A_1.lean.md)
+
+Verification: `lake env lean` exits successfully with only the required `sorry` warning. Blueprint marker updates were left to the deterministic sync per project rules.

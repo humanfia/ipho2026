@@ -1,0 +1,10 @@
+Closed the sole `sorry` in [problem_IPhO_2026_3_C_5.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:174).
+
+Verification passed:
+
+- `lake env lean …`: success
+- `lake build`: success
+- No `sorry`, `admit`, `axiom`, or `sorryAx`
+- Only standard foundational axioms reported
+
+The required [task result](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_5.lean.md) is complete.

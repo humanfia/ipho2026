@@ -1,0 +1,15 @@
+Review artifacts are complete and validated.
+
+- 28/28 listed targets represented
+- 21 formalization passes, 7 failures
+- 28 compile passes reused; no Lean checks rerun
+- 35 open `sorry`
+- JSONL syntax and target-set equality verified
+
+Files:
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/proof-journal/sessions/session_1/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/proof-journal/sessions/session_1/summary.md)
+- [recommendations.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/proof-journal/sessions/session_1/recommendations.md)
+- [PROJECT_STATUS.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/PROJECT_STATUS.md)
+- [review.md](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/iter/iter-001/review.md)

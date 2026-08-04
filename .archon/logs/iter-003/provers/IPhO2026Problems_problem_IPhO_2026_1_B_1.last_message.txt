@@ -1,0 +1,10 @@
+Closed all 5 `sorry` placeholders in [problem_IPhO_2026_1_B_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-run/IPhO2026Problems/problem_IPhO_2026_1_B_1.lean).
+
+Verification passed:
+
+- `lake env lean ...`: success
+- Language-server diagnostics: clean
+- No `sorry`, `admit`, added axioms, or escape hatches
+- Axiom scan reports only standard Lean/Mathlib axioms
+
+Results are recorded in [the task report](/root/proposal_for_physic/science-mango-ipho-2026-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_1.lean.md).
