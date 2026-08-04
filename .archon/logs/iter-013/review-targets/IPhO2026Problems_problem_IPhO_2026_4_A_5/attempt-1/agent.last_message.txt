@@ -1,0 +1,12 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict: solved** (`IPhO2026_4_A_5.main`, route=solved)
+
+- **Compile/sorry**: preflight rc=0, `sorry_count=0`, 11.19s; my own `rg 'sorry|admit|native_decide|axiom'` over the Lean file finds zero matches; only 8 benign `unusedVariables` linter warnings on frozen binders.
+- **Contract**: statements match the iter-007-frozen blueprint ledger; `IsochoricReadout.hT12` and `main`'s `hvar` guards intact; all answer values (1/T0, 0.0037 K⁻¹, 0.0034±0.0007 K⁻¹) stay conclusion-side — no weakening, no answer-as-assumption.
+- **Iter-010 blocker repaired**: `beta0_close_to_ideal` (L407) now takes `hvar`, picks a distinct-temperature witness via `by_cases`, derives `slope·V = nR` then `offset = 0`, excluding the old constant-temperature countermodel. Uncertainty conjunct cancels `P0·|T2−T1| > 0` via `hP0` + `hT12`.
+- **Evidence**: iter-013 prover trace (session 019fa8a9) confirms fresh `lake env lean` with 0 errors / 0 sorries on the byte-identical file. No matching task-result artifact was supplied — reported as a process warning only, trace used as primary evidence per instructions.
+
+Files written:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_5/attempt-1/milestones.jsonl` (1 JSON line, validated parseable)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_5/attempt-1/summary.md` (10 lines)

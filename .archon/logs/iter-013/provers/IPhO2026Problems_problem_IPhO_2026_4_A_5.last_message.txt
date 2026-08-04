@@ -1,0 +1,7 @@
+Task complete. My assigned file needed no proof work this iteration.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:1` — **0 sorries found**; fresh `lake env lean` compiles with **0 errors** (only benign unused-variable linter warnings on frozen signature binders).
+- All declarations already carry complete proofs: `main` (L290) closed via `beta0_close_to_ideal` (L407), `beta0_eq_ideal_of_linear` (L477), and `beta0_uncertainty_bound` (L500), consistent with the iter-007-reconciled `IsochoricReadout.hT12` contract. The PROGRESS.md census already listed this file as sorry-free.
+- No signatures touched, no axioms/`admit`/`native_decide` introduced, file byte-identical to pre-lane state.
+- Result recorded at `.archon/task_results/problem_IPhO_2026_4_A_5.md:1`, noting the four blueprint theorems (`beta0_close_to_ideal`, `beta0_eq_ideal_of_linear`, `beta0_uncertainty_bound`, `main`) are ready for the deterministic `\leanok` sync. No redraft needed.

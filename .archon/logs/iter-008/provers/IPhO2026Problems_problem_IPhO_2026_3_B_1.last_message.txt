@@ -1,0 +1,11 @@
+Task complete. Summary of this lane:
+
+**Outcome** — `IPhO2026Problems/problem_IPhO_2026_3_B_1.lean` re-verified unchanged: fresh `lake env lean` gives 0 errors and exactly the 3 contracted sorry warnings (L201 `leg_mem_tracked_range`, L223 `leg_work_integral_eval`, L263 `isothermal_heat_into_torus`).
+
+**Key findings**
+- The on-disk file already fully implements the iter-008 blueprint ledger (17 `\lean{}` pins under `IPhO2026.Problem3.B1.*`, all grep-verified against the chapter), so this was a sorry-preserving no-op gate-retry — per the objectives register and the iter-002 review reroute ("review-retry, no file changes; `3_B_1` semantics green").
+- Its only review blocker was the deterministic doctor `missing-physlib-import` finding, already reconciled by the planner-recorded PhysLean-coverage exemption `% NOTE:` in the chapter.
+- Faithfulness re-audit passed: the recorded answer `-(μ₀nK/2T)(H_f²−H_i²)` appears only in the answer-carrier definition and the `rfl`-proved `official_answer_value` conclusion — never in hypotheses, structure fields, or governing-law predicates. The first-law predicate supplies leg balances against the demagnetized reference only; each work integral is still a genuine proof obligation.
+- Fresh LeanExplore queries (Mathlib+Physlib filter) confirmed no PhysLean analogue for this model and grounded the bridge-3 route (`integral_id`, `intervalIntegral.intervalIntegrable_id`); near misses recorded in the task result.
+
+**Artifact** — full audit written to `.archon/task_results/problem_IPhO_2026_3_B_1.lean.md` (assumption/target split, goal-faithfulness audit, 6 covered bridge obligations, countermodel audit, uncertainty = N/A / branch = covered, declaration↔label ledger, grounding gaps). No `.lean` or blueprint files were edited.

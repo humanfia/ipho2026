@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "iteration": 10,
+  "complete": true,
+  "status": "complete",
+  "target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean",
+    "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+    "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean",
+    "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+    "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean"
+  ],
+  "targets": 22,
+  "reviewed": 22,
+  "unresolved": [],
+  "errors": {},
+  "requested_jobs": 28,
+  "max_combined_workers": 22,
+  "max_reviewers": 22,
+  "max_attempts": 3,
+  "rounds": [
+    {
+      "attempt": 1,
+      "submitted": 22,
+      "completed": 22,
+      "failed": 0
+    }
+  ],
+  "duration_secs": 2308.959,
+  "preflight": {
+    "iteration": 10,
+    "jobs": 1,
+    "duration_secs": 318.782,
+    "summary": {
+      "total": 22,
+      "passed": 20,
+      "failed": 2
+    },
+    "targets": [
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 10,
+        "duration_secs": 14.181,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:267:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:273:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:279:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:286:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:295:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:312:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:319:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:328:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:350:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:361:6: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 6,
+        "duration_secs": 16.473,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:320:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:385:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:416:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:467:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:493:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:563:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:633:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 5,
+        "duration_secs": 15.13,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:302:9: error(lean.unknownIdentifier): Unknown identifier `le_or_lt`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:302:34: error: Tactic `rcases` failed: `x✝ : ?m.612` is not an inductive datatype\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:401:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:415:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 18.963,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:144:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_2_A_1.lean:193:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_2_A_1.lean:214:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_2_A_1.lean:346:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_2_A_1.lean:392:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 0,
+        "duration_secs": 15.145,
+        "diagnostics": "Try this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\nIPhO2026Problems/problem_IPhO_2026_2_B_2.lean:262:40: error: unsolved goals\np : CookerParams\nθ : ℝ\nhcal : B1Calibration p θ\nhθl : 0 < θ\nhθu : θ < π / 2\nhs : 0 < sin θ\nh2a : 2 * p.a = 2 * p.R * sin θ * (1 - cos θ)\nhne : cos θ ≠ 1\nh10 : 1 - cos θ ≠ 0\nh2Rs : 2 * p.R * sin θ ≠ 0\nh2Rs' : 2 * p.R * sin θ * (1 - cos θ) ≠ 0\n⊢ p.R - p.R * cos θ = -(p.R * cos θ * sin θ * 2) + p.R * sin θ * 2"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 14.426,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean:215:5: warning: Variable name `hR` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_2_B_3.lean:216:5: warning: Variable name `ha` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_2_B_3.lean:218:5: warning: Variable name `hphys` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 14.762,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 2,
+        "duration_secs": 14.379,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:155:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_2_C_2.lean:194:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 17.707,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 1,
+        "duration_secs": 13.945,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean:145:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 1,
+        "duration_secs": 14.794,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:548:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 14.59,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 14.383,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 3,
+        "duration_secs": 14.385,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:201:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_B_1.lean:223:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_B_1.lean:263:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 3,
+        "duration_secs": 7.206,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:148:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_B_2.lean:159:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_B_2.lean:190:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 9,
+        "duration_secs": 9.945,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean:244:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:293:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:334:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:372:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:395:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:413:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:432:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:457:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_2.lean:471:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 2,
+        "duration_secs": 15.156,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean:327:6: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_C_4.lean:365:6: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 14.287,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 1,
+        "duration_secs": 15.538,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:155:37: warning: Variable name `ht₂` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:399:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:494:5: warning: Variable name `law` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:498:5: warning: Variable name `hT₀` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:499:5: warning: Variable name `hT₀pos` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:517:5: warning: Variable name `law` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:521:5: warning: Variable name `hT₀` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:523:5: warning: Variable name `hβ₀` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:526:13: warning: Variable name `hσ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 14.002,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 1,
+        "duration_secs": 14.765,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:296:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 4,
+        "duration_secs": 14.62,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:172:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_C_7.lean:242:8: warning: declaration uses `sorry`"
+      }
+    ]
+  },
+  "session_dir": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/proof-journal/sessions/session_10"
+}

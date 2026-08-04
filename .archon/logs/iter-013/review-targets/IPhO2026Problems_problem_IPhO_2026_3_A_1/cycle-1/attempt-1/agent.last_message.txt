@@ -1,0 +1,12 @@
+Both files are durable and the JSONL parses cleanly. Review complete.
+
+**Verdict: `solved`**
+
+- **Fix verified** — the iter-010 `underdetermined_contract` defect (spurious factor `N` on Ampère's field side) is repaired: `ampere_sum` now states the once-traversed circulation `(2πR)·HPerimeter = ∑_t I_t`, and the new law field `perimeter_eq_interior` ties the perimeter magnitude to the interior `H` via the stated thin-torus uniformity (IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:274).
+- **Proof chain audited first-hand** — Bridge 1 `2πR·H = N·I` via bundled `FiniteWinding` cardinality, Bridge 2 `H = N·I/(2πR)` via `eq_div_iff`, Bridges 3–4 via `field_simp` under `A,V > 0`, and both target theorems are exact transitivity assemblies concluding the official answer `H = N·I·A/V`.
+- **Honesty checks pass** — preflight rc=0, `sorry_count=0`, empty diagnostics; no `axiom`/`admit`/`native_decide`; trace reports `#print axioms` = standard Mathlib trio only; file byte-identical to the iter-013 baseline; statements and units (`InstantaneousCurrent.readout` in A, `H` in A/m) unweakened; exact-real derivation so no tolerance concern.
+- **Process warnings (non-blocking)** — the flattened task-result `.archon/task_results/problem_IPhO_2026_3_A_1.md` the prover wrote at session end is absent from the disk I see, and the blueprint retains stale `2πR·(N·H)=N·I` prose in two doc/ledger entries; neither affects proof validity.
+
+Artifacts written:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_A_1/cycle-1/attempt-1/milestones.jsonl`
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_A_1/cycle-1/attempt-1/summary.md`

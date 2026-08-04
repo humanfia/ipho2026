@@ -1,0 +1,17 @@
+Done. The iter-010 review finding on `problem_IPhO_2026_3_A_1.lean` is fixed at its root and the file is now sorry-free.
+
+**Root cause and fix**
+- The defect was loop-vs-filament confusion: the amperian curve in a toroidal winding is the mean-path circle traversed **once**, while each of the `N` turns contributes an **enclosed current**, not a loop. The old law summed the field side over all turns (`∑_t 2πR·H_t`), forcing `2πR·H = I` after cancellation and making `H = N·I/(2πR)` unprovable.
+- `AmpereLawThinMeanPath.ampere_sum` is now the unsummed circulation law `(2πR)·HPerimeter = ∑_t I_t` (`IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:275`), with a new declared perimeter magnitude `fieldMagnitudePerimeter` on the torus, tied to the interior `fieldMagnitude` only by the physical uniformity law `perimeter_eq_interior` (`problem_IPhO_2026_3_A_1.lean:564`).
+- Bridge 1 is repaired to the sound `2πR·H = N·I` and proved; Bridge 2 (`H = N·I/(2πR)`) is now fully proved, **closing the old line-579 sorry**; both main theorems (`paramagneticTorus_H_eq`, `paramagneticTorus_H_eq_meanRadius`) follow by proved transitivity. Main target statements were not altered.
+
+**Verification**
+- Fresh `lake env lean` on the file: exit 0, **0 errors / 0 warnings / 0 sorries**; `lake build` green.
+- Diagnostics-flow sanity probe (`/tmp` copy with a deliberate error) confirmed errors are genuinely reported.
+- Countermodel re-check: the review's countermodel values (`R=1/π, HPerimeter=1, I_t=2, N=2`) are now **refuted** by the redrafted law, confirming it constrains the model correctly.
+
+**Deliverables**
+- Redrafted: `IPhO2026Problems/problem_IPhO_2026_3_A_1.lean` (only assigned file touched).
+- Report: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_1.md` — records the assumption/target split, goal-faithfulness audit, bridge inventory (all 6 covered/proved), abstraction/countermodel audit, and 4 planner-owned blueprint redraft items (the chapter ledger still describes the old summed law at `def:...:AmpereLawThinMeanPath` and the old Bridge 1 form at `lem:...:ampere_uniform_eq`; chapters are outside my write permissions).
+
+One formatting note: the harness's `apply_patch` rejected the large markdown add-file twice with spurious hunk-header errors, so the task-result file was written via shell heredoc (and verified); all `.lean` edits went through `apply_patch` successfully.

@@ -1,0 +1,16 @@
+Autoformalization complete for `IPhO2026Problems/problem_IPhO_2026_2_C_3.lean`.
+
+**Outcome**
+- Created `IPhO2026Problems/problem_IPhO_2026_2_C_3.lean` — compiles with exit 0 and exactly one expected `declaration uses sorry` warning, no errors.
+- Appended a `\lean`-linked theorem `thm:IPhO2026Problems_problem_IPhO_2026_2_C_3:limitingIntersectionCoordinates` with `\leanok` to the blueprint chapter (the pre-existing plan-agent `\begin{theorem}[Physics formalization target]` block was left untouched, since its statement is the meta-instruction rather than physics).
+- Wrote the full audit to `.archon/task_results/problem_IPhO_2026_2_C_3.md`.
+
+**Formalization highlights**
+- Physical lengths are genuine Physlib `Dimensionful (WithDim Dimension.L𝓭 ℝ)` values, read out through the named `Figure2gLengthProjection.readout` — no scalar aliases.
+- C.1 results (`m_A = cot 2θ`, `b_A = R/(2 cos θ)`) are exact hypotheses; C.2 expansions are `=O[𝓝 0] (Δθ ↦ Δθ^2)` asymptotic laws on an arbitrary ray family, so they constrain but do not fix a fake definition.
+- Target is purely conclusion-side: the two `Tendsto … (𝓝[≠] 0)` statements with limits `R sin³θ` and `(R/2) cos θ (2 − cos 2θ)`; the recorded answer appears in no hypothesis. Body is `by constructor <;> sorry`.
+- Branch info preserved: `0 < θ < π/2` (Fig. 2g acute-incidence geometry, verified against the official page image); two-sided punctured limit in `Δθ`.
+
+**Notes for plan/review agents**
+- `archon` CLI was not on PATH here, so dag-query navigation was skipped (recorded in task results).
+- Physlib/Mathlib have no caustic/envelope-of-lines API; the ray-line structure is a minimal local abstraction, and the eventual proof route (difference-quotient limits via `IsBigO.trans_isLittleO`, `IsLittleO.tendsto_div_nhds_zero`, plus `Real.sin_two_mul`/`tan_eq_sin_div_cos`) is grounded and documented under bridge obligations.

@@ -1,0 +1,12 @@
+All five sorries in `IPhO2026Problems/problem_IPhO_2026_2_A_1.lean` are now proved; the file compiles clean (exit 0, 0 errors, 0 sorries).
+
+**Proved declarations**
+- `limiting_ray_reflection_count` (`IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:121`) — cut set equals `Finset.Iic (n+1)`, card `n+2`.
+- `threshold_forms_agree` (`IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:167`) — `(2N−1)π/(4N+2) = π/2 − π/(2N+1)` + `sin_pi_div_two_sub`.
+- `threshold_x_N_cos` (`IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:273`) — squeezed `x_NAt n` between threshold clauses using midpoint `y`, reparametrized via `arccos(y/R)`, moved inequalities to angle space with `cos_le_cos_of_nonneg_of_le_pi`.
+- `threshold_x_N_sin` (`IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:406`) and `threshold_x_N` (`IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:411`) — chained from the cosine form.
+
+**Infrastructure lemmas added inside the namespace (contract unchanged)**
+- `cut_finite`, `ncard_clip_le`, `ncard_clip_ge`, `reflection_count_le_of_exceeds`, `arccos_Ioc_of_mem` — finite-cardinality bounds on the odd-multiple cut set `{k | (2k+1)α ≤ π}` and the entry-angle readout for `y ∈ (0, R)`.
+
+`lean_verify` on all five target theorems shows only `propext`, `Classical.choice`, `Quot.sound` — no `sorryAx` or new axioms. Results recorded in `.archon/task_results/problem_IPhO_2026_2_A_1.md`, including the blueprint environments ready for `\leanok`. No redraft needed.

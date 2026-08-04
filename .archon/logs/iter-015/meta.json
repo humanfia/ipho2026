@@ -1,0 +1,179 @@
+{
+  "iteration": 15,
+  "stage": "prover",
+  "mode": "parallel",
+  "startedAt": "2026-07-29T02:40:14Z",
+  "plan": {
+    "status": "done",
+    "deterministic": true,
+    "deterministicCandidates": [
+      "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean"
+    ],
+    "promptOriginalChars": 6668,
+    "promptCompressedChars": 6668,
+    "promptCompressionOmittedChars": 0,
+    "promptCompressionChanged": false,
+    "sessionId": "019fabbe-7a49-7253-87b6-420836dcf2ae",
+    "durationSecs": 434
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 4
+  },
+  "prover": {
+    "status": "done",
+    "dispatchEligible": 6,
+    "dispatchSkippedNoEligible": false,
+    "pipelineReviewEnabled": true,
+    "pipelineImmediateRedraftEnabled": true,
+    "pipelineFormalizationReviewEnabled": true,
+    "pipelineStartsAt": "prover",
+    "pipelineReviewMaxCombined": 4,
+    "pipelineReviewMaxReviewers": 4,
+    "pipelineReviewComplete": false,
+    "pipelineReviewTargets": 6,
+    "pipelineReviewReviewed": 5,
+    "pipelineReviewUnresolved": 1,
+    "pipelineReviewReport": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-015/pipelined-review.json",
+    "pipelineFormalizersRequested": 0,
+    "pipelineFormalizersMaterialized": 0,
+    "pipelineFormalizersFailed": 0,
+    "pipelineFormalizationReviews": 0,
+    "pipelineFormalizationPending": 0,
+    "pipelineGateEventsApplied": true,
+    "pipelineGateEvents": 5,
+    "durationSecs": 8440
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_2_C_4": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+      "status": "done",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "019fac25-9814-76a2-99d2-000f48f7018e"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "status": "running",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "019faca7-1df8-77c3-a03d-d3bfef104c53"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+      "status": "done",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "019fabcc-02ae-7b20-b152-0c19a2d93ff9"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+      "status": "done",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "019fabcc-02b7-7b53-a59c-2c07a55eb6a6"
+    }
+  },
+  "pipelineReviews": {
+    "IPhO2026Problems_problem_IPhO_2026_2_C_2": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_2": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_1": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_2": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_3": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_A_1": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_4": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "status": "error",
+      "attempt": 3,
+      "cycle": 1,
+      "error": "milestone missing: [Errno 2] No such file or directory: '/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_1_C_1/cycle-1/attempt-3/milestones.jsonl'"
+    }
+  },
+  "pipelinePreflights": {
+    "IPhO2026Problems_problem_IPhO_2026_1_C_2": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_1": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_3": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_A_1": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_4": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    }
+  },
+  "axiomSweep": {
+    "status": "done",
+    "scope": "current-objectives",
+    "jobs": 6,
+    "targets": 6,
+    "filesChecked": 6,
+    "failedFiles": 0,
+    "durationSecs": 32,
+    "sorryLaunderings": 0
+  },
+  "review": {
+    "status": "running"
+  }
+}

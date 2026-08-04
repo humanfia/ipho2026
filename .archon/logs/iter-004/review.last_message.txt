@@ -1,0 +1,20 @@
+All review artifacts are written. Iter-004 session_4 review is complete.
+
+**Verdict: 1 failed / 0 passed** (`status=partial`), `IPhO2026Problems/problem_IPhO_2026_4_C_6.lean` at review attempt 1/3.
+
+**What was verified**
+- Preflight `passed` (12.9 s, 0 errors, exactly the 4 contracted sorries) — no rerun per bounded-review rule.
+- The lane deviated from its quarantine-delete directive and instead restated `official_sample_value` against "recovered" official microdata. I independently verified the arithmetic: `1/(4186·0.089·2.28e-3) = 1.17727`, deviation `0.00727 ≤ 0.03` — the iter-002 false-existential defect is genuinely closed; the uncertainty budget `0.02197 ≤ 0.03` holds with a disclosed `/2` convention.
+- All 6 mandatory semantic checks pass at statement level; 4/4 bridge obligations covered; doctor clean for this file (not among the 19 `missing-physlib-import` findings).
+
+**Why the gate still fails** (both durable, non-statement blockers)
+1. Deterministic grounding log is again noise-only (`Path.target`/`semiformal_result`) and contradicts the file's real 7-abstraction inventory — 3rd consecutive iter, needs loop-level routing.
+2. The recovered microdata's only evidence is the lane's own task-report quote: `raw/E1_solution.pdf` is absent from this checkout, so the provenance of a conclusion-side physics claim is prover-asserted — the same defect class the file was quarantined for.
+
+**Artifacts written**
+- `.archon/proof-journal/sessions/session_4/milestones.jsonl` (full structured `formalization_review`)
+- `.archon/proof-journal/sessions/session_4/summary.md`, `recommendations.md`
+- `.archon/iter/iter-004/review.md` (born-bounded iter narrative)
+- `.archon/PROJECT_STATUS.md` — Knowledge Base extended with iter-004 findings (provenance-verification detector, pdftotext exponent-sign trap, mean-error convention load-bearing note)
+
+**Routing for the next plan**: re-review at 2/3, not redraft — secure provenance (restore the solution PDF or extract its C.6 page into `reports/`) or fall back to the quarantine-delete; rewrite the chapter's now-stale "microdata unrecoverable" NOTE; keep the grounding-log noise defect routed as the systematic 26-file blocker.

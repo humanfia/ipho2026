@@ -1,0 +1,16 @@
+Iter-003 review complete. Exactly one target was in scope (`problem_IPhO_2026_1_B_1.lean`, redraft #3, review attempt 2/3); verdict: **failed**.
+
+**Verdict rationale**
+- Compile regression (BLOCKER): preflight recorded 3 `linarith` errors at L401/L419/L427 in the newly added `CoulombPairData.quadratic_pos_of_large`; 5 sorries are per the by-sorry contract.
+- Core directive met: `bound_branch : total_energy < 0` is now a `CoulombPairData` field, closing the iter-002 countermodel at mk time (E≥0 instances are unlawful). Preservation duties met: 1600/9 strictly conclusion-side, `AnchoredValues`, both sorry bridges, proved endpoints intact.
+- New finding (answer-in-formula): proved `turning_root_cases` derives `x = 1600/9` from a hypothesis formula that literally encodes the root coefficients — a goal-faithfulness weakness, not a fake.
+- Doctor: 19 findings, all `missing-physlib-import` (file has the iter-003 exemption NOTE + complete grounding log); reconciliation is director-side. sync_leanok ran (iter=3, this file), added/removed 0 — stale `\leanok` is flagged, not laundering.
+
+**Artifacts written**
+- `.archon/proof-journal/sessions/session_3/milestones.jsonl` (full `formalization_review`: 6 checks — derivability failed; 5 bridges — 3 covered / 2 blocked)
+- `.archon/proof-journal/sessions/session_3/summary.md`
+- `.archon/proof-journal/sessions/session_3/recommendations.md` (R1 fix-first linarith discharge shapes; R2 answer-in-formula tightening; R3 doctor patch; R4 sign-carrier decision; R5 do-not list)
+- `.archon/iter/iter-003/review.md` (narrative sidecar)
+- `.archon/PROJECT_STATUS.md` Knowledge Base (durable iter-003 patterns; Overall Progress left frozen)
+
+One out-of-scope observation surfaced for the next plan agent: iter-003 objective O2 (`4_C_6` quarantine) was never applied — `official_sample_value` at L409 is still on disk and numerically false; it was not in this iter's deterministic target set, so it was not audited, just recorded in recommendations.

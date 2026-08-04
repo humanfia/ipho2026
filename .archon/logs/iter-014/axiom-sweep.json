@@ -1,0 +1,14 @@
+{
+  "ran": true,
+  "error": null,
+  "filesChecked": 1,
+  "durationSecs": 18,
+  "jobs": 1,
+  "scope": "current-objectives",
+  "targetFiles": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+  ],
+  "failedFiles": [],
+  "sorryLaunderings": [],
+  "otherNonStandardAxioms": []
+}

@@ -1,0 +1,32 @@
+@sqrt_div : ∀ {x : ℝ}, 0 ≤ x → ∀ (y : ℝ), √(x / y) = √x / √y
+@sqrt_sq : ∀ {x : ℝ}, 0 ≤ x → √(x ^ 2) = x
+sqrt_sq_eq_abs : ∀ (x : ℝ), √(x ^ 2) = |x|
+@sqrt_le_sqrt : ∀ {x y : ℝ}, x ≤ y → √x ≤ √y
+sin_arccos : ∀ (x : ℝ), sin (arccos x) = √(1 - x ^ 2)
+@cos_arccos : ∀ {x : ℝ}, -1 ≤ x → x ≤ 1 → cos (arccos x) = x
+@arccos_le_arccos : ∀ {x y : ℝ}, x ≤ y → arccos y ≤ arccos x
+@arccos_lt_arccos : ∀ {x y : ℝ}, -1 ≤ x → x < y → y ≤ 1 → arccos y < arccos x
+@div_le_one : ∀ {α : Type u_1} [inst : Semifield α] [inst_1 : PartialOrder α] [PosMulReflectLT α] {a b : α},
+  0 < b → (a / b ≤ 1 ↔ a ≤ b)
+.archon/tmp/probe_2_B_2/names.lean:14:8: error(lean.unknownIdentifier): Unknown identifier `div_le_div_right`
+@div_mul_cancel₀ : ∀ {G₀ : Type u_1} [inst : GroupWithZero G₀] {b : G₀} (a : G₀), b ≠ 0 → a / b * b = a
+@mul_div_cancel_left₀ : ∀ {M₀ : Type u_1} [inst : CommMonoidWithZero M₀] [inst_1 : Div M₀] [MulDivCancelClass M₀]
+  (b : M₀) {a : M₀}, a ≠ 0 → a * b / a = b
+@csSup_le_iff : ∀ {α : Type u_1} [inst : ConditionallyCompleteLattice α] {s : Set α} {a : α},
+  BddAbove s → s.Nonempty → (sSup s ≤ a ↔ ∀ b ∈ s, b ≤ a)
+@bddAbove_Ioo : ∀ {α : Type u_1} [inst : Preorder α] {a b : α}, BddAbove (Ioo a b)
+@bddBelow_Ioo : ∀ {α : Type u_1} [inst : Preorder α] {a b : α}, BddBelow (Ioo a b)
+@csSup_Ioo : ∀ {α : Type u_1} [inst : ConditionallyCompleteLattice α] {a b : α} [DenselyOrdered α],
+  a < b → sSup (Ioo a b) = b
+@csInf_Ioo : ∀ {α : Type u_1} [inst : ConditionallyCompleteLattice α] {a b : α} [DenselyOrdered α],
+  a < b → sInf (Ioo a b) = a
+@sq_lt_sq : ∀ {α : Type u_1} [inst : Ring α] [inst_1 : LinearOrder α] [IsStrictOrderedRing α] {a b : α},
+  a ^ 2 < b ^ 2 ↔ |a| < |b|
+@sq_le_sq : ∀ {α : Type u_1} [inst : Ring α] [inst_1 : LinearOrder α] [IsStrictOrderedRing α] {a b : α},
+  a ^ 2 ≤ b ^ 2 ↔ |a| ≤ |b|
+@le_csSup : ∀ {α : Type u_1} [inst : ConditionallyCompleteLattice α] {s : Set α} {a : α},
+  BddAbove s → a ∈ s → a ≤ sSup s
+@neg_lt_self : ∀ {α : Type u_1} [inst : AddGroup α] [inst_1 : Preorder α] [AddLeftStrictMono α] {a : α}, 0 < a → -a < a
+@sin_pos_of_mem_Ioo : ∀ {x : ℝ}, x ∈ Ioo 0 π → 0 < sin x
+sin_two_mul : ∀ (x : ℝ), sin (2 * x) = 2 * sin x * cos x
+@mem_image : ∀ {α : Type u_1} {β : Type u_2} (f : α → β) (s : Set α) (y : β), y ∈ f '' s ↔ ∃ x ∈ s, f x = y

@@ -1,0 +1,8 @@
+# Review — problem_IPhO_2026_1_B_1.lean (iter-017, cycle-1/attempt-1): SOLVED
+
+- **Route: solved.** All five checks pass; `maximum_separation_T1_B1` is fully proved with the exact official answer `(1600/9)·a₀` as greatest attained separation.
+- **Compile/axioms:** preflight passed (0 sorries, 0 diagnostics); trace shows fresh `lake env lean` exit 0, `grep -c sorry` = 0, `lean_verify` → `[propext, Classical.choice, Quot.sound]` only. `opaque` constants are intentional anti-unfolding design, no laundering.
+- **Contract audit:** hypotheses (CoulombPairData fields, AnchoredValues, IsBoundMu) contain no target value; `1600/9` appears only in proved theorems. `bound_branch : E < 0` is forced by the other fields (E = (4/625 − 1/100)·k·e²/a₀ < 0), so it adds no illicit content. USER-hint sign contract (Q ≥ 0 on realized motion, Q < 0 beyond threshold) respected.
+- **Independent math check:** turning-point quadratic roots recomputed = 100 and 1600/9; both coefficient matches (E = −(9/16)L²/(2μ_red·r₀²), k·e² = (25/16)L²/(2μ_red·r₀)) verified numerically; band `0 ≤ Q ↔ 100 ≤ x ≤ 1600/9` follows from the negative prefactor.
+- **Evidence agreement:** newest task result (`task_results/IPhO2026Problems_problem_IPhO_2026_1_B_1.md`) matches the iter-017 trace; the older `problem_IPhO_2026_1_B_1.md` is the same-iteration formalize-lane artifact (stale alternate path — process note only).
+- **Non-blocking notes:** blueprint chapter still carries the iter-001 STALE-LEANOK annotation and awaits its plan/writer prose-inventory pass (coverage debt `unmatched` 42); marker state is sync-owned and not a proof failure.

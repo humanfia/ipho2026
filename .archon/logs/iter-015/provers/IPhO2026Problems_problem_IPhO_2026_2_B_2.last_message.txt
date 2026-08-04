@@ -1,0 +1,15 @@
+All done. `IPhO2026Problems/problem_IPhO_2026_2_B_2.lean` is fully proved.
+
+**Outcome**
+- 0 errors, 0 warnings, 0 sorries — fresh `lake env lean` exit 0
+- `#print axioms` on every proved declaration: `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no new axioms
+- Signatures byte-identical; only proof bodies after `:= by` touched
+
+**What was closed**
+- `abs_hitOffset_eq` — repaired the 4 reviewed tactic errors: `hparseval` now goes through a tagged ring-expansion proving `e0 e1 + n0 n1 = 0` by square-vanishing; `|ue| ≤ p.R` via plain `sq_le_sq`; `hsq` via `div_pow` + `field_simp [ne_of_gt p.hR]`; `hgoal` rewrite order fixed with `conv_lhs => rw [← sq_abs wn]`
+- `collectedWidth_eq_two_mul_yOff` — image set is exactly `Ioo (-yOff) yOff`, width `csSup_Ioo − csInf_Ioo`
+- `yOff_eq_R_sin_thetaMax` — two-sided squeeze: midpoint-in-band argument (upper) and attained θ_max ray strictly inside the open band (lower), angles via `arccos` range + `strictMonoOn_sin`
+- `two_r_sin_over_diameter_eq` — B.1 calibration + `sin_two_mul` by `linear_combination`, then `mul_div_mul_right` cancellation
+- `power_ratio_eq_width_ratio` and the main theorem `power_ratio_in_terms_of_theta_max` — intensity cancellation + 3-lemma chain, exactly the blueprint route
+
+Results written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_2.md`, including the six blueprint environments ready for `\leanok` (sync-owned) and a note that the chapter narration needs no re-keying.

@@ -1,0 +1,10 @@
+Lane complete. Summary of what was done:
+
+**Verification (no edit needed)**
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_3_C_4.lean` — exit 0, 0 errors, exactly the 8 contracted `declaration uses sorry` warnings (L274/283/317/325/335/355/375/401), matching the PROGRESS ledger.
+- All 28 `\lean{IPhO2026.Problem3.C4.*}` pins in the blueprint chapter ledger resolve 1:1 to declarations on disk; no missing pins and no unpinned public declarations.
+- The official answer `t = (C_c*T_h/P)*(ln(T_0/T) − (T_0−T)/T_h)` appears only as the conclusion of `c4_elapsed_time` (`IPhO2026Problems/problem_IPhO_2026_3_C_4.lean:388`); all six scalars are `opaque`, and the governing laws (`CarnotHeatRatio`, `CycleWorkHeatBalance`, `ConstantPowerDensityLaw`, `BodyCalorimeterDensityLaw`, bundled via `InfinitesimalCycleLaw`/`IsCoolingRun`) are equational `Prop`s with no defeq path to the answer.
+
+**Disposition**
+- This objective is one of the iter-008 gate-retry lanes (review retry at 1/3): a sorry-preserving redraft audit. The file already satisfies the planner-frozen spec and the iter-008 ledger, so the correct discharge was a **no-op** — no statement change was requested or made.
+- Task result written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_4.md` with the full assumption/target split, goal-faithfulness audit, 8-entry bridge-obligation table, countermodel audit, branch/uncertainty coverage, pin↔label mapping, and marker-readiness note for the deterministic review pass.

@@ -1,0 +1,13 @@
+Done. The 3_B_2 target was already fully formalized from a prior iteration; this pass verified it end-to-end and recorded the audit.
+
+**Verification**
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_3_B_2.lean`: **0 errors**, exactly 3 expected `sorry` warnings (`adiabatic_invariant_along_path` L148, `endpoint_relation` L159, `adiabatic_temperature_change` L190). `lam_add_mu0_K_sq_pos` is fully proved via `positivity`.
+- All 11 declarations match the chapter's `\lean{}` ledger 1:1; the chapter carries `% archon:physics`.
+
+**Faithfulness checks**
+- The official answer `T_i·(√((λ+μ₀KH_f²)/(λ+μ₀KH_i²)) − 1)` appears only in the target theorem's conclusion; hypotheses carry the governing laws (`T·M·V = n·K·H`, `C_M = nλ/T²`, first-law adiabatic balance `Cm·dT/dt = −w`), positive parameters, and endpoint/orientation data (`H_i ≥ 0`, `T_i, T_f > 0`).
+- Sign convention, ramp direction (signed `H`, start `H_i ≥ 0`), and the A.3 work law `dW = μ₀VH dM` are all hypothesis-side; no numerical uncertainty in the source (exact closed form).
+
+**Deliverable**
+- Wrote `.archon/task_results/problem_IPhO_2026_3_B_2.md` with the full assumption/target split, goal-faithfulness audit, bridge-obligation inventory (all 5 bridges covered, 3 as contracted sorries), countermodel audit, and grounding record.
+- `\leanok` was deliberately **not** added: the three main ledger declarations still carry sorries, so marking them would be reverted by the deterministic sync. `lam_add_mu0_K_sq_pos` is flagged as sync-eligible (proved).

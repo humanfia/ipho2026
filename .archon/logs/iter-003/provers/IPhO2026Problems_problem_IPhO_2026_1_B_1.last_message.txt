@@ -1,0 +1,290 @@
+Interesting — `ring` failed to prove `-(a - b) = -b + a`?! It transformed the goal to `-a + b = a - b` and failed. So `ring` IS broken in this environment. That means `import Mathlib` in this project gives a corrupted `ring`/`linarith` — no wait, the third error earlier (`h3 : -(a - b) = -b + a` via `ring` failed, simplifying to `-a + b = a - b`). Hmm wait — that's my h3 statement: `-(a - b) = -b + a`. ring_nf turned LHS into `-a + b`, RHS stays `a - b`. And `-a + b` vs `a - b` aren't equal! WAIT. `-(a-b) = -a + b`. And my claimed RHS `-b + a`... `-b + a = a - b`. So `-(a-b) = -a+b` but my h3 says `-(a-b) = -b + a = a - b`. That's WRONG algebra! `-(a-b) = b - a`, not `a - b`.
+
+I made a sign error: `-(a - b) = b - a`. My h3 was `-(a - b) = -b + a`? No `-b + a = a - b ≠ b - a`. So h3 is FALSE. ring correctly reduced to `-a+b = a-b` which is false. Fine — ring is NOT broken; I wrote a false identity.
+
+Then back to linarith failing on `0 ≤ -b + a` given `h : a ≤ b`... hmm, but is THAT goal even true?? `-b + a = a - b` and `a ≤ b ⟹ a - b ≤ 0`, so `0 ≤ a - b` is FALSE in general! e.g. a=0, b=1: `-1 + 0 = -1 < 0`. The goal `0 ≤ -b + a` is `0 ≤ a - b`, false!
+
+Oh no — so my desired conclusion had a sign flip all along. Let's recheck what I actually need:
+
+`hmul : coulombK * elementaryCharge ^ 2 ≤ r * (-D.total_energy)` where `-E > 0`.
+
+I want: `0 ≤ D.total_energy * r + coulombK * elementaryCharge ^ 2`, i.e. `0 ≤ E·r + C`.
+
+`hcast : E·r = -(r·(-E))`. So `E·r + C = C - r·(-E)`. And `hmul : C ≤ r·(-E)` gives `C - r·(-E) ≤ 0`. So `E·r + C ≤ 0`, NOT `≥ 0`!!!
+
+Wait, let me redo carefully. `hr : C/(-E) ≤ r`. Multiply by `(-E) > 0`: `C ≤ r·(-E) = -E·r`. So `E·r ≤ -C`, i.e. `E·r + C ≤ 0`. Hmm! So actually the term `E·r + C` is NEGATIVE for large r. But E<0, so E·r is negative and large in magnitude; C is fixed positive. For r ≥ C/(-E), E·r + C ≤ 0. Right!
+
+But then `Q(r) = r·(E·r + k e²) − L²/(2μ_red)` for large r is negative·positive... `E·r + C ≤ 0`, so `r·(E·r + C) ≤ 0` (r>0), and then `Q(r) = r·(...) − L²/(2μ_red) < 0`. So Q(r) is NEGATIVE for large r, not positive!
+
+Hmm wait, that changes the physics story. `Q(r) = E r² + k e² r − L²/(2μ_red)`. With E < 0, this is a downward-opening parabola: at r→0+, Q → −L²/(2μ_red) < 0; Q rises to a max at r* = −k e²/(2E) = k e²/(2|E|), then falls to −∞. The physically allowed region is Q(r) ≤ 0?? 
+
+Hold on. Let me recheck the sign of the radial energy law. Radial KE = E − L²/(2μr²) + k e²/r ≥ 0 for allowed motion (since U_eff = L²/(2μr²) − k e²/r). Multiply by r² > 0: `E r² − L²/(2μ) + k e² r ≥ 0`, i.e. `Q(r) = E r² + k e² r − L²/(2μ) ≥ 0` for physically allowed r!
+
+But the existing file says `orbit_support` asserts `Q(r) ≤ 0` at attained separations, and `attainedSeparations := {r | 0 < r ∧ Q(r) ≤ 0}`. That's backwards physically... but wait — with E<0 and downward parabola, `Q(r) ≤ 0` region is r ∈ (0, r₁] ∪ [r₂, ∞) (unbounded above!) while `Q ≥ 0` region is `[r₁, r₂]` (bounded). So the FILE's convention `Q ≤ 0` gives unbounded support — which was exactly the review's complaint ("turning-point quadratic opens upward, unbounded")!
+
+Hmm wait, the review said "with E ≥ 0 lawful derivations the hypotheses must become unsatisfiable (turning-point quadratic opens upward, unbounded)". Meaning: the review expects that hypotheses are satisfiable ONLY on the bound branch. With the file's `Q ≤ 0` convention: E ≥ 0 → parabola opens upward (E>0) → Q ≤ 0 region bounded between roots... E=0 → linear. Hmm the review's framing: "E ≥ 0 ⇒ hypotheses unsatisfiable (quadratic opens upward, unbounded)". 
+
+Hmm, with Q ≤ 0 as the lawful region and E > 0: parabola opens up, Q(0) = −L²/2μ < 0, Q ≤ 0 on [0, r_root] bounded. 100·a₀ must be in it (turning_100: Q(r₀)=0, so r₀ = the positive root). Bound criterion... the recorded bound criterion is `4μ²ℏ² < kme²r₀` ⇔ E < 0. So under E ≥ 0 we'd need... Q(r₀) = 0 always possible. Hmm, whatever — the memory line: "Proof-route branch predicates MUST be structure fields, not hypotheses — universal set + external `IsBound` leaves countermodels (1_B_1 class)". And PROGRESS sanity: "with `E ≥ 0` lawful derivations the hypotheses must become unsatisfiable (turning-point quadratic opens upward, unbounded)".
+
+Hmm — "the turning-point quadratic opens upward, unbounded": with the allowed region defined as `Q ≤ 0`, E < 0 makes the parabola open downward and the `Q ≤ 0` region is unbounded above... no wait, that's also unbounded. Ugh. Let me not over-think the original physics convention. The file's attainedSeparations = {Q ≤ 0}: with E < 0 (downward parabola, two positive roots r₁ < r₂ where Q = 0), Q ≤ 0 on (0,r₁] ∪ [r₂,∞) — unbounded! With E > 0 (upward), Q ≤ 0 between roots — bounded! That seems to invert the physics: actually wait, physical allowed region is Q ≥ 0 (KE ≥ 0). With E<0 (bound): Q ≥ 0 on [r₁, r₂] — bounded. Correct physics requires `Q ≥ 0`.
+
+But the file defines attainedSeparations with `Q ≤ 0`. That's an EXISTING modeling choice, and review iter-002/iter-003 gave "semantics green" apart from the branch-predicate issue. The planner's requested sanity: "with `E ≥ 0` lawful derivations the hypotheses must become unsatisfiable (turning-point quadratic opens upward, unbounded)".
+
+Hmm, reading again: "turning-point quadratic opens upward, unbounded" — for E ≥ 0 with the `Q ≤ 0` lawful-region convention: E > 0 opens upward, Q(0) < 0, region `Q ≤ 0` = [0, r₊] bounded... this reading says "unbounded"... 
+
+Honestly, I think I'm overanalyzing the planner's physics sign shorthand. Let me look at what `turning_100` + `coulomb_law` give for E: E = 4μ²ℏ²/(m r₀²) − k e²/r₀. With μ=4, r₀=100a₀: E = 64ℏ²/(m·10⁴a₀²) − ke²/(100a₀). Using ke² = ℏ²/(m a₀): E = ℏ²/(m a₀²)·(64/10⁴ − 1/100) = ℏ²/(m a₀²)·(0.0064 − 0.01) < 0. Yes E < 0 on the bound branch. Good — `bound_branch : total_energy < 0` is physically correct.
+
+Now for my helper theorem: I claimed `Q(r) > 0` for `r ≥ k e²/(−E)`. Reality: `Q(r) = E r² + k e² r − L²/2μ` — with E<0, for r ≥ k e²/|E|... let's test r = k e²/|E|: E r² + k e² r = r(E r + k e²) = r(−|E|·k e²/|E| + k e²) = 0. So Q = −L²/2μ < 0. For r larger: E r + k e² < 0, so Q even more negative. So Q(r) < 0 for r ≥ k e²/(−E) — the OPPOSITE sign from what I wrote. My theorem statement is mathematically FALSE — that's why linarith failed: I was trying to prove a false goal (good — the checker was telling me the truth!).
+
+So with the file's convention (attainedSeparations = {Q ≤ 0}): the lawful region under E < 0 is {Q ≤ 0} = (0,r₁] ∪ [r₂,∞), which is unbounded above. The turn at 100 is one root; the other root 1600/9 ≈ 177.8. Since Q is a downward parabola with roots 100 and 177.8, Q > 0 between roots, Q ≤ 0 outside: (0,100] ∪ [177.8,∞). So the attained set is unbounded above under the file's convention?! Then "maximum separation" would be infinite — consistent with the review complaint that countermodels exist. But wait — the review fix requested is `bound_branch : D.E < 0`, which per the sanity check "with E ≥ 0 lawful derivations the hypotheses must become unsatisfiable (turning-point quadratic opens upward, unbounded)".
+
+Hmm, that sanity check says: hypotheses must become unsatisfiable when E ≥ 0. I.e., current hypotheses WITHOUT bound_branch are satisfiable with some E ≥ 0 countermodel (that's the bug: E ≥ 0 → upward parabola → {Q ≤ 0} bounded between roots... wait that would make max exist. Hmm, no — with E ≥ 0, upward parabola, Q ≤ 0 between the two roots IF two roots exist (discriminant (k e²)² + 2 E L²/μ_red > 0). Roots: [−k e² ± √Δ]/(2E), for E>0: one positive root [−ke²+√Δ]/2E. So Q ≤ 0 on (0, r₊] — bounded by r₊. And turning_100 forces Q(100 a₀) = 0 ⟹ r₊ = 100 a₀. Then attainedSeparations ⊆ (0, 100 a₀], and a "maximum separation" of 1600/9·a₀ > 100·a₀ would be FALSE — but the theorem says max = 1600/9·a₀ which is NOT in attainedSeparations (since 177.8 > 100). So the existential `∃ r_max, IsGreatest ... ∧ r_max = 1600/9 a₀` is unprovable but consistent (the theorem just can't be proven from a countermodel — but theorems with `sorry` compile anyway; the REVIEW issue is about the hypotheses being satisfiable in a way that makes the stated conclusion false — meaning the formalization doesn't faithfully capture "bound").
+
+Wait, actually, hmm: with E > 0 and Q ≤ 0 region (0, 100a₀]: is this a legitimate countermodel to the hypotheses? orbit_support: ∃ nonempty O with Q ≤ 0 on O: pick O = {50 a₀}. Also Q(50 a₀) ≤ 0? With E>0, r₊ = 100a₀ being the root: Q(50a₀) < 0 yes. Fine. turning_100: Q(100a₀) = 0 ✓. So all structure fields satisfiable with E > 0 — a countermodel where the physical situation is an unbound (hyperbolic... well with their Q-sign, whatever) trajectory. In that model, `attainedSeparations ⊇ (0,100a₀]`?? no wait attainedSeparations = {r > 0 | Q(r) ≤ 0} = (0, 100a₀]. The main theorem claims 1600/9·a₀ ∈ attainedSeparations — false in that model. So IF later stages tried to prove the main theorem from these hypotheses, they'd be stuck — but worse, the hypotheses themselves don't force E < 0, and the planner wants the structure to EXCLUDE E ≥ 0 interpretations so that the model class matches "bound orbit".
+
+Hmm wait, but hold on: is E > 0 even compatible with `coulomb_law`+`angular_momentum_per_particle`+AnchoredValues? `boundMu_isBound` + AnchoredValues derive numeric values: L = 8ℏ, μ_red = m/2, v₀ from m v₀ (50 a₀) = 4ℏ → v₀ = 4ℏ/(50 m a₀), E = 2·(1/2)m v₀² − k e²/(100a₀) — this is a DEFINITE number < 0 as computed. So actually with AnchoredValues + coulomb_law, E is pinned and negative! The countermodels arise when... hmm, but AnchoredValues records only `total_angular_momentum_value`, `speed_value`, `reduced_mass_pos`, `initial_separation_pos` — NOT the numeric E. E numeric value comes from coulomb_law (a structure field) + speed_value. So E < 0 IS derivable from existing fields (coulomb_law + speed_value + bohr_radius_def). That derivation is exactly `boundMu_isBound`-adjacent content (currently sorry'd). So the countermodels: interpret `initial_speed`, `particleMass` etc. freely? No — particleMass is opaque with positivity; initial_speed is a free structure FIELD of D with no positivity constraint... wait, coulomb_law ties E to v₀. If v₀ = 0, then angular_momentum_per_particle field forces μ·ℏ = 0 ⟹ contradiction with boundMu_isBound? That has IsAngularMomentumFactor (0 < 4) and the inequality — doesn't directly contradict ℏ > 0... m·0·(r₀/2) = 0 = 4ℏ ≠ 0 — contradiction! So v₀ = 0 excluded by `angular_momentum_per_particle` + hbar_pos. 
+
+OK so can E ≥ 0 with all fields? E = m v₀² − k e²/r₀ with m v₀ r₀/2 = μℏ: v₀ = 2μℏ/(m r₀), E = 4μ²ℏ²/(m r₀²) − k e²/r₀. E ≥ 0 ⟺ 4μ²ℏ² ≥ k m e² r₀. And IsBoundMu demands 4μ²ℏ² < k m e² (100a₀) — the negation! But IsBoundMu is NOT a structure field; it appears as a hypothesis `hb : IsBoundMu boundMu` on the theorems. With boundMu = 4 and r₀ = 100a₀ (initial_separation_value field), the coulomb_law + angular_momentum_per_particle fields give E = 4·16ℏ²/(m r₀²) − ke²/r₀. Then hb: 4·16ℏ² < kme²·100a₀ = ke²·100·ℏ²/(kme²)... hmm I mean kme²(100a₀) = 100ℏ² (using a₀ = ℏ²/(kme²)). So hb ⟺ 64ℏ² < 100ℏ² ✓, and then E = (64ℏ²/(m r₀) − k e²)·... let me just: E·r₀ = 4μ²ℏ²/(mr₀) − ke² = 64ℏ²/(100 m a₀) − ke² = ℏ²/(ma₀)(0.64) − ℏ²/(ma₀) < 0. So with hb + the fields, E < 0 follows. So WHY does the planner say countermodels exist?
+
+Because E is a FREE structure field `total_energy`! The field `coulomb_law` relates it to initial_speed etc. — but those are also free fields... no wait, they're pinned by angular_momentum_per_particle relative to opaque constants: m·v₀·(r₀/2) = 4ℏ pins v₀ given m, ℏ, r₀; r₀ pinned by initial_separation_value; and coulomb_law pins E from v₀, r₀. So E is FULLY pinned by the structure fields + ScalingRegime. Then E < 0 is derivable (that's real content, currently behind sorry in boundMu_isBound's numeric simplification). 
+
+Hmm, so in what sense do countermodels with E ≥ 0 exist? I think the planner/review worry is at the level of the STRUCTURE: taken as raw fields, someone can instantiate `CoulombPairData` with a DIRECTLY chosen `total_energy := 5`, `initial_speed := <whatever satisfies>`. Wait — can they? m·v₀·(r₀/2) = 4ℏ with m, ℏ > 0 fixed forces v₀ = 8ℏ/(m r₀), no freedom. E = m v₀² − ke²/r₀ forced. Hmm unless... they choose `particleMass`? No, opaque. `hbar`? opaque. So given ScalingRegime, ALL models of CoulombPairData have THE SAME E, L, v₀, r₀, μ_red values (pinned). E < 0 is then a THEOREM (provable by substitution — the content of the boundMu_isBound sorry). So adding `bound_branch : total_energy < 0` as a field doesn't change the model class at all IF everything is pinned... 
+
+BUT: the pinning uses `boundMu` = 4 via angular_momentum_per_particle: `m v₀ (r₀/2) = boundMu · ℏ`?? Let me check the field: `angular_momentum_per_particle : particleMass * initial_speed * (initial_separation / 2) = boundMu * hbar`. Hmm interesting — the field directly uses `boundMu`! So yes pinned.
+
+OK here's the thing: this is the autoformalize/redraft stage, and the planner's directive is explicit: add `bound_branch : D.E < 0` as a structure field. I've done that. The sanity criterion: "with E ≥ 0 lawful derivations the hypotheses must become unsatisfiable (turning-point quadratic opens upward, unbounded)". I read this as: the bound_branch field makes any E ≥ 0 instantiation fail — i.e., the structure itself now requires E < 0, so a countermodel built around E ≥ 0 (ignoring the pinning) cannot instantiate the structure. My helper theorem was meant to demonstrate the "downward/bounded" content but I got the SIGN wrong relative to the file's `Q ≤ 0` convention.
+
+Let me now recompute what the true boundedness statement is under the file's convention `{Q ≤ 0}`:
+
+With E < 0: downward parabola, Q → −∞ as r → ∞, Q(r) ≤ 0 for r ≥ r₂ (upper root). So `{Q ≤ 0} ⊇ [r₂, ∞)` — the attained set per the file is unbounded ABOVE no matter what. That means `orbitBound_T1_B1 : r ≤ 1600/9 a₀` is actually FALSE under literal reading of attainedSeparations = {0<r ∧ Q(r) ≤ 0}?? Because for any huge r with Q(r) < 0 (which holds for r > r₂), r ∈ attainedSeparations and r > 1600/9 a₀. Indeed r = 10000·a₀: Q huge negative ⟹ r ∈ attainedSeparations ⟹ orbitBound_T1_B1 false!
+
+Wait, that can't be — the file compiled and was "semantics green" except for this branch predicate thing. Let me recheck attainedSeparations definition... line ~240: `def attainedSeparations : Set ℝ := { r : ℝ | 0 < r ∧ D.turningQuadratic r ≤ 0 }` and turningQuadratic: `D.total_energy * r^2 + coulombK * elementaryCharge^2 * r − L^2/(2μ_red)`. With E<0: for r→∞, E r² dominates → −∞ ≤ 0. So yes huge r are in the set. So orbitBound_T1_B1 (r ≤ 1600/9 a₀) is false in the literal model — but it's `sorry`, and at formalize stage that's tolerated ONLY IF the statement is intended to be provable later... A FALSE statement is not provable. Hmm, but physically: the ACTUAL attained set is the orbit's radial range, which is [perigee? , apogee] — a sub-interval, and `orbit_support` gives a nonempty subset where Q ≤ 0... The physical reading: attainedSeparations is meant to be "the set of separations the orbit actually visits" — an interval [r_min, r_max] = [100, 177.8]a₀ — and the lawful-motion constraint is Q(r) ≥ 0 there physically (KE ≥ 0). The file's convention has Q ≤ 0 — INVERTED. But with the inversion, the set where Q ≤ 0 near the orbit... hmm, actually wait. Let me recompute: is Q ≥ 0 or Q ≤ 0 at the orbit?
+
+Q(r) = E r² + ke²r − L²/2μ. Radial KE × r²: (1/2)μṙ²·r² = E r² − L²/(2μ) + ke²r = Q(r). KE ≥ 0 ⟺ Q(r) ≥ 0. At the orbit r ∈ [100, 177.8]a₀, Q(r) ≥ 0 (between the roots of downward parabola ✓). So the correct lawful region is Q(r) ≥ 0, and the file has it backwards?? But review gave semantics green excepting branch predicate... The review's own sanity note: "(turning-point quadratic opens upward, unbounded)" — for E ≥ 0 the parabola opens upward; with lawful region `Q ≤ 0`... 
+
+Hmm hold on, maybe I should recheck the sign convention of Q as defined in the file: `turningQuadratic r = total_energy * r^2 + coulombK * elementaryCharge^2 * r − total_angular_momentum^2/(2*reduced_mass)`. And orbit_support asserts this is ≤ 0. The doc-strings claim "the radial kinetic energy is nonnegative, i.e. Q(r) ≤ 0". That's physically wrong (should be ≥ 0), BUT this is the file's established convention from prior iterations, reviewed. Hmm wait — maybe I mis-derived. Radial energy: E = (1/2)μṙ² + L²/(2μr²) − ke²/r. So (1/2)μṙ² = E − L²/(2μr²) + ke²/r. Multiply by r²: (1/2)μṙ²r² = Er² − L²/(2μ) + ke²r = Q(r). KE ≥ 0 ⟹ Q(r) ≥ 0. Yes, Q ≥ 0 is the physical region. The file's `≤ 0` is inverted. Hmm!! But wait — review iter-002 did NOT flag this? The planner instruction says the ONLY genuine defect for this file is the branch-predicate issue. And "PRESERVE UNCHANGED: proved algebra certificates, AnchoredValues, orbit_support, all conclusion-side bridges..." — so orbit_support with ≤ 0 must be preserved!
+
+Hmm, is it actually wrong though? Let me recheck with numbers: E < 0 (bound). Q(r) = E r² + ke²r − L²/2μ at r = 100a₀ should be 0 (turning). At r = 140a₀ (between roots): E r² + ke²r − L²/2μ. Downward parabola (E<0), roots at 100 and 177.8 → between roots Q > 0. So physical region (between roots) has Q > 0. File says Q ≤ 0 at attained separations. So the file's attainedSeparations near the actual orbit is wrong — attainedSeparations would be (0,100]∪[177.8,∞)... 
+
+Hmm, wait wait. Let me recheck the ROOTS. Q = 0 ⟺ in 1/x variable (x in units of a₀): the file's normalization: (100/x)² − (1+ρ)(100/x) + ρ = 0 with ρ = 9/16: roots 100/x = 1 ⟹ x = 100; 100/x = 9/16 ⟹ x = 1600/9 ≈ 177.8. Let u = 100/x. The monic quadratic in u opens upward in u. Q sign: Q(x a₀) ∝ u² − (1+ρ)u + ρ times POSITIVE factor? `x²·Q(x·a₀)·(2μ_red/l²) = (100/x)² − ...`. With x > 0, 2μ_red/l² > 0: sign(Q(xa₀)) = sign(u² − (1+ρ)u + ρ) = sign of upward parabola in u = (u−1)(u−ρ) = (100/x − 1)(100/x − 9/16). For x = 140: 100/140 ≈ 0.714; (0.714−1)(0.714−0.5625) = (−0.286)(0.152) < 0. So Q(140a₀) < 0!
+
+Hmm! So Q is NEGATIVE between the roots?! But I computed downward parabola in r with roots 100, 177.8 should be positive between... Let me recheck the parabola direction: leading coefficient E < 0 → opens downward → negative outside [r₁,r₂], positive inside. r=140a₀ ∈ (100, 177.8)a₀ → Q > 0. But the x-computation gives Q < 0. CONTRADICTION — one of my computations is wrong.
+
+Q(r) = E r² + ke² r − L²/(2μ_red). Bah, let me just plug actual numbers. Use units ℏ=m=ke²=k=e=1... take a₀ = ℏ²/(k m e²) = 1. Bound case: L = 2μℏ = 8 (μ=4). μ_red = m/2 = 1/2. r₀ = 100. v₀: m v₀ r₀/2 = 4 ⟹ v₀ = 8/100 = 0.08. E = 2·(1/2)·1·v₀² − 1/100 = (0.08)² − 0.01 = 0.0064 − 0.01 = −0.0036. Q(r) = −0.0036 r² + r − 64/(2·0.5) = −0.0036r² + r − 64.
+
+Q(100) = −0.0036·10000 + 100 − 64 = −36 + 36 = 0 ✓.
+Roots: 0.0036r² − r + 64 = 0 → r = [1 ± √(1 − 4·0.0036·64)]/(2·0.0036) = [1 ± √(1−0.9216)]/0.0072 = [1 ± √0.0784]/0.0072 = [1 ± 0.28]/0.0072. r₁ = 0.72/0.0072 = 100 ✓, r₂ = 1.28/0.0072 = 177.78 = 1600/9 ✓.
+
+Q(140) = −0.0036·19600 + 140 − 64 = −70.56 + 76 = 5.44 > 0. Positive! Q between roots is POSITIVE. So my u-computation was wrong somewhere: u = 100/x: Q ∝ u² − (100/100 + 100/r₂)... 100/100 = 1, 100/(1600/9) = 900/1600 = 9/16 = ρ. Sum 1 + ρ, product ρ. Factor (u−1)(u−9/16). At x=140, u = 5/7 ≈ 0.714: (0.714−1) = −0.286; (0.714−0.5625) = +0.152; product = −0.0434 < 0. So which is right?? Q(140) = 5.44 numerically. So the FACTOR `x²·Q·(2μ/l²) = u²−(1+ρ)u+ρ` must have a sign error. μ_red = 0.5, l = L/μ_red = 16, 2μ_red/l² = 1/256 > 0, x² = 19600 > 0. x²·5.44/256 = 76.56/256... = 0.299. And u²−(1+ρ)u+ρ = (5/7)² − 25/16·(5/7) + 9/16 = 0.5102 − 1.1161 + 0.5625 = −0.0434. But 0.299 ≠ −0.0434. So the normalization identity in the file (`turningQuadratic_normalized_eq`, which is sorry'd) claims this iff — let me verify the algebra myself:
+
+Q(x a₀) = E x²a₀² + ke² x a₀ − L²/(2μ_red).
+(1/x)²·Q·(something): E a₀² = −0.0036, ke²a₀ = 1, L²/(2μ_red) = 64.
+Q(x) = −0.0036 x² + x − 64.
+Divide by x²: −0.0036 + 1/x − 64/x². With u = 100/x: 1/x = u/100, 64/x² = 64u²/10000 = 0.0064 u².
+Q/x² = −0.0036 + u/100 − 0.0064u². Multiply by −1/0.0036: 1 − u/0.36 + (0.0064/0.0036)u² = 1 − 2.777...u + 1.7778u². Hmm, 1.7778 = 16/9. So (16/9)u² − (25/9)u + 1 = 0 ⟺ 16u² − 25u + 9 = 0 ⟺ u = (25 ± √(625−576))/32 = (25 ± 7)/32 → u = 1 or u = 18/32 = 9/16 ✓.
+
+For monic: u² − (25/16)u + 9/16 = 0, i.e. u² − (1 + 9/16)u + 9/16 ✓ matches file. Now sign: Q/x² = −0.0036·[(16/9)u² − (25/9)u + 1] = −0.0036·(16/9)·[u² − (25/16)u + 9/16]. So Q(x) = x²·(−0.0064)·monic. The factor −0.0064 = E·a₀²?? E = −0.0036, hmm −0.0064 = −E·...−(−0.0036) = 0.0036 no. Anyway the factor relating Q to the monic quadratic is NEGATIVE (as it must be: multiply by 2μ_red/l²·(−1)·... let me see: monic = (9/16)·(−Q/x²)/0.0036·... I'm making arithmetic soup. Point: monic = c·Q(x·a₀)/x² with c = −1/(0.0036·16/9) < 0. So sign(monic) = −sign(Q). At x=140: monic = −0.0434 < 0 ⟹ Q > 0 ✓ consistent!
+
+So the file's `turningQuadratic_normalized_eq` states an iff (roots match — fine, zeros are sign-insensitive). BUT `attainedSeparations = {Q ≤ 0}` corresponds to {monic ≥ 0} = u ≤ 9/16 or u ≥ 1, i.e., x ≥ 1600/9 or x ≤ 100. So attainedSeparations = (0,100a₀] ∪ [1600/9 a₀, ∞). UNBOUNDED. And the physical orbit is Q ≥ 0: x ∈ [100, 1600/9]. So the file's attainedSeparations does NOT equal the physical orbit range; it's inverted + unbounded.
+
+Wait, so then orbitBound_T1_B1 would be FALSE (as I argued: r = 10000a₀ ∈ attainedSeparations since Q < 0 there). Hmm, unless I've flipped something again. Q(10000) with numbers: −0.0036·10⁸ + 10⁴ − 64 < 0 ✓. So r = 10⁴·a₀... wait units: x=10⁴ in units of a₀, r = 10⁴·a₀, attainedSeparations uses r in metres: turningQuadratic r with r in metres. Q(10⁴·a₀) = −0.0036·(10⁴)² + 10⁴ − 64 (in my scaled units a₀=1) < 0 ⟹ 10⁴a₀ ∈ attainedSeparations ⟹ contradicts orbitBound (r ≤ 177.8a₀). So `orbitBound_T1_B1` is FALSE as stated?!
+
+Hmm hold on, is E really the coefficient? turningQuadratic: `D.total_energy * r^2 + coulombK * elementaryCharge^2 * r − D.total_angular_momentum^2/(2*D.reduced_mass)`. Yes = E r² + ke²r − L²/(2μ_red) = Q. Yes.
+
+So either (a) the file's model is genuinely broken (the ≤ should be ≥), and the review/planner got it wrong, or (b) there's something I'm misreading. Let me reread the orbit_support doc... "the turning-point quadratic Q(r) = E r² + k e² r − L²/(2 μ_red) is nonpositive at every attained separation r ∈ O... The radial kinetic energy is (1/2) μ_red ṙ² = E − L²/(2 μ_red r²) + k e²/r, so Q(r) ≤ 0 is precisely (1/2) μ_red ṙ² ≥ 0 multiplied through by the positive r²."
+
+Multiply (1/2)μṙ² = E − L²/(2μr²) + ke²/r by r²: (1/2)μṙ² r² = E r² − L²/2μ + ke²r = Q. So (1/2)μṙ² ≥ 0 ⟺ Q ≥ 0. The doc says "Q(r) ≤ 0 is precisely (1/2)μṙ² ≥ 0" — that's an elementary sign error in the doc AND in the encoding. The physical constraint should be Q(r) ≥ 0.
+
+Hmm. But the planner's instruction is explicit: "PRESERVE UNCHANGED: proved algebra certificates (certified_factorization, turning_root_cases), AnchoredValues, orbit_support, all conclusion-side bridges (orbitBound_T1_B1, apogee_attained_T1_B1)". And this is the autoformalize stage where statements get fixed iteratively. The review iter-002 finding (reviews 2/3) identified ONLY the branch-predicate defect; the ≤/≥ issue was apparently not flagged. My lane instruction says to do exactly the planner's redraft and preserve the rest. Should I flag the sign issue? I should preserve orbit_support as instructed (it's a protected signature per "Do not alter theorem statements…"), and note the observation in task_results as a redraft request/finding for the planner. Wait — but hold on. If attainedSeparations is unbounded above, then orbitBound_T1_B1 is FALSE, meaning the main theorem is unprovable... making the whole formalization provably false downstream. That's a serious finding worth reporting. But am I AUTHORIZED to change `≤ 0` to `≥ 0`? The instruction: "Do NOT alter theorem statements, signatures, or hypotheses to make them provable." Changing orbit_support's ≤ to ≥ changes a structure field — this is exactly the kind of statement-level change only the planner should authorize. The planner instruction enumerates precisely what to change (add bound_branch) and what to preserve. I'll preserve and report.
+
+Hmm, wait, but actually, hmm. Let me reconsider — maybe with bound_branch added, the planner considers the model correctly "bound" in the sense that E < 0 is recorded, and the ≤ / ≥ sign is understood differently... No. With Q ≤ 0 convention and E < 0, {Q ≤ 0} = (0,100]∪[177.8,∞) unbounded — bound_branch doesn't fix boundedness of the attained set. Hmm, but is attainedSeparations required to be bounded for the theorem? Yes: IsGreatest attainedSeparations (1600/9 a₀) needs every member ≤ 1600/9 a₀; members ≥ 1600/9 a₀ exist (all of [177.8a₀, ∞)). Actually more subtly: at r = 1600/9 a₀ exactly: Q = 0 ≤ 0 so 1600/9 a₀ ∈ attainedSeparations ✓ (apogee_attained fine), but the upper-bound half fails. So maximum_separation_T1_B1 is FALSE as stated under the literal definitions (given consistent models exist — and with pinned E, L etc. they do... wait, no! attainedSeparations and all theorems take D as variable with hb : IsBoundMu etc. Given any model D (all pinned to same numbers), the statement of maximum_separation_T1_B1 for that D is false. And a model D exists (can we prove existence? opaque constants with ScalingRegime as hypothesis — the theorems take {hR : ScalingRegime} as hypothesis, so empty model class... no, D : CoulombPairData hR is a VARIABLE; if no D exists the theorems are vacuously true. Does a D exist? All fields pinned consistently — yes mathematically, though not proven in the file. So the theorems are about a real, unique-up-to-trivia model and are false in it). 
+
+OK regardless: this is above my pay grade for this lane — the instruction is explicit about what to change. I'll:
+
+1. Keep `bound_branch : total_energy < 0` field (done).
+2. Delete my false helper `quadratic_pos_of_large` (mathematically false — cannot stay) and `attainedSeparations_lt_energy_threshold` (also false).
+3. Replace with a helper that IS true and demonstrates the bound-branch content under the file's OWN convention. What's true with E < 0 and the file's Q?
+
+True facts available:
+- With E < 0, the quadratic is a downward parabola: Q(r) < 0 for all r ≥ −(ke²)/(2E)... hmm vertex at r* = −ke²/(2E) > 0; Q decreasing for r > r*. Boundedness? No — {Q ≤ 0} ⊇ [r₂, ∞) unbounded. So no boundedness statement is derivable for attainedSeparations. 
+
+What CAN I add that's true and demonstrates "hypotheses unsatisfiable for E ≥ 0"? The sanity check: "with E ≥ 0 lawful derivations the hypotheses must become unsatisfiable". Hmm — meaning, I think: WITHOUT the bound_branch field, one could build a model with E ≥ 0 (if the pinning is relaxed); with the field, any E ≥ 0 assignment cannot instantiate CoulombPairData. The sanity statement "turning-point quadratic opens upward, unbounded" — for E > 0, {Q ≤ 0} = (0, r₊] bounded... for E < 0, {Q ≤ 0} ⊇ [r₂, ∞) unbounded. Hmm so "opens upward, unbounded" describes E ≥ 0 making the quadratic open upward and... the Q ≥ 0 region unbounded — i.e., bound/unbound classification swaps if you identify lawful with Q ≥ 0. The planner's half-sentence is loose; the operative requirement is: `bound_branch : D.total_energy < 0` as a structure field. Done.
+
+So what helper can I honestly add that (i) is mathematically TRUE, (ii) exposes the bound-branch content, (iii) doesn't presume target values? Options:
+
+Option A: From bound_branch + turning_100 + positivity derive L ≠ 0:
+`angular_momentum_ne_zero_of_bound : D.total_angular_momentum ≠ 0`. Proof as my earlier hL attempt: if L = 0, turning_100 gives E r₀² + ke²r₀ = 0; with E < 0, first term < 0, second term... ke²r₀ > 0; sum = 0 possible! E r₀² = −ke²r₀ ⟺ r₀ = ke²/|E|. That's consistent, not a contradiction. E.g. L=0 radial fall with turning at r₀ = ke²/|E|. So L = 0 is NOT excluded by E<0 + turning_100. My earlier hL "proof" was wrong anyway (linarith failed because hturn: A + B = 0 with A<0, B>0 is satisfiable!). Indeed hterm + hcoul + hturn is satisfiable: hturn = A+B = 0. linarith failed correctly. Good catch by the checker.
+
+Option B: bound-branch ↔ discriminant form. The planner offered the alternative: `turning_discriminant_pos : 0 < (k e²)² + 2 E L²/μ_red`. From E < 0 alone, is the discriminant positive? Δ = (ke²)² + 2EL²/μ_red. turning_100: E r₀² + ke²r₀ = L²/2μ_red ⟹ 2μΔ′ where... Δ = (ke²)² + 2EL²/μ_red. Substitute L²/μ_red = 2r₀(E r₀ + ke²): Δ = (ke²)² + 4Er₀(Er₀ + ke²) = (ke² + 2Er₀)²? (ke²)² + 4E²r₀² + 4Er₀ke² = (ke² + 2Er₀)² ≥ 0. And > 0 iff ke² + 2Er₀ ≠ 0. With E<0 and r₀ = ke²/|E|·?? not determined. Vertex value: Q(r*) = −Δ/(4E)·... Q vertex = −(Δ)/(4E) with Δ = (ke²)²+2EL²/μ... standard: for ar²+br+c, vertex value = c − b²/(4a)·... = −(b²−4ac)/(4a)·(−1)... vertex = −Δ₂/(4a) where Δ₂ = b² − 4ac. Here Δ₂ = (ke²)² + 4E·L²/(2μ_red) = (ke²)² + 2EL²/μ_red = Δ. vertex value = Q(r*) = −Δ/(4E). With E < 0: sign(−Δ/(4E)) = sign(Δ)·(−1)/(negative) = sign(Δ)·positive. So Δ > 0 ⟺ vertex value > 0 ⟺ Q has two distinct real roots. turning_100 gives Q(r₀) = 0: r₀ is A root. Vertex > 0 needs Δ > 0: is it? Δ = (ke²+2Er₀)² as computed — could be zero if ke² = −2Er₀ = 2|E|r₀, i.e., r₀ = ke²/(2|E|) = vertex. If r₀ = vertex AND Q(r₀) = 0, then... vertex value 0 ⟺ Δ = 0 ⟺ double root at r₀. Then the orbit is a CIRCLE at r₀! Is the circle excluded? μ=4 bound: E = −0.0036, ke² = 1, r₀ = 100: ke² + 2Er₀ = 1 + 2(−0.0036)(100) = 1 − 0.72 = 0.28 ≠ 0. Not a circle ✓ (indeed 0.28 = √0.0784). So Δ = (ke² + 2Er₀)² with the actual numbers = 0.0784 > 0. But from raw fields E<0 + turning_100 alone, Δ = (ke²+2Er₀)² could be 0 (circular orbit case: r₀ = ke²/(2|E|), L² = 2μr₀(Er₀ + ke²) = 2μr₀·ke²/2 = μr₀ke² — consistent positive L). So bound_branch + turning_100 gives Δ ≥ 0, not strictly.
+
+So a TRUE option: `bound_branch_two_mul_discriminant_sq : (coulombK * elementaryCharge^2 + 2 * D.total_energy * D.initial_separation) ^ 2 = (coulombK * elementaryCharge^2)^2 + 2 * D.total_energy * D.total_angular_momentum^2 / D.reduced_mass` — a pure derivation from turning_100. Provable? turning_100: E r₀² + ke² r₀ − L²/(2μ) = 0 ⟹ L²/(2μ) = r₀(Er₀ + ke²) ⟹ L²/μ = 2r₀(Er₀+ke²). Then (ke²)² + 2E·L²/μ = (ke²)² + 4Er₀(Er₀+ke²) = (ke²+2Er₀)². Ring computation if I have L²/μ = 2r₀(Er₀+ke²). From turning_100 with μ_red ≠ 0: multiply by 2μ_red: 2μ(Er₀² + ke²r₀) = L². OK: true and provable with `field_simp`+`nlinarith` or careful rewrites. This is the eccentricity discriminant (Hint 1: ε = √(1 + 4L²E/(k²e⁴m))! 1 + 4L²E/(k²e⁴m) = [(ke²)² + ... ] hmm: (ke²)² + 2EL²/μ_red... with μ_red = m/2: 2EL²/μ_red = 4EL²/m. So Δ = (ke²)² + 4EL²/m = (ke²)²[1 + 4EL²/(k²e⁴m)] = (ke²)²ε²! So Δ = (ke²)²ε² — Hint 1's eccentricity! This is a lovely bridge: bound branch ⟹ Δ = (ke² + 2Er₀)² ≥ 0, consistent with ε real. And ε < 1 ⟺ E < 0: 1 + 4EL²/(k²e⁴m) = ε², ε < 1 ⟺ 4EL²/(k²e⁴m) < 0 ⟺ E < 0. So bound_branch ⟺ ε < 1. 
+
+I could add:
+`theorem eccentricity_sq_nonneg_of_bound : 0 ≤ 1 + 4 * D.total_angular_momentum^2 * D.total_energy / (coulombK^2 * elementaryCharge^4 * particleMass)` — well ≥ 0 trivially since = ε... circular. Better: `0 ≤ 1 + 4 * L² * E / ((k e²)² * m)` derived as a square: `(k e² + 2 E r₀)²` relation. Given turning_100 + reduced_mass_eq:
+
+`1 + 4L²E/(k²e⁴m) = (ke² + 2Er₀)²/(ke²)²` — needs (ke²)² ≠ 0... this is true and provable, moderate work.
+
+Cleaner: express Hint 1's ε as discriminant witness:
+`theorem bound_branch_turning_discriminant : (coulombK * elementaryCharge ^ 2) ^ 2 + 2 * D.total_energy * D.total_angular_momentum ^ 2 / D.reduced_mass = (coulombK * elementaryCharge ^ 2 + 2 * D.total_energy * D.initial_separation) ^ 2` 
+
+Check: Δ = (ke²)² + 2EL²/μ_red. Want: = (ke² + 2Er₀)² = (ke²)² + 4E²r₀² + 4Er₀ke². Need 2EL²/μ_red = 4E²r₀² + 4Er₀ke² = 4Er₀(Er₀ + ke²). From turning_100 (with μ_red ≠ 0): L² = 2μ_red·r₀(Er₀ + ke²)·... turning_100: E r₀² + ke²r₀ − L²/(2μ_red) = 0 ⟹ L²/(2μ_red) = r₀(Er₀+ke²) ⟹ L²/μ_red = 2r₀(Er₀+ke²) ⟹ 2EL²/μ_red = 4Er₀(Er₀+ke²)... wait 2E·L²/μ_red = 2E·2r₀(Er₀+ke²) = 4Er₀(Er₀+ke²) ✓. True!
+
+Requires μ_red ≠ 0 — hmm, structure has no positivity on reduced_mass; reduced_mass_eq : reduced_mass = m/2 with m > 0 (hR) gives it. So add hypothesis from hR? reduced_mass_eq is a field; hR gives particleMass_pos. So prove `have hm : D.reduced_mass ≠ 0 := by rw [D.reduced_mass_eq]; positivity... ` positivity with hR.particleMass_pos: `by rw [D.reduced_mass_eq]; exact ne_of_gt (by positivity : (0:ℝ) < particleMass/2)`... positivity needs the hypothesis in context: `have hmpos : 0 < D.reduced_mass := D.reduced_mass_eq ▸ half_pos hR.particleMass_pos`. Then proceed.
+
+Proof:
+```
+have hmpos : 0 < D.reduced_mass := by
+  rw [D.reduced_mass_eq]; exact half_pos hR.particleMass_pos
+have ht := D.turning_100
+have hL : D.total_angular_momentum ^ 2 / D.reduced_mass = 2 * D.initial_separation * (D.total_energy * D.initial_separation + coulombK * elementaryCharge ^ 2) := by
+  have h1 : D.total_angular_momentum ^ 2 = 2 * D.reduced_mass * D.initial_separation * (D.total_energy * D.initial_separation + coulombK * elementaryCharge ^ 2) := by
+    have : 2 * D.reduced_mass * (D.total_energy * D.initial_separation ^ 2 + coulombK * elementaryCharge ^ 2 * D.initial_separation) = D.total_angular_momentum ^ 2 := by
+      have hrw : D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) = D.total_energy * D.initial_separation ^ 2 + coulombK * elementaryCharge ^ 2 * D.initial_separation := by linarith [ht]
+      rw [hrw]... hmm messy
+```
+Cleaner: from ht: `E r₀² + ke² r₀ − L²/(2μ) = 0`. So `L² = 2μ(Er₀² + ke²r₀)` requires multiplying. Do:
+```
+have hμ : (2:ℝ) * D.reduced_mass ≠ 0 := by positivity  -- needs hmpos in ctx; positivity uses hypotheses
+have ht2 : D.total_energy * D.initial_separation ^ 2 + coulombK * elementaryCharge ^ 2 * D.initial_separation = D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) := by linarith [ht]
+have hL2 : D.total_angular_momentum ^ 2 = 2 * D.reduced_mass * (D.total_energy * D.initial_separation ^ 2 + coulombK * elementaryCharge ^ 2 * D.initial_separation) := by
+  rw [ht2]; field_simp
+then goal: (ke²)² + 2E·L²/μ = (ke² + 2Er₀)²:
+have hE : ... 
+rw ... let me compute target form: 2 * E * L² / μ = 2E·(L²/μ). 
+have hLμ : 2 * D.total_energy * D.total_angular_momentum ^ 2 / D.reduced_mass = 4 * D.total_energy * D.initial_separation * (D.total_energy * D.initial_separation + coulombK * elementaryCharge ^ 2) := by
+  rw [hL2]  -- L² replaced...
+  field_simp
+  ring
+then: (ke²)² + that = ((ke²) + 2Er₀)²: ring_nf... 
+final: have hfinal : ... := by rw [hLμ]; ring
+where after rw the goal (ke²)² + 4Er₀(Er₀+ke²) = (ke²+2Er₀)² closes by ring. 
+```
+This is all true, checkable. This lemma's content: the Hint-1 discriminant (ke²)² + 2EL²/μ_red is a PERFECT SQUARE of (ke² + 2Er₀) — the two-body eccentricity is real, and its numerator witnesses the two turning roots. It uses bound_branch? Not actually needed — ht + hm enough. Hmm, but the planner wants the branch predicate to be USED/exposed... bound_branch usage: ε < 1 on bound branch. Hint 1: ε² = 1 + 4L²E/(k²e⁴m). Bound ⟺ ε < 1. Add:
+
+```
+/-- Bound branch in Hint-1 language: the square eccentricity
+`ε² = 1 + 4L²E/(k²e⁴m)` of the conic (official Hint 1) is strictly below
+`1` exactly when `E < 0`.  The `bound_branch` field of `CoulombPairData`
+selects the elliptic branch `ε < 1` (Hint 2's closed orbit)...
+-/
+theorem eccentricity_sq_lt_one_of_bound (hR : ScalingRegime) (D : CoulombPairData hR) ... hmm particleMass vs reduced_mass relation needed
+```
+ε² = 1 + 4L²E/((ke²)²m). E < 0, L²... need L ≠ 0 for strict ε² < 1 — if L = 0 then ε² = 1 (radial degenerate ellipse, ε=1?). Circular reasoning risk: don't need L≠0: ε² − 1 = 4L²E/((ke²)²m) ≤ 0 with E<0; strict iff L≠0. With L=0 the "orbit" is a degenerate segment — still bounded with apogee r₀ = ke²/|E|. But roots: Δ = (ke²)² + 2E·0/μ = (ke²)² > 0, roots at [ke² ± ke²]/(2|E|): 0 and ke²/|E| = r₀. Apogee r₀ fine. Actually L=0 case has perigee 0 (collision). Anyway ε² ≤ 1 with equality iff L = 0:
+
+`theorem eccentricity_sq_le_one_of_bound : 1 + 4 * D.total_angular_momentum^2 * D.total_energy / ((coulombK * elementaryCharge^2)^2 * particleMass) ≤ 1`
+
+Proof: equivalent to 4L²E/((ke²)² m) ≤ 0: numerator ≤ 0 (E < 0, L² ≥ 0), denominator > 0 (hR). div_nonpos_of_nonpos_of_nonneg... Actually `div_nonpos : a ≤ 0 → 0 ≤ b → a/b ≤ 0`. numerator: 4 · L² · E ≤ 0 via mul_nonpos_of_nonneg_of_nonpos: 4L²·E with 0 ≤ 4L², E ≤ 0 ✓. denominator: (ke²)²·m > 0 ✓. Then 1 + (that) ≤ 1 via add_le_of_nonpos_right? `add_le_of_nonpos_right : b ≤ 0 → a + b ≤ a`. Clean and TRUE. This exposes bound_branch content in the official Hint-1 language: elliptic branch ε² ≤ 1 ⟸ E < 0. And its `lt` variant under L ≠ 0 could be stated with proof... L ≠ 0 not derivable (shown above consistent with L = 0). So keep `≤`. 
+
+This lemma: (i) true, (ii) uses bound_branch essentially (grounded in it — needs hR and the field), (iii) speaks Hint-1 language (branch information: elliptic vs hyperbolic branch ⟸ sign of E), (iv) no target value. 
+
+Also should I keep something about "countermodels excluded"? The field itself is the exclusion. In the task result I'll document the sanity: instantiating with E ≥ 0 now fails at `bound_branch` field obligation.
+
+Also delete `IsBoundMu.ne_zero` (it's fine/true — proved by `ne_of_gt hb.1`; wait hb.1 : 0 < μ; ne_of_gt : a > b → a ≠ b; hb.1 : 0 < μ ⟹ 0 ≠ μ; need μ ≠ 0: `ne_of_gt hb.1` gives `(0:ℝ) ≠ μ`? `ne_of_gt : a > b → a ≠ b`, a > b is 0... hmm `0 < μ` is μ > 0, i.e. `hb.1 : 0 < μ` which is `LT.lt 0 μ`... `ne_of_gt : a > b → a ≠ b`, i.e. from `0 < μ` get `... ` 0 < μ unfolds to μ > 0? In Lean, `a > b := b < a`. So hb.1 : 0 < μ i.e. μ > 0: ne_of_gt hb.1 : μ ≠ 0 ✓. It compiled before? I added it in the second patch; the file compiled after my third patch with only warnings. Yes it compiled. Keep it — harmless, true, useful glue: `IsBoundMu μ → μ ≠ 0`.
+
+Now remove the false lemmas and add the two true ones. Current false block spans from `/-- Bound-branch sign lemma:` to right before `end CoulombPairData`. I'll replace the whole block using python (apply_patch multi-line hunks keep failing with this lean3-style tool due to ≤/≥; I'll use exact context = false statement lines which are distinctive ASCII... the comment contains unicode though. Use python: find index of `/-- Bound-branch sign lemma:` and `end CoulombPairData`, splice).
+
+Actually, wait — I must re-examine: is `quadratic_pos_of_large` really false? r ≥ ke²/(−E): Q(r) = E r² + ke²r − L²/2μ = r(Er + ke²) − L²/2μ. At r = ke²/(−E): Er + ke² = −(−E)r + ke² = −ke² + ke² = 0 → Q = −L²/2μ ≤ 0. And larger r → Er+ke² < 0 → r·(Er+ke²) < 0 → Q < 0. So Q(r) ≤ 0 there — my theorem `0 < Q(r)` is FALSE (except even L=0 gives Q ≤ 0). Confirmed false. Delete it. And the corollary attainedSeparations_lt_energy_threshold likewise false (huge r ARE in attainedSeparations). Delete both.
+
+This also means the planner's requested sanity "quadratic opens upward, unbounded" as I'd encoded is impossible; I'll note in task_results that boundedness of the file's attainedSeparations does NOT follow from E < 0 alone (sign analysis: with the file's `Q ≤ 0` lawful-region convention the upper tail [r₂,∞) always satisfies it), and flag the apparent ≤/≥ inversion for the planner as a redraft request (per workflow: "any grounding gaps or redraft requests"). That's honest reporting; I keep the file faithful to instructions otherwise. Hmm — actually hold on. Let me think about whether to flag it as a defect or whether the planner/review consciously accepts `Q ≤ 0` as "excluded region"... The doc says "the turning-point quadratic Q(r)... is nonpositive at every attained separation" — at a turning point Q = 0 ✓, but between turning points Q > 0 (computed above numerically: Q(140a₀) = 5.44 > 0). Hmm — so attainedSeparations as {Q ≤ 0} excludes the actual orbit interior (140a₀ not in the set) but INCLUDES the tails (0,100] and [177.8,∞). So the initial point 100a₀ ∈ attainedSeparations ✓ (as turning point, boundary), 1600/9 a₀ ✓ (boundary). But e.g. 50a₀ ∈ attainedSeparations (Q(50) = −9+50−64 = −23 < 0 ✓) — physically the orbit never reaches 50a₀. And 300a₀ ∈ attainedSeparations (Q(300) = −324+236 < 0) — orbit never reaches. IsMaxSeparationAlongOrbit (greatest element) then fails to hold for ANY r (set unbounded above) — maximum_separation_T1_B1 is false under literal model. Definitely flag as redraft request: change `≤ 0` to `≥ 0` in orbit_support and attainedSeparations (2 spots + docs), or equivalently negate Q's definition. With `≥ 0`: set = [100, 1600/9]a₀ ✓ bounded, maximum meaningful, bound_branch (E<0) gives downward parabola... wait with Q' := −Q... let me recheck: lawful = Q ≥ 0 = between roots since Q downward. With E ≥ 0 (upward): Q ≥ 0 region unbounded → no greatest element → consistent with planner's sanity "(E ≥ 0) turning-point quadratic opens upward, unbounded"!! YES — the planner's sanity phrase makes sense with the CORRECTED ≥: with E ≥ 0 the {Q ≥ 0} region is unbounded above so no max separation exists; the bound branch E < 0 is exactly what bounds it. So the planner KNEW the intended convention is Q ≥ 0! The file's `≤ 0` is the actual iter-002 defect behind "countermodels"... Hmm, but the planner explicitly said the defect is the missing branch field and to preserve orbit_support. Hmm. "with `E ≥ 0` lawful derivations the hypotheses must become unsatisfiable (turning-point quadratic opens upward, unbounded)" — reading it once more: "the hypotheses must become unsatisfiable" — plain meaning: any instantiation of the structure with E ≥ 0 is impossible. With bound_branch field: yes trivially (field demands E < 0) regardless of ≤/≥. OK.
+
+Decision: implement exactly planner's directive (done mostly), add the TRUE Hint-1-flavored bridge lemmas (eccentricity_sq_le_one_of_bound, turning_discriminant square identity, keep IsBoundMu.ne_zero), delete the false ones, and in task_results note the ≤/≥ observation as a redraft request (flag clearly, don't change since explicitly told to preserve orbit_support unchanged). This respects "PRESERVE UNCHANGED ... orbit_support" while being honest.
+
+Hmm, actually — should I really add eccentricity lemmas beyond the directive? The directive: "record the bound branch as a hard structure constraint... Add a field bound_branch : D.E < 0 (or equivalently turning_discriminant_pos...) to CoulombPairData (E, L existing fields; add E if it lives only in theorem binders today). Re-derive boundMu_isBound from it, or delete the duplicate." 
+
+"Re-derive boundMu_isBound from it, or delete the duplicate": can boundMu_isBound be re-derived from bound_branch?? bound_branch is a field of CoulombPairData D; boundMu_isBound (hR : ScalingRegime) : IsBoundMu boundMu doesn't mention D. Deriving it would require a D... can't for arbitrary D free — actually IsBoundMu boundMu is a Prop about constants only: 0 < 4 ∧ 64ℏ² < kme²(100a₀) — given hR.bohr_radius_def this is pure constant algebra, independent of D. It can't be "re-derived from" a field of D; the phrase means relate the two bound criteria. The existing statement+proof stay (the final `sorry` after field_simp — which was there before; preserves 5 sorries).
+
+The sanity: "with E ≥ 0 lawful derivations the hypotheses must become unsatisfiable (turning-point quadratic opens upward, unbounded)" — I'll demonstrate via the eccentricity/discriminant bridge: on any model, bound_branch yields ε² ≤ 1 (elliptic branch), i.e., the model's conic branch (Hint 1/Hint 2) is the bounded one. Good enough as the "exposure" of the branch predicate with usable consequences (per Physics Modeling Rules: every abstract Prop field must expose consequences — the discriminant-square identity + eccentricity lemma are those consequences).
+
+Now write the replacement block. Also keep the `IsBoundMu.ne_zero` lemma (already in, compiles). Replace false block with:
+
+```lean
+/-- Hint-1 discriminant identity on the recorded bound setup: the
+two-body eccentricity discriminant `Δ = (k e²)² + 2 E L²/μ_red` (the
+quantity under the root in the official Hint 1,
+`ε = √(1 + 4 L² E/(k² e⁴ m))` with `μ_red = m/2`) is exactly the square
+of `k e² + 2 E r₀`, where `r₀` is the Fig.-1b turning separation.  This
+is the usable equation exposed by the effective radial law (`turning_100`
+multiplied through by `2 μ_red ≠ 0`); it carries no numeric target value:
+it asserts the *reality* of the eccentricity, not its magnitude. -/
+theorem turning_discriminant_eq_sq {hR : ScalingRegime} (D : CoulombPairData hR) :
+    (coulombK * elementaryCharge ^ 2) ^ 2 +
+        2 * D.total_energy * D.total_angular_momentum ^ 2 / D.reduced_mass =
+      (coulombK * elementaryCharge ^ 2 + 2 * D.total_energy * D.initial_separation) ^ 2 := by
+  have hmpos : 0 < D.reduced_mass := by
+    rw [D.reduced_mass_eq]; exact half_pos hR.particleMass_pos
+  have ht : D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) =
+      D.total_energy * D.initial_separation ^ 2 +
+        coulombK * elementaryCharge ^ 2 * D.initial_separation := by
+    have h := D.turning_100
+    linarith [h]
+  have hL2 : D.total_angular_momentum ^ 2 =
+      2 * D.reduced_mass * (D.total_energy * D.initial_separation ^ 2 +
+        coulombK * elementaryCharge ^ 2 * D.initial_separation) := by
+    have h2m : (2 * D.reduced_mass) ≠ 0 := ne_of_gt (by linarith)
+    calc D.total_angular_momentum ^ 2
+        = D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) * (2 * D.reduced_mass) := by
+          rw [div_mul_cancel₀ _ h2m]
+      _ = 2 * D.reduced_mass * (D.total_energy * D.initial_separation ^ 2 +
+            coulombK * elementaryCharge ^ 2 * D.initial_separation) := by
+          rw [ht]; ring
+  have hm : D.reduced_mass ≠ 0 := ne_of_gt hmpos
+  calc (coulombK * elementaryCharge ^ 2) ^ 2 +
+        2 * D.total_energy * D.total_angular_momentum ^ 2 / D.reduced_mass
+      = (coulombK * elementaryCharge ^ 2) ^ 2 +
+        2 * D.total_energy * (D.total_angular_momentum ^ 2 / D.reduced_mass) := by ring
+    _ = (coulombK * elementaryCharge ^ 2) ^ 2 +
+        2 * D.total_energy * (2 * (D.total_energy * D.initial_separation ^ 2 +
+          coulombK * elementaryCharge ^ 2 * D.initial_separation)) := by
+        rw [hL2]  -- hmm: L²/μ inside; better to first rewrite L²/μ via ht·...
+```
+
+Hmm, this is getting convoluted. Cleaner path: from ht, get `L² / μ_red = 2·(E r₀² + ke² r₀)`:
+`have hLμ : D.total_angular_momentum ^ 2 / D.reduced_mass = 2 * (D.total_energy * D.initial_separation ^ 2 + coulombK * elementaryCharge ^ 2 * D.initial_separation)`
+Proof: L²/μ = (L²/(2μ))·2 = ht·2 — `div` juggling: `L²/μ = 2·(L²/(2μ))`: `by rw [← mul_div_assoc']`? 2·(L²/(2μ)) = (2·L²)/(2μ) — and L²/μ = (L²)/(μ). Use field_simp-style: 
+```
+have hLμ : D.total_angular_momentum ^ 2 / D.reduced_mass = 2 * (D.total_energy * D.initial_separation ^ 2 + coulombK * elementaryCharge ^ 2 * D.initial_separation) := by
+  rw [← ht]  -- goal: L²/μ = 2·(L²/(2μ))
+  field_simp
+```
+After `rw [← ht]` RHS becomes `2 * (L²/(2μ))`, goal `L²/μ = 2*(L²/(2μ))`: field_simp + ring should do. Then:
+```
+calc (ke²)² + 2E·L²/μ = (ke²)² + 2E·(L²/μ) := by rw [mul_div_assoc]
+  _ = (ke²)² + 2E·(2·(Er₀² + ke²r₀)) := by rw [hLμ]
+  _ = (ke² + 2Er₀)² := by ring
+```
+`mul_div_assoc : a * b / c = a * (b / c)` ✓. rw [mul_div_assoc] on `2 * E * L² ^ 2 / μ` — the term is `2 * E * L² / μ` parses as `((2*E)*L²)/μ`; mul_div_assoc rewrites `(a*b)/c → a*(b/c)` giving `2E·(L²/μ)` ✓... but the goal might print as `2 * E * L ^ 2 / μ = 2 * E * (L ^ 2 / μ)` after rw. fine.
+
+Now the eccentricity lemma:
+```lean
+/-- Bound-branch content in the language of the official Hint 1: the
+square eccentricity `ε² = 1 + 4 L² E / ((k e²)² · m)` of the conic
+trajectory is at most `1` — the trajectory is on the elliptic (bound)
+branch, not the parabolic/hyperbolic one — because the `bound_branch`
+field gives `E < 0`.  Strictly, `ε² = 1` only in the degenerate
+zero-angular-momentum limit; the bound hypothesis excludes `E > 0`
+(Hint 2's unbounded branch).  No numeric value of `ε` is asserted. -/
+theorem eccentricity_sq_le_one_of_bound {hR : ScalingRegime} (D : CoulombPairData hR) :
+    1 + 4 * D.total_angular_momentum ^ 2 * D.total_energy /
+        ((coulombK * elementaryCharge ^ 2) ^ 2 * particleMass) ≤ 1 := by
+  apply add_le_of_nonpos_right
+  apply div_nonpos
+  · apply mul_nonpos_of_nonneg_of_nonpos
+    · positivity
+    · exact le_of_lt D.bound_branch
+  · have hm : (0:ℝ) < particleMass := hR.particleMass_pos
+    have hk : (0:ℝ) < coulombK * elementaryCharge ^ 2 := by
+      have he : elementaryCharge ≠ 0 := ne_of_gt hR.elementaryCharge_pos
+      exact mul_pos hR.coulombK_pos (sq_pos_of_ne_zero he)
+    positivity
+```
+Check positivity for `0 ≤ 4 * L^2`: constant 4 > 0 and sq_nonneg — positivity should handle `0 ≤ 4 * X^2`? positivity proves 0 < or 0 ≤ goals... target here is `0 ≤ 4 * L^2 * E` no wait — I split as mul_nonpos_of_nonneg_of_nonpos with first factor `4 * L^2` (`0 ≤`) and second `E` (`≤ 0`). `mul_nonpos_of_nonneg_of_nonpos : 0 ≤ a → b ≤ 0 → a * b ≤ 0`. The product is `4 * L^2 * E` = `(4*L^2)*E` ✓. positivity : `0 ≤ 4 * L^2` ✓ (4>0, L²≥0).
+
+`div_nonpos : a ≤ 0 → 0 ≤ b → a / b ≤ 0` ✓. `add_le_of_nonpos_right : b ≤ 0 → a + b ≤ a` — signature: `add_le_of_nonpos_right (a:=..) (b:=..) : b ≤ 0 → a + b ≤ a` ✓ so goal `1 + X ≤ 1` closes by apply with X ≤ 0 subgoal ✓.
+
+positivity for `0 ≤ (ke²)^2 * m`? need `0 <`? div_nonpos wants `0 ≤ b`. positivity with hk, hm in ctx: `0 ≤ (coulombK * elementaryCharge^2)^2 * particleMass` — positivity proves via sq_nonneg... `(ke²)^2` — positivity handles pow with even exponent as `0 ≤`? It can do `0 ≤ x^2` via sq_nonneg? positivity's pow extension: a^n with n even and a ≠ 0 gives 0 < a^n... hmm with hk we have ke² > 0 so `0 < (ke²)^2` and `0 ≤ m` from hm — positivity should manage. If not, fall back to explicit le_of_lt (mul_pos ... ). I'll test via lean_run_code.
+
+Also IsBoundMu.ne_zero — does it duplicate/matter? Keep.
+
+Wait, one more consideration: does `turning_discriminant_eq_sq` need bound_branch? No — it's pure from turning_100. It's fine as supporting algebra (like the other certificates). The eccentricity lemma uses bound_branch. Both together provide the "usable consequences" for the new Prop field (rule: every abstract Prop-valued relation must expose consequences; here the field is `total_energy < 0`, its consequence: ε² ≤ 1 elliptic branch — done).
+
+Plan the edit: python splice replacing block from `/-- Bound-branch sign lemma:` marker through just before `end CoulombPairData`. Then compile-check with lake env lean. Then also run lean_run_code for the two lemmas in isolation first (faster feedback) — lean_run_code needs the full context though; I'll inline mini versions.

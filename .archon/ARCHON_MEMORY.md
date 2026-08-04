@@ -1,0 +1,7 @@
+- `1_B_1`s E<0 branch predicate MUST be a structure field, not a hypothesis.
+- Readout structs need neq-guards else degenerate countermodels (4_A_5).
+- deriv law structs need path Differentiability fields else balance junk 0=0 (3_B_2).
+- Solution PDFs at sibling hf-IPHO2026-upload/ipho_2026_source/, not checkout.
+- Comment trap: `+/-` eats `-/`; /-! illegal pre-import.
+- `unmatched` 42 by design: `1_B_1`(39) waits redraft; `hello`(1); 2_C_2/PartA1.(3).
+- Subagent (`git apply -R`) destroyed uncommitted work (iter-014 `1_B_2`): forbid git mutations in directives; snapshot `git diff` pre-dispatch.

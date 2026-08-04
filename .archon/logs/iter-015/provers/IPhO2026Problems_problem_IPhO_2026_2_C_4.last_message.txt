@@ -1,0 +1,13 @@
+Done. The assigned file is fully proved — the retry-2 elaboration/faithfulness failure is repaired without touching any signature.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_2_C_4.lean` compiles clean: 0 errors, **0 sorries**, all 27 declarations including the frozen target `IPhO2026_2_C_4.HalfCylindricalMirrorCaustic.caustic_small_angle_power_law`.
+
+**What was proved**
+- The main target: `SatisfiesCausticPowerLaw c.X_c c.Y_c c.R (c.R/2) ((3/4)·c.R^(1/3))`, i.e. the recorded C.4 constants `u = R/2`, `v = (3/4)R^(1/3)`, `p = 2`, `q = 3`, with the statement kept byte-frozen (asymptotic `IsEquivalent` along `smallAngleFilter`, the honest leading-order reading).
+- Supporting math (new `C4Dev` namespace, ~290 lines, no axioms/sorries): FTC chain `t - sin t = ∫₀ᵗ(1 - cos s) ds` → cubic bound `|t - sin t| ≤ |t|³/6` → quadratic `1 - cos x ≤ x²/2` → `sin θ ~ θ`; quartic squeeze `|cos θ - 1 + θ²/2| ≤ θ⁴/24`; the exact residual `cos θ(2 - cos 2θ) - (1 + 3θ²/2) = o(θ²)`; rpow split `(R sin³θ)^(2/3) = R^(2/3)·sin²θ` on `(0, π)`; assembly to `Y_c ~ R/2 + (3R/4)θ²` and `X_c ~ R·θ³` with `w = R > 0`.
+
+**Verification**
+- `lake env lean` on the file: exit 0, 0 errors (one benign unused-variable lint on `hθ1`).
+- `lean_verify` on the main theorem: axioms `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no new axioms, source scan clean.
+- Results written to `.archon/task_results/problem_IPhO_2026_2_C_4.md`, including `\leanok` candidates and a note that the `C4Dev.*` helpers are new named theorems without blueprint entries (coverage debt for the blueprint writer).

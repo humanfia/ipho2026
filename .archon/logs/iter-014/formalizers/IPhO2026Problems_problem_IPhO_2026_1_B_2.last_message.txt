@@ -1,0 +1,10 @@
+Done. The iter-014 redraft for `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean` landed and is durable on disk.
+
+**Redraft outcome**
+- Root cause repaired per the Review certificate (`missing_foundational_bridge`): `newton_relative_law` upgraded from the norm-only form to the faithful vector central-force Newton equation `sep'' = -(2 k e²/m) • (r⁻³ sep)` at `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:265`, closing both the factor-of-two gap and the direction-loss underdetermination.
+- 13 proved calculus-bridge lemmas added at `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:516` (coordinate-wise `HasDerivAt`, `ContDiff` velocity differentiability, `perp` homogeneity/self, Lagrange identity, radial differentiability, the perp Leibniz rule) plus `perp_sep_is_const_of_central_force` — angular-momentum conservation from the central-force equation, via grounded Mathlib `is_const_of_deriv_eq_zero`.
+- 3 proved field-consistency certificates added at `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:667` (`newton_relative_law_norm`, `perp_sep_initial`, `angular_momentum_conserved_value`), machine-checking the sign chain previously justified only in docstrings.
+- Main-theorem statements and all prior proved certificates are byte-unchanged; fresh `lake env lean` → **0 errors, exactly the 3 documented Kepler-integration sorries** (`orbit_eq_conic`, `exists_asymptoticRelativeVelocity`, `signed_deflection_eq_formula`). What remains sorried is narrowed to the integration half of the Kepler layer.
+- Redraft evidence written to `.archon/task_results/problem_IPhO_2026_1_B_2.md` with assumption/target split, faithfulness audit, 16-row bridge inventory (13 covered-proved/3 blocked), countermodel audit, and grounding log.
+
+No protected declarations were violated (`archon-protected.yaml` has no entries for this file); no blueprint, PROGRESS, or gate files touched.

@@ -1,0 +1,11 @@
+Done. Summary of this lane:
+
+**Outcome**
+- Audited `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` against its blueprint chapter — the file already faithfully implements the chapter's declaration ledger (all 11 `\lean{}` pins match), so this iter-008 gate-retry lane was a sorry-preserving no-op redraft with no Lean edits.
+- Fresh `lake env lean` (after the audit): **0 errors, exactly 3 sorry warnings** (L148 `adiabatic_invariant_along_path`, L159 `endpoint_relation`, L190 `adiabatic_temperature_change`) — matches the contracted count; `lam_add_mu0_K_sq_pos` is fully proved via `positivity`.
+- Grounding spot-checks re-run via LeanExplore (Physlib/Mathlib filters): no paramagnet heat-budget or magnetic adiabatic-invariant API exists (near misses: ideal-gas `adiabatic_relation_*`, `CanonicalEnsemble.*`) — the chapter's iter-004 reconciliation NOTE and the local law structures remain the right call; `Physlib.Electromagnetism.Dynamics.Basic` import satisfies the gate's grounding reason.
+
+**Markers**
+- `\leanok` is owned by the deterministic `sync_leanok` phase (per `.archon/AGENTS.md` and reaffirmed by the 3_A_2 lane precedent), so I did not hand-edit blueprint markers. All 11 declarations are ready for their markers at the contracted sorry count (3/3).
+
+**Task result** written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_2.md` with the full assumption/target split, goal-faithfulness audit, derivability/bridge inventory, countermodel audit, and branch-coverage record.

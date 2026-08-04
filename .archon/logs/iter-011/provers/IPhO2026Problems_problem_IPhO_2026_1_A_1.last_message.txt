@@ -1,0 +1,11 @@
+Redraft complete and verified. Summary of what changed:
+
+**Repair applied** (Proof Review `other_modeling_defect`, attempts 1/3): the shipped readout `ρ₀ g Δh·(a√2/2)·(a/2)·(a√2/4) = ρ₀ g Δh a³/8` was physically wrong — I cross-checked the official solution (`raw/T1_solution.pdf`, T1-A1) and rebuilt the pressure side on its model:
+
+- The linear depth law makes the two side-face gauge pressures differ by the **constant** `ρ₀ g Δh` (shared free-surface offset cancels), so `ΔF = ρ₀ g Δh·(a²/√2)` (pressure difference × slot opening area `a·(a/√2)`), acting at the face centroid with arm `a/(2√2)` — the official note's special arm for both pressure difference and effective weight.
+- New carriers: `pressureDifferenceForce`, `pressureFigureArm` (+ lemmas `pressure_difference_force_eq`, `pressure_figure_arm_eq`); `pressureCoupleMagnitude := pressureDifferenceForce * pressureFigureArm`, which now genuinely evaluates to `ρ₀ g Δh a³/4` — exactly what `pressure_couple_eq` claims (the repaired bridge).
+- `PressureMomentReadout.pressure_couple` field → `pressure_force` + `centroid_arm`; `IsCriticalTorqueBalance` RHS → `ρ₀ g Δh (a²/√2) (a/(2√2))`; `pressure_couple_position_trace` → `4·pressureFigureArm = a√2`; header narrative updated.
+
+**Verification**: fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_1_A_1.lean` → 0 errors, 12 expected `sorry` warnings, no other diagnostics. Countermodel check: `hbal` is now satisfiable iff `a = Δh/(2√2)` for positive parameters, so the previous `a = Δh/(4√2)` countermodel is eliminated.
+
+**Task result**: written to `.archon/task_results/problem_IPhO_2026_1_A_1.md`, including a note for the plan agent that the blueprint ledger blocks for `PressureMomentReadout`/`IsCriticalTorqueBalance`/`pressureCoupleMagnitude` are now stale and four new declaration blocks are needed (I may not edit `.tex`).

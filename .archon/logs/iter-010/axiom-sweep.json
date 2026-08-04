@@ -1,0 +1,8 @@
+{
+  "ran": false,
+  "error": "axiom sweep timed out after 1800s",
+  "filesChecked": 0,
+  "durationSecs": 1800,
+  "sorryLaunderings": [],
+  "otherNonStandardAxioms": []
+}

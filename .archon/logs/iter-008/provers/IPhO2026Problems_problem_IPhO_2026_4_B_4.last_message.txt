@@ -1,0 +1,7 @@
+Done. `problem_IPhO_2026_4_B_4.lean` re-verified: 0 errors, exactly the 2 contracted sorries at `IPhO2026Problems/problem_IPhO_2026_4_B_4.lean:216` and `IPhO2026Problems/problem_IPhO_2026_4_B_4.lean:224`.
+
+**Findings**
+- The on-disk file is already the frozen contract and fully faithful to the blueprint chapter: official answer confined to the two conclusion-side theorems, Dalton/ideal-gas/zero-at-T₀ laws as structure fields, Clausius–Clapeyron kept as context-only predicate.
+- All three derivation-bridge lemmas are proof-complete; only `vaporPressure_eq` and `target` carry the contracted sorries.
+- Blueprint ledger pins match the flat `IPhO2026_4_B_4.*` namespace on disk — no changes needed, so I left both the `.lean` file and chapter untouched.
+- Task result written to `.archon/task_results/problem_IPhO_2026_4_B_4.lean.md` with the full assumption/target split, bridge inventory (3 covered, 1 contracted-sorry), countermodel audit, and marker-ready flags for the proved lemmas (`\leanok` left to the review agent per AGENTS.md).

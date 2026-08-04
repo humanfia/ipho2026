@@ -1,0 +1,14 @@
+**Verdict: solved** (`route=solved`, `redraft_kind=not_applicable`). Both review artifacts are durable on disk.
+
+**Key findings**
+- **Compilation/sorries**: Preflight reports `compiles=true`, `rc=0`, `sorry_count=0`; grep confirms `sorry` appears only in the historical header comment, with no `axiom`/`admit`/`native_decide`.
+- **No axiom laundering**: The iter-015 trace shows `#print axioms` (04:01:42Z) for all six proved declarations = `[propext, Classical.choice, Quot.sound]` only; final `lake env lean` run exits 0 (04:02:22Z) after the scratch AxiomCheck section was removed.
+- **Contract fidelity**: `power_ratio_in_terms_of_theta_max` preserves the blueprint statement exactly — `P / P₀ = 1 / (1 - cos θ_max)` is a proved goal, not an assumption; `ThetaMaxSpec` in `(0, π/2)`, B.1 calibration, and all structure signatures are intact.
+- **Physics semantics**: Specular reflection law, `(R/2)e` container offset, two-sided hit band `(-yOff, yOff)` with coverage, and `P = I·w`, `P₀ = I·2a` width accounting are used honestly; units are consistent per-unit-axis-length ratios; exact symbolic answer, no tolerance issues.
+- **Evidence agreement**: The 365-event iter-015 trace and the newest (only) task-result artifact `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_2.md` agree; no stale-artifact conflict.
+
+The prior `yOff`-autoImplicit hygiene remark from iter-013 stands but remains a non-soundness note.
+
+**Files written**
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/cycle-1/attempt-1/milestones.jsonl`
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/cycle-1/attempt-1/summary.md`

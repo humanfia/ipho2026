@@ -1,0 +1,13 @@
+Done. Summary of this lane (review-gate retry retry/verify lane for `2_C_4`, statements planner-frozen):
+
+**Findings**
+- The assigned file `IPhO2026Problems/problem_IPhO_2026_2_C_4.lean` already fully satisfies its frozen physics-formalize spec, so I made **no code changes** — any redraft belongs to the deterministic review re-pass.
+- Fresh `lake env lean` verification this iter: **0 errors**, exactly **1 contracted `sorry` warning** (line 145:8, `caustic_small_angle_power_law`), matching the PROGRESS ledger.
+- The chapter has `% archon:physics`; no `/- USER: -/` hints in the file.
+
+**Audit results** (written to `.archon/task_results/problem_IPhO_2026_2_C_4.md`)
+- Assumption/target split is clean: C.3 coordinate formulas + envelope law are hypothesis-side fields; the C.4 constants `u = R/2, v = (3/4)R^(1/3), p = 2, q = 3` appear only in the theorem conclusion.
+- 6 bridge obligations all `covered` (Taylor-match asymptotics is the contracted sorry, localized for the prover stage).
+- Countermodel audit: `CausticPowerLawForm` is determinate — the `IsEquivalent` ratio condition is false for any other `(u, v)` on this curve, and the `∃ w > 0, X ~ w·θ^q` guard excludes degenerate parametrizations.
+- Uncertainty: not applicable (exact constants requested; `θ ≪ 1` captured by the filter). Branch: covered — positive-angle branch resolves `|X_c|` to `X_c`; prover-stage discharge tracked as bridge 5.
+- The iter-008 retry reason ("no Physlib import") is answered by the chapter's standing iter-002 exemption NOTE (PhysLean has no caustic/power-law asymptotics module); no irrelevant import added.

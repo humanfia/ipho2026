@@ -1,0 +1,14 @@
+Done. The assigned file was already fully proved by the iter-11 redraft — this lane verified all completion criteria and recorded the result.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_3_C_4.lean` — **0 sorries, 0 errors** under fresh `lake env lean`; no edits from me were needed.
+- The iter-10 proof-Review blocker (underdetermined contracts at `T'=0` / `P=0`) was resolved by the iter-11 redraft, which added `RegimeAssumptions` to `heatDumpedDensity_eq`/`residenceDensity_eq` and closed both sorries. Gate ledger confirms: `retry`, 0 attempts, `redraft_resolved_iter: 11`.
+
+**Verified this lane**
+- Only `sorry` matches are two stale doc-comment sentences (L58, L319) — no code-level `sorry`/`admit`/`axiom`.
+- `#print axioms` on all 8 declarations (incl. main target `c4_elapsed_time`): each depends only on `[propext, Classical.choice, Quot.sound]` — no `sorryAx` or custom axioms.
+- Proofs match the blueprint route exactly: bridge lemmas → a.e. congruence off endpoints → FTC evaluation → official answer `t = (C_c·T_h/P)·(ln(T_0/T) − (T_0−T)/T_h)`.
+
+**Notes**
+- Task result written to `.archon/task_results/problem_IPhO_2026_3_C_4.md:1`, including the full list of `\leanok` candidates — the chapter currently has no `\leanok` markers (sync/review owns those; I did not touch the chapter).
+- Minor: two doc comments still say "all proofs are `sorry`" — cosmetic staleness only; flagged for the review/polish stage rather than edited, since I limited myself to strictly necessary changes (none).

@@ -1,0 +1,10 @@
+Redraft complete. All three iter-001 review mandates are implemented; the file compiles with exactly 5 expected `sorry` warnings, and results are logged at `.archon/task_results/problem_IPhO_2026_1_B_1.md`.
+
+**Changes to `IPhO2026Problems/problem_IPhO_2026_1_B_1.lean`:**
+
+- **Vacuous `radial_energy` deleted** — replaced by genuine orbit-support law `CoulombPairData.orbit_support` (`∃ O : Set ℝ, O.Nonempty ∧ ∀ r ∈ O, 0 < r ∧ Q(r) ≤ 0`), with proved eliminators `quadratic_nonpos_of_orbit`, `orbit_subset_attainedSeparations`, `attainedSeparations_nonempty` exposing the constraining inequality content.
+- **Answer-valued hypotheses demoted** — `ha_max_attained` and the literal `hfact` (`100 ≤ x ∧ x ≤ 1600/9`) removed from both target theorems; `1600/9` now first appears conclusion-side in new `sorry`-bodied bridges `orbitBound_T1_B1` (support bound) and `apogee_attained_T1_B1` (attainability via IVT). Both main targets (`maximum_separation_T1_B1`, `_in_bohr_radii_`) are now **proved** from those bridges, no sorry.
+- **Certificates kept** — `certified_factorization` / `turning_root_cases` stay fully proved; `attainedSeparations_subset_Icc_abstract` restated over abstract ordered roots so no certified root value is presupposed.
+- New supporting pieces: `CoulombPairData.AnchoredValues` (answer-free value-equation/positivity interface) and `turningQuadratic_normalized_eq` (normalization bridge with abstract `ρ`, sorry).
+
+Verification: `lake env lean` exits 0 with only the 5 `sorry` warnings; `lake build IPhO2026Run` succeeds. No other files were edited (no blueprint/`PROGRESS.md` changes; `\leanok` left to the deterministic sync).

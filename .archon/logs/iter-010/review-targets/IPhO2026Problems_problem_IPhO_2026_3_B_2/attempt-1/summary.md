@@ -1,0 +1,9 @@
+# Review: IPhO2026Problems/problem_IPhO_2026_3_B_2.lean (iter-010, attempt-1)
+
+- Theorem reviewed: `IPhO2026_3_B_2.adiabatic_temperature_change` (target, T3-B.2).
+- Preflight: compiles, 0 errors, 3 sorries at L148 (`adiabatic_invariant_along_path`), L159 (`endpoint_relation`), L190 (`adiabatic_temperature_change`); only `lam_add_mu0_K_sq_pos` is proved (via `positivity`).
+- Contract audit: statement is faithful to the blueprint — official answer `Tf - Ti = Ti*sqrt((lam + mu0*K*Hf^2)/(lam + mu0*K*Hi^2)) - 1` appears conclusion-side only; hypotheses honestly carry governing laws, adiabatic first-law balance, positive parameters, `Hi >= 0`, `Ti > 0`, `Tf > 0`; no axioms, `admit`, `native_decide`, or signature changes.
+- Root cause (needs_redraft / missing_foundational_bridge): `ParamagneticTorusLaws` never requires the path's temperature/field/magnetization to be differentiable or continuous. `deriv` returns 0 at non-differentiable points and the integrable `Cm`/`w` witnesses do not constrain `p`, so `IsAdiabaticPath` holds pointwise even for paths with jumps between `t1` and `t2` — making the quantified invariant lemma false as stated. The sorries are therefore logical, not tactic-level.
+- Prover evidence: iter-010 trace (session `biui-0724`, ~700 lines of scratch attempts) reached the same conclusion and proposed redraft options (positive lower-bound/regularity field; endpoints-only invariant; integrated first law). No matching task_result artifact exists — process warning only, not a semantic failure.
+- Exact repair: add path regularity (Differentiable temperature/field/magnetization, or an integrated first-law formulation enabling FTC); then prove constancy of `T^2*(lam + mu0*K*H^2)`, specialize to endpoints, and finish with `Real.sqrt` of the positive quotient (using `lam_add_mu0_K_sq_pos`, `Ti > 0`, `Tf > 0`).
+- Verdict: status=blocked, route=needs_redraft.

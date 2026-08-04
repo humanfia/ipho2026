@@ -1,0 +1,8 @@
+File compiles with exit 0, sole honest `sorry` isolated in `q_relation`.
+
+**Summary of what I did**
+
+- **Attempted `q_relation` honestly first**: derived the full algebraic bridge inside the proof body — the substituted Carnot ratio (`hratio`), prefactor nonvanishing (`hne`), Figure-3b $q$-values, and both adiabatic-leg square-differences (`hcold`: $M_3^2=M_2^2$, `hhot`: $M_1^2=M_4^2$) inlined since later lemmas can't be referenced.
+- **Found the goal is genuinely underdetermined**, not just hard: in square-difference variables the model only yields $c=b$, $a=d$, $-a+b-c+d=0$, while `q_relation` ≡ $T_h d = T_c b$ — linearly independent. Built a concrete countermodel ($T_h{=}2, T_c{=}1, A{=}1, b{=}c{=}1, a{=}d{=}\tfrac32, Q_h{=}\tfrac12, Q_c{=}1$) satisfying all model fields yet violating `q_relation`. Root cause: with Figure-3b temperatures the `AdiabaticLegStateLaw` legs collapse to $0=0$, and the Carnot ratio is their algebraic shadow — no field carries the common $q$-value amplitude.
+- **Kept the main target chain complete**: `m1_sq`, `m1_eq_sqrt`, `m1_sq_arg_nonneg` are proved from the leg laws alone and do not depend on the sorried `q_relation`; also removed a stale "q_relation still sorry upstream" comment in `m1_sq`.
+- **Recorded everything** in `.archon/task_results/problem_IPhO_2026_3_C_2.md` with a `## Redraft needed` section: smallest faithful repair is one added model field (`q_leg12 : T_1 M_1^2 = T_2 M_2^2`, isentropy of leg 1→2) or restating `q_relation` to the provable ratio-flattened form.

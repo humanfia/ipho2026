@@ -1,0 +1,10 @@
+Autoformalization complete for `IPhO2026Problems/problem_IPhO_2026_3_C_5.lean`.
+
+**What was produced**
+
+- Read PROGRESS.md, the blueprint chapter (`% archon:physics` confirmed), the source report, and the official page image `T3_page-4.png` (T3-C5 text: overall `COP = Q_c/W` until the C.4 time, in terms of `T_0`, `T_h`, `T`).
+- Modeled the physics with `opaque` scalar readouts (temperatures, heats, work, time, `C_c`, `P`), figure data `CycleFields` (`H1..H4`, Figure 3b), and equational law predicates: `ConstantPowerWork` (`W = Pt`), `CooledBodyHeatBalance` (`Q_c = C_c(T_0−T)`), `AccumulatedCarnotHeatRelation` (`Q_h = Q_c T_h ln(T_0/T)/(T_0−T)`, from `dQ_c/dQ_h = T_c/T_h`), `RefrigeratorEnergyBalance` (`Q_h = Q_c + W`), `C4ElapsedTimeLaw` (C.4 re-encoded locally per the natural-language-only policy), plus the context equation of state `T·M·V = n·K·H`.
+- Targets, both `by sorry`: `overall_coefficient_of_performance` (full contract with the C.4 time law) and `coefficient_of_performance_via_energy_balance` (direct route), each concluding exactly `COP = [(T_h/(T_0 − T))·ln(T_0/T) − 1]⁻¹` — the answer never appears in any hypothesis or definition.
+- Compiles via `lake env lean` with only the two expected `sorry` warnings at `IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:184` and `IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:198`.
+
+Task result written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_5.md`, including assumption/target split, faithfulness audit, 9-item bridge inventory (algebra bridges marked `blocked` for the proof stage), countermodel audit, and a grounding-gap note that PhysLean has no Carnot/COP API (LeanExplore confirmed; only `Real.log` and `ℝ` algebra grounded). Ready for `\leanok` on `thm:physics:IPhO_2026_3_C_5:target` — flagged for the review agent.

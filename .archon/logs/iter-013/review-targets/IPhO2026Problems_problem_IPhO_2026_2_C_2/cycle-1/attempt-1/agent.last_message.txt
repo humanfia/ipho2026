@@ -1,0 +1,12 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict: `partial` / `retry_proof`** (fail-closed on compilation).
+
+**Root cause** (not just the last Lean error): the file fails to *parse* — an orphaned docstring at `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:178-182` (the old `branch_denominators_ne_zero` doc, whose lemma now lives at line 225) dangles directly before `deriv_specularSlopeFamily`'s docstring, yielding `182:40: unexpected token '/--'; expected 'lemma'`. This is a trivial leftover-edit defect from an incomplete post-trace redraft.
+
+**Key findings**
+- Contract is faithful and matches the blueprint: no `sorry`/`admit`/`axiom`, signatures unchanged, C.2 coefficients kept conclusion-side, acute-branch/C.1 prerequisites honest.
+- The iter-13 redraft fields `M_specular_deriv`/`B_specular_deriv` genuinely resolve the iter-10 `underdetermined_contract` routing (`HasDerivAt.deriv` pins the little-o witnesses to `deriv M θ`, then the contracts land the recorded `-2 csc(2θ)²` / `(R/(2cos θ)) tan θ` values), excluding the certified affine countermodel.
+- The iter-13 trace (212 turns) is stale — it ran against the pre-redraft HasDerivAt file; its requested "option 1" redraft is exactly what the current file implements. Empty task-result list recorded as process warning only.
+
+**Exact repair**: delete/re-attach the orphaned docstring at lines 178–182 and recompile — the proof bodies are already written and should close routinely. Written to `milestones.jsonl` (valid JSON, 1 line) and `summary.md` (9 lines).

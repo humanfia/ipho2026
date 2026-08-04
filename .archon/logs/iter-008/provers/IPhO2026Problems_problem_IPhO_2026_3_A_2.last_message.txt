@@ -1,0 +1,10 @@
+Done. Audited `IPhO2026Problems/problem_IPhO_2026_3_A_2.lean` against its blueprint chapter — the file already faithfully formalizes IPhO 2026 T3 Part A.2, so I preserved the frozen spec (sorry-preserving no-op lane per PROGRESS.md).
+
+**Verification**
+- `lake env lean IPhO2026Problems/problem_IPhO_2026_3_A_2.lean`: 0 errors, exactly 2 `sorry` warnings (L96 A.1 bridge lemma, L150 main theorem) — matches the contracted count.
+
+**Key fidelity points**
+- Target `dW_emf = V·H·dB` is conclusion-side only (`IPhO2026Problems/problem_IPhO_2026_3_A_2.lean:148`); assumptions carry only governing laws: constitutive `B = μ₀H + μ₀M` (PhysLean `FreeSpace.μ₀`), Ampère, ring-volume `V = 2πRA`, Faraday `emf·dt = N·A·dB`, source power `ε·I·dt`.
+- A.1 result enters as derivable bridge lemma, not an assumption; sign convention and thin-ring/`r < R` geometry preserved; no uncertainty in source (not applicable).
+
+**Task result** written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_2.md` with the assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit, and grounding gaps (PhysLean lacks circuit-level Faraday/source-work APIs → local laws, consistent with the chapter's reconciliation NOTE). All 8 declarations are already `\lean`-pinned in the chapter ledger; `\leanok` application belongs to the deterministic sync once the review gate retries.

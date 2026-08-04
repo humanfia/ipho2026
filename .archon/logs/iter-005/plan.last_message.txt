@@ -1,0 +1,20 @@
+Everything is settled for iteration 005. Here's the handoff summary:
+
+## Iter-005 plan — autoformalize endgame (1 repair lane)
+
+**State verified first-hand this iter**
+- `1_B_1` still has the same 3 `linarith` errors (L401/L419/L427) inside `quadratic_pos_of_large` — its iter-004 lane was gate-dropped before running, so the file is untouched.
+- `archon blueprint-doctor` re-run live: **clean, 0 findings** — the 19 injected `missing-physlib-import` findings were the iter-003-end stale snapshot (third iter injected); formally retired, no per-file action.
+- `4_C_6`'s iter-004 lane **landed**: official microdata recovered (slope `(2.28±0.06)·10⁻³ 1/s`, mass `(89±1) g`), `official_sample_value` restated TRUE (1.1773 ∈ 1.17±0.03, 4× margin), all 6 structured review checks PASS. I ratified the lane's recover-instead-of-quarantine deviation.
+
+**Dispatch** (`.archon/iter/iter-005/objectives.md`)
+- One `physics-formalize` repair lane on `problem_IPhO_2026_1_B_1.lean`: the sign chain asserts `0 ≤ E·r + k e²` for large `r`, but from `k e²/(−E) ≤ r` with `−E > 0` the true direction is `E·r + k e² ≤ 0` — the lane gets latitude to restate the lemma to the mathematically true `turningQuadratic r < 0` (downward parabola) and re-audit its one consumer. Preservation constraints verbatim from iter-004 O1. The lane is expected to be gate-dropped (`review_exhausted`, 3/3) by design — the directive plus clean-compile evidence is the endgame record; re-entry runs through the gate's built-in proof-Review redraft-reopen path, not a gate patch (rationale in the sidecar).
+
+**State updates**
+- `PROGRESS.md`: objectives replaced with the single repair lane; stage line + audit line re-dated.
+- `blueprint/..._4_C_6.tex`: stale quarantine NOTE rewritten to the recovered-microdata state (the lane's explicit request) with the provenance caveat.
+- `task_pending.md`: iter-005 ground truth; the 25 retry + `4_C_6` targets recorded as review-queue (dropped from objectives so the review phase is their next consumer).
+- `TO_USER.md`: iter-005 notice — endgame state, `1_B_1` accepted-residual surfacing, `raw/E1_solution.pdf` provenance item, doctor-patch pinning still open.
+- `ARCHON_MEMORY.md`: rewritten to 5 bullets / 621 chars (gate no-re-enroll fact added; per-file-gate dropped).
+- `task_results/problem_IPhO_2026_4_C_6.md` consumed and cleared.
+- Helper-blueprint transcription (472-debt) deferred consciously to iter-006: it carries zero gating force (umbrella nodes have no `\lean{}` pins the prover phase consults), and a 472-entry tex batch in the same iter as the final review pass is exactly the churn class that desyncs the deterministic sync.

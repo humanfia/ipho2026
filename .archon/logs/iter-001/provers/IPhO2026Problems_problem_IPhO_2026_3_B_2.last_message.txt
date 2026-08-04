@@ -1,0 +1,16 @@
+Done. The autoformalization of IPhO 2026 Problem 3, part B.2 is complete and compiling.
+
+**What was produced**
+- `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` — compiles cleanly under `lake env lean` with only the three expected `declaration uses sorry` warnings; `lake build` of the project default target also stays green.
+- `.archon/task_results/problem_IPhO_2026_3_B_2.md` — full assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit, and grounding log.
+
+**Modeling highlights**
+- `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:33` `ParamagneticTorusState` — local state structure (`field`, `magnetization`, `temperature` as named real fields with SI-unit docstrings), since PhysLean has no magnetization object (confirmed via LeanExplore).
+- `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:96` `ParamagneticTorusLaws` — governing laws as hypotheses: equation of state `T·M·V = n·K·H`, heat capacity `C_M = nλ/T²`, and A.3's work rate `dW = μ₀·V·H·dM` (as `μ₀VH·dM/dt` via Mathlib `deriv`), each with `IntervalIntegrable` regularity so the predicates stay constraining.
+- `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:118` `IsAdiabaticPath` — the first-law balance `Cm·dT/dt = −w` (δQ = 0), *not* the integrated answer.
+- Bridge lemmas `adiabatic_invariant_along_path` (conservation of `T²·(λ+μ₀KH²)`) and `endpoint_relation` carry the derivation; `lam_add_mu0_K_sq_pos` is fully proved by `positivity`.
+- `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:190` `adiabatic_temperature_change` (sorry) — the target `Tf − Ti = Ti·(√((λ+μ₀KHf²)/(λ+μ₀KHi²)) − 1)` appears only on the conclusion side; the positive sqrt branch is enforced by `Ti > 0`, `Tf > 0`, and the positivity lemma.
+
+**Notes**
+- Grounding gaps recorded: PhysLean's thermodynamics is ideal-gas-centric and has no magnetization/Curie-law API, justifying the local law predicates; `Physlib.Electromagnetism.Dynamics.Basic` (`FreeSpace`) is imported and grounds the `μ₀ > 0` hypothesis.
+- No `axiom`, no `native_decide`, no statement weakening; blueprint chapter untouched (no `\leanok` added — left to the deterministic sync since proofs remain sorried).

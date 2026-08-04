@@ -1,0 +1,12 @@
+Review complete for `IPhO2026Problems/problem_IPhO_2026_3_C_3.lean` — verdict: **solved**. Both artifacts are durable on disk.
+
+**Findings**
+- Compilation: preflight passed, 0 errors, `sorry_count`=0; source scan confirms no `sorry`/`admit`/`axiom`/`native_decide`/elaboration trickery.
+- Contract: `PotassiumChromateCoolingRun` carries only governing laws (EOS, signed B.1 isothermal heat, Carnot ratio, Figure-3b assignment, calorimetry) plus supplied T3-C3 data; official answer values appear exclusively in the conclusions of `absorbed_heat_value`, `temperature_drop_value`, `final_temperature_value`.
+- Physics honest: signed heat convention correct (heat_23 → +Qc with H decreasing, heat_41 → −Qh), cooling branch proved via `helium_cools` (not assumed), π certified via `Real.pi_gt_d4`/`pi_lt_d4`.
+- Numerics independently verified: Qc = 0.12934593 J, drop = 9.9497e-3 K, TFinal = 0.9900503 K — all strictly inside their bands.
+- Warts (non-blocking): blueprint ledger states the T_h-fixing relation with legacy vertex labels that don't match the Lean or official fields; and the iter-015 prover JSONL/task result for this target is missing (aborted session) — recorded as a process warning, with Lean source + preflight as primary evidence per instructions.
+
+Artifacts written:
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_3/cycle-1/attempt-1/milestones.jsonl` (1 JSON line, route=solved)
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_3/cycle-1/attempt-1/summary.md` (11 lines)

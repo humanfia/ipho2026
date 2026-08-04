@@ -1,0 +1,14 @@
+Lane complete. Summary of my findings and actions:
+
+**Status**
+- `IPhO2026Problems/problem_IPhO_2026_3_C_5.lean` already contains the full, faithful formalization (17 context/quantity declarations, 6 governing-law equation predicates, an operating-history bridge structure, and the two C.5 target theorems with the recorded answer only conclusion-side).
+- Verified with a fresh `lake env lean`: **0 errors**, exactly the 2 contracted `sorry` warnings (L184 `overall_coefficient_of_performance`, L198 `coefficient_of_performance_via_energy_balance` — matching the iter-009 planner audit).
+- All 12 blueprint `\lean{...}` pins correspond to live declarations; no `\leanok` markers added by hand since the theorems carry contracted sorries (marker sync is deterministic and owned by the loop).
+
+**Key judgment call**
+- PROGRESS.md marks this as a review-gate retry lane (1/3) with **"statements planner-frozen; deterministic review pass is the next consumer"** — so I did not redraft the file. The stale gate reason ("does not import Physlib") is contradicted by the planner-recorded PhysLean-coverage exemption NOTE in the chapter (iter-002, iter-001 review ruling), the same convention the same-family 3_C_4 file shares; eight passed files import Physlib only where they genuinely use it.
+- I re-confirmed the grounding gap with live LeanExplore queries (Carnot/COP, Curie-law paramagnet EOS, first-law cycle): PhysLean rev `1706ae68` has no applicable cycle contract, and I probed that `Temperature` carries no `Sub`/`Div` instances, so the ratio/log algebra of the C.5 formula cannot be stated over it — the local ℝ-scalar equation contracts remain the faithful minimal carrier.
+
+**Artifacts**
+- Wrote the required per-lane audit to `.archon/task_results/problem_IPhO_2026_3_C_5.md`: assumption/target split, goal-faithfulness audit (no target smuggling), four derivability bridges (all `covered`), abstraction-sufficiency/countermodel audit, uncertainty (`not applicable`) and branch coverage (`covered` via `0 < T < T_0 < T_h`), and the grounding-gap record.
+- The `.lean` file and blueprint chapter are unchanged; retry-lane next consumer remains the deterministic review re-pass.

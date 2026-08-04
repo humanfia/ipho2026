@@ -1,0 +1,13 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: blocked — `needs_redraft` with `redraft_kind=missing_foundational_bridge`**
+
+Key findings:
+- **Compilation fails** (rc=1) with 4 sorries: `orbit_eq_conic` L493, `exists_asymptoticRelativeVelocity` L544, `signed_deflection_eq_formula` L574, and an inner sorry at L901 inside `signed_deflection_angle_T1_B2` itself (the dot/perp parallelogram ratio step of `hbranch`).
+- **Contract is faithful**: the iter-11 redraft succeeded — `eps² = 49/4` is machine-proved, the exact signed value `-arctan(2/√45) ≈ -16.6015°` sits inside both official rounding bands, the official value is conclusion-side only, and there is no axiom/admit/native_decide/laundering. Signature preserved.
+- **Root cause** is not the trailing tactic errors (L884/L886 norm-sq `|a i|²` vs `(a i)²`, L901 bad rewrite — those are independently fixable). The target is unprovable as-is because the physical core — conic orbit (Hint 2), existence of `u_inf` as a `Filter.Tendsto` limit, and the deflection formula — rests on a Kepler/Binet-ODE integration layer that doesn't exist in the file or in Mathlib. That is a missing-foundational-bridge redraft, not a `retry_proof` tactic gap and not `blocked_infrastructure` in the strict sense (a local contract addition can repair it).
+- **Trace caveat**: the prover session did genuine assembly work but aborted on a 429 rate limit; no iter-13 matching task result exists (recorded as a process warning). Blueprint `.tex` ledger prose is stale (still narrates the false 67/4 chain) and needs syncing.
+
+Written:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/attempt-1/milestones.jsonl` (valid single-line JSON, schema v1)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/attempt-1/summary.md`

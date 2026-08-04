@@ -1,0 +1,9 @@
+Done. Summary of this lane's outcome:
+
+**Verification (fresh, this session)**
+- `lake env lean IPhO2026Problems/problem_IPhO_2026_1_B_2.lean` → exit 0, 0 errors, exactly 7 `sorry` warnings (lines 319, 353, 376, 421, 443, 502, 535) — contract unchanged.
+- All 37 blueprint ledger `\lean{}` pins grep-verified on disk; no repoints or escape repairs needed.
+
+**No file edits** — deliberately. The gate's recorded failure ("does not import Physlib/PhysLean") is the formally retired stale doctor snapshot: the chapter carries the standing iter-003 exemption NOTE (PhysLean has no two-body Coulomb/Rutherford scattering module — confirmed by the grounding log's near-miss inventory: `Electromagnetism.ElectricField`, `oneDimPointParticle_electricField`, `RigidBody.angularMomentum` are all mismatches), and the iter-002 review scored all six semantic checks green. PROGRESS.md iter-008 defines this lane as a sorry-preserving no-op on a planner-frozen file.
+
+**Task result** written to `.archon/task_results/problem_IPhO_2026_1_B_2.md` with the full assumption/target split, goal-faithfulness audit (answer `-16.60`° strictly conclusion-side; hints 1–2 as derivable sorried bridges), 12-entry bridge inventory (6 closed certificates + 6 sorried bridges with documented proof routes), countermodel audit, and branch/uncertainty coverage (branch covered via `direction_toward_pair`; uncertainty genuinely not applicable — the bands model the 2-d.p. printing convention). Next consumer is the deterministic review pass.

@@ -1,0 +1,13 @@
+**Iter-007 plan phase complete.** The injected 19 `missing-physlib-import` findings are the iter-003 stale snapshot for the 5th iter running — live `archon blueprint-doctor` reports clean, 0 findings (verified twice, including after this phase's tex edits).
+
+**What landed this phase**
+- Earlier in-phase (already recorded in the sidecar): the `4_A_5` `hT12 : T₁ ≠ T₂` refactor via the `refactor` subagent — verified 0 errors + 10 contracted sorries at `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:226`; `4_A_5` re-reviews at gate 2/3.
+- **Coverage-debt batch 2** (planner-side, tex-only): `4_B_6` bucket (23 decls → 7 entries) + `3_A_1` bucket (35 decls → 13 entries, incl. the 4-bridge Ampère derivation route and both A.1 target theorems with the `\\uses{}` wiring the prover stage will consume). Chapters: `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_4_B_6.tex`, `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_A_1.tex`.
+- Debt: **472 → 363**, both new buckets verified at 0 via `dag-query unmatched`; doctor clean post-edit.
+- Corrected the per-part debt map (was under-derived): 23 accurate buckets recorded in `.archon/task_pending.md`; only **11 true `_raw`** remain — 10 decl-file-verified in `problem_IPhO_2026_2_B_3.lean` + `hello` in `IPhO2026Run/Basic.lean`.
+- State files synced: `PROGRESS.md`, `task_pending.md`, `STRATEGY.md` phase table, `TO_USER.md`, `ARCHON_MEMORY.md` (dag-bucketing gotcha), sidecar addendum in `.archon/iter/iter-007/plan.md`.
+
+**Standing orders for the next phases (unchanged, on record)**
+- 26 gate-enrolled targets (14 at 1/3 + `4_C_6` at 2/3 + 11 eager at 0/3 with `4_A_5` → 2/3): no statement changes pending; the deterministic review pass is their next consumer.
+- `1_B_1` stays 3/3 `review_exhausted` — no autoformalize redispatch; reopen only via prover-stage proof-Review redraft (frozen spec in iter-005/006 objectives).
+- Next planner batches largest-first: `1_B_1` (32, reflects its reopen end-state), `1_B_2` (32), `1_A_1` (28), `3_C_2` (25), `4_A_5` (23 incl. `hT12`).

@@ -1,0 +1,10 @@
+Done. The iter-011 redraft of `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean` is complete and compiles clean.
+
+**What changed**
+- Repaired the review-flagged `underdetermined_contract`: the regularity fields `M_first_order`/`B_first_order` in `NeighboringRayExpansion` went from a bare existential little-o (which pinned no coefficient) to `∃ dm, HasDerivAt M dm θ` / `∃ db, HasDerivAt B db θ`, so coefficients are now pinned to `deriv` by `HasDerivAt.deriv` while `HasDerivAt.isLittleO` gives exactly the documented expansion meaning.
+- Added the specular-family layer: closed-form C.1 laws `specularSlopeFamily`/`specularInterceptFamily`, bridge contracts `slopeFamily_deriv`/`interceptFamily_deriv`, smoothness anchors `slopeFamily_smooth`/`interceptFamily_smooth`.
+- Proved `sorry`-free: the derivative evaluations `(d/dθ)cot(2θ) = -2csc(2θ)²` and `(d/dθ)(R/2cosθ) = (R/(2cosθ))tan θ` (Mathlib chain rule), the coefficient carriers `slope_deriv_value`/`intercept_deriv_value`, and the shift/`comp_tendsto` asymptotic assembly of both target halves.
+
+**Honest status**
+- Compile: fresh `lake env lean` → 0 errors, 2 expected `sorry` warnings (L326, L381); `lake build` green.
+- The 2 remaining sorries discharge only the hypothesis-side bridge `deriv s.M/B s.θ = deriv (C.1 law) s.θ`. All C.2 target coefficients remain conclusion-side; everything downstream of the bridges is fully proved. Closing them needs a planner-approved structure field (either the two `...Family_deriv` hypothesis fields or pointwise C.1-family equality fields) — flagged in the task result at `.archon/task_results/problem_IPhO_2026_2_C_2.md`.

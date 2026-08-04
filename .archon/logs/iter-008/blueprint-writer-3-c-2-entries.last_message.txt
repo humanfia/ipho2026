@@ -1,0 +1,13 @@
+3-c-2-entries: COMPLETE — all 25 C.2 Lean decls now have blueprint ledger blocks with 0 unknown uses and 0 unmatched; official magnetization value confined to the two conclusion-side theorem blocks.
+
+Report: `.archon/task_results/blueprint-writer-3-c-2-entries.md`
+
+**What was done**
+- Read the covered file `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean` first-hand (namespace `IPhO2026.Problem3.C2`, 25 decls, 10 contracted sorries) and matched sibling conventions from `IPhO2026Problems_problem_IPhO_2026_3_C_4.tex`.
+- Appended the `% --- Archon named-quantities coverage (blueprint-writer 3-c-2-entries) ---` ledger to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_2.tex:57` — 17 blocks in dependency order: quantities/geometry → governing-law carriers → adiabatic-leg derivation bridges (`heat_isothermal_via_q`, `Qh_eq`, `Qc_eq`, `q_relation`, `q3_eq`, `q4_eq_adiabatic_41`) → value theorems (`m1_sq`, `m1_eq_sqrt`, `m1_sq_arg_nonneg`). Projection family `M1`/`M2`/`M3`/`M4`/`q` folded into one parent block with one `\lean{}` line each.
+- Umbrella `thm:physics:IPhO_2026_3_C_2:target:48` now `\uses` the model parent def and `thm:...:m1_eq_sqrt`.
+
+**Verification**
+- Pins 25/25 grep-verified against exact disk names; `\uses` 0 unknown in-chapter; begin/end 45/45.
+- `leandag build` rerun: 0 unknown_uses, 0 unmatched_lean, 0 isolated nodes for the chapter.
+- Official value `M₁ = √(M₂² − M₃² + M₄²)` confined to conclusion-side blocks; markers, skeleton, exemption NOTE verbatim; no other file modified.

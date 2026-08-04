@@ -1,0 +1,16 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: `blocked` — `needs_redraft` / `underdetermined_contract`**
+
+Key findings for `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean`:
+
+- **Does not compile** (preflight confirms): unknown identifier `le_or_lt` at line 302 plus cascading `rcases` failure; 5 active `sorry`s, including both main theorems (`minimum_angular_frequency_T1_C1`, `minimum_angular_frequency_backward_branch_T1_C1`).
+- **Root cause is a contract defect, not tactics**: `quadratic_characterization_of_threshold` has no hypothesis on `hbar`, but with `hbar = 0` the let-bound `E₀ := hbar * hbarOmegaMin …` collapses to `0 * (_/0) = 0`, making the conclusion `0 < E₀` false (concrete countermodel: `m=c=1`, `dU=1/4`, `θ=π/4`). The `hbar < 0` branch is provable via cancellation but was abandoned with `sorry`. The trace itself ends mid-rewrite concluding the same redraft (add `0 < hbar`), matching the on-disk state.
+- **Statements/signatures are faithful**: all blueprint `\lean` targets match, the recorded answer appears only conclusion-side, physics (photon momentum, energy balance with fragment masses `2m`/`m`, angle via inner product) is honest, and there is no axiom/`native_decide` laundering.
+- **Process warning**: the matching task-result list was empty; the prover trace was used as primary evidence and agrees with the file — reported as a warning, not a semantic failure.
+
+Artifacts written:
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_1_C_1/attempt-1/milestones.jsonl` (one JSON line, validated)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_1_C_1/attempt-1/summary.md` (9 lines)
+
+Next repair path recorded: add `(hb : 0 < hbar)` to the quadratic lemma, swap `le_or_lt` → `le_or_gt`/`lt_trichotomy`, finish minimality via the root-factorization argument, then build the `ReachableFrequency` bridge to discharge both threshold theorems.

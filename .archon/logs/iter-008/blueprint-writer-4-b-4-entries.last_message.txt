@@ -1,0 +1,3 @@
+4-b-4-entries: COMPLETE — Appended the full B.4 ledger to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_4_B_4.tex` (9 blocks, pins 11/11 on-disk verbatim, `\\uses` 0 unknown, official answer confined to `vaporPressure_eq`/`target`, umbrella wired to the in-file `target` theorem); all prior skeleton content verbatim and no other file touched.
+
+Report: `.archon/task_results/blueprint-writer-4-b-4-entries.md`

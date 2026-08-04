@@ -1,0 +1,12 @@
+Re-audit complete for `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean` (review-gate retry lane, statements planner-frozen).
+
+**Verification**
+- Fresh `lake env lean`: exit 0, **0 errors**, exactly the 10 contracted sorry warnings (L213–L296) — matches the iter-009 planner audit (`3_C_2` = 10 sorries).
+- Blueprint chapter has `% archon:physics`; all 25 `\lean{...}` pins resolve name-for-name to existing declarations.
+- **No .lean edits** (frozen lane); wrote only `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_2.md`.
+- `\leanok`: none applicable (all bodies `sorry`; sync owns marking).
+
+**Key findings recorded in the task result**
+- Assumption/target split is clean: EOS, B.1 isothermal heat law, and Carnot ratio are law-shaped `Prop`s; the C.2 answer appears only conclusion-side in `m1_sq` / `m1_eq_sqrt` / `m1_sq_arg_nonneg`.
+- One derivability gap flagged as a **prover-stage redraft candidate** (bridge 5): `q3_eq` / `q4_eq_adiabatic_41` assert the adiabatic-leg invariant $q = T M^2$ conserved, but the `ProcessKind.adiabatic` labels carry no constraining equation, so those two lemmas are underdetermined by the stated hypotheses (main target theorems remain protected conclusion-side). Suggested fix: an `adiabatic_leg_q_const` field/fold into the model at the prover stage.
+- LeanExplore re-check (Mathlib+Physlib): confirmed no PhysLean Carnot-cycle-on-(M,H,T) API — the chapter's `Mathlib`-baseline import exemption stands; grounded `NNReal.sqrt_eq_iff_eq_sq`-family lemmas for the future discharge of `m1_eq_sqrt`.

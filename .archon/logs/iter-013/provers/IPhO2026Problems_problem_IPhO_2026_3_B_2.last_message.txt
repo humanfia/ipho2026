@@ -1,0 +1,14 @@
+Work complete. Summary of this prover lane (`IPhO2026Problems/problem_IPhO_2026_3_B_2.lean`, IPhO 2026 T3-B.2):
+
+**Outcome: redraft request — the frozen contract is provably false in three places.**
+
+**Findings (all verified, not heuristic):**
+- **Bridge lemma 1 (`adiabatic_invariant_along_path`) is false as stated.** Eliminating `Ṁ`, `Ḣ` via the stated balance `Cm·Ṫ = −w` and the EOS gives `deriv[T²(λ+μ₀KH²)] = 4μ₀KH²T·Ṫ`, which does not vanish identically. Explicit smooth countermodel satisfying every premise (incl. the iter-012 differentiability fields and both integrability clauses): `n=K=V=λ=μ₀=1`, `p(t) = (−tanh t, −sinh t, sech t)`, `t₁=0`, `t₂=1` — balance and EOS hold identically (sympy-verified residuals 0), yet `F(0)=1 ≠ (1+tanh²1)/cosh²1 = F(1)`.
+- **The target proof's algebra is also broken**: from the frozen `hrel : Tf²·B = Ti²·A` one gets `(Tf/Ti)² = A/B`, not the `B/A` the script needs (this is the current compile error at L363); the endpoint relation's brackets are swapped vs. the official identity.
+- **Root cause (checked against the official solution first-hand)**: T3-B2 uses `dU = dW` i.e. `nλ/T² dT = +μ₀VH dM` (the Lean balance has the flipped sign), and the true invariant is `(λ+μ₀KH²)/T²`, not `T²(λ+μ₀KH²)`. The official answer formula in the target's conclusion is correct and stays.
+
+**Actions kept within prover permissions:**
+- Signatures/hypotheses untouched; all scratch verification files deleted.
+- Only in-file edit: a precise blocker comment above the remaining `sorry` at L283 (`IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:271`), documenting the irreducible residual and countermodel pointer; the full derivation context above the sorry is kept for the repaired contract.
+- Fresh `lake env lean`: 1 error / 1 sorry — exactly the census the file arrived with (the error and sorry position are unchanged, now better documented).
+- Full report with the smallest faithful repair (flip balance sign, invariant → `(λ+μ₀KH²)/T²`, swap endpoint brackets — names and target conclusion preserved) at `.archon/task_results/problem_IPhO_2026_3_B_2.md`. Repair contours were machine-tested on raw-function abstractions during the investigation: with those three changes, bridge 1 (`deriv_div` + `is_const_of_deriv_eq_zero` route) and the target's closing block (verified compiling) both go through.

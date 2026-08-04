@@ -1,0 +1,10 @@
+Review complete for `IPhO2026Problems/problem_IPhO_2026_2_C_3.lean`. Verdict: **solved** (route=solved).
+
+**Check results**
+- Compilation: preflight green — exit 0, 0 sorries, no diagnostics; `lean_verify` on `limitingIntersectionCoordinates` reports axioms only `{propext, Classical.choice, Quot.sound}` with a clean source scan.
+- Signature/statement: frozen contract preserved — a genuine two-coordinate `Tendsto` on `𝓝[≠] 0` yielding `X_c = R sin³θ` and `Y_c = (R/2)cos θ(2 − cos 2θ)`, exactly matching the blueprint theorem at `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_2_C_3.tex:142`.
+- Semantics: Physlib `Dimensionful` lengths with a single fixed Figure-2g unit readout; physical quantities, dimensions, and figure roles faithfully preserved.
+- Honesty: C.1 exact line, C.2 `O(Δθ²)` expansions, and eventual intersection existence are hypotheses only; the limit appears solely in the conclusion — no answer-as-assumption or weakening.
+- Trace: iter-010 prover `session_end` matches the on-disk proof. Warning: the matching task-results list is empty — recorded as a process warning only, per instructions.
+
+Artifacts durable on disk: `milestones.jsonl` (one validated JSON line) and `summary.md` in `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_3/attempt-1/`.

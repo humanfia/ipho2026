@@ -1,0 +1,3 @@
+2-b-1-entries: COMPLETE — appended 15-block ledger to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_2_B_1.tex` (pins 15/15 exact disk names, 0 unknown `\uses`, umbrella wired, official α=R/β=−R/2 confined to the target theorem).
+
+Report: /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/blueprint-writer-2-b-1-entries.md

@@ -1,0 +1,728 @@
+/-
+  IPhO 2026, Theoretical Problem 1 (T1), Part T1-B1 (labeled B.1) —
+  the electron–positron pair of Figure 1b.
+
+  Autoformalized from blueprint chapter
+  `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_B_1.tex`
+  (marked `% archon:physics`) and the official source page `T1_page-2.png`.
+
+  Physical situation (Fig. 1b, official page 5/14):
+  A positron `e⁺` is located at a distance `100·a₀` from an electron `e⁻`.
+  The particles move so that their velocities are antiparallel and, at that
+  instant, perpendicular to their separation (Fig. 1b).  Each particle
+  carries angular momentum of magnitude `μ·ℏ` about the system's center of
+  mass, `μ` a dimensionless numerical factor.  The only interaction between
+  `e⁺` and `e⁻` is electrostatic (Coulomb); both particles have the same
+  inertial mass `m` and equal charge magnitude `e` of opposite sign.  The
+  system is isolated, classical, non-relativistic.  The Bohr radius is
+  `a₀ = 4πε₀ℏ²/(m e²)`, and the Coulomb constant is `k = 1/(4πε₀)`.
+
+  Current subquestion (T1-B1, 1.0 pts):
+    For `μ = 4` the system is bound, meaning that the particles move in a
+    closed orbit around the system's center of mass.  Find the maximum
+    separation distance between `e⁺` and `e⁻` in terms of `a₀`.
+
+  Recorded official answer: `r_max = (1600/9)·a₀`.  This value appears ONLY
+  as a *conclusion-side factored expression used by the bridges* (see the
+  goal-faithfulness note on `IsTurningPointInBohrRadii.certified_factorization`)
+  and in the closed-form equalities of `maximum_separation_T1_B1` /
+  `maximum_separation_in_bohr_radii_T1_B1` and `orbitBound_T1_B1`.  No
+  assumption, premise field or local definition asserts that `1600/9 · a₀`
+  is attained, maximal, or even positive — that is exactly what must be
+  proved.
+
+  Official hints recorded on the same page (governing-law input, not target):
+    Hint 1: eccentricity `ε = √(1 + 4 L² E / (k² e⁴ m))`, with `E` and `L`
+      the total energy and the magnitude of the total angular momentum,
+      `k` the Coulomb constant;
+    Hint 2: polar equation of the conic trajectory `r = a / (1 − ε cos θ)`.
+  These hints identify the trajectory with a conic and justify the
+  turning-point description of the radial motion; they are encoded through
+  the effective radial law rather than with square-root expressions.
+
+  Conventions:
+  * Two-body → one-body reduction is encoded in
+    `CoulombPairData.reduced_mass_eq` (`μ_red = m/2`) and
+    `CoulombPairData.relative_kinetic` (kinetic energy of two opposite
+    velocities in the CM frame: `2·(1/2) m v₀² = (1/2)(m/2) v_rel²` with
+    `v_rel = 2 v₀`).
+  * The effective one-dimensional radial dynamics (energy + angular-momentum
+    conservation for the inverse-square attraction) is exposed as a genuine
+    orbit-support law: the field `CoulombPairData.orbit_support` asserts the
+    existence of a nonempty set of attained separations, all of positive
+    radius, on which the turning-point quadratic
+    `Q(r) = E r² + k e² r − L²/(2 μ_red)` is nonnegative (equality exactly
+    at turning points); the eliminator `CoulombPairData.quadratic_nonneg_of_orbit`
+    discharges the corresponding proof obligation for any attained
+    separation.  The initial transverse instant of Fig. 1b is a turning
+    point (`turning_100`), so `100·a₀` is attained
+    (`CoulombPairData.initial_separation_attained`).
+  * The hypothesis interface `CoulombPairData.AnchoredValues` re-anchors the
+    abstract data fields to the opaque constants (value equations for `L`,
+    `v₀`, positivity of `μ_red` and `r₀`), so that the pure-algebra
+    normalization certificate `CoulombPairData.turningQuadratic_normalized_eq`
+    can be stated without numeric root values.
+  * All proofs except the definitional membership/expansion lemmas and the
+    two pure-algebra certificates are `sorry` by design (autoformalize
+    stage).  The certificates prove only polynomial identities (a
+    factorization and a root-case split); they never assert attainability or
+    maximality of the target value.
+-/
+
+import Mathlib
+
+open Real Set
+
+/- USER: The radial feasibility sign was corrected after the first 3 Review
+attempts. With
+  Q(r) = E*r^2 + k*e^2*r - L^2/(2*mu_red),
+the energy law gives Q(r) = (1/2)*mu_red*r_dot^2*r^2, hence every attained
+positive radius satisfies 0 <= Q(r). Do not change this back to Q(r) <= 0.
+For E < 0, Q is negative beyond the upper turning point; that exclusion is
+what makes the attained interval bounded. -/
+
+namespace IPhO2026.Problem1.B1
+
+noncomputable section
+
+/-! ### Universal constants and fixed problem parameters -/
+
+/-- Mass `m` of each particle (electron and positron inertial mass, kg). -/
+opaque particleMass : ℝ
+
+/-- Reduced Planck constant `ℏ` (J·s). -/
+opaque hbar : ℝ
+
+/-- Coulomb constant `k = 1/(4πε₀)` (N·m²·C⁻²). -/
+opaque coulombK : ℝ
+
+/-- Elementary charge magnitude `e`: the electron has charge `−e`, the
+positron `+e` (C). -/
+opaque elementaryCharge : ℝ
+
+/-- Bohr radius `a₀ = 4πε₀ℏ²/(m e²) = ℏ²/(k·m·e²)` (m).  Opaque on purpose:
+its defining SI relation to `k, ℏ, m, e` is imposed via
+`ScalingRegime.bohr_radius_def` so that nothing about the target value can
+be obtained by unfolding. -/
+opaque bohrRadius : ℝ
+
+/-- Positivity of the constants plus the defining relation of the Bohr
+radius (`a₀ = ℏ²/(k·m·e²)`, i.e. the page's `a₀ = 4πε₀ℏ²/(m e²)` with
+`k = 1/(4πε₀)`). -/
+structure ScalingRegime : Prop where
+  particleMass_pos : 0 < particleMass
+  hbar_pos : 0 < hbar
+  coulombK_pos : 0 < coulombK
+  elementaryCharge_pos : 0 < elementaryCharge
+  bohrRadius_pos : 0 < bohrRadius
+  bohr_radius_def : bohrRadius = hbar ^ 2 / (coulombK * particleMass * elementaryCharge ^ 2)
+
+/-- The dimensionless angular-momentum factor `μ` of the statement: each
+particle carries angular momentum `μ·ℏ` about the centre of mass. -/
+def IsAngularMomentumFactor (μ : ℝ) : Prop :=
+  0 < μ
+
+/-- The Figure-1b initial separation in units of `a₀`: `100`. -/
+def initialSeparationInBohrRadii : ℝ := 100
+
+/-- The angular-momentum factor of the bound subquestion T1-B1: `μ = 4`. -/
+def boundMu : ℝ := 4
+
+/-- Recorded bound criterion for the subquestion: at the transverse initial
+instant the total energy of the pair is
+`E = 4 μ²ℏ²/(m r₀²) − k e²/r₀`, which is negative exactly when
+`4 μ² ℏ² < k m e² r₀`.  `IsBoundMu μ` is the strict version of this
+inequality together with `0 < μ`.  No closed-form answer is involved. -/
+def IsBoundMu (μ : ℝ) : Prop :=
+  IsAngularMomentumFactor μ ∧
+    4 * μ ^ 2 * hbar ^ 2 <
+      coulombK * particleMass * elementaryCharge ^ 2 *
+        (initialSeparationInBohrRadii * bohrRadius)
+
+/-- With `a₀ = ℏ²/(k·m·e²)` from `ScalingRegime` and the initial separation
+`r₀ = 100·a₀`, the factor `μ = 4` satisfies the bound criterion.  The RHS
+`k e² · (100 a₀)` simplifies to `100 ℏ²/m`, and `4·4² = 64 < 100`. -/
+theorem boundMu_isBound (hR : ScalingRegime) : IsBoundMu boundMu := by
+  refine ⟨by norm_num [boundMu, IsAngularMomentumFactor], ?_⟩
+  have hb : (0 : ℝ) < coulombK * particleMass * elementaryCharge :=
+    mul_pos (mul_pos hR.coulombK_pos hR.particleMass_pos) hR.elementaryCharge_pos
+  rw [boundMu, initialSeparationInBohrRadii, hR.bohr_radius_def]
+  field_simp
+  rw [lt_div_iff₀ hb]
+  nlinarith [mul_pos (sq_pos_of_pos hR.hbar_pos) hb]
+
+/-- The recorded bound criterion retains its positivity component:
+`IsBoundMu μ` includes `IsAngularMomentumFactor μ`, i.e. `0 < μ`, so any
+certified bound factor is nonzero.  Route-independent; carries no numeric
+target content. -/
+theorem IsBoundMu.ne_zero {μ : ℝ} (hb : IsBoundMu μ) : μ ≠ 0 :=
+  ne_of_gt hb.1
+
+/-! ### Two-body Coulomb system and governing laws -/
+
+/-- Data and governing laws of the isolated, classical, non-relativistic
+electron–positron pair with purely electrostatic interaction, with the
+two-body → one-body (relative coordinate, reduced mass) reduction encoded.
+
+Energies are in joules, angular momenta in J·s, separations/lengths in
+metres, speeds in m/s.  No field mentions the maximum separation requested
+by the subquestion. -/
+structure CoulombPairData (hR : ScalingRegime) where
+  /-- Reduced inertial mass of the two equal masses (kg). -/
+  reduced_mass : ℝ
+  /-- Total angular momentum about the centre of mass, magnitude (J·s). -/
+  total_angular_momentum : ℝ
+  /-- Conserved total energy of the isolated system (J). -/
+  total_energy : ℝ
+  /-- Initial separation (Fig. 1b), in metres. -/
+  initial_separation : ℝ
+  /-- Initial CM-frame speed of each particle (m/s); the velocities are
+      antiparallel, so the relative speed is `2·initial_speed`. -/
+  initial_speed : ℝ
+  /-- Reduced mass of two equal point masses: `μ_red = m/2`. -/
+  reduced_mass_eq : reduced_mass = particleMass / 2
+  /-- Fig. 1b readout: `r₀ = 100·a₀`. -/
+  initial_separation_value :
+    initial_separation = initialSeparationInBohrRadii * bohrRadius
+  /-- Angular momentum per particle about the centre of mass is `μ·ℏ`
+      (given data): each particle orbits at radius `r₀/2` with velocity
+      perpendicular to its radius vector, so `m v₀ (r₀/2) = μ ℏ`. -/
+  angular_momentum_per_particle :
+    particleMass * initial_speed * (initial_separation / 2) = boundMu * hbar
+  /-- Total angular momentum is the sum of the two equal per-particle
+      contributions (equal masses, antiparallel velocities ⇒ centre of
+      mass at the midpoint): `L = 2 μ ℏ`. -/
+  total_angular_momentum_eq :
+    total_angular_momentum =
+      2 * (particleMass * initial_speed * (initial_separation / 2))
+  /-- Relative-coordinate kinetic energy: the sum of the two Newtonian
+      kinetic energies equals `(1/2) μ_red v_rel²` with
+      `v_rel = 2 v₀`. -/
+  relative_kinetic :
+    2 * ((1 / 2) * particleMass * initial_speed ^ 2) =
+      (1 / 2) * reduced_mass * (2 * initial_speed) ^ 2
+  /-- Coulomb's law: potential energy `U(r) = −k e²/r`; at the transverse
+      initial instant the total energy is kinetic plus Coulomb. -/
+  coulomb_law :
+    total_energy =
+      2 * ((1 / 2) * particleMass * initial_speed ^ 2) -
+        coulombK * elementaryCharge ^ 2 / initial_separation
+  /-- Effective radial law — orbit support (energy + angular-momentum
+      conservation for the inverse-square attraction, Hint 1 of the
+      official page): there exists a nonempty set `O` of attained
+      separations along the orbit, all of positive radius, and along the
+      trajectory the radial kinetic energy is nonnegative, i.e. the
+      turning-point quadratic
+      `Q(r) = E·r² + k e²·r − L²/(2 μ_red)`
+      is nonnegative at every attained separation `r ∈ O`, with
+      `Q(r) = 0` exactly at turning points.  The radial kinetic energy is
+      `(1/2) μ_red ṙ² = E − L²/(2 μ_red r²) + k e²/r`, so `0 ≤ Q(r)` is
+      precisely `(1/2) μ_red ṙ² ≥ 0` multiplied through by the positive
+      `r²`.  No quantitative bound on `O` (boundedness, location of the
+      upper edge, any numeric value beyond the Fig.-1b readout) is
+      asserted here; those are conclusion-side obligations of the target
+      theorems. -/
+  orbit_support :
+    ∃ O : Set ℝ,
+      O.Nonempty ∧
+        (∀ r ∈ O,
+          0 < r ∧
+            0 ≤ total_energy * r ^ 2 + coulombK * elementaryCharge ^ 2 * r -
+                total_angular_momentum ^ 2 / (2 * reduced_mass))
+  /-- The transverse initial instant of Fig. 1b is a turning point
+      (velocities perpendicular to the separation, radial speed zero):
+      `Q(r₀) = 0`. -/
+  turning_100 :
+    total_energy * initial_separation ^ 2 +
+        coulombK * elementaryCharge ^ 2 * initial_separation -
+          total_angular_momentum ^ 2 / (2 * reduced_mass) = 0
+  /-- Hard structural constraint recording the *bound branch* of the
+      radial motion: the conserved total energy of the pair is negative,
+      `E < 0`.  This is the planner-mandated branch predicate (iter-003):
+      carried as a structure field rather than an external hypothesis so
+      that every instance of `CoulombPairData` physically realizes the
+      bound orbit of the subquestion and no countermodel with `E ≥ 0` can
+      satisfy the hypotheses.  Sign sanity: with `E < 0` (and
+      `0 < μ_red`) the turning-point quadratic
+      `Q(r) = E·r² + k e²·r − L²/(2 μ_red)` opens strictly downward, so
+      `{r > 0 | 0 ≤ Q(r)}` is bounded above — consistent with a finite
+      maximum separation; with any `E ≥ 0` the quadratic opens upward
+      and the lawful region would be unbounded, and the energy evaluation
+      `boundMu_eq_zero_of_not_bound` below shows that `E ≥ 0` would force
+      `4 = 0`, i.e. the hypotheses become unsatisfiable outside the bound
+      branch.  This field says nothing about the *value* of the maximum:
+      no numeric location, location ratio, or attainability claim is
+      recorded here. -/
+  bound_branch : total_energy < 0
+
+namespace CoulombPairData
+
+variable {hR : ScalingRegime} (D : CoulombPairData hR)
+
+/-- The turning-point quadratic of the effective radial dynamics,
+`Q(r) = E·r² + k e²·r − L²/(2 μ_red)`: multiplying the radial energy law
+`(1/2) μ_red ṙ² = E − L²/(2 μ_red r²) + k e²/r` by `r² > 0`. -/
+def turningQuadratic (r : ℝ) : ℝ :=
+  D.total_energy * r ^ 2 + coulombK * elementaryCharge ^ 2 * r -
+    D.total_angular_momentum ^ 2 / (2 * D.reduced_mass)
+
+/-- The set of separations (metres) ever attained by the pair along the
+bound orbit — the geometric support of the trajectory as read from the
+effective radial law (`0 ≤ Q(r)`, i.e. nonnegative radial kinetic energy).
+It carries no closed form.  The governing-law field `orbit_support`
+asserts that this set (or some nonempty subset of it) is physically
+realized by the motion; `quadratic_nonneg_of_orbit` below is the
+elimination theorem connecting the two. -/
+def attainedSeparations : Set ℝ :=
+  { r : ℝ | 0 < r ∧ 0 ≤ D.turningQuadratic r }
+
+/-- Elimination theorem for the orbit-support law: at any separation
+attained along the orbit (as witnessed by `orbit_support`) the
+turning-point quadratic is nonpositive — i.e. the radial kinetic energy
+is nonnegative.  This is the usable consequence (inequality form) of the
+effective radial law, replacing any bare assertion of existence. -/
+theorem quadratic_nonneg_of_orbit {r : ℝ}
+    (hr : r ∈ Classical.choose D.orbit_support) :
+    0 ≤ D.turningQuadratic r :=
+  ((Classical.choose_spec D.orbit_support).2 r hr).2
+
+/-- The orbit carrier witnessed by `orbit_support` is nonempty and consists
+of attained separations. -/
+theorem orbit_subset_attainedSeparations :
+    Classical.choose D.orbit_support ⊆ D.attainedSeparations :=
+  fun _ hr =>
+    ⟨(Classical.choose_spec D.orbit_support).2 _ hr |>.1,
+      D.quadratic_nonneg_of_orbit hr⟩
+
+/-- The orbit carrier witnessed by `orbit_support` has at least one
+element, hence so does `attainedSeparations`. -/
+theorem attainedSeparations_nonempty : D.attainedSeparations.Nonempty :=
+  (Classical.choose_spec D.orbit_support).1.mono D.orbit_subset_attainedSeparations
+
+/-- Membership in `attainedSeparations` unfolds definitionally (bridge for
+later proof stages); proved by `Iff.rfl` because it is a definition
+expansion only — it says nothing about which separation is maximal. -/
+theorem mem_attainedSeparations_iff (r : ℝ) :
+    r ∈ D.attainedSeparations ↔ 0 < r ∧ 0 ≤ D.turningQuadratic r :=
+  Iff.rfl
+
+/-- The initial separation `r₀ = 100·a₀` is attained (it is the
+configuration of Fig. 1b, and `turning_100` gives `Q(r₀) = 0`). -/
+theorem initial_separation_attained :
+    D.initial_separation ∈ D.attainedSeparations := by
+  refine ⟨?_, ?_⟩
+  · rw [D.initial_separation_value]
+    have : 0 < initialSeparationInBohrRadii * bohrRadius :=
+      mul_pos (by norm_num [initialSeparationInBohrRadii]) hR.bohrRadius_pos
+    exact this
+  · rw [turningQuadratic]
+    rw [D.turning_100]
+
+/-- Specific angular momentum `l = L/μ_red` of the reduced one-body problem
+(m²/s). -/
+def specificAngularMomentum : ℝ :=
+  D.total_angular_momentum / D.reduced_mass
+
+/-- Pure-algebra certificate: with `l = L/μ_red ≠ 0` and `r > 0`, the
+turning-point condition `Q(r) = E·r² + k e²·r − L²/(2μ_red) = 0` is
+equivalent to the monic `(1/r)`-quadratic
+`(1/r)² − (2 k e²/(μ_red l²))·(1/r) − 2E/(μ_red l²) = 0`
+(the Binet-form normalization of the radial law: divide `Q(r)` by the
+positive `r²` and multiply by the nonzero `−2μ_red/L²`, using
+`L² = μ_red²·l²`; the previous draft's leading `l²` factor and `+2E`
+sign were dimensionally and numerically wrong — at the known root
+`r = 100·a₀` that form evaluates to `0.0254 ≠ 0`, while this corrected
+form evaluates to `0`).  Route-independent; contains no target value. -/
+theorem turningQuadratic_eq_zero_iff {r : ℝ} (hr : 0 < r)
+    (hl : D.specificAngularMomentum ≠ 0) :
+    D.turningQuadratic r = 0 ↔
+      (1 / r) ^ 2 -
+        (2 * coulombK * elementaryCharge ^ 2 /
+            (D.reduced_mass * D.specificAngularMomentum ^ 2)) * (1 / r) -
+          2 * D.total_energy /
+            (D.reduced_mass * D.specificAngularMomentum ^ 2) = 0 := by
+  have hm : D.reduced_mass ≠ 0 := by
+    intro h
+    exact hl (by rw [specificAngularMomentum, h, div_zero])
+  have hL : D.total_angular_momentum ≠ 0 := by
+    intro h
+    exact hl (by rw [specificAngularMomentum, h, zero_div])
+  have hr' : r ≠ 0 := ne_of_gt hr
+  have key : (1 / r) ^ 2 -
+        (2 * coulombK * elementaryCharge ^ 2 /
+            (D.reduced_mass * D.specificAngularMomentum ^ 2)) * (1 / r) -
+          2 * D.total_energy /
+            (D.reduced_mass * D.specificAngularMomentum ^ 2) =
+      -(2 * D.reduced_mass / (D.total_angular_momentum ^ 2 * r ^ 2)) *
+        D.turningQuadratic r := by
+    rw [turningQuadratic, specificAngularMomentum]
+    field_simp
+    ring
+  have hcoeff : -(2 * D.reduced_mass / (D.total_angular_momentum ^ 2 * r ^ 2)) ≠ 0 :=
+    neg_ne_zero.mpr (div_ne_zero (mul_ne_zero two_ne_zero hm)
+      (mul_ne_zero (pow_ne_zero 2 hL) (pow_ne_zero 2 hr')))
+  rw [key, mul_eq_zero, or_iff_right hcoeff]
+
+/-- Anchoring interface re-tying the abstract fields of `CoulombPairData`
+to the opaque physical constants they came from.  The fields of
+`CoulombPairData` are kept abstract on purpose (so that no answer value
+can be obtained by unfolding); this hypothesis interface records the
+value equations and positivity facts derived from the governing fields,
+giving later proof stages what is needed to normalize the turning-point
+quadratic in the `μ = 4` case.  It asserts nothing about which
+separations are attained or maximal. -/
+structure AnchoredValues {hR : ScalingRegime} (D : CoulombPairData hR) :
+    Prop where
+  /-- Lifting of the governing-law total-angular-momentum equation to the
+      opaque constants: `L = 2·μ·ℏ` with `μ = 4`. -/
+  total_angular_momentum_value :
+    D.total_angular_momentum = 2 * boundMu * hbar
+  /-- Lifting of the Fig.-1b per-particle angular-momentum equation
+      `m v₀ (r₀/2) = μ ℏ` to the abstract fields. -/
+  speed_value :
+    particleMass * D.initial_speed * (D.initial_separation / 2) =
+      boundMu * hbar
+  /-- Reduced mass of two equal positive masses is positive. -/
+  reduced_mass_pos : 0 < D.reduced_mass
+  /-- Initial separation `r₀ = 100·a₀` is positive. -/
+  initial_separation_pos : 0 < D.initial_separation
+/-- Normalization of the turning-point quadratic in the recorded `μ = 4`
+bound case, explicit-coefficient form: for `x > 0` (separation `x·a₀`),
+writing `u = 100/x` (inverse separation in units of `100·a₀`),
+
+`Q(x·a₀) = −(L²·(x·a₀)²/(2 μ_red·r₀²))·(u² − (25/16)·u + 9/16)`,
+
+with the monic factor written root-ratio style as
+`u² − (100/100 + 100/(1600/9))·u + (100/100)·(100/(1600/9))` so that
+`certified_factorization` rewrites it to `(u − 1)·(u − 9/16)` directly.
+This is a *pure-algebra value computation* from the governing fields of
+`CoulombPairData` plus the Bohr-radius relation: substitute `v₀` from
+`angular_momentum_per_particle`, `L` from `total_angular_momentum_eq`,
+`μ_red` from `reduced_mass_eq`, `E` from `coulomb_law`,
+`r₀ = 100·a₀` from `initial_separation_value`, and `ℏ² = k·m·e²·a₀` from
+`ScalingRegime.bohr_radius_def`; the coefficient matches are
+`L²/(2 μ_red r₀) = (16/25)·k e²` (linear term) and
+`E = −(9/16)·L²/(2 μ_red r₀²)` (quadratic term), after which
+`field_simp`/`ring` finishes.  The prefactor is strictly negative on the
+bound branch, which is what places the lawful region `0 ≤ Q` *between*
+the two roots — the orientation content of the subquestion.  The
+equation asserts nothing about attainability or maximality; those stay
+conclusion-side in `apogee_attained_T1_B1` / `orbitBound_T1_B1`.
+The earlier existential-`ρ` draft was underdetermined: the quantified
+iff constrained only the root *set*, and no hypothesis pinned `ρ`, so
+the support bound was not derivable from it; the explicit coefficients
+are the minimal faithful repair (same status as
+`certified_factorization`, which already records the root ratio).
+This is the single remaining value-computation bridge of the file. -/
+theorem turningQuadratic_normalized_eq {hR : ScalingRegime}
+    (D : CoulombPairData hR) (hv : D.AnchoredValues) (hb : IsBoundMu boundMu)
+    {x : ℝ} (hx : 0 < x) :
+    D.turningQuadratic (x * bohrRadius) =
+      -(D.total_angular_momentum ^ 2 * (x * bohrRadius) ^ 2 /
+          (2 * D.reduced_mass * D.initial_separation ^ 2)) *
+        ((100 / x) ^ 2 - (100 / 100 + 100 / (1600 / 9)) * (100 / x) +
+          (100 / 100) * (100 / (1600 / 9))) := by
+  sorry
+
+/-- Bound-branch sign lemma: on the recorded bound branch
+(`CoulombPairData.bound_branch : E < 0`), for every large enough radius
+(`r >= k e^2 / (-E)`, well-defined since `E ≠ 0`) the turning-point
+quadratic is strictly negative: `q = E r² + k e² r − L²/(2 μ_red)`.
+Indeed `E*r + k*e² ≤ 0`, while the nonzero angular momentum makes the
+subtracted centrifugal term strictly positive. Hence no lawful separation
+with `0 ≤ q` can reach `k e²/(−E)`, so the radial support is bounded above.
+The *location* of the sharp bound is not asserted here; that is
+conclusion-side content (`orbitBound_T1_B1`). -/
+theorem quadratic_neg_of_large {hR : ScalingRegime} (D : CoulombPairData hR)
+    (hm : 0 < D.reduced_mass) {r : ℝ}
+    (hr : coulombK * elementaryCharge ^ 2 / (-D.total_energy) ≤ r) :
+    D.turningQuadratic r < 0 := by
+  have hE : D.total_energy < 0 := D.bound_branch
+  have hneg : 0 < -D.total_energy := neg_pos.mpr hE
+  have he : elementaryCharge ≠ 0 := ne_of_gt hR.elementaryCharge_pos
+  have hnum_pos : 0 < coulombK * elementaryCharge ^ 2 :=
+    mul_pos hR.coulombK_pos (sq_pos_of_ne_zero he)
+  have hr_pos : 0 < r := lt_of_lt_of_le (div_pos hnum_pos hneg) hr
+  have hkey : D.total_energy * r + coulombK * elementaryCharge ^ 2 ≤ 0 := by
+    have hmul : coulombK * elementaryCharge ^ 2 ≤ r * (-D.total_energy) := by
+      have h := mul_le_mul_of_nonneg_right hr (le_of_lt hneg)
+      rwa [div_mul_cancel₀ _ (ne_of_gt hneg)] at h
+    have hcast : D.total_energy * r = -(r * (-D.total_energy)) := by ring
+    rw [hcast]
+    nlinarith [hmul]
+  have hLpos : 0 < D.total_angular_momentum := by
+    rw [D.total_angular_momentum_eq, D.angular_momentum_per_particle]
+    exact mul_pos (by norm_num) (mul_pos (by norm_num [boundMu]) hR.hbar_pos)
+  have hL : 0 < D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) := by
+    exact div_pos (sq_pos_of_pos hLpos) (mul_pos (by norm_num) hm)
+  have hexpand : D.turningQuadratic r =
+      r * (D.total_energy * r + coulombK * elementaryCharge ^ 2)
+        - D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) := by
+    rw [turningQuadratic]; ring
+  rw [hexpand]
+  have hnonpos : r * (D.total_energy * r + coulombK * elementaryCharge ^ 2) ≤ 0 :=
+    mul_nonpos_of_nonneg_of_nonpos (le_of_lt hr_pos) hkey
+  linarith [hL, hnonpos]
+
+/-- Bound-branch corollary, support-boundedness form: every attained
+separation lies strictly below the energy-sign threshold `k e²/(−E)`.
+This is the first usable *boundedness* consequence of the `bound_branch`
+field on the attained-separation set; the exclusion of unbounded-support
+countermodels as a theorem.  It does not locate the maximum: the sharp
+value `(1600/9)·a₀` is proved conclusion-side in `orbitBound_T1_B1`. -/
+theorem attainedSeparations_lt_energy_threshold {hR : ScalingRegime}
+    (D : CoulombPairData hR) (hm : 0 < D.reduced_mass) {r : ℝ}
+    (hr : r ∈ D.attainedSeparations) :
+    r < coulombK * elementaryCharge ^ 2 / (-D.total_energy) := by
+  rcases hr with ⟨hr_pos, hrQ⟩
+  by_contra hcontra
+  push_neg at hcontra
+  have hneg := D.quadratic_neg_of_large hm hcontra
+  linarith [hrQ, hneg]
+
+end CoulombPairData
+
+/-! ### Turning-point readout (recorded initial instant, no target value) -/
+
+/-- A positive `x` (units of `a₀`) is a turning point of the radial motion
+when `Q(x·a₀) = 0`.  The associated `radial_is_zero` field records its
+physical meaning: the radial speed vanishes there.  No numeric value of
+any root beyond the Fig.-1b readout `100` is baked into any assumption. -/
+def IsTurningPointInBohrRadii {hR : ScalingRegime} (D : CoulombPairData hR)
+    (x : ℝ) : Prop :=
+  0 < x ∧ D.turningQuadratic (x * bohrRadius) = 0
+
+/-- The Fig.-1b transverse instant at separation `100·a₀` is a turning
+point (subsumes the `turning_100` governing-law field, restated in
+turning-point language for downstream use). -/
+theorem initial_turning_point {hR : ScalingRegime} (D : CoulombPairData hR) :
+    IsTurningPointInBohrRadii D initialSeparationInBohrRadii := by
+  refine ⟨by norm_num [initialSeparationInBohrRadii], ?_⟩
+  rw [CoulombPairData.turningQuadratic, ← D.initial_separation_value]
+  exact D.turning_100
+
+/-! ### Certified root identity for the recorded bound case (bridge) -/
+
+/-- The certified factorization of the turning-point quadratic in the
+`μ = 4` bound case: for `x > 0`, writing the quadratic in `1/x`
+(in units of `a₀`),
+
+`x²·Q(x·a₀)·(2 μ_red/l²)
+  = (100/x)² − (100/100 + 100/(1600/9))·(100/x) + (100/100)·(100/(1600/9))`
+
+This is a *purely algebraic* restatement of the constants of
+`CoulombPairData` (`E`, `L`, `μ_red`, `v₀`, `r₀`) after the governing
+fields are substituted; its identification with the recorded official
+value is conclusion-side content (it asserts nothing about which turning
+point is maximal or attained beyond what `attainedSeparations` and the
+governing laws already say).  Carried as a separate theorem so later proof
+stages can `rw` with it. -/
+theorem certified_factorization {hR : ScalingRegime} (_D : CoulombPairData hR)
+    (x : ℝ) (hx : 0 < x) :
+    (100 / x) ^ 2 - (100 / 100 + 100 / (1600 / 9)) * (100 / x) +
+        (100 / 100) * (100 / (1600 / 9)) =
+      (100 / x - 1) * (100 / x - 9 / 16) := by
+  have hx' : (100 : ℝ) / x ≠ 0 := by positivity
+  field_simp
+  ring
+
+/-- Root-of-factorization bridge: a positive `x` makes the certified
+`1/x`-quadratic vanish iff `x = 100` or `x = 1600/9`.  This is still pure
+algebra over the factorization (`certified_factorization`); the *physics*
+content — that both roots are attained and that the larger one is the
+maximum — belongs to the main theorem below. -/
+theorem turning_root_cases {hR : ScalingRegime} (D : CoulombPairData hR)
+    {x : ℝ} (hx : 0 < x)
+    (hroot :
+      (100 / x) ^ 2 - (100 / 100 + 100 / (1600 / 9)) * (100 / x) +
+          (100 / 100) * (100 / (1600 / 9)) = 0) :
+    x = 100 ∨ x = 1600 / 9 := by
+  rw [certified_factorization (hR := hR) (_D := D) x hx] at hroot
+  rcases mul_eq_zero.mp hroot with h | h
+  · have : (100 : ℝ) / x = 1 := by linarith
+    have hx0 : x ≠ 0 := ne_of_gt hx
+    field_simp at this
+    left
+    linarith [this]
+  · have : (100 : ℝ) / x = 9 / 16 := by linarith
+    have hx0 : x ≠ 0 := ne_of_gt hx
+    field_simp at this
+    right
+    nlinarith [this]
+
+/-! ### Certified sign band and turning-point root cases (bridges) -/
+
+/-- Certified sign band of the turning-point quadratic (orientation
+content of the bound branch): for `x > 0` (separation `x·a₀`), the
+lawful radial region `0 ≤ Q(x·a₀)` is exactly the closed band
+`100 ≤ x ∧ x ≤ 1600/9`.  Pure algebra from
+`CoulombPairData.turningQuadratic_normalized_eq` (the strictly negative
+prefactor places the lawful region *between* the roots) and
+`certified_factorization`; the lower endpoint is the Fig.-1b periapsis
+readout and the upper endpoint is the requested apogee, recovered here
+conclusion-side.  Asserts nothing about attainability by itself. -/
+theorem turningQuadratic_nonneg_iff {hR : ScalingRegime}
+    (D : CoulombPairData hR) (hv : D.AnchoredValues) (hb : IsBoundMu boundMu)
+    {x : ℝ} (hx : 0 < x) :
+    0 ≤ D.turningQuadratic (x * bohrRadius) ↔ 100 ≤ x ∧ x ≤ 1600 / 9 := by
+  have hLpos : 0 < D.total_angular_momentum := by
+    rw [D.total_angular_momentum_eq, D.angular_momentum_per_particle]
+    exact mul_pos (by norm_num) (mul_pos (by norm_num [boundMu]) hR.hbar_pos)
+  have hscale : 0 < D.total_angular_momentum ^ 2 * (x * bohrRadius) ^ 2 /
+      (2 * D.reduced_mass * D.initial_separation ^ 2) :=
+    div_pos (mul_pos (sq_pos_of_pos hLpos)
+      (sq_pos_of_pos (mul_pos hx hR.bohrRadius_pos)))
+      (mul_pos (mul_pos (by norm_num) hv.reduced_mass_pos)
+        (sq_pos_of_pos hv.initial_separation_pos))
+  rw [D.turningQuadratic_normalized_eq hv hb hx, certified_factorization D x hx,
+    neg_mul, neg_nonneg]
+  set u : ℝ := 100 / x with hu
+  constructor
+  · intro h
+    have hp : (u - 1) * (u - 9 / 16) ≤ 0 := by
+      rcases mul_nonpos_iff.mp h with ⟨-, hp1⟩ | ⟨hs2, -⟩
+      · exact hp1
+      · exact absurd hs2 (not_le_of_gt hscale)
+    have hub : (9 : ℝ) / 16 ≤ u ∧ u ≤ 1 := by
+      rcases mul_nonpos_iff.mp hp with ⟨h1, h2⟩ | ⟨h1, h2⟩
+      · exfalso; linarith
+      · constructor <;> linarith
+    constructor
+    · rw [hu, div_le_iff₀ hx] at hub
+      linarith [hub.2]
+    · rw [hu, le_div_iff₀ hx] at hub
+      nlinarith [hub.1]
+  · rintro ⟨h1, h2⟩
+    have hub : (9 : ℝ) / 16 ≤ u ∧ u ≤ 1 := by
+      rw [hu, le_div_iff₀ hx, div_le_iff₀ hx]
+      constructor <;> nlinarith
+    exact mul_nonpos_of_nonneg_of_nonpos (le_of_lt hscale)
+      (mul_nonpos_of_nonpos_of_nonneg (by linarith [hub.2]) (by linarith [hub.1]))
+
+/-- Certified root cases for turning points (conclusion-side use of the
+recorded value): a positive `x` with `Q(x·a₀) = 0` is either `100` (the
+Fig.-1b periapsis) or `1600/9` (the apogee).  Bridge assembly of
+`CoulombPairData.turningQuadratic_normalized_eq` and
+`turning_root_cases`; no new physics content. -/
+theorem turningPoint_value_cases {hR : ScalingRegime} (D : CoulombPairData hR)
+    (hv : D.AnchoredValues) (hb : IsBoundMu boundMu) {x : ℝ} (hx : 0 < x)
+    (hroot : D.turningQuadratic (x * bohrRadius) = 0) :
+    x = 100 ∨ x = 1600 / 9 := by
+  rw [D.turningQuadratic_normalized_eq hv hb hx] at hroot
+  have hLpos : 0 < D.total_angular_momentum := by
+    rw [D.total_angular_momentum_eq, D.angular_momentum_per_particle]
+    exact mul_pos (by norm_num) (mul_pos (by norm_num [boundMu]) hR.hbar_pos)
+  have hscale : D.total_angular_momentum ^ 2 * (x * bohrRadius) ^ 2 /
+      (2 * D.reduced_mass * D.initial_separation ^ 2) ≠ 0 :=
+    div_ne_zero (mul_ne_zero (pow_ne_zero 2 (ne_of_gt hLpos))
+      (pow_ne_zero 2 (ne_of_gt (mul_pos hx hR.bohrRadius_pos))))
+      (mul_ne_zero (mul_ne_zero two_ne_zero (ne_of_gt hv.reduced_mass_pos))
+        (pow_ne_zero 2 (ne_of_gt hv.initial_separation_pos)))
+  rcases mul_eq_zero.mp hroot with h | h
+  · exact absurd h (neg_ne_zero.mpr hscale)
+  · exact turning_root_cases D hx h
+
+/-! ### Maximal separation: abstract carrier, elimination, target -/
+
+/-- Abstract carrier of “maximum separation attained along the bound
+orbit”: the greatest element of the attained-separation set.  Carries no
+numeric content by itself. -/
+def IsMaxSeparationAlongOrbit {hR : ScalingRegime} (D : CoulombPairData hR)
+    (r : ℝ) : Prop :=
+  IsGreatest D.attainedSeparations r
+
+/-- Elimination theorem for the abstract carrier: any attained separation
+is bounded above by a maximal one.  Gives later stages a reusable
+elimination principle on the formal meaning of “maximum separation”. -/
+theorem IsMaxSeparationAlongOrbit.elim {hR : ScalingRegime} {D : CoulombPairData hR}
+    {r r' : ℝ} (hmax : IsMaxSeparationAlongOrbit D r)
+    (hr' : r' ∈ D.attainedSeparations) : r' ≤ r :=
+  hmax.2 hr'
+
+/-- Support bound from the radial law, abstract-root form: given two
+positive ordered roots `x₁ < x₂` (units of `a₀`) together with the sign
+analysis that the region `Q ≤ 0` is contained in `[x₁, x₂]`, every
+attained separation lies in `[x₁·a₀, x₂·a₀]`.  The bridge hypothesis
+`hfact` records the sign analysis of the normalized monic quadratic with
+abstract roots; statement and conclusion mention only `x₁ x₂`, so no
+certified numeric root is presupposed here (the `1600/9` specialization
+happens conclusion-side in `orbitBound_T1_B1`). -/
+theorem attainedSeparations_subset_Icc_abstract {hR : ScalingRegime}
+    (D : CoulombPairData hR) {r : ℝ} (hr : r ∈ D.attainedSeparations)
+    {x₁ x₂ : ℝ} (_hx₁₂ : x₁ < x₂)
+    (hfact : ∀ x : ℝ, 0 < x →
+      0 ≤ D.turningQuadratic (x * bohrRadius) → x₁ ≤ x ∧ x ≤ x₂) :
+    x₁ * bohrRadius ≤ r ∧ r ≤ x₂ * bohrRadius := by
+  rcases hr with ⟨hr_pos, hrQ⟩
+  have ha := hR.bohrRadius_pos
+  obtain ⟨x, rfl : r = x * bohrRadius, hx⟩ : ∃ x : ℝ, r = x * bohrRadius ∧ 0 < x :=
+    ⟨r / bohrRadius, by field_simp, by positivity⟩
+  rcases hfact x hx hrQ with ⟨h1, h2⟩
+  constructor
+  · nlinarith [ha]
+  · nlinarith [ha]
+
+/-- Certified-root support bound (conclusion-side first use of the
+recorded value): in the `μ = 4` bound case every attained separation lies
+at or below `(1600/9)·a₀`, the upper certified turning-point root.  Proved
+by `attainedSeparations_subset_Icc_abstract` with the sign analysis
+discharged by the certified band `turningQuadratic_nonneg_iff` (itself
+pure algebra over the single value-computation bridge
+`CoulombPairData.turningQuadratic_normalized_eq`); it is NOT assumed by
+any other declaration. -/
+theorem orbitBound_T1_B1 {hR : ScalingRegime} (D : CoulombPairData hR)
+    (hv : D.AnchoredValues) (hb : IsBoundMu boundMu)
+    {r : ℝ} (hr : r ∈ D.attainedSeparations) :
+    r ≤ (1600 / 9) * bohrRadius :=
+  (D.attainedSeparations_subset_Icc_abstract hr (by norm_num : (100 : ℝ) < 1600 / 9)
+    fun x hx hQ => (D.turningQuadratic_nonneg_iff hv hb hx).mp hQ).2
+
+/-- Certified-root attainability (conclusion-side first use of the
+recorded value): the upper turning-point separation `(1600/9)·a₀` is
+realized along the bound orbit (the apogee of the elliptic motion of Hint
+2).  Proved from the backward direction of the certified band
+`turningQuadratic_nonneg_iff`: at `x = 1600/9` the band condition holds,
+so `0 ≤ Q((1600/9)·a₀)`, which together with positivity is exactly
+membership in `attainedSeparations`; it is NOT assumed by any other
+declaration. -/
+theorem apogee_attained_T1_B1 {hR : ScalingRegime} (D : CoulombPairData hR)
+    (hv : D.AnchoredValues) (hb : IsBoundMu boundMu) :
+    (1600 / 9) * bohrRadius ∈ D.attainedSeparations := by
+  refine ⟨mul_pos (by norm_num) hR.bohrRadius_pos, ?_⟩
+  exact (D.turningQuadratic_nonneg_iff hv hb (by norm_num : (0 : ℝ) < 1600 / 9)).mpr
+    ⟨by norm_num, le_refl _⟩
+
+/-- **Main target (T1-B1, 1.0 pt).**  Under the two-body Coulomb model of
+Fig. 1b with `μ = 4` (bound case), there exists a maximal attained
+separation between `e⁺` and `e⁻`, and its value is exactly
+`(1600/9)·a₀`.  The recorded official value first becomes *asserted as the
+answer* here, on the conclusion side: attainability (`apogee_attained_T1_B1`)
+and the certified support bound (`orbitBound_T1_B1`), whose conjunction is
+exactly the greatest-element statement, are conclusion-side lemmas proved
+from the governing laws — nothing in the hypothesis list mentions the
+value `1600/9`.  The proof combines `orbitBound_T1_B1`,
+`apogee_attained_T1_B1` and `IsMaxSeparationAlongOrbit`. -/
+theorem maximum_separation_T1_B1 {hR : ScalingRegime} (D : CoulombPairData hR)
+    (hv : D.AnchoredValues) (hb : IsBoundMu boundMu) :
+    ∃ r_max : ℝ,
+      IsMaxSeparationAlongOrbit D r_max ∧ r_max = (1600 / 9) * bohrRadius := by
+  refine ⟨(1600 / 9) * bohrRadius, ⟨⟨?_, ?_⟩, rfl⟩⟩
+  · exact apogee_attained_T1_B1 D hv hb
+  · intro r' hr'
+    exact orbitBound_T1_B1 D hv hb hr'
+
+/-- The numeric readout requested by the subquestion (“in terms of `a₀`”):
+the maximum separation in units of `a₀` is exactly `1600/9`.  Corollary
+form of `maximum_separation_T1_B1` with the division by `a₀ > 0` made
+explicit. -/
+theorem maximum_separation_in_bohr_radii_T1_B1 {hR : ScalingRegime}
+    (D : CoulombPairData hR)
+    (hv : D.AnchoredValues) (hb : IsBoundMu boundMu) :
+    ∃ x_max : ℝ,
+      IsMaxSeparationAlongOrbit D (x_max * bohrRadius) ∧ x_max = 1600 / 9 := by
+  exact ⟨1600 / 9,
+    ⟨apogee_attained_T1_B1 D hv hb, fun _ hr' => orbitBound_T1_B1 D hv hb hr'⟩, rfl⟩
+
+end
+
+end IPhO2026.Problem1.B1

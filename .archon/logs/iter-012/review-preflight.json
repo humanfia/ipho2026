@@ -1,0 +1,30 @@
+{
+  "iteration": 12,
+  "jobs": 2,
+  "duration_secs": 9.317,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 3,
+      "duration_secs": 4.969,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:159:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_B_2.lean:170:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_B_2.lean:201:8: warning: declaration uses `sorry`"
+    },
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 2,
+      "duration_secs": 9.312,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:179:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_C_7.lean:203:8: warning: declaration uses `sorry`"
+    }
+  ]
+}

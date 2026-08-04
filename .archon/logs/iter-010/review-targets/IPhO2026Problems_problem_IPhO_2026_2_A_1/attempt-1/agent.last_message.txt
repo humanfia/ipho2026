@@ -1,0 +1,13 @@
+Review complete for `IPhO2026Problems/problem_IPhO_2026_2_A_1.lean`. Both artifacts are durable on disk.
+
+**Verdict: solved** — all five review checks pass.
+
+- **Compilation**: preflight rc=0, 0 sorries, no axioms/admit/`native_decide`; only 5 `push_neg` deprecation style warnings (no semantic impact).
+- **Axiom audit**: prover trace `lean_verify` reports only `propext`, `Classical.choice`, `Quot.sound` — no `sorryAx`.
+- **Contract fidelity**: the `HalfCylindricalMirror` structure bundles only assumption-side physics (radius positivity, staircase symmetry/axial-ray value, threshold defining property, edge count, and the geometric reflection-count law with odd-multiple impact angles and rim impact counted). The recorded A.1 answer `x_N = R·cos(π/(2N+1)) = R·sin((2N−1)π/(4N+2))` appears strictly conclusion-side in `threshold_x_N_cos` (@IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:273), `threshold_x_N_sin` (:406), `threshold_x_N` (:411) — no answer-as-assumption, no weakening, signatures match the blueprint `\lean` targets.
+- **Proof honesty**: `threshold_x_N_cos` uses the threshold property in a by_contra squeeze with midpoint rays reparametrized via `arccos(y/R)`, cardinality bounds on the odd-multiple cut set, and cosine monotonicity; the sine form follows via `sin_pi_div_two_sub` on `(2N−1)π/(4N+2) = π/2 − π/(2N+1)`.
+- **Process note**: the supplied task-results list was empty, so the iter-010 prover trace (130 turns, ending with clean `lake env lean` exit 0 and `goals_after=[]`) was used as primary evidence — recorded as a process warning, not a semantic failure.
+
+**Artifacts written**
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_2_A_1/attempt-1/milestones.jsonl` (one JSON object line, validated)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_2_A_1/attempt-1/summary.md` (11 lines)

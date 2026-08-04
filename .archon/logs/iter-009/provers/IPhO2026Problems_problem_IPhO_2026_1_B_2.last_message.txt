@@ -1,0 +1,10 @@
+Lane complete. Summary:
+
+**Status**
+- `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean` compiles clean under fresh `lake env lean`: 0 errors, exactly 7 contracted `sorry` warnings (L319/353/376/421/443/502/535), no linter noise. Axioms are `propext`/`sorryAx`/`Classical.choice`/`Quot.sound` only — no escape hatches.
+- No statement edits: this lane is review-gate retry 2/3 with planner-frozen statements; per PROGRESS.md the deterministic review re-pass is the next consumer, and a self-initiated redraft would risk a third recorded-stale strike. The chapter already carries the iter-003 PhysLean-exemption NOTE that answers the gate's recorded stale reason.
+- `\leanok`: none added — zero `\leanok` occurrences exist project-wide (deterministic `sync_leanok` phase owns them; provers may not edit chapters).
+
+**Deliverable**
+- Wrote `.archon/task_results/problem_IPhO_2026_1_B_2.md` with the full required sections: assumption/target split, goal-faithfulness audit (the `-16.60` value is conclusion-side only), 9-entry bridge inventory (3 grounded/proved: `eccentricity_gt_one`, `asymptote_factor_certificate`, `signedDeflection_eq_neg_angle`; 7 encoded-sorry bridges), countermodel audit of the `Prop` interfaces, uncertainty (n/a — rounding-band convention, no source `±`) and Fig.-1b branch coverage, and the 37 pinned declarations.
+- One flag for the plan agent recorded in the report: PROGRESS.md's sorry ledger line "`1_B_2` 5" bundles the two main-target sorries; the authoritative compiler count is 7 per-declaration sorries.

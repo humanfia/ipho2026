@@ -1,0 +1,53 @@
+**A2 works** (only unused-variable warnings). **A2 claims a stronger minimality: E₀ ≤ E whenever Q(E) ≤ 0 and E > 0 — actually without even needing E > 0!** Wait — check: A2 proves E₀ ≤ E from Q(E) ≤ 0 alone (hE, hdU, hmc2 unused). Since Q(E) → +∞ as E → ±∞ and Q ≤ 0 only between the roots ✓ E between E₀ and E₁ ✓ E₀ ≤ E ✓. 
+
+Now assemble the full proofs. The chain is:
+
+
+```
+quad_characterization → (hE0pos, hq0, hmin)
+reachability: quad_hom_correct + sinsq→cossq conversion at t
+floor bound: quad at t: hQ : t E² − 6mc2 E + 6dU mc2 ≤ 0 [from quad_hom_correct]
+A2 at t (t ≥ 2 needed? no! A2 needs hS: 0 < t, hq0 needs the candidate root AT t — YES exists since hdisc at t, hE0le needs... hSlb: 2 ≤ t? NO — A2's hE0le is given explicitly: t·Ω(t) ≤ 3mc2. hE0le from B1 (needs t ≥ 2? B1's s' ≤ 3 → t Ω(t) ≤ 3 mc2 needed t any with 2dUt/(3mc2) ≤ 1 ✓ (hdisc) and 0 ≤ s' ✓. B1 didn't need t ≥ 2! Let me recheck B1: E₀ ≤ 3mc2/t from s' ≥ 0 and E₀ = 3mc2 s'/t. s' = 1 − σ ≥ 0 ✓ since σ ≤ 1 (needs 0 ≤ w ✓). So no t bound.) ✓
+E₀ ≥ dU: direct from hQ(E₀)=0, hE0pos: E₀ = dU + (tE₀² + kinetic)/(4m)... wait: hE0pos is ℏΩ(t) > 0 ✓. balance: E₀ = dU + ps/(4m) + qs/(2m), ps, qs ≥ 0 → E₀ ≥ dU. Need strict for floor argument? floor needs Eℏ < E₀min ≤ contradiction: Eℏ < dU or Eℏ ≥ dU. Non-strict E₀_min ≥ dU suffices ✓ (case split at dU).
+```
+
+Wait — for floor: E₀min = ℏ·Ω(t) with t = 3−2c̄² at floor's angle. A2 gives Ω(t-angle) ≤ Eℏ directly (Eℏ = ℏω > 0 ✓). So:
+```
+floor: ω < Ω(θ):
+  Eℏ = ℏω < ℏΩ(θ) [ℏ > 0 ✓].
+  witness at Eℏ: θℏ, c̄, t, hmom, heb.
+  → quad_hom_correct: Q_t(Eℏ) ≤ 0 where t = 3 − 2c̄²... 
+
+WAIT. quad_hom_correct gives Q[E] with factor s' := 3 − 2cθ² (i.e., the COS² form s' = 3 − 2cθ²). And A2 needs hq0 = Q at... the candidate root — which root? A2's S = t. The candidate root at factor t is Ω(t-as-factor) = 3mc2(1−√(1−2dU·t/(3mc2)))/(ℏ·t). quad_characterization supplies Q_t(ℏΩ(t)) = 0 ✓ and t·E₀ ≤ 3mc2 ✓ (B1). So A2: E₀(t) ≤ Eℏ. 
+
+But I need E₀(θ's S(θ)) ≤ Eℏ! The factor t = 3 − 2c̄² ≤ 3 − 2cos²θ = S(θ) — since c̄² ≤ cos²θ (|S_rel c̄ cosθ| = c̄ |cosθ| ≤ 1·|cosθ|... 
+
+hmm: |S_rel c̄ cosθ| = |c̄|·|cosθ| ≤ 1 ⟹ |c̄ cosθ| ≤ 1. So c̄² cos²θ ≤ 1. Need: c̄² ≤ cos²θ?? — NOT implied! cos²θ could be small (θ near π/2) with c̄² ≤ 1/cos²θ large... no wait c̄ ≤ 1 anyway (we can assume c̄ ∈ [−1,1] as slack). Then c̄² ≤ 1 BUT cos²θ could be < c̄²! E.g. θ = π/3 (cos²=1/4), c̄ = 1: t = 3−2 = 1 < S(θ) = 3−1/2 = 2.5 ✓ t ≤ S(θ). Bad case: θ = π/3 with c̄² vs cos²θ: c̄² ≤ 1, cos²θ = 1/4 — if c̄² = 1/2 > 1/4 = cos²θ?? Is that consistent with the geometric constraint |S_rel c̄ cosθ| = c̄|cosθ| ≤ 1? c̄² = 1/2, cos²θ = 1/4 → c̄|cosθ| = (1/√2)(1/2) ≈ 0.35 ≤ 1 ✓ consistent! So t = 3 − 2(1/2) = 2 > 3 − 2(1/4) = 2.5 = S(θ)?? 3−1 = 2 vs 3−0.5=2.5: t = 2 < 2.5 ✓ WAIT: c̄² = 1/2 gives t = 3−2·(1/2) = 2; S(θ) = 3−2cos²θ = 3−2(1/4) = 2.5. t = 2 ≤ 2.5 ✓ hmm t ≤ S(θ) ⟺ 3−2c̄² ≤ 3−2cos²θ ⟺ cos²θ ≤ c̄². We have c̄² = 1/2 ≥ 1/4 = cos²θ ✓. 
+
+Constraint: c̄²cos²θ ≤ 1 with cos²θ ≤ 1, c̄² ≤ ... no upper constraint! c̄ can be HUGE: c̄ = 100, cosθ = 0.001 → product 0.1 ≤ 1 ✓. Then t = 3−2·10⁴ very negative. Q_t then: tE²−6mc2E+6dU mc2 — for t < 0, Q_t opens DOWNWARD: Q_t ≤ 0 for E ≤ E₁' or E ≥ E₀' where E₀' ≤ E₁' roots... sign flips! Careful.
+
+Right — the angle between p and photon IS θ (given, ∈ [0,π]); c̄ is the cosine of the angle between ±p and the photon axis (any value with |S_rel c̄ cosθ| ≤ 1 — i.e., c̄ cosθ ∈ [−1,1]). Determinant-factor identity: ps − μ² = ps(1−c̄²cos²θ)/... ≥ 0 ✓ always. And the quadratic-implication forces factor t(ω) = (S + 2 c̄ cosθ·sign... t = S + 2 c̄ cosθ χ for the witness χ ∈ {±1} — since c̄ cosθ χ ∈ [−1, 1] (|c̄ cosθ χ| = |c̄ cosθ| ≤ 1 ✓): t = S + 2(c̄ cosθ χ) ∈ [S−2, S+2] = [1+2cos²θ−2, 1+2cos²θ+2] ⊂ [2cos²θ−1, 2cos²θ+3]. Since cos²θ ≥ 0: t ≥ −1 possible negative edge (θ = π/2: cosθ = 0: c̄ cosθ = 0 → t = S = 1 fine ✓). Actually c̄ cosθ χ ∈ [−1,1] ⟹ t = S + 2u, u ∈ [−1,1]: t ∈ [S−2, S+2]. Lower: S−2 = 2cos²θ−1 ≥ −1. t < 0 possible iff cos²θ < 1/2 and u near −1. Hmm — but if cosθ ≠ 0 then |u| = |c̄ cosθ| ≤ ... c̄ is |... arbitrary: constraint only u = c̄ cosθ χ ∈ [−1,1]. For a config with cosθ = 0.1 and u = −1: c̄ = 10, χ = −1: is this realizable geometrically?? μ = P c̄ cosθ = P·(10)(0.1) = P; and ps(1−...)... the residual norm² = ps(1 − (μ/√ps)²) = ps − μ² = ps − P²c̄²cos²θ — must be ≥ 0: c̄²cos²θ ≤ 1 required! c̄ = 10, cosθ = 0.1: c̄²cos²θ = 1 ✓ boundary. u = c̄cosθχ = −1. t = S−2 = 2(0.01)+1−2 = −0.98 < 0!! 
+
+Hmm: t = 3−2c̄²... NO WAIT. What is t again? Shit, I conflated t with s'. Restart cleanly:
+
+The quadratic-form in the WITNESS elimination (nofloorof): factor was s = 1 + 2(1−c̄²)? NO — that scratch experiment set cosθ = c̄ directly (over-simplified). Let me redo the REAL witness elimination:
+
+Real variables: E = pγ (I'm now writing E = photon momentum·c = ℏω/c·c = ℏω — YES E = pγc = ℏω ✓ same). ps = ‖p‖²·c², qs = ‖q‖²·c².
+
+Momentum: c²qs = E² + c²ps − 2·(pγc)·(√(c²ps))·(μ/‖p‖) = E² + c²ps − 2E·c√ps·cχ where cχ := μ/‖p‖ ∈ {+cosθ, −cosθ} (sign case χ, cχ² = cos²θ ✓). NOTE: no free c̄! The actual dot product is fixed by μ = ±‖p‖cosθ. 
+
+Energy: E = dU + ps/(4mc²)... i.e. E = dU + c²ps/(4 mc²)... let me restate with mc2 := mc²: energy: E = dU + (c²ps)/(4·mc2·(1/c²)...) — messy. Cleaner: energy: ℏω = dU + ‖p‖²/(4m) + ‖q‖²/(2m). Multiply by 4m·(1)... in E-units: E = ℏω: 4mE = 4mdU + ‖p‖² + 2‖q‖² (multiply by 4m)... wait ‖p‖²/(4m)·4m = ‖p‖² ✓. So 4mE = 4mdU + Np + 2Nq with Np = ‖p‖², Nq = ‖q‖². The momentum law: Nq = (ℏω/c)² + Np − 2(ℏω/c)√Np·cχ. Sub: E²/c² = (ℏω)²/c²·... define pγ = ℏω/c = E/c: Nq = E²/c² + Np − 2(E/c)√Np cχ. Multiply by c²: c²Nq = E² + c²Np − 2Ec√Np·cχ. Let ps = c²Np, qs = c²Nq?? then ps/(c²) = Np: ps := c²·Np, qs := c²·Nq: qs = E² + ps − 2Ec√Np cχ = E² + ps − 2E√(c²Np)cχ = E² + ps − 2E√ps·cχ ✓ (since c > 0: √(c²Np) = c√Np... hmm √ps = √(c²Np) = c√Np (c>0) ✓). And √ps = c‖p‖ ✓.
+
+Energy: 4mE = 4mdU + Np + 2Nq = 4mdU + ps/c² + 2qs/c². Multiply by c²: 4mc²E = 4mc²dU + ps + 2qs: 
+
+**4mc2·E = 4mc2·dU + ps + 2qs** ✓ (mc2 := mc²) — matches quad_hom_correct's heb form ✓ (1*E = dU + ps/(4mc2) + qs/(2mc2) ✓).
+
+Momentum: qs = E² + ps − 2E√ps·cχ with cχ² = cos²θ ✓.
+
+So the elimination is EXACTLY quad_hom_correct with cθ := cχ and no extra c̄: 
+Q[cχ] := (3 − 2cχ²)E² − 6mc2E + 6dU·mc2 = −(3√ps − 2E·cχ)²/2 ≤ 0 ✓✓ 
+and cχ² = cos²θ → (3−2cos²θ)E² − 6mc2 E + 6dU mc2 ≤ 0 ✓✓ — the factor is EXACTLY S(θ) = 1+2sin²θ = 3−2cos²θ!! 
+
+WONDERFUL — floor = quad_hom_correct at (cθ := cχ) + rewrite cχ² = cos²θ via mul_pow + A2. No t-transfer needed at all!!
+
+And A2 needs: 0 < S(θ) ✓ (S ≥ 1); hq0 := quad_char at factor t := S(θ) with hdisc at t = S(θ) — hdisc for floor: given "0 ≤ 1 − S"... **CONFIRM SIGNATURE**: floor's hypothesis hdisc. Need to read exact floor statement! Let me look at the remainder of the file.

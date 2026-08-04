@@ -1,0 +1,8 @@
+**2-b-2-aperture-coverage: COMPLETE** — `full_side_coverage` strengthened to `Set.Ioo (0:ℝ) p.R`; 0 errors, exactly 5 contracted sorries (L177/L186/L193/L201/L212, zero drift).
+
+- New sorries introduced: none
+- Divergences from directive: none — exactly the two requested edits (field interval + header doc prose `(0, a)` → `(0, R)`), no other declaration touched, no renames/deletions
+- No cascading breakage (no `AbsorbedRays` construction sites exist; files don't import each other)
+- Full report: `.archon/task_results/refactor-2-b-2-aperture-coverage.md`
+
+Note: this environment exposes `apply_patch` only via shell; the changes were applied successfully with it.

@@ -1,0 +1,11 @@
+Review complete. Both `milestones.jsonl` (single validated JSON line) and `summary.md` are durable on disk under `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_A_1/attempt-1/`.
+
+**Verdict: `blocked` / `needs_redraft`** (`redraft_kind: underdetermined_contract`) for `IPhO2026.Problem3.PartA1.paramagneticTorus_H_eq`.
+
+Key findings:
+- **Compile/honesty**: preflight passes with exactly 1 `sorry` (IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:579, in `fieldMagnitude_eq_meanRadius_form`); no axioms, admits, `native_decide`, or statement weakening. The main theorem states the official answer `H = N·I·A/V` faithfully.
+- **Root cause (independently confirmed)**: the law field `AmpereLawThinMeanPath.ampere_sum` sums the circulation over all N turns, so its proved consequence is `2πR·(N·H) = N·I`, which cancels to `2πR·H = I` — the goal `H = N·I/(2πR)` is semantically **false** as a consequence of the bundled laws (countermodel `2πR=2, N=2, H=1, I=2`, machine-verified by the prover via `norm_num`). The `sorry` step is exactly an invalid multiplication by N, so no tactic repair can close it — the amperian-law hypothesis must be redrafted to take the circulation once along the mean loop.
+- **What is sound**: Bridge 1, Bridges 3–4, and both target theorems (as transitivity assemblies) are proved honestly; the defect is localized to the spurious N-factor in the law field.
+- **Evidence**: iter-010 prover trace supports the claimed partial proof and records the redraft request; the newest flattened task-result artifact is missing from this workspace — recorded as a process warning, not a semantic failure.
+
+Exact repair is recorded in `next_steps`: restate the law as `(2πR)·HOf t₀ = Σ turnCurrents` (equivalently `2πR·H = N·I`), after which Bridges 2–4 and both target theorems close unchanged.

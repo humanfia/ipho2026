@@ -1,0 +1,14 @@
+Work is verified clean — done.
+
+**Final verification (leandag, chapter-scoped):**
+- `conflicts: []`, `unknown_uses: []`, zero unmatched `IPhO2026_1_C_2.*` declarations
+- Zero isolated nodes in `IPhO2026Problems_problem_IPhO_2026_1_C_2`; begin/end environments balanced
+
+**What changed** (only the assigned chapter + report):
+- `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_C_2.tex:145` — new `\subsection*{Threshold calibration and the $\pi/6$ official value}` with the 8 blocks in directive order: `C2CalibratedData` → `hbarOmegaMin` → `angular_factor_at_pi_div_six` → `hbarOmegaMinAtPiDivSix` → `hbarOmegaMin_at_pi_div_six` → `ThresholdRealizable` → `excess_photon_energy_at_threshold` → `excess_photon_energy_pi_div_six_form`, each with `\label`, exact `\lean{IPhO2026_1_C_2.<name>}` pins, real `\uses{}` edges (reusing the iter-008 structure labels), 1–3 line statements, and tactic-free proof sketches.
+- `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_C_2.tex:45` — `thm:physics:IPhO_2026_1_C_2:target` gained `\uses{thm:…:excess_photon_energy_pi_div_six_form}`.
+- All prior content (source paragraphs, structure ledger, exemption NOTE, existing `\lean` pins) untouched; the recorded `2.03e-11 eV` stays conclusion-side only.
+- Report written to `.archon/task_results/blueprint-writer-1-c-2-rest.md` (Status: COMPLETE).
+
+1-c-2-rest: COMPLETE — all 8 remaining live Lean declarations of `IPhO2026_1_C_2` transcribed into the chapter with matched pins; leandag-clean.
+Report: `.archon/task_results/blueprint-writer-1-c-2-rest.md`

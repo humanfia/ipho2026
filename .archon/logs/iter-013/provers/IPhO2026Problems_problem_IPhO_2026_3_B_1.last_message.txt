@@ -1,0 +1,13 @@
+All 7 sorries in `IPhO2026Problems/problem_IPhO_2026_3_B_1.lean` are closed — the file compiles fresh with **0 errors, 0 warnings, 0 sorries**.
+
+**What was proved**
+- Bridge chain: `magnetization_deriv` (EOS solution + `HasDerivAt.const_mul`), `workOnDensity_eq_linear` (`ring`), `workOnDensity_contDiff` (`contDiff_const.mul contDiff_id`), `q_in_eq_neg_integral` (first-law leg at `(0,H)` + calibration), `q_in_deriv` (FTC-1 via `intervalIntegral.integral_hasDerivAt_right`), `leg_work_integral_eval` (`integral_const_mul` + `integral_id` + `field_simp` with `hV`/`hT`).
+- Target `isothermal_heat_into_torus`: rewrites both endpoints through the bridge lemmas and closes by `ring`, deriving the official answer `Q = -(μ₀ n K / (2T))(H_f² - H_i²)` from the first law, EOS, and A.3 work law — no hypothesis stated the closed form.
+
+**Honesty checks**
+- Signature discipline: every edit is strictly after `:= by`; no statement, hypothesis, or name was touched. The lane-start file was byte-identical to the iter-013 snapshot.
+- `#print axioms` on all 8 named theorems/lemmas reports only `[propext, Classical.choice, Quot.sound]` — no `sorryAx`, axioms, `admit`, or `native_decide`.
+
+**Bookkeeping**
+- Added `\leanok` to the 9 proved lemma/theorem environments in `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_B_1.tex` (definitions left to the deterministic sync, matching sibling lanes).
+- Full report at `.archon/task_results/problem_IPhO_2026_3_B_1.md`. One cosmetic note recorded there: the header docstring still claims bodies are `by sorry` — flagged for polish rather than edited under signature discipline.

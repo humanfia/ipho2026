@@ -1,0 +1,13 @@
+Done. The `4_A_5` compile blocker is repaired and the file now compiles clean by-sorry.
+
+**Root cause (two stacked issues, both in comment syntax — no statement code touched)**
+- Three doc comments contained the literal ASCII `+/-` in `beta0 = 0.0034 +/- 0.0007 K^-1`; a character-level scan confirmed each `+/-` line opens a nested block comment that swallows the enclosing `-/`, leaving three comments unclosed → the `351:0: unterminated comment` error that hid `beta0_uncertainty_bound` and both `end`s. Replaced with `±`.
+- The file header used the Lean-3 style `/-!` opener, which this toolchain (Lean4 + module system) treats as a declaration doc comment, illegal before `import` (`47:0: invalid 'import' command`). Reproduced with a 4-line minimal file; sibling files use plain `/-`. Changed the opener only.
+
+**Verification**: fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_4_A_5.lean` → exit 0, zero errors, exactly the 10 intended `declaration uses sorry` warnings.
+
+**Files touched**
+- `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:1` and three comment lines (24, 256, 324) — comment tokens only.
+- `.archon/task_results/problem_IPhO_2026_4_A_5.md` — full assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit, and grounding log (incl. the `IdealGas.ideal_gas_law` near-miss note: PhysLean's law fixes `R = 1` dimensionlessly, so the local `IsIdealGasLaw` with free decalibrated `R` per the A.4 note stays).
+
+The gate keeps `4_A_5` enrolled at 0/3 as planned; eligible for the post-repair review pass and `\leanok` sync.

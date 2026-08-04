@@ -1,0 +1,6 @@
+Repair complete. Summary:
+
+- **Fix**: `hbarOmegaMin_at_pi_div_six` at `IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:248` — after `unfold …; rw [hf]`, the residual goal was `x/(3/2) = 1/(3/2) * x` (pure field normalization), closed with one added `ring` line at `IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:253`. No statement changed; the two intended `by sorry` targets (`excess_photon_energy_at_threshold`, `excess_photon_energy_pi_div_six_form`) remain untouched.
+- **Verification**: `lake env lean` exits 0 with only the two expected `declaration uses sorry` warnings plus two pre-existing unused-variable infos. Diff vs the iter-002 baseline snapshot is exactly the one `ring` line.
+- **Incident handled**: the file was briefly zeroed by a malformed `sed` mid-session; restored byte-identically from `.archon/logs/iter-002/snapshots/.../baseline.lean` before applying the fix, then re-verified.
+- **Result file**: `.archon/task_results/problem_IPhO_2026_1_C_2.md` records the assumption/target split, goal-faithfulness audit, bridge obligations, countermodel audit, and uncertainty/branch coverage.

@@ -1,0 +1,14 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict**: `status=partial`, `route=retry_proof`, `redraft_kind=not_applicable` for `IPhO2026_2_B_2.power_ratio_in_terms_of_theta_max`.
+
+**Key findings**
+- **Contract is sound**: the iter-011 two-sided-band redraft resolves the iter-010 `underdetermined_contract` — `P/P₀ = 2·yOff/(2a) = 1/(1−cos θ_max)` is genuinely derivable from the structured hypotheses (`PowerBudget`, `B1Calibration`, `ThetaMaxSpec`) and matches the recorded official answer.
+- **Failure is mechanistic**: preflight shows `compiles=false`, `sorry_count=5` (target theorem plus the four chain lemmas), and the attempted `abs_hitOffset_eq` fails at `279:4` — the Parseval identity `(v·e)²+(v·n)² = ‖v‖²` is handed to `linarith`/`nlinarith` without a ring-normal-form hypothesis, plus downstream abs/sqrt rewrite misses (`295:8`, `309:8`) and an unproven field normalization (`299:69`).
+- **Trace evidence**: the iter-013 prover session (294 events) ended on a HTTP 429 rate-limit abort mid-repair, before the patched Parseval block was ever recompiled — a budget interruption, recorded as contributing cause, not `blocked_infrastructure`. No matching task-results artifact exists (`[]`); flagged as process warning only.
+
+Written files:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/attempt-1/milestones.jsonl` (single valid JSON line)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/attempt-1/summary.md`
+
+`next_steps` in the milestones file gives an exact repair recipe (explicit ring-expanded Parseval hypothesis, `sq_abs` rewrite ordering, `field_simp`+`ring` for the division identity, and the four sorry discharges via `csSup_Ioo`/`csInf_Ioo`, band monotonicity, and the double-angle identity).

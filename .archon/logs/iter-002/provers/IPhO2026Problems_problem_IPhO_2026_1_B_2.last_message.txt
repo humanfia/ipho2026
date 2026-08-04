@@ -1,0 +1,10 @@
+Done. `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean` redrafted from the 42-line stub into a full 547-line physics formalization; `lake env lean` exits 0 with only the 7 intended `sorry` warnings.
+
+**What was built** (all under `namespace IPhO2026.Problem1.B2`, `import Mathlib` only):
+- **Scenario structure**: `CoulombScatteringData` — trajectory-based (`sep : ℝ → EuclideanSpace ℝ (Fin 2)`), with 12 governing-law fields as equations (Newton–Coulomb `newton_relative_law`, bracket-form angular-momentum conservation, multiplied-out radial-energy identity, periapsis condition, two-body reduction laws) and Fig.-1b readouts (`r₀ = 100·a₀`, per-particle angular momentum `μℏ` at `μ = 15/2`).
+- **Orientation/branch preserved hypothesis-side**: `initial_transverse : perp sep0 v0 = +r₀·v₀` (oriented readout; sign-consistency with the AM law documented), rolling branch `direction_toward_pair : perp u0 u_inf ≤ 0` inside `IsAsymptoticRelativeVelocity`, whose core is a genuine `Filter.Tendsto (deriv S.sep) atTop (nhds u.vec)` limit — so `u_inf` is a defined concept with existence as a sorry-backed theorem, not an assumption.
+- **Derivable hints as bridges**: `total_energy_pos`, `eccentricity_sq_eq : eps² = 67/4`, `orbit_eq_conic` (Hint 2, physical branch), `signed_deflection_eq_formula : angle = π − 2·arctan(1/√(eps²−1))` — all `by sorry` proof obligations, never fields.
+- **Conclusion-side targets**: `signed_deflection_angle_T1_B2` (`∃ u δ, IsAsymptoticRelativeVelocity S u ∧ δ = signedDeflection u ∧ δ = -(π − 2·arctan(2/√63)) ∧ roundsToOfficialDegrees (deg δ)` with honest `±0.005°` rounding interval around `-16.60°`) and the magnitude corollary; `16.60` appears nowhere else.
+- **Proved certificates** (no sorry): `eccentricity_gt_one`, `turningQuadratic_periapsis`, `asymptote_factor_certificate`, `signedDeflection_eq_neg_angle`, plus small definitional lemmas.
+
+Task result with the full assumption/target split, 8-entry derivability inventory, countermodel audit, and grounding log written to `.archon/task_results/problem_IPhO_2026_1_B_2.md:1`. Blueprint chapter already exists; `\leanok` left to the deterministic sync as instructed.

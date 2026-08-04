@@ -1,0 +1,68 @@
+Wait — the equation has `sin θ` on the RHS only. That means `div_eq_div_iff` here has signature `a/b = c/d ↔ a*d = c*b`, and the goal `R*(1-cosθ) = 1*(2R sinθ (1-cosθ))`... after normalization: RHS `2·R·sinθ·(1-cosθ)` normalizes to `2 R sinθ - 2 R sinθ cosθ` i.e. `-(p.R * cos θ * sin θ * 2) + p.R * sin θ * 2`. And LHS `R - R cosθ`. These are NOT equal as polynomials — indeed `R(1-cosθ) ≠ 2R sinθ (1-cosθ)` in general!
+
+So `div_eq_div_iff` gave `a*d = c*b` with `a = p.R`, `d = 1 - cos θ`, `c = 1`, `b = 2*p.R*sin θ*(1-cosθ)` → `R(1-cosθ) = 1·(2R sinθ (1-cosθ))`. That's wrong... wait that means the original equation `R/(2R sinθ(1-cosθ)) = 1/(1-cosθ)` requires `R(1-cosθ) = 2R sinθ(1-cosθ)`?? NO — cross multiply: `a/b = c/d ↔ a·d = c·b`: `R·(1-cosθ) = 1·(2R sinθ (1-cosθ))` — that's only true if `1 = 2 sinθ`... That's false!
+
+Hold on. I made an error. `R/(2R sinθ (1-cosθ)) = 1/(1-cosθ)` cross-multiplied is `R(1-cosθ) = 2R sinθ(1-cosθ)`, which is NOT the right cross-multiplication... wait yes it is: `a/b = c/d ⟺ ad = cb` where `b = 2R sinθ(1-cosθ)`, `d = (1-cosθ)`. So `a·d = R·(1-cosθ)` and `c·b = 1·2R sinθ(1-cosθ)`. Hmm, that says the original equation equals `R(1-cosθ) = 2R sinθ(1-cosθ)`. That's FALSE in general!
+
+WAIT. Am I confusing myself? Let me redo the algebra by hand.
+
+`h2a : 2a = 2R sinθ (1 - cosθ)`.
+
+Goal: `R/(2a) = 1/(1-cosθ)`.
+
+Substituting: `R/(2R sinθ (1-cosθ)) = 1/(1-cosθ)`.
+
+LHS: cancel `R`: `1/(2 sinθ (1-cosθ))`. So goal reduces to `1/(2 sinθ (1-cosθ)) = 1/(1-cosθ)`?? That's only true if `2 sinθ = 1`!!!
+
+SOMETHING IS WRONG. Let me recheck the physics algebra.
+
+B.1: `a = R sinθ − (R/2) sin(2θ)`. With `sin(2θ) = 2 sinθ cosθ`:
+`2a = 2R sinθ − R · 2 sinθ cosθ = 2R sinθ (1 − cosθ)`. ✓
+
+Recorded answer: `P/P₀ = 1/(1 − cos θ_max)`. And `P/P₀ = R/(2a)`.
+
+So `R/(2a) = 1/(1−cosθ)` requires `2a = R(1−cosθ)`. But we derived `2a = 2R sinθ(1−cosθ)`. These agree iff `2 sinθ = 1`, i.e. `θ = π/6`.
+
+Interesting! So the official IPhO answer must actually involve a specific θ_max = π/6? Or the recorded answer in the blueprint is `1/(1−cos θ_max)` where... Hmm. Actually wait — maybe the recorded answer is wrong in my reading. Let me re-check the blueprint: "Recorded answer/context. P/P₀ = 1/(1 - cos(theta_max))." Hmm.
+
+Hmm, but for the actual IPhO 2026 T2 problem... The mirror is a half-cylinder with aperture 2R, container at R/2 offset. θ_max is the maximum incidence angle. If the tangent ray (grazing the container edge) has θ_max with `sin θ_max`... Actually, maybe in the real problem θ_max is a FIXED geometric value determined by the configuration (e.g., the tangent geometry gives θ_max = π/6), and B.2 asks to express P/P₀ in terms of θ_max — interestingly the answer 1/(1−cosθ_max) would then equal a number.
+
+Wait, if θ_max were π/6: `a = R/2 − (R/2)(sin π/3) = R/2 − R√3/4 ≈ 0.067R`. And `1/(1−cos(π/6)) = 1/(1−√3/2) ≈ 7.46`. And `R/(2a) = R/(0.134R) ≈ 7.46`. ✓ consistent!
+
+So mathematically, `R/(2a) = 1/(1−cosθ)` given `2a = 2R sinθ(1−cosθ)` holds ONLY when `2 sinθ(1−cosθ) = (1−cosθ)·... ` hmm no. Let me redo: `R/(2a) = 1/(1−cosθ)` ⟺ `2a = R(1−cosθ)` ⟺ `2R sinθ(1−cosθ) = R(1−cosθ)` ⟺ `2 sinθ = 1` (since `1−cosθ ≠ 0`).
+
+So the identity is genuinely NOT derivable from the B.1 calibration alone unless `sin θ = 1/2`. Something is off with the recorded answer or the formalization's algebra.
+
+Hmm wait, let me recheck the actual physics. Maybe the official answer is `P/P₀ = 1/(1−cos θ_max) · something`... Or maybe the official answer is expressed differently: perhaps `P/P₀ = 2 sin θ_max / ... ` Hmm.
+
+Actually let me reconsider: maybe the B.1 relation is different: "a = R sin θ_max − (R/2) sin(2 θ_max)" — maybe θ_max is determined implicitly by another relation too (e.g. geometry of the tangent ray: the maximal ray is tangent to the container). And B.2's answer `P/P₀ = 1/(1−cos θ_max)` might be an expression that uses BOTH the calibration AND an additional constraint that pins `θ_max` such that `2 sin θ_max = 1`... no wait, that would make P/P₀ a pure number.
+
+Hmm, alternatively maybe I have the width ratio wrong: `P/P₀ = collectedWidth/(2a)` with collectedWidth = R. Let me sanity check with physics: the half-cylinder mirror has aperture 2R; sunlight along the axis. Rays on the container's side (impact parameters 0..R) reflect onto the container. So the mirror collects power ∝ R (per unit length). Without mirror, container receives ∝ 2a (its diameter). So P/P₀ = R/(2a). ✓.
+
+Now with a ≈: from the figure, the container is small. With the above numbers R/(2a) ≈ 7.46.
+
+Now `1/(1−cosθ_max)` with θ_max the max incidence angle. Incidence angle at mirror point m: angle between −e and the normal (m−C)/R. For the tangent ray at the container's edge: The impact parameter at tangent ≈ a(something)... For small a, tangent ray hits the mirror near where the container is, at angle near... The max incidence angle: rays arriving at impact parameter y hit mirror at angle θ with ⟨m−C, e⟩ = ... From the geometry: incoming ray direction −e hits circle at point m; incidence angle θ satisfies `⟨m−C, e⟩ = R cos θ` (for rays hitting the side facing the sun). Impact parameter relates to sinθ etc.
+
+From B.1, presumably θ_max satisfies a = R sinθ_max − R/2 sin2θ_max. For small a, θ_max is small?? Then a ≈ R θ_max − R θ_max = small... Expand: sinθ ≈ θ, sin2θ ≈ 2θ: a ≈ Rθ − Rθ = 0 to first order; second order: sinθ ≈ θ − θ³/6, sin2θ ≈ 2θ − 4θ³/3: a ≈ R(θ − θ³/6) − (R/2)(2θ − 4θ³/3) = Rθ − Rθ³/6 − Rθ + (2Rθ³/3) = Rθ³/2. So θ_max ≈ (2a/R)^{1/3} small. Then 1/(1−cosθ_max) ≈ 2/θ_max² — huge, ≠ R/(2a). CONTRADICTION with the recorded answer.
+
+So the recorded answer `1/(1−cos θ_max)` can't literally be right with the actual θ_max... UNLESS the official answer is expressed in terms of a different angle convention. E.g., maybe official: P/P₀ = 1/(1 − cos θ_max)... Hmm with θ_max the largest incidence angle over rays striking the container. If the geometry gives tan or sin relationship... 
+
+Hmm, let me look at the actual IPhO 2026 problem. This is IPhO 2026 (Colombia?) T2 "Solar Cooker". I recall the actual answer structure might be P/P₀ = 1/(1−cosθ_max)?? Let me test with θ_max = π/6 giving a = R/2 − R√3/4 ≈ 0.067R and ratio ≈ 7.46 both ways. Hmm! Interesting coincidence? Let me verify whether B.1's relation at θ=π/6: `a = R·(1/2) − (R/2)·sin(π/3) = R/2 − (R/2)(√3/2) = R/2 − R√3/4 ≈ 0.067R`. And `2a = 2R sinθ(1−cosθ) = 2R(1/2)(1−√3/2) = R(1−√3/2)`. So `R/(2a) = 1/(1−√3/2) = 1/(1−cos(π/6))`. YES SO AT θ=π/6 BOTH EXPRESSIONS AGREE.
+
+So indeed the derivation `2a = 2R sinθ(1−cosθ)` at θ=π/6: is θ_max actually π/6? Hmm, but B.1 says "Given a = α sin θ_max + β sin 2θ_max, determine α and β" — it's a general identity in θ_max, not pinning θ_max. But maybe there IS an additional physical relation in the actual problem pinning θ_max: the max incidence angle occurs for the ray tangent to the container, and reflection geometry at tangent gives... In fact, for the extreme ray that just grazes the container and was reflected — hmm, or maybe the extreme ray is the one arriving at the mirror EDGE (impact parameter R, the rim of the half-cylinder), giving incidence angle... The ray at the mirror rim: m − C = R·(direction to rim). Rim of half cylinder: ⟨m−C,e⟩ = 0! So incidence angle at rim = arccos(0) = π/2. Hmm, that's grazing.
+
+Actually maybe θ_max is determined by requiring the reflected ray from the rim to pass through the container, giving a relation like `1 = 2 sin θ_max`. If `sin θ_max = 1/2`, θ_max = π/6. That would be an additional hidden constraint making the recorded answer self-consistent.
+
+Given the inconsistency: our formalized statement `radius_over_diameter_eq` claims `R/(2a) = 1/(1−cosθ)` from `2a = R sinθ − ...`. As shown, this is equivalent (given R>0, 1−cosθ≠0) to `2 sinθ = 1`. So the statement AS STATED is FALSE for generic θ. E.g. θ = π/4: a = R(√2/2) − (R/2)·1 ≈ 0.207R; check: R/(2a) = 1/(2·0.207) = 2.414; 1/(1−cos(π/4)) = 1/(1−0.707) = 3.414. NOT EQUAL. So the statement is FALSE.
+
+Hmm wait — but the review passed this file and the prover instructions say the statement is the contract; if not provable, record a redraft request. But hold on — maybe I should double-check the recorded official answer. Perhaps the official answer is `P/P₀ = 1/(1 − cos θ_max)` is genuinely the official answer, and the actual θ_max is CONSTRAINED (the problem may ask first in a previous subpart to find θ_max = 30°). Let me check the problem structure: Part B.1: "Given a = α sin θ_max + β sin 2θ_max, determine α and β in terms of R." Part B.2: "Express P/P₀ in terms of θ_max."
+
+Hmm, so θ_max appears as a free symbol. If the answer `1/(1−cosθ_max)` is right officially, then the B.1 calibration plus freedom of θ_max should imply it. But we showed it doesn't for arbitrary θ. UNLESS θ_max is not arbitrary: θ_max is defined by the geometry (the largest incidence angle among container-striking rays) — an implicit constraint linking θ_max, a, R beyond B.1. Specifically, the ray realizing θ_max is tangent to the container, giving an additional equation. In fact maybe the official solution: the extreme ray is tangent to the container; geometry yields after reflection the tangent condition gives `sin θ_max` relation `a = R sinθ − R/2 sin2θ` (B.1) — that IS the tangent condition. And there's ONE θ solving it for given a... For a given small a, θ_max ≈ (2a/R)^{1/3} small, and the identity `R/(2a) = 1/(1−cosθ_max)` says `a ≈ θ²/4·R/... ` let me verify numerically with small a: a = 0.001R. Solve θ: R sinθ − (R/2) sin2θ = 0.001R → small θ: Rθ³/2 = 0.001R → θ³ = 0.002 → θ ≈ 0.126. Then 1/(1−cos0.126) ≈ 1/(0.00792) ≈ 126.3. And R/(2a) = 500. NOT EQUAL. So official answer 1/(1−cosθ_max) cannot be the right formula in terms of θ_max with this calibration!! Something's off: perhaps the recorded "answer/context" in the blueprint is actually incorrect, OR θ_max has a different meaning.
+
+Alternatively maybe official answer: P/P₀ = 1/(1−cosθ_max) where θ_max is the angle subtended... Actually, maybe let's derive the real thing: P/P₀ = R/(2a) where 2a = 2R sinθ_max(1−cosθ_max)... wait 2a = 2R sinθ(1−cosθ) → R/(2a) = 1/(2 sinθ_max (1−cosθ_max)). Hmm. If official answer were `1/(2 sinθ_max(1−cosθ_max))`... My numeric check: θ=0.126: 2·0.1257·0.00792 ≈ 0.00199 → 1/0.00199 ≈ 502 ✓ matches 500. So the correct expression is `R/(2a) = 1/(2 sinθ_max (1 − cosθ_max))`.
+
+Hmm interesting. So the recorded answer in the blueprint "P/P₀ = 1/(1−cos θ_max)" is likely WRONG (or θ convention differs). But the theorem statement `radius_over_diameter_eq` is simply false as a mathematical statement (for θ=π/4 e.g., take p with R=1, a = sin(π/4) − (1/2)sin(π/2) = 0.707−0.5 = 0.207 > 0; valid CookerParams). Then R/(2a) = 2.414 ≠ 1/(1−0.707)=3.414. So the lemma is FALSE. I cannot prove a false statement honestly.
+
+Wait — but hold on. Let me double check the actual IPhO 2026 T2 B.2 answer. Let me search references/ in the project.
+
+Actually, important: the problem says "Express the power ratio P/P₀ in terms of θ_max." Perhaps the official answer is indeed `1/(1 − cos θ_max)` and the B.1 relation I have is differently written. Let me check the reports directory for this problem's source.

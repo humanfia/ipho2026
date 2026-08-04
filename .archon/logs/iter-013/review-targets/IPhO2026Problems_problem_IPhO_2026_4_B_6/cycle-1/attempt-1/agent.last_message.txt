@@ -1,0 +1,12 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict: solved.** The iter-11 formalization redraft repaired the iter-10 `underdetermined_contract` finding:
+
+- **Contract fix** (`problem_IPhO_2026_4_B_6.lean:312`): the new data-readout hypothesis `Lv_reported_central_eq : Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue` pins the previously free reported scalar, eliminating the countermodel `central = 10000`. This matches the blueprint proof sketch, which computes the reported value *as* `Qᵥ/M₀` — a data-presupposition, not the target conclusion.
+- **Honest proof**: preflight confirms rc 0, `sorry_count` 0, no admit/axiom laundering; only an unused-`input` linter warning. The band conjunct closes via `rw [withinUncertainty, Lv_reported_central_eq]`, `abs_le`, `norm_num` (|39/18.0e-3 − 2190| ≈ 23.3 ≤ 110); the conversion relation `IsSpecificLatentHeatOf` remains a genuine conclusion with `rfl` conversion equation.
+- **Semantics**: units (kJ/mol, kg/mol, kJ/kg), opaque wrappers, official answer 2190 ± 110 kJ/kg all faithful; `Lᵥ = Qᵥ/M₀` never assumed.
+- **Caveat (non-blocking)**: the iter-013 prover trace ends with a stale 1-sorry baseline summary, superseded by the landed redraft the supplied preflight actually measured; no matching task-result artifact exists — recorded as a process warning in the evidence, not a proof defect.
+
+Files written:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/cycle-1/attempt-1/milestones.jsonl` (1 validated JSON line)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/cycle-1/attempt-1/summary.md` (12 lines)

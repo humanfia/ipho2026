@@ -1,0 +1,11 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: solved / route=solved** for `IPhO2026.Problem3.C4.c4_elapsed_time`.
+
+- **Compilation**: preflight rc=0, `sorry_count: 0`, no diagnostics; `rg` confirms only two stale doc-comment mentions of `sorry` (cosmetic, no code-level escape hatches).
+- **Contract preserved**: the theorem concludes exactly the official answer `t = (C_c·T_h/P)·(ln(T_0/T) − (T_0−T)/T_h)`, purely conclusion-side; hypotheses bundle only `RegimeAssumptions`, `IsCoolingRun` (Carnot ratio product form, first law, constant-power density, calorimetry) and the operational accumulation hypothesis.
+- **Iter-10 blocker resolved**: `heatDumpedDensity_eq` and `residenceDensity_eq` now take `RegimeAssumptions` over `Ioo tempFinal tempInitial`, so `T' > 0` and `P > 0` exclude the earlier countermodels; both are honestly proved.
+- **Proof route**: a.e. congruence off the two endpoints → FTC evaluation (`integral_inv`, `integral_one`) with `0 ∉ [T,T_0]` → `field_simp` to the answer form.
+- **Trace**: iter-013 prover `session_end` corroborates (0 sorries, standard axioms only); the on-disk task result at `.archon/task_results/problem_IPhO_2026_3_C_4.md` agrees. The empty task-result list in the prompt payload was noted as a process note only.
+
+Files written: `attempt-1/milestones.jsonl` (one validated JSON record) and `attempt-1/summary.md` (10 lines).

@@ -1,0 +1,14 @@
+Done. The autoformalization of IPhO 2026 T1-B.1 is complete and verified.
+
+**What was produced**
+- `IPhO2026Problems/problem_IPhO_2026_1_B_1.lean` — compiling by-sorry formalization (exit 0, exactly 4 expected `sorry` warnings, no other diagnostics).
+- `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_B_1.tex` — target theorem `\label{thm:physics:IPhO_2026_1_B_1:target}` marked `\leanok`.
+- `.archon/task_results/problem_IPhO_2026_1_B_1.md` — full audit report.
+
+**Modeling highlights**
+- Governing laws live in `CoulombPairData` (`IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:141`): reduced mass `μ_red = m/2`, per-particle angular momentum `mv₀(r₀/2) = μℏ`, total `L = 2μℏ`, kinetic reduction `2·½mv₀² = ½μ_redv_rel²`, Coulomb law `U(r) = −ke²/r`, effective radial law (`Q(r) ≤ 0` on attained separations), and the turning-point condition at `r₀ = 100a₀`.
+- Constants (`m, ℏ, k, e, a₀`) are opaque scalars with `ScalingRegime` carrying `a₀ = ℏ²/(kme²)` — no alias collapse, nothing unfolds to the answer.
+- Targets `maximum_separation_T1_B1` / `..._in_bohr_radii_T1_B1` assert `r_max = (1600/9)·a₀` conclusion-side only; bridges (`certified_factorization`, `turning_root_cases`, `attainedSeparations_subset_Icc`, `IsMaxSeparationAlongOrbit.elim`) are proved pure algebra or premise-exposing lemmas with explicit remaining obligations.
+- No uncertainty in source (N/A); bound branch covered via `IsBoundMu` (strict `E < 0` criterion, `μ² < 50` after `bohr_radius_def`).
+
+**Sorry inventory (4):** `boundMu_isBound` (final arithmetic), `turningQuadratic_eq_zero_iff` (rescaling algebra), and the two main targets (attainability + `IsGreatest` assembly) — all honest gaps for the prover stage, with partial proofs kept in place.

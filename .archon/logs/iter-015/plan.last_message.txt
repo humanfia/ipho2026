@@ -1,0 +1,9 @@
+Plan sidecar written. Bounded pass over the 4 supplied excerpts is complete at `.archon/iter/iter-015/plan.md:1`.
+
+**What the plan contains**
+- `2_C_4` (retry 2/3): namespace repair for the `𝓝`/`𝓝[≥]` elaboration failure (add `open Topology Filter` or qualify), replacement of the false `hdecomp` `ring`-division detour at L220 with the honest second-order decomposition `cos θ - 1 + θ²/2 = o(θ²)` + `(sin θ - θ)(sin θ + θ) = o(θ²)`, and the `IsEquivalent` rpow assembly via `sin θ ≥ 0` on the branch. Flagged that the existing `ring` remainder identity algebraically cannot produce the recalled quadratic — the prover must restructure rather than patch.
+- `1_C_1` (retry 1/3): drop the redundant `ring` after goal-closing `field_simp` (L330), clear denominators before `subst` so the validated `linear_combination (S·(3mc²))·hsq3` certificate fires (L337), plus the reachability witness construction and `Q(E) ≤ 0` upper-bound assembly for the two main threshold sorries.
+- `2_B_2` (retry 1/3): Parseval `nlinarith` certificate fix (pass `sq_nonneg (g.e 0 * g.n 1 - g.e 1 * g.n 0)`, not the irrelevant `g.e 0 - g.n 1` hints), `csSup_Ioo`/`csInf_Ioo` route for the width lemma, B.1 double-angle cancellation for the ratio bridge.
+- `2_C_2` (retry 1/3): restore-or-neutralize the dangling `branch_denominators_ne_zero` doc block at L177-182 (git archaeology first), then balance `end` scopes; proofs themselves already complete with 0 sorries.
+
+**Blueprint chapters**: no strategy defects found in any of the four `.tex` excerpts — all defects are Lean proof-layer, so no listed-chapter edits were made.

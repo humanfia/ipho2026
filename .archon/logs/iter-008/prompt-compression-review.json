@@ -1,0 +1,20 @@
+{
+  "role": "review",
+  "enabled": true,
+  "changed": true,
+  "original_chars": 40449,
+  "compressed_chars": 38373,
+  "omitted_chars": 2076,
+  "target_chars": 40000,
+  "section_chars": 1290,
+  "created_at": "2026-07-28T01:57:49Z",
+  "sections": [
+    {
+      "title": "Workflow guidance from active subagents",
+      "original_chars": 3415,
+      "compressed_chars": 1339,
+      "omitted_chars": 2076,
+      "omitted_lines": 36
+    }
+  ]
+}

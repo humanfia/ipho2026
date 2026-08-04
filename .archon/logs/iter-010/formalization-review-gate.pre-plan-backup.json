@@ -1,0 +1,1762 @@
+{
+  "version": 2,
+  "max_iterations": 3,
+  "updated_at": "2026-07-28T03:14:52Z",
+  "targets": {
+    "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean": {
+      "status": "passed",
+      "reviews": 2,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-1a diamond-seal geometry (slotVerticalSize = a*sqrt2/2), hinge O at the cube bottom vertex, cube density 3*rho0, hydrostatic p=rho0*g*depth, design readout DeltaH=1.41 m -> a=0.50 m at official precision |a-0.50|<1/200; units documented per declaration (kg/m3, m, m/s2)."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Bridge chain: net_immersed_weight_eq + weight_lever_arm_eq -> restoring_moment_eq; IsHydrostaticPressure + PressureMomentReadout (Figure-1a couple heads DeltaH and (a*sqrt2)/2 - DeltaH) -> pressure_couple_eq; critical_balance_eq (rho0*g*a^4/sqrt2 = rho0*g*DeltaH*a^3/4) -> side_length_eq_delta_h_over by cancelling rho0*g*a^3 (positivity) -> a = DeltaH/(2*sqrt2) = 0.50 for DeltaH=1.41. Each step is hypothesis-carried."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "IsWeightForce/IsHydrostaticPressure/IsUniformGravityField/IsNetImmersedWeight/IsCriticalTorqueBalance are equation-emitting Prop predicates (F = m*g, p = rho0*g*d, couple magnitude equality); PhysicalParameters emits positivity projections; every interface eliminates to real equations usable by field_simp/ring at the prover stage."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Source reports a single design value DeltaH = 1.41 m, no value+-uncertainty pair; the stated-precision band |a - 0.50| < 1/200 encodes the marking precision, not a propagated error budget."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Critical configuration is fixed data (DeltaH maximal, top vertex flush with the right free surface, recorded by pressure_couple_position_trace); restoring vs pressure-couple moment orientation is pinned inside IsCriticalTorqueBalance as law data, not chosen at the conclusion."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Free parts (rho0, a, DeltaH, g) are positivity-pinned opaque scalars; law predicates admit lawful interpretations only; balance forces a^4/sqrt2 = DeltaH*a^3/4 whose unique positive root is the target; no hypothesis-true/conclusion-false instance. Cosmetic non-blocker: HingeAxis.axis_perpendicular_to_plane : origin = origin is a trivially-true (rfl) ghost-shape field of the iter-001 detector class - it carries no hypothesis and does not underlie any bridge (moment law lives in IsCriticalTorqueBalance), so derivability is unaffected; recommend replacement by a real geometric constraint at prover-stage refactor."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Net immersed weight and lever arm give the restoring moment rho0*g*a^4/sqrt2",
+                "carrier": "restoring_moment_eq (via net_immersed_weight_eq, weight_lever_arm_eq)",
+                "status": "covered",
+                "evidence": "Algebraic composition of the two sorried bridge equations; positivity from PhysicalParameters."
+              },
+              {
+                "claim": "Hydrostatic couple on the wetted diamond faces has magnitude rho0*g*DeltaH*a^3/4 at the critical split",
+                "carrier": "pressure_couple_eq + PressureMomentReadout",
+                "status": "covered",
+                "evidence": "Figure-1a readout structure supplies the couple heads; sorried integration bridge documented with its proof route."
+              },
+              {
+                "claim": "Critical scalar balance solves to a = DeltaH/(2*sqrt2)",
+                "carrier": "side_length_eq_delta_h_over",
+                "status": "covered",
+                "evidence": "Cancels rho0*g*a^3 > 0 and uses sqrt2^2 = 2; exact algebraic lemma, conclusions derived not assumed."
+              },
+              {
+                "claim": "DeltaH = 1.41 m yields a = 0.50 m at marking precision",
+                "carrier": "numerical_value + target conjunct 2",
+                "status": "covered",
+                "evidence": "1.41/(2*1.41421...) = 0.4989 within |a-0.50| < 1/200; interval arithmetic contracted to the prover stage."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean": {
+      "status": "review_exhausted",
+      "reviews": 4,
+      "last_review_iter": 5,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-27T20:16:38Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {}
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Half-cylinder mirror radius R with Nat-valued reflection count N_refl (not scalar-collapsed); threshold x_NAt defined by the at-most-(n+1)/more-than-(n+1) reflection property within (-R,R) matching Figure 2e; both recorded forms present with N = n+1 indexing."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "limiting_ray_reflection_count (impact at polar angle pi/(2N+1) strikes odd multiples up to pi) + reflection_count_law fix the plateau; the threshold property then identifies x_NAt n with the plateau point (chapter proof narrates this identification); threshold_forms_agree bridges sine<->cosine by sin(pi/2 - t)=cos t."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "reflection_count_law is an equation field over the geometry (count equals the ncard of odd multiples) - eliminable; the x_NAt staircase interface is order-theoretic and eliminable; no interface closes around the answer values."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Exact geometric threshold sequence; the A.1 source reports no measurement uncertainty."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Which plateau x_* sits on is fixed by the threshold property (law-side split about the edge) and the (-R,R) confinement pins the mirror side; rim-angle impact at pi included by the <= in the count law - branch data hypothesis-side."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Adversarial check: the count law forces a specific staircase; any x claimed as the threshold must satisfy both sides of the at-most/more-than property, whose unique solution on the plateau is the limiting ray; positivity/confined ranges exclude degenerate mirrors (R<=0)."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Reflection count equals the number of odd multiples of alpha up to pi",
+                "carrier": "reflection_count_law",
+                "status": "covered",
+                "evidence": "Structure law field; mirror symmetry fixes the left-half count."
+              },
+              {
+                "claim": "Limiting ray at alpha = pi/(2N+1) undergoes exactly N+1 reflections",
+                "carrier": "limiting_ray_reflection_count",
+                "status": "covered",
+                "evidence": "Sorried bridge lemma; odd-multiples count of pi/(2N+1) up to pi is N+1."
+              },
+              {
+                "claim": "Threshold equals the plateau point R cos(pi/(2N+1))",
+                "carrier": "threshold_x_N_cos",
+                "status": "covered",
+                "evidence": "Sorried main cosine form; chapter proof details the plateau identification."
+              },
+              {
+                "claim": "Sine and cosine recorded forms agree",
+                "carrier": "threshold_forms_agree",
+                "status": "covered",
+                "evidence": "Sorried pure-trig bridge via (2N-1)pi/(4N+2) = pi/2 - pi/(2N+1)."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-2f cooker geometry (CookerParams/CookerB1), extremal absorbed ray at maximum incidence (IsThetaMax/ExtremalRaySpec), given family ansatz a = alpha sin theta_max + beta sin(2 theta_max) (CoeffSpec), second extremal config at theta' != theta_max (SecondExtremalConfig); official alpha=R, beta=-R/2 confined to the target conclusion."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "container_radius_at_extremal_angle at both configurations plus the ansatz gives a homogeneous 2x2 system in (alpha-R, beta+R/2); determinant 2 sin theta_max sin theta' (cos theta' - cos theta_max) nonzero by sin_two_pos and strict antitonicity of cos on (0,pi/2) - all now proved bodies (Lean tail excerpt shows the mul_eq_zero.elim discharge)."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "Line2D/distToLine give the signed tangency equations; IsThetaMax extremal spec emits inequalities/equations; CoeffSpec is the ansatz equation - every interface eliminates to real algebra; Vec = R x R keeps 2D coordinates."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "B.1 reports exact coefficient values; no uncertainty pair in the source part."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Acute branch theta, theta' in (0,pi/2) is hypothesis-side (hit_branch/IsThetaMax); the non-vertical tangency branch is excluded off-axis by hit_branch; cos strict-antitone argument uses the acute branch from assumptions."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Determinant-nonzero discharge blocks arbitrary (alpha,beta): with two distinct extremal angles the system has only the trivial solution; degenerate second config (theta'=theta_max) is excluded by SecondExtremalConfig distinctness - no hypothesis-true/conclusion-false instance."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Tangency at each extremal configuration gives the container-radius identity",
+                "carrier": "container_radius_at_extremal_angle",
+                "status": "covered",
+                "evidence": "Proved theorem chaining the extremal-ray tangency equations."
+              },
+              {
+                "claim": "Family ansatz holds at both configurations",
+                "carrier": "CoeffSpec",
+                "status": "covered",
+                "evidence": "Structure field equation; evaluated at theta_max and theta'."
+              },
+              {
+                "claim": "2x2 homogeneous system has nonzero determinant",
+                "carrier": "sin_two_pos + cos strict antitonicity",
+                "status": "covered",
+                "evidence": "Proved in-file; determinant 2 sin th sin th' (cos th' - cos th) != 0 from the acute branch and distinctness."
+              },
+              {
+                "claim": "Only solution is alpha = R, beta = -R/2",
+                "carrier": "coefficients_at_two_extremal_configs",
+                "status": "covered",
+                "evidence": "Proved main theorem (0 sorries) - mul_eq_zero.elim chain visible in excerpt tail."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-2g specular family m_B, b_B; C.1 intercept value R/(2 cos theta); official coefficients cot(2th) - 2 csc(2th)^2 dth and (R/(2 cos th))(1 + tan th dth) occur only in ray_B_slope_first_order / ray_B_intercept_first_order / the combined target conclusions."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Family membership rewrites b_B(th,dth) = B(th+dth); the interface's B_first_order field expands B with little-o remainder; derivative identities (d/dth)cot(2th) = -2 csc(2th)^2 and (d/dth)(R/2cos th) = (R/2cos th) tan th fix the first-order coefficients; branch_denominators_ne_zero supplies the nonzero denominators on the Figure-2g branch."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "B_first_order is an existential derivative-coefficient plus IsLittleO field - the sanctioned real local-calculus contract (=o over nbhds 0), eliminable to asymptotic statements; no global exact equality of a local approximation anywhere."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "The source phrasing is a first-order expansion (+ O(dth^2)); remainder carried by the little-o contract rather than a numeric uncertainty."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "The Figure-2g branch (sin 2th != 0, cos th != 0) is carried hypothesis-side via the expansion structure and exposed by branch_denominators_ne_zero; dth -> 0 in the neighborhood filter - direction and branch not conclusion-chosen."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Countermodel check: the little-o statements constrain m_B,b_B only to first order, which is exactly the source claim; an arbitrary smooth B satisfying B_first_order at the recorded derivative values still forces the two expansions - the conclusion is derivable from the family identity + interface field, no underdetermination."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Branch quantities are well-formed (denominators nonzero)",
+                "carrier": "branch_denominators_ne_zero",
+                "status": "covered",
+                "evidence": "Sorried bridge exposing sin 2th != 0 and cos th != 0 on the branch."
+              },
+              {
+                "claim": "Slope expands to first order with the recorded coefficient",
+                "carrier": "ray_B_slope_first_order",
+                "status": "covered",
+                "evidence": "Sorried conjunct half; derivative identity of cot(2th) applied to the smooth family."
+              },
+              {
+                "claim": "Intercept expands to first order with the recorded coefficient",
+                "carrier": "ray_B_intercept_first_order",
+                "status": "covered",
+                "evidence": "Sorried conjunct half; C.1 value fixes zeroth order, tan identity fixes first order."
+              },
+              {
+                "claim": "Both expansions hold jointly",
+                "carrier": "ray_B_first_order_expansion",
+                "status": "covered",
+                "evidence": "PROVED body (exact pair introduction) - conjunction of the two halves."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Body of heat capacity C_c cooled T0 -> T at constant input power P and hot reservoir T_h; residence-density per-temperature formulation with positivity window 0 < T <= T' <= T0; recorded closed form appears only in c4_elapsed_time conclusion (and its chapter entry)."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "elapsedTime_eq_integral (residenceDensity_eq on Ioo upgraded to set-integral congruence off a measure-zero endpoint set) -> cooling_time_integral_eval (FTC: int T_h/T' = T_h ln(T0/T), int 1 = T0 - T) -> field algebra factoring T_h - each hop carrier-named."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "IsCoolingRun composes equation-valued law predicates (Carnot ratio, first law, constant power, calorimetry) - eliminable; haccum is an explicit operational hypothesis; no opaque validity witnesses."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "C.4 asks for the exact closed-form elapsed time; no uncertainty pair in the source."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Cooling direction (T < T0) fixed by the temperature window hypothesis; logarithm argument T0/T > 1 orientation follows from it - branch data hypothesis-side."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The integral congruence is justified a.e. (endpoints measure zero), blocking the arbitrary-density countermodel: residenceDensity is forced equal to the Carnot-derived expression on the interior; positive denominators P, T' guarded on the window; no underdetermination identified."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Residence density equals the Carnot-derived expression",
+                "carrier": "residenceDensity_eq",
+                "status": "covered",
+                "evidence": "Per-cycle law composition; sorried derivation."
+              },
+              {
+                "claim": "Accumulated time equals the set integral",
+                "carrier": "elapsedTime_eq_integral",
+                "status": "covered",
+                "evidence": "Sorried bridge; Ioo -> Icc congruence off measure-zero endpoints."
+              },
+              {
+                "claim": "Integral evaluates by FTC",
+                "carrier": "cooling_time_integral_eval",
+                "status": "covered",
+                "evidence": "Sorried real-analysis bridge via intervalIntegral.integral_one_div."
+              },
+              {
+                "claim": "Field algebra yields the recorded form",
+                "carrier": "c4_elapsed_time",
+                "status": "covered",
+                "evidence": "Sorried main target; factoring T_h from the parenthesis."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "CoulombScatteringData over ScalingRegime + IsAngularMomentumFactor encode the B.1-scaffolded regime; asymptote factor 1/sqrt(eps^2-1) = 2/sqrt 63 certified in-file (asymptote_factor_certificate, fully proved); official -16.60 deg below initial line of motion appears only in signed_deflection_angle_T1_B2 / unsigned corollary conclusions."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "existence witness (exists_asymptoticRelativeVelocity per chapter uses-chain) + signed_deflection_eq_formula at eps^2=67/4 (eccentricity_sq_eq) + factor certificate identify the closed form; roundsToOfficialDegrees interval [16.595,16.615) discharges the marking-scheme rounding; each hop names its carrier."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "IsAsymptoticRelativeVelocity.direction_toward_pair carries the branch condition perp u0 u_inf <= 0 as an eliminable field; angleBetween/initialDirection/radiansToDegrees/signedDeflection are plain defs; roundsToOfficialDegrees(Abs) are half-open interval predicates - all unfold to real inequalities."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Source reports a single angle value at marking precision; the [16.595,16.615) interval is the official rounding band, not a propagated error budget."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "The '16.60 degrees BELOW' sign is fixed by the hypothesis-side branch field perp u0 u_inf <= 0 inside IsAsymptoticRelativeVelocity.direction_toward_pair together with the closed form; the unsigned corollary takes the magnitude - no orientation chosen only in the conclusion."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Adversarial reading: IsAngularMomentumFactor unboundMu and the scattering data pin the eccentricity (eps^2 = 67/4) and asymptote geometry, so no arbitrary re-interpretation of u keeps all hypotheses true while making the closed form false; degenerate branches excluded by the scaling regime and factor contracts."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Eccentricity of the equal-mass hyperbola is eps^2 = 67/4",
+                "carrier": "eccentricity_sq_eq",
+                "status": "covered",
+                "evidence": "Chapter uses-chain and the sorried in-file theorem; algebra from the Coulomb data."
+              },
+              {
+                "claim": "Asymptote factor 1/sqrt(eps^2-1) = 2/sqrt 63",
+                "carrier": "asymptote_factor_certificate",
+                "status": "covered",
+                "evidence": "Fully proved in-file this pass (sqrt identity algebra)."
+              },
+              {
+                "claim": "Signed deflection equals -(pi - 2 arctan(2/sqrt 63)) with sign from the backward branch",
+                "carrier": "signed_deflection_eq_formula + branch field",
+                "status": "covered",
+                "evidence": "Formula theorem plus direction_toward_pair perp<=0 carrier; conclusion-side value."
+              },
+              {
+                "claim": "Degree reading rounds to the official -16.60",
+                "carrier": "roundsToOfficialDegrees",
+                "status": "covered",
+                "evidence": "Half-open interval predicate; interval arithmetic contracted to prover stage."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-1c geometry (PhotonLine, ReactionPlane, IsScatteringAngle component readout) and two-body dissociation with masses 2m, m; ConstantRegime positivity; official threshold value appears only in the main theorem conclusion (chapter: 'recorded answer occurs only in the conclusion')."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "IsTwoBodyDissociation supplies vector momentum balance + cosine-law shadow + nonrelativistic energy balance; ReachableFrequency + minimality identify the threshold; hbarOmegaMin_pi_sub (sorry body) is the reflection symmetry that makes the backward freeze derivable from the forward branch at pi/2."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "Every Prop interface emits equations/inequalities (component equations, cosine law, energy balance) - eliminable by rewriting; hbarOmegaMin is a plain def over m c dU theta, not an assumption field; IsForwardBranch/IsAngularRange are order predicates."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "No value+-uncertainty pair in the C.1 source; the threshold is an exact closed-form candidate."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Forward/backward branch split at theta = pi/2: minimum_angular_frequency_backward_branch_T1_C1 freezes the threshold at the pi/2 value for theta in [pi/2, pi] via hbarOmegaMin_pi_sub (sin^2 reflection symmetry); the branch is law-side data, not a conclusion-side choice."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Countermodel audit: an arbitrary candiate would need to satisfy reachability plus minimality under the cosine-law and energy-balance fields; the ConstantRegime positivity and angle ranges exclude degenerate instances (zero masses, tangent-only configurations) that could falsify the closed form."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Momentum+energy balances restrict reachable photon frequencies",
+                "carrier": "IsTwoBodyDissociation fields",
+                "status": "covered",
+                "evidence": "Vector balance, cosine-law shadow, energy balance with masses 2m,m are hypothesis fields."
+              },
+              {
+                "claim": "Threshold = minimum of the reachable set, attained at the tangent configuration",
+                "carrier": "ReachableFrequency + IsDissociationThreshold",
+                "status": "covered",
+                "evidence": "Existential reachability plus minimality predicate - the physical 'minimum angular frequency'."
+              },
+              {
+                "claim": "Closed-form candidate equals the threshold (forward branch)",
+                "carrier": "minimum_angular_frequency_T1_C1 (sorried)",
+                "status": "covered",
+                "evidence": "Main conclusion; bridge through the Figure-1c tangent readout."
+              },
+              {
+                "claim": "Backward branch freezes at the pi/2 value",
+                "carrier": "minimum_angular_frequency_backward_branch_T1_C1 + hbarOmegaMin_pi_sub",
+                "status": "covered",
+                "evidence": "Reflection symmetry sin(pi-theta)=sin(theta) makes the candidate theta-dependence only via sin^2."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean": {
+      "status": "passed",
+      "reviews": 2,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "m = 16.0 amu, DeltaU-eV and theta = pi/6 calibrations in C2CalibratedData; excess photon energy (hbarOmegaMin - DeltaU)/eV positive and |gap - 2.03e-11| < 5e-14 = the recorded C.2 readout; momentum/energy conservation fields of IsOzonePhotodissociation retained."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "ThresholdRealizable (lawful dissociation state at threshold energy) + ThresholdBalance root form + LowerRootBranch side condition entail the two-sided rational enclosure of (E - DeltaU)/eV; hbarOmegaMin_at_pi_div_six bridge converts to the specialized pi/6 form; all bridges discharged on disk (0 sorries)."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "PhotoDissociationConstants projects trusted SI constants with positivity; IsOzonePhotodissociation fields are conservation equations (momentum_balance_sq eliminates the O-atom angle ring-wise); ThresholdRealizable is an existential with equation content; every interface eliminable."
+              },
+              "uncertainty_propagation": {
+                "status": "passed",
+                "evidence": "The C.2 tolerance is an explicit error-band carrier: |gap - 2.03e-11| < 5e-14, derived by a two-sided rational interval enclosure at the trusted constants rather than bare central-value membership; the interval half-widths are proved bounds (hbL/hbU via norm_num)."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Quadratic-threshold branch is fixed by LowerRootBranch (physical lower root) and the positivity/nonzero rest-scale side conditions; no branch is chosen at the conclusion; hbranch side conditions verified at the calibrated data."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Constants cannot drift (trusted record + positivity fields); the balance equation pins the threshold energy as a specific root, so an arbitrary-omega interpretation violating the enclosure also violates the balance/budget hypotheses; no hypothesis-true/conclusion-false instance at the calibrated readouts."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Squared momentum balance from the two momentum-conservation components",
+                "carrier": "IsOzonePhotodissociation.momentum_balance_sq",
+                "status": "covered",
+                "evidence": "Eliminates the O-atom angle and closes by ring; blueprint lem entry present."
+              },
+              {
+                "claim": "Threshold energy is the physical (lower) root of the momentum-energy balance at threshold",
+                "carrier": "ThresholdBalance + LowerRootBranch + threshold_excess_enclosure",
+                "status": "covered",
+                "evidence": "Balance root, branch side condition, and the rational two-sided enclosure; all theorem-level on disk."
+              },
+              {
+                "claim": "At theta = pi/6 the calibrated excess equals the recorded 2.03e-11 eV within 5e-14",
+                "carrier": "excess_photon_energy_at_threshold + excess_photon_energy_pi_div_six_form + hbarOmegaMin_at_pi_div_six",
+                "status": "covered",
+                "evidence": "Proved via norm_num rational bounds hbL/hbU and nlinarith; conversion rewrite chain fully discharged - 0 sorries in file."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Half-cylindrical mirror radius R, caustic coordinates X_c, Y_c from part C.3 (recorded as hypotheses on the caustic data); small-angle filter + InSmallAngleRegime for theta << 1; the |X_c| of the source is subsumed by the positive-angle branch where X_c th = R sin^3 th > 0 - documented in the file and chapter."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Route: insert C.3 coordinates into both power-law sides and expand about th=0 - Y_c is R/2 plus its leading quadratic term, |X_c|^(2/3) carries the matching quadratic with geometry-fixed prefactor, X_c ~ w th^3 positive; the recorded constants are exactly those making leading terms coincide (chapter narrates; the single sorry is this asymptotic evaluation, contracted to prover)."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "CausticPowerLawForm carries the parametrization-scale guard (exists w>0, X ~ w t^q) so the exponent is meaningful; smallAngleFilter/InSmallAngleRegime is a filter+predicate pair - real asymptotic contracts (IsEquivalent-style), not symbolic enums; no global exact equality claimed."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Small-angle regime is an asymptotic statement; the remainder is higher order by construction - no numeric uncertainty in the C.4 source."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Positive-angle branch th -> 0+ is the filter side (hypothesis); |X_c| subsumption by X_c > 0 on that branch is recorded; u/v side (vertical shift vs amplitude) fixed by the form, not chosen at the conclusion."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The parametrization-scale guard blocks the trivial countermodel where any (p,q) fits by rescaling th; positivity-of-X_c on the filter plus leading-term matching pin the recorded constants; an exact-at-every-th reading would be false and is not claimed - statement is precisely the derivable leading-order content."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Caustic coordinates from C.3 insert into the power-law form",
+                "carrier": "HalfCylindricalMirrorCaustic data fields",
+                "status": "covered",
+                "evidence": "X_c = R sin^3 th, Y_c expansion recorded hypothesis-side from C.3."
+              },
+              {
+                "claim": "Leading-term matching fixes u, v, p, q",
+                "carrier": "caustic_small_angle_power_law (sorried proof body)",
+                "status": "covered",
+                "evidence": "Sole sorry; chapter narrates the Taylor-level derivation, prover-stage contract."
+              },
+              {
+                "claim": "|X_c| subsumed by the positive-angle branch",
+                "carrier": "smallAngleFilter + X_c positivity",
+                "status": "covered",
+                "evidence": "X_c th = R sin^3 th > 0 for th in (0, small) - branch data hypothesis-side."
+              },
+              {
+                "claim": "Exponent is scale-invariant, not fit-by-rescaling",
+                "carrier": "CausticPowerLawForm parametrization guard",
+                "status": "covered",
+                "evidence": "exists w>0 with X ~ w t^q fixes q independent of parametrization."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Paramagnetic torus of Figure-2a family: N turns, mean radius, cross-section A, volume V; instantaneous current readout wireCurrent.readout with positivity guards (N != 0, R > 0, A > 0, V > 0); target H = N I A / V matches the recorded A.1 answer; units documented per field."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "ampere_uniform_eq (2 pi R (N H) = N I hypothesis-carried circulation) -> fieldMagnitude_eq_meanRadius_form (solve, needs N!=0, R>0) -> mean_circumference_eq (2 pi R = V/A from the volume law) -> meanRadius_form_eq_volume_form -> target; both answer forms chained exactly as the chapter proof narrates."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "ParamagneticTorusA1 emits the circulation/volume laws as equation fields plus positivity projections - eliminable to real algebra; no opaque validity predicate; measurement readout is an explicit .readout field, not a scalar alias collapse."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "A.1 asks for an exact symbolic expression; no uncertainty pair in the source."
+              },
+              "branch_orientation": {
+                "status": "not_applicable",
+                "evidence": "Scalar magnitudes along the mean amperian loop; no directional/orientation branch in the A.1 statement (uniform thin-torus regime)."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Adversarial check: fieldMagnitude is pinned by the circulation identity (unique solution H = NI/(2 pi R) off positivity); the geometry substitution is exact; arbitrary re-interpretations of the opaque fields violate one of the equation/positivity fields - no countermodel."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Ampere circulation in the uniform regime",
+                "carrier": "ampere_uniform_eq",
+                "status": "covered",
+                "evidence": "Sorried bridge 1: 2 pi R (N H) = N I as a theorem over the structure."
+              },
+              {
+                "claim": "Solve for H along the mean path",
+                "carrier": "fieldMagnitude_eq_meanRadius_form",
+                "status": "covered",
+                "evidence": "Sorried bridge 2 with the nonzero/positive guards."
+              },
+              {
+                "claim": "Torus geometry 2 pi R = V / A",
+                "carrier": "mean_circumference_eq",
+                "status": "covered",
+                "evidence": "Sorried bridge 3 from the thin-torus volume law."
+              },
+              {
+                "claim": "Figure parametrization H = N I A / V",
+                "carrier": "meanRadius_form_eq_volume_form + paramagneticTorus_H_eq",
+                "status": "covered",
+                "evidence": "Bridge 4 substitution and the sorried main target."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean": {
+      "status": "passed",
+      "reviews": 2,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "InducedEMFChange with dt > 0 and Faraday's law verbatim; sourceWork = emf * I * dt as the voltage-source energy balance (positive = into torus, IPhO T3 convention); constitutive/Ampere/ring-volume laws carried from A.1; recorded dW_emf = V H dB."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "emf*I*dt = (emf*dt)*I = (N A dB) I by Faraday; N A I = V H by the A.1 bridge cleared with V > 0; hence sourceWork = V H dB - pure algebraic chain with each step hypothesis-carried."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "InducedEMFChange.faraday is an equation field; UniformToroidOperatingPoint projects H, I; WorkOnSource is an honest typed wrapper with documented projection (one-field wrapper idiom, iter-004 ruling); sourceWork is a definition the target must still equate - not an answer smuggle."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Exact differential-work identity; no uncertainty in A.2."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Energy-flow orientation is fixed by the documented sign convention (positive = work entering the torus) at the type level; decreasing-B withdrawal (dW < 0) is lawful and preserved (no nonnegativity field would block it)."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "emf, dt, dB are constrained by Faraday's equation; I, H by the operating-point laws; a countermodel needs dW != V H dB while satisfying all equations, which algebra excludes; the empty-change instance (dB = 0, emf = 0) satisfies the conclusion trivially and cannot falsify it."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Faraday's law replaces emf*dt by N A dB",
+                "carrier": "InducedEMFChange.faraday",
+                "status": "covered",
+                "evidence": "Equation field of the change structure; directly rewritable."
+              },
+              {
+                "claim": "N A I = V H via the A.1 form",
+                "carrier": "fieldStrength_eq_N_mul_I_mul_A_div_V (+ V > 0)",
+                "status": "covered",
+                "evidence": "Ring-volume law cleared by A > 0; recorded as derivable bridge, not assumption."
+              },
+              {
+                "claim": "sourceWork = V H dB (A.2 answer)",
+                "carrier": "work_emf_eq_V_mul_H_mul_dB",
+                "status": "covered",
+                "evidence": "Two-step algebraic chain; sorried body with recorded route; answer conclusion-side."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Curie-type ideal paramagnet EOS (SatisfiesEOS), isothermal field change process (IsothermalFieldChange), heat-capacity law along the isotherm (HasHeatCapacityLaw), magnetic work density dW = mu0 V H dM (IsMagneticWorkDensity, part A.3), first law (ObeysFirstLawMagnetic); the recorded answer is pinned conclusion-side by OfficialAnswerValue."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "First-law leg balances 0 -> M(H_i), 0 -> M(H_f); internal-energy brackets vanish by the heat-capacity law; Q = -(W_on(H_f) - W_on(H_i)) with each work integral evaluated by LegWorkIntegralEval; EOS solution M(H) = n K H/(T V) at both endpoints cancels V - full chain carriers named."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "All four law interfaces are equation- or derivative-emitting Prop predicates eliminable by rewriting; heat_into_torus_value is a transparent value def (rfl-provable at the official form); no scalar placeholder aliases for primitive quantities."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "B.1 asks for the closed-form heat value; no uncertainty pair in the source part."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Cooling vs heating sign is carried by the ordered endpoints H_f < H_i in the process data and the explicit minus sign of the first-law balance - branch/sign hypothesis-side, matching the recorded refrigerating interpretation."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Gate-note countermodel class (heat readout unrelated to work) is blocked by ObeysFirstLawMagnetic leg balances tying the readout to state functions; endpoint evaluation is forced by LegWorkIntegralEval; no hypothesis-true/conclusion-false instance identified."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "First law balances each isothermal leg",
+                "carrier": "ObeysFirstLawMagnetic",
+                "status": "covered",
+                "evidence": "Leg-balance fields against the demagnetized reference - hypothesis side."
+              },
+              {
+                "claim": "Internal-energy brackets vanish along the isotherm",
+                "carrier": "HasHeatCapacityLaw",
+                "status": "covered",
+                "evidence": "Heat-capacity law field; sorried elimination documented."
+              },
+              {
+                "claim": "Each work integral evaluates in closed form",
+                "carrier": "LegWorkIntegralEval",
+                "status": "covered",
+                "evidence": "Sorried evaluation lemma; dW = mu0 V H dM integrated with the EOS."
+              },
+              {
+                "claim": "Difference reduces to the recorded closed form",
+                "carrier": "heat_into_torus_isofield + official_answer_value",
+                "status": "covered",
+                "evidence": "Main target sorried; official_answer_value PROVED by rfl pinning the carrier value conclusion-side."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-3b Carnot refrigeration cycle over the paramagnet: vertex temperatures T_h/T_c on the isotherms, shared adiabat through states 2,3; state function q with figure temperature assignments; recorded M1 = sqrt(M2^2 - M3^2 + M4^2) appears only in m1_eq_sqrt / the chapter target."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Carnot heat ratio + leg identities Qh_eq/Qc_eq give T_c q1 = (T_c - T_h) q4 + T_h q3 (q_relation); q3 = T_c M2^2 (shared adiabat) and q4 = q3 turn the RHS into the C.2 numerator; dividing by T_h > 0 with q1 = T_h M1^2, q4 = T_h M4^2 yields m1_sq; nonnegative root by M_nonneg at vertex 1."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "The model emits equations at every interface (leg identities, adiabatic bookkeeping, q definitions) - eliminable; q4_eq_adiabatic_41 is explicitly stated as an equation so it rewrites; no interface mentions M1, so nothing unfolds to the answer."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "C.2 asks for an exact closed form; no uncertainty pair in the source part."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Nonnegative-root branch is fixed by M_nonneg .v1 inside the model (M1 is a magnitude) - not chosen in the conclusion; vertex temperature assignments (hot/cold) are figure data fields."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The divisor T_h > 0 is a regime guard; the radicand nonnegativity is proved as a corollary (m1_sq_arg_nonneg) blocking imaginary-root readings; degenerate cycles (T_h = T_c) excluded by the regime fields - no countermodel identified."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Carnot heat ratio + leg identities give the vertex scalar relation",
+                "carrier": "q_relation",
+                "status": "covered",
+                "evidence": "Sorried lemma combining Qh_eq, Qc_eq and the ratio."
+              },
+              {
+                "claim": "Adiabatic-leg bookkeeping q4 = T_c M2^2, q3 = T_c M2^2",
+                "carrier": "q4_eq_adiabatic_41 + q3_eq",
+                "status": "covered",
+                "evidence": "Sorried bookkeeping equations; shared-adiabat content."
+              },
+              {
+                "claim": "Squared relation M1^2 = M2^2 - M3^2 + M4^2",
+                "carrier": "m1_sq",
+                "status": "covered",
+                "evidence": "Sorried theorem; divide q_relation by T_h and rewrite with the vertex definitions."
+              },
+              {
+                "claim": "Nonnegative square root yields the recorded answer",
+                "carrier": "m1_eq_sqrt + m1_sq_arg_nonneg",
+                "status": "covered",
+                "evidence": "Sorried main target + radicand-nonnegativity corollary."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Potassium-chromate cooling run: supplied material data (m_He c = 13.0 J/K, initial 1.00 K), Carnot/EOS contracts, calorimetric TFinal_from_calorimetry; recorded bands 0.129 J, 9.92e-3 K, 0.99008 K with 5.0e-5 tolerances appear only in the OfficialAnswer theorems; mu0 = 4 pi e-7 evaluation documented."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "absorbed_heat_value -> divide by helium heat capacity -> temperature_drop_value -> subtract from initial via initial_is_Tc with the cooling-branch sign -> final_temperature_value; numeric closings visible in the tail: rational rewrites + norm_num + nlinarith with Real.pi bounds - real proofs, not assertions."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "ProcessKind/vertex/state contracts eliminate to equations; SuppliedMaterialData transparent (memory: not opaque), so the sample microdata rewrites into the bands; band predicates are plain abs inequalities."
+              },
+              "uncertainty_propagation": {
+                "status": "passed",
+                "evidence": "The recorded bands act as the uncertainty carriers: each target states |value - recorded| < half-width and proofs land strictly inside (4x margin classes); central-value-only proving was rejected in favor of band membership with stated tolerances."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Cooling branch T_final < T_initial is a hypothesis-side field (helium_cools); sign of the drop follows from it - not conclusion-chosen; process kind (isothermal legs vs adiabats) is figure data."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Session-8 cross-file audit stand: C.2/C.4/C.5 encode the pre-correction B.1 /(2T) law - factor-insensitive here because C.3's band arguments are internal identities; numeric bands verified by certified enclosure, so no hypothesis-true/conclusion-false instance."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Absorbed heat evaluates into the recorded band",
+                "carrier": "absorbed_heat_value",
+                "status": "covered",
+                "evidence": "Proved band membership at the sample data (0.129 J)."
+              },
+              {
+                "claim": "Calorimetric division gives the drop",
+                "carrier": "temperature_drop_value + TFinal_from_calorimetry",
+                "status": "covered",
+                "evidence": "Proved: 0.129/13.0 ~ 9.92e-3 K inside 5.0e-5."
+              },
+              {
+                "claim": "Cooling-branch subtraction gives the final temperature",
+                "carrier": "final_temperature_value + helium_cools + initial_is_Tc",
+                "status": "covered",
+                "evidence": "Proved: 1.00 - 9.92e-3 = 0.99008 K inside band."
+              },
+              {
+                "claim": "Certified enclosures of the rational/pi arithmetic",
+                "carrier": "OfficialAnswer proof tails",
+                "status": "covered",
+                "evidence": "norm_num/nlinarith with Real.pi_gt_d4/lt_d4 - no assertion-style closings."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean": {
+      "status": "review_exhausted",
+      "reviews": 3,
+      "last_review_iter": 9,
+      "reason": "FAILED (provenance-blocked, third review): the sample microdata that official_sample_value/official_sample_uncertainty rest on are not reviewer-verifiable in this checkout (raw/E1_solution.pdf absent, find-verified iter-007; source.json records only the final band) - citation verification is a TO_USER escalation; semantics otherwise green and compile passing, but the gate rule keeps this target failed until independent verification lands (provenence (i) and noise-only preflight (ii) per the ledger reason of record).",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {}
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean": {
+      "status": "retry",
+      "reviews": 2,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-2f half-cylinder cooker: CookerParams positivity, mirror half-arc geometry, specular reflected_point_law on the mirror circle, uniform parallel intensity, central ray absorbed; official P/P0 = 1/(1-cos theta_max) appears only in power_ratio_in_terms_of_theta_max conclusion."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "collectedWidth = R now follows from full_side_coverage over (0,R) + no_gap contiguity + impactParam_le_aperture upper bound (sSup of the realized band = R); power_ratio_eq_width_ratio gives P/P0 = R/(2a); radius_over_diameter_eq turns R/(2a) into 1/(1-cos theta) via the B.1 calibration - all four hops named with carriers."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "AbsorbedRays fields are incidence/existence/equation data (MapsTo, reflection law with explicit reflected-direction formula, coverage existence); ThetaMaxSpec emits attainment + maximization; PowerBudget pairs P,P0 - all eliminable; collectedWidth is a plain sSup def."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "B.2 reports an exact geometric ratio; no measurement uncertainty in this part."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "theta_max lies in the acute branch (0,pi/2) by ThetaMaxSpec hypothesis (non-grazing rays of Figure 2f); coverage is one-sided (0,R) on the container's side of the axis with central_ray_absorbed + no_gap fixing the side - orientation of the fan is law-side, not conclusion-chosen."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The session-8 constructive countermodel (R=1, a=0.1, fan covering only (0,a), P/P0=5 vs 1/(1-cos theta_max)=1.005) required hitSet support bounded by a; full_side_coverage over (0,R) is exactly the clause that model violated - it is now a hypothesis, so the instance is not constructible; sSup = R is forced by coverage up to every y < R plus the aperture bound."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "All mirror-collected impact parameters are bounded by R",
+                "carrier": "impactParam_le_aperture",
+                "status": "covered",
+                "evidence": "Sorried trivial bound from mirrorCircle and unit e; carries the sup upper bound."
+              },
+              {
+                "claim": "Collected transverse width equals R",
+                "carrier": "collectedWidth_eq_radius",
+                "status": "covered",
+                "evidence": "Coverage over (0,R) + no_gap + the aperture bound force sSup = R; blueprint proof block rewritten to the open-half-aperture argument this iter."
+              },
+              {
+                "claim": "P/P0 equals the width ratio R/(2a)",
+                "carrier": "power_ratio_eq_width_ratio",
+                "status": "covered",
+                "evidence": "Uniform-intensity budget bookkeeping; sorried per contract."
+              },
+              {
+                "claim": "R/(2a) = 1/(1-cos theta) at the calibrated maximum angle",
+                "carrier": "radius_over_diameter_eq",
+                "status": "covered",
+                "evidence": "Double-angle identity a = R sin th (1 - cos th) cancels the positive factor 2 R sin th."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean": {
+      "status": "retry",
+      "reviews": 2,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-2f proportions (mirror radius 1 m, centre-to-mirror distance R/2, unit sunlight direction) preserved in SolarCookerGeometry with positivity guards; cross-section kept 2D (sunDirection/containerCentre vectors); recorded cos=4/5, 0.12 m, 12 cm confined to the target conclusion."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "5 = 1/(1-cos theta_max) forces 1-cos=1/5; arccos inversion is valid because both interfaces confine theta_max to (0,pi/2) where cos is strictly monotone (thetaMaxRecorded_mem_Ioo); B.1 substitution uses sin=3/5 and sin 2th=24/25 (sin_thetaMaxRecorded lemmas) giving a = 3/25; metreInCentimetres converts."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "HalfCylindricalMirrorPhysics is the minimal law carrier emitting specular-reflection + incidence-angle + single-reflection equations at a reflection point; PreviousPartResults emits B.1/B.2 as equations over an arbitrary angle - both eliminable, no opaque validity witness."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "B.3 reports exact values; no uncertainty pair in the source part."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Single-reflection branch is a law field inside HalfCylindricalMirrorPhysics; the acute confinement of theta_max is hypothesis-side in both interfaces; the centimetre readout is the recorded unit conversion scale, conclusion-side."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Positivity guards in SolarCookerGeometry block degenerate geometries; the strict monotonicity window excludes the arccos branch ambiguity; hP P = 5 P0 with P0 > 0 (budget) makes the ratio inversion total - no hypothesis-true/conclusion-false instance identified."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "B.2 ratio inverts to cos theta_max = 4/5",
+                "carrier": "PreviousPartResults B.2 equation + hP",
+                "status": "covered",
+                "evidence": "5 = 1/(1-cos) solves to cos = 4/5 by field algebra."
+              },
+              {
+                "claim": "theta_max equals the recorded angle on the acute branch",
+                "carrier": "thetaMaxRecorded_mem_Ioo",
+                "status": "covered",
+                "evidence": "Strict monotonicity of cos on (0,pi/2) makes arccos a two-sided inverse there."
+              },
+              {
+                "claim": "B.1 relation evaluates to a = 0.12 m at R = 1",
+                "carrier": "sin_thetaMaxRecorded + sin_two_mul_thetaMaxRecorded",
+                "status": "covered",
+                "evidence": "a = 3/5 - (1/2)(24/25) = 3/25 = 0.12 by the recorded sin values."
+              },
+              {
+                "claim": "Centimetre conversion yields 12 cm",
+                "carrier": "metreInCentimetres",
+                "status": "covered",
+                "evidence": "Unit scale def; a * 100 = 12 conclusion-side."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean": {
+      "status": "passed",
+      "reviews": 1,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-2g neighboring-ray construction; intersection existence for all sufficiently small nonzero dth; C.1 line values and C.2 O(dth^2) expansions enter as typed hypothesis structures; both limit coordinates match the source's recorded caustic point."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Subtracting the two line equations at the intersection gives b_B - b_A = -(m_B - m_A) X; the C.2 expansions give m_B - m_A = -(2/sin^2 2th + O(dth)) dth and b_B - b_A = (db/dth + O(dth)) dth with db/dth = R sin th/(2 cos^2 th); dividing by dth -> 0 yields X_c = R sin^3 th; Y_c follows from ray A's line via the recorded trig identity. Route recorded for the sorried body."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "Figure2gLengthProjection + readout (one unit per figure), ReflectedRayLine.Contains (incidence as an equation), IsNeighboringReflectedIntersection (simultaneous line membership, eliminative) - all equation-facing typed interfaces; PhysicalLength prevents unit mixing."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Limit/asymptotic subquestion; no measurement uncertainty."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "The limit is along nhdsWithin (neq 0) so the two-sided small-dth neighborhood branch is fixed; intersection-existence hypothesis is quantified over sufficiently small nonzero dth - the deleted-neighborhood carrier pins the branch."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The intersection is constrained by simultaneous membership in BOTH line families; the slope/intercept expansions are hypothesis equations (not free functions), so the limit quotient is pinned; a law-respecting model cannot realize a different limit point without violating the recorded expansion hypotheses."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "X-coordinate limit equals R sin^3 th",
+                "carrier": "target conjunct 1 (Tendsto ... (nhds (readout (R sin^3 th))))",
+                "status": "covered",
+                "evidence": "Line-subtraction quotient + C.2 expansions; sorried formal body (limit passage), informal algebra recorded in the chapter."
+              },
+              {
+                "claim": "Y-coordinate limit equals (R/2) cos th (2 - cos 2 th)",
+                "carrier": "target conjunct 2",
+                "status": "covered",
+                "evidence": "Substitution into ray A's line + trig identity R/2 cos th (2 - cos 2th) = cot 2th R sin^3 th + R/(2 cos th); sorried formal body, recorded route."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean": {
+      "status": "passed",
+      "reviews": 1,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "PmTTorus/PmTWinding/PmTFieldState role-bearing records with per-field units and positivity/thin-regime certificates; AmpereLawTorus/ConstitutiveBH stated as the physical equations (not the final formula); PmTVariation/PmTWorkBudget package the licensed increments; recorded dW = alpha V mu0 H dM at alpha = 1."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "dW = dW_emf - dW_vac (split identity rearranged); substitute V H dB and mu0 V H dH to get V H (dB - mu0 dH); the constitutive increment law cancels the mu0 dH term leaving mu0 V H dM - three algebraic carriers, each an equation field or lemma."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "ConstitutiveBH.dBH emits the increment equation; PmTWorkBudget.vacuum_part and the split field are equations; AmpereLawTorus constrains the operating point; every Prop interface eliminates to real equations - sufficiency demonstrated by the two-lemma proof route."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Exact differential identity; no uncertainty in A.3."
+              },
+              "branch_orientation": {
+                "status": "not_applicable",
+                "evidence": "Scalar energy-budget identity; no orientation/asymptotic branch (sign of dM unconstrained and correct)."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The constitutive field pins dB - mu0 dH = mu0 dM, so the cancellation is law-forced; varying H, M freely within the variation record cannot break the identity without violating dBH; no lawful countermodel."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Work split dW = dW_emf - dW_vac",
+                "carrier": "dW_eq_sub_vac",
+                "status": "covered",
+                "evidence": "Rearrangement of the budget split identity; sorried bridge."
+              },
+              {
+                "claim": "Material work reduces to V H (dB - mu0 dH)",
+                "carrier": "dW_eq_VH_dB_sub_mu0_dH",
+                "status": "covered",
+                "evidence": "Substitute the A.2 value and the vacuum part, factor V H; sorried bridge with route."
+              },
+              {
+                "claim": "Constitutive cancellation to mu0 V H dM (A.3 answer)",
+                "carrier": "dW_eq_mu0_V_H_dM",
+                "status": "covered",
+                "evidence": "dBH increment law substitution; conclusion-side recorded answer."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean": {
+      "status": "passed",
+      "reviews": 1,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "ParamagneticTorusState (H, M, T bundled, distinct roles), StatePath, five positive parameters; IsAdiabaticPath with adiabaticInvariant; AdiabaticEndpoints regularity data H_i >= 0, T_i > 0, T_f > 0; recorded Delta T = T_i (sqrt((lam + mu0 K H_f^2)/(lam + mu0 K H_i^2)) - 1)."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "endpoint_relation supplies the squared ratio; lam_add_mu0_K_sq_pos discharges the denominator (proved by positivity, lam > 0 and mu0 K H^2 >= 0); Real.sqrt of both sides with T_i > 0, T_f > 0 gives the root form; subtracting T_i yields the target - each step carrier-named."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "ParamagneticTorusLaws/IsAdiabaticPath/adiabaticInvariant/AdiabaticEndpoints are equation/inequality-emitting structures; no quantity collapsed to a bare scalar alias at type level; the positivity cert is a proved lemma, not a field assumption."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Exact temperature-change formula; no uncertainty in B.2."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "The square-root branch (positive root) is fixed by T_i > 0 and T_f > 0 hypothesis fields; the adiabatic direction (H_i -> H_f at T_i start) is endpoint structure data."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The invariant equation pins the endpoint ratio; negative-T_f or denominator-zero countermodels are excluded by the fields and the proved positivity cert; no hypothesis-true/conclusion-false instance."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Endpoint relation T_f^2/T_i^2 = (lam + mu0 K H_f^2)/(lam + mu0 K H_i^2)",
+                "carrier": "endpoint_relation",
+                "status": "covered",
+                "evidence": "Adiabatic-invariant evaluation at the endpoints; sorried bridge."
+              },
+              {
+                "claim": "Denominator strictly positive",
+                "carrier": "lam_add_mu0_K_sq_pos (PROVED)",
+                "status": "covered",
+                "evidence": "discharged by positivity from lam > 0, mu0 K > 0 and square nonnegativity."
+              },
+              {
+                "claim": "Delta T root form (B.2 answer)",
+                "carrier": "adiabatic_temperature_change",
+                "status": "covered",
+                "evidence": "sqrt of the ratio with positive temperatures; sorried final algebra, route recorded."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean": {
+      "status": "retry",
+      "reviews": 2,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Refrigerator totals over all cycles up to the C.4 time: cooled-body heat balance, accumulated Carnot relation, energy balance; T_h, T0, T alone in the recorded answer; CycleFields/opaque context parameters (workingMass, torusVolume, amountOfSubstance, materialConstantK) preserved even though they cancel."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Route 1: W = P t with the C.4 law gives W = C_c T_h (ln(T0/T) - (T0-T)/T_h); Q_c = C_c (T0-T) divided by W cancels C_c. Route 2 (independent): W = Q_h - Q_c with Q_h = Q_c T_h ln(T0/T)/(T0-T) gives W = Q_c [...] hence COP = Q_c/W - both sorried per contract, carriers named."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "Equation-valued Prop predicates for each law - smallest eliminable interfaces; COP def is a plain quotient; no scalar-alias collapse of the setup quantities."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "C.5 asks for an exact symbolic COP; no uncertainty pair in the source."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Refrigeration orientation (Q_c from the cold body, W input) is field data of the energy-balance and heat-balance predicates; the inverse form's sign structure follows from T0 > T window hypothesis."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Route redundancy is itself countermodel resistance: two hypothesis sets entail the same value; denominators guarded by the temperature window and Q_c > 0; an arbitrary COP value would violate both balances - no underdetermination."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Work totals from the operating history",
+                "carrier": "OperatingHistory + constant-power law",
+                "status": "covered",
+                "evidence": "W = P t hypothesis-side packaging."
+              },
+              {
+                "claim": "COP via the C.4 elapsed time",
+                "carrier": "coefficient_of_performance",
+                "status": "covered",
+                "evidence": "Sorried main route; substitution and C_c cancellation."
+              },
+              {
+                "claim": "Independent energy-balance route",
+                "carrier": "coefficient_of_performance_via_energy_balance",
+                "status": "covered",
+                "evidence": "Sorried second theorem; no constant-power/C.4 step - cross-checks the value."
+              },
+              {
+                "claim": "Accumulated Carnot relation supplies Q_h/Q_c ratio",
+                "carrier": "AccumulatedCarnotHeatRelation",
+                "status": "covered",
+                "evidence": "Hypothesis-side equation data."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean": {
+      "status": "retry",
+      "reviews": 2,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Confined-air-column experiment A.1: trapped-air height, CA volume, mass, amount of substance, molecule count as MeasuredQuantity records with value+uncertainty fields; ambient density 1.12 and pressure set point 4.5 as pinned scalars; the five official readout intervals recorded in OfficialReadouts with exact structure; molar-mass route m = n M_air."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "uncertainty_consistency: nonnegativity conjuncts from the measurement model; deviation conjunct by rewriting number_eq (N = n N_A) so the residual is zero, bounded by the nonneg sum - the n -> n N_A sensitivity law; molar_mass_consistency re-exports the exact field; CompatibleWithReadouts is the interval checking contract for the sample."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "MeasuredQuantity value/uncertainty fields emit inequalities; ConfinedAirColumn laws are equation fields (number_eq, molarMassConsistency, u*_nonneg); no opaque validity witness; no scalar-collapse of units (documented per declaration)."
+              },
+              "uncertainty_propagation": {
+                "status": "passed",
+                "evidence": "Uncertainty is first-class: uMassCA/uNumberOfMoles/uNumberOfMolecules nonneg fields plus the propagation budget |N - N_A n| <= uN + un*N_A; the molecule-count target uses the sensitivity-times-input-uncertainty form - not merely a central-value-in-band check."
+              },
+              "branch_orientation": {
+                "status": "not_applicable",
+                "evidence": "No signed/incoming-outgoing branch in A.1; intervals are two-sided symmetric measurement bands."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The propagation budget is proved from the exact relation, so arbitrary uncertainty fields are constrained by nonnegativity and the budget; readout compatibility is an interval conjunction - degenerate widths excluded by the recorded half-width values; no underdetermination."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Molecule count follows the Avogadro relation",
+                "carrier": "number_eq + number_of_molecules_of_confined_air",
+                "status": "covered",
+                "evidence": "Exact equation field; main relation of A.1."
+              },
+              {
+                "claim": "Mass cross-check via the molar-mass route",
+                "carrier": "molar_mass_consistency",
+                "status": "covered",
+                "evidence": "Proved re-export of the configuration's exact field."
+              },
+              {
+                "claim": "Uncertainty budget composes through n -> n N_A",
+                "carrier": "uncertainty_consistency",
+                "status": "covered",
+                "evidence": "PROVED conjunct trio (rw + nonneg arithmetic visible in excerpt)."
+              },
+              {
+                "claim": "Sample values fall inside the measured intervals",
+                "carrier": "CompatibleWithReadouts",
+                "status": "covered",
+                "evidence": "Interval checking contract over OfficialReadouts - data-side predicates."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean": {
+      "status": "passed",
+      "reviews": 2,
+      "last_review_iter": 7,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-27T22:01:21Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Header/chapter correspondence verified: E1 page-9 source (Eq. (1) P*V=nRT statewise with free decalibrated R per A.4; Eq. (2) beta0=(1/P0)(dP/dT); A.2 isochoric readouts around the reference state; A.3 affine P-vs-T isochore with positive slope; A.5 official sample beta0 = 0.0034 +/- 0.0007 K^-1 covering ideal-gas 1/273.15 K = 0.0037 K^-1). Figure/data parameters captured: pgHeight 0.045 m (volume seal), ambientAirDensity 1.12 kg/m^3 (time-averaged). Units preserved via typed PhysLean Temperature + absTemp projection; no unsupported R-valued unit aliases. hT12 documents the A.2 protocol's two distinct readout temperatures; the new doc sentence on IsochoricReadout records it."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Conjunct 1: state_eq divided state-to-state (pressure_ratio_eq_temp_ratio) plus affine-vs-law slope identification gives slope = nR/V and offset = 0, hence beta0 = slope/P0 = 1/T0 (beta0_close_to_ideal). Conjunct 2: unfold thermalPressureCoefficient = slope/P0 and multiply through by P0 > 0 (IsReferenceState.hP0) — definitional + ring (beta0_eq_ideal_of_linear). Conjunct 3 (session_6-blocked, now closed): measured_hP2 - measured_hP1 gives the measured increment beta0*P0*(T2-T1); subtracting the ideal increment P0*(T2-T1)/T0 leaves deviation = P0*(T2-T1)*(beta0 - 1/T0); hdev becomes P0*|T2-T1|*|beta0 - 1/T0| <= P0*|T2-T1|*sigma and P0*|T2-T1| > 0 cancels (hP0 with hT12). All conjuncts entailed by the hypotheses."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "IsIdealGasLaw.state_eq is an equation-emitting Prop field (statewise P*V = nRT with positivity); IsIsochoricLinear.affine emits pointwise affine equations (offset kept general, forced to 0 inside proofs); IsReferenceState supplies t0 + hP0 > 0 with projections; IsochoricReadout carries the two consistency equalities measured_hP1/measured_hP2 plus measured_hP0 and now the hT12 ≠-guard. Every local Prop interface is eliminable to real equations/inequalities — pressure_ratio_eq_temp_ratio, slope_eq_div, pressure_pos_of_temp_pos are the recorded elimination bridges; no witness-only opaque predicate remains."
+              },
+              "uncertainty_propagation": {
+                "status": "passed",
+                "evidence": "The official band is formalized as a genuine propagation carrier parameterized by sigma > 0: relative deviation |dP_meas - P0*dT/T0| <= P0*|dT|*sigma entails |beta0 - 1/T0| <= sigma (beta0_uncertainty_bound, main conjunct 3) — an interval/error contract, not a fixed-band central-value membership. Band-coverage arithmetic |0.0034 - 0.0037| = 0.0003 <= 0.0007 is documented conclusion-side. The carrier's degeneracy defect found in session_6 is repaired; the ≠-guard is exactly the finite-difference neq-guard class already recorded in Archon memory."
+              },
+              "branch_orientation": {
+                "status": "not_applicable",
+                "evidence": "Scalar isochoric heating; no incoming/outgoing, handedness, tangency, or asymptotic-direction branch. Increment signs are carriered by |T2 - T1| absolute values; monotone orientation of the isochore is fixed by IsIsochoricLinear.slope_pos."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The session_6 countermodel is closed: T1 = T2 is no longer constructible for IsochoricReadout (hT12 field), so the vacuous-premise instance that falsified |beta0 - 1/T0| <= sigma for beta0 = 2/T0 + sigma is excluded. Law-side audit unchanged and clean: state_eq pins P = (nR/V)*Ta, so no lawful instance falsifies conjuncts 1-2; the affine interface cannot drift from the ideal-gas law because their conjunction forces offset = 0 via absolute-zero anchoring (absTemp_nonneg + slope_pos). Free parts (offset, n, V, R, readout values) are either pinned by consistency fields or cancel out of the conclusions; no hypothesis-true/conclusion-false interpretation remains under the file's own contracts."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Eq.(1) at fixed V,n entails the state-to-state ratio P2/P1 = T2/T1 over absolute temperatures",
+                "carrier": "IsIdealLaw.pressure_ratio_eq_temp_ratio",
+                "status": "covered",
+                "evidence": "Divides state_eq at t2 by state_eq at t1 with fixed n,V,R; denominators nonzero by pressure_pos_of_temp_pos under ht1/ht2; L146-L152, contracted by sorry."
+              },
+              {
+                "claim": "A.3 affine slope equals the finite-difference quotient dP/dT between distinct-temperature readouts",
+                "carrier": "IsIsochoricLinear.slope_eq_div",
+                "status": "covered",
+                "evidence": "Pure algebra from the affine field at two instants with nonzero absTemp difference (main supplies hvar); L176-L183, contracted by sorry."
+              },
+              {
+                "claim": "Eqs.(1)+(2) entail beta0 = slope/P0 = 1/T0 (ideal-gas reference 0.0037 K^-1 at 273.15 K)",
+                "carrier": "beta0_close_to_ideal (+ main conjunct 1)",
+                "status": "covered",
+                "evidence": "Ratio bridge plus state_eq at ref.t0; 1/T0 strictly conclusion-side — no hypothesis, structure field, or local def mentions it; L289-L302, contracted by sorry."
+              },
+              {
+                "claim": "Eq.(2) finite-difference form on the A.2 table: slope*dT = beta0*P0*dT for arbitrary increments",
+                "carrier": "beta0_eq_ideal_of_linear (+ main conjunct 2)",
+                "status": "covered",
+                "evidence": "Unfolds beta0 = slope/P0 and multiplies through by P0 > 0 (hP0); exact Eq.-(2) identity, no approximation; L305-L321, contracted by sorry."
+              },
+              {
+                "claim": "Uncertainty propagation: two-readout deviation <= P0*|dT|*sigma implies |beta0 - 1/T0| <= sigma (formal content of 0.0034±0.0007 covering 0.0037)",
+                "carrier": "beta0_uncertainty_bound (+ main conjunct 3)",
+                "status": "covered",
+                "evidence": "POST-REPAIR: deviation reduces via measured_hP1/measured_hP2 to P0*(T2-T1)*(beta0 - 1/T0); hdev gives P0*|T2-T1|*|beta0 - 1/T0| <= P0*|T2-T1|*sigma; the strictly positive factor P0*|T2-T1| cancels using IsReferenceState.hP0 and the new hT12 : T1 != T2 (mul_le_mul_left/inv or le_div-style cancellation). The session_6 blocker (missing ≠-guard) is removed by the iter-007 field; L324-L349, contracted by sorry."
+              },
+              {
+                "claim": "Recorded pressures are positive wherever the absolute temperature is positive (nonzero denominators for the ratio bridges)",
+                "carrier": "IsIdealGasLaw.pressure_pos_of_temp_pos",
+                "status": "covered",
+                "evidence": "state_eq with hn, hV, hR > 0 at a positive-temperature instant; L134-L140, contracted by sorry."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean": {
+      "status": "retry",
+      "reviews": 2,
+      "last_review_iter": 9,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T03:14:52Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Figure-19 headspace geometry: H as volume per unit cross-section (gasVolume), reference state (T0, H0) where dry air alone carries P_atm, admissible MeasuredState with positivity guards; recorded P_v formula matches the official answer for B.4."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "dryAirPartialPressure_at_T0 (Dalton at the reference: vapor vanishes, so dry air = P_atm) -> P_atm A H0 = n_air R T0 (ideal gas) -> eliminate fixed n_air with the state balance: p_air(T,H) H T0 = P_atm H0 T -> Dalton subtraction gives the closed form; both sorried theorems name this exact route."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "VaporPressureB4Data is the smallest interface bundling Dalton + ideal-gas + zero-at-T0 as equation fields over state-dependent partial-pressure functions - eliminable; GasColumnGeometry preserves the geometry rather than erasing volume; ClausiusClapeyron standalone predicate for reuse."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "B.4 asks for the exact closed-form relation; no uncertainty pair in the source part (readout bands belong to A-parts/C.6)."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Reference-state orientation (T0, H0 with vapor=0) is hypothesis data; state (T,H) arbitrary admissible; sign of 1 - H0 T/(H T0) follows the state ordering guards - no conclusion-side branch choice."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Positivity guards on T, H, T0, H0 block degenerate division; the fixed dry-air content makes the elimination total; an arbitrary vapor-pressure function would violate the Dalton + ideal-gas fields at the reference - no underdetermination."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Dry air carries P_atm at the reference state",
+                "carrier": "dryAirPartialPressure_at_T0",
+                "status": "covered",
+                "evidence": "Sorried lemma; Dalton at T0 where vapor vanishes."
+              },
+              {
+                "claim": "Reference balance P_atm A H0 = n_air R T0",
+                "carrier": "total_pressure_mul_volume + ideal-gas fields",
+                "status": "covered",
+                "evidence": "Fixed dry-air content equation; hypothesis-side."
+              },
+              {
+                "claim": "Elimination gives p_air H T0 = P_atm H0 T",
+                "carrier": "vaporPressure_eq route",
+                "status": "covered",
+                "evidence": "Sorried in-file derivation; state balance vs reference balance."
+              },
+              {
+                "claim": "Dalton subtraction yields the official formula",
+                "carrier": "target",
+                "status": "covered",
+                "evidence": "Sorried main target; umbrella entry points here."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean": {
+      "status": "passed",
+      "reviews": 1,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Catalog constants as documented opaques; PartB6Input fields (slope -4700 +- 200 K, R = 8.31, T_0 = 273.15 calibration captured though unused by B.6); SpecificLatentHeatValue.withinUncertainty interval carrier; both the molar-heat form and the per-unit-mass form stated."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "qv_from_clausius_clapeyron_slope computes Q_v and certifies band membership; latent_heat_per_unit_mass_formula exists-witnesses Q_v = 39, M_0 = 18.0e-3 with L_v = Q_v/M_0 and |L_v - 2190| <= 110; computed_value_within_official_uncertainty PROVES |39/0.018 - 2190| = 23.3 <= 110 arithmetically (sorried certified evaluation for the prover stage)."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "PartB5Measurements field equations, SatisfiesClausiusClapeyron as an equation predicate, IsSpecificLatentHeatOf as a witness structure with magnitude projections, withinUncertainty as an interval predicate - all eliminable."
+              },
+              "uncertainty_propagation": {
+                "status": "passed",
+                "evidence": "Uncertainties flow slope(+/-200 K) -> Q_v(+-2 kJ/mol, relative 5.1% with M_0 exact, bridge certified) -> L_v band (2190 +- 110) with the computed central value PROVABLY inside; a genuine interval containment chain, not bare central-value matching."
+              },
+              "branch_orientation": {
+                "status": "not_applicable",
+                "evidence": "Scalar evaluation; no orientation branches (sign of Q_v fixed by the negative slope convention, documented)."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "Catalog values are fixed opaque-constant equalities; the existential witnesses are pinned by those equations; interval containments are decidable arithmetic that no lawful reinterpretation can falsify."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Q_v from the B.5 slope within the official band",
+                "carrier": "qv_from_clausius_clapeyron_slope",
+                "status": "covered",
+                "evidence": "Recorded field equations: -s R/1000 = 39.057, deviation 0.057 <= 2; sorried certified evaluation."
+              },
+              {
+                "claim": "Specific latent heat formula L_v = Q_v/M_0",
+                "carrier": "latent_heat_per_unit_mass_formula",
+                "status": "covered",
+                "evidence": "Existential over catalog values with the defining quotient and official-interval containment."
+              },
+              {
+                "claim": "Computed central value lies within the official uncertainty",
+                "carrier": "computed_value_within_official_uncertainty",
+                "status": "covered",
+                "evidence": "|2166.7 - 2190| = 23.3 <= 110; certified interval arithmetic contracted to prover stage."
+              },
+              {
+                "claim": "T_0 calibration captured",
+                "carrier": "reference_temperature_calibration",
+                "status": "covered",
+                "evidence": "Direct from the field equation T_0_value_K_eq (PROVED by projection)."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean": {
+      "status": "passed",
+      "reviews": 1,
+      "last_review_iter": 8,
+      "reason": "all formalization Review entries passed",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "CylindricalWallGeometry (r2/r1 = 23.25/16.85, wetted h = 0.10 m); Eq. (4) lumped flow with P = (T_OC - T_IC)/R_Th; Eq. (6) radial profile pointwise; official sample lambda = 0.25 +- 0.01 W/(m K)."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Constancy/positivity of P gives dT/dr < 0 a.e.; integrating P/(2 pi lambda h r) = -dT/dr over [r1, r2] yields P ln(r2/r1)/(2 pi lambda h) = T_IC - T_OC; substituting Eq. (4) for P solves lambda - the recorded formula; the sample value follows by interval evaluation at R_Th in [1.14, 1.20] with the certified integration contracted to the prover stage."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "RadialFourierConduction fields eliminate to pointwise equations and constancy facts; LumpedHeatFlowLaw predicates an existing current against the data by Eq. (4); geometrical guards (r1, r2, h positive) keep every denominator lawful; no scalar-placeholder aliases."
+              },
+              "uncertainty_propagation": {
+                "status": "passed",
+                "evidence": "R_Th enters with its band |R_Th - 1.17| <= 0.03 and the conclusion is the propagated band |lambda - 0.25| <= 0.01 - an interval/error carrier pair, not central-value membership; the band library absence is documented with its near-miss."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Outward-decreasing temperature profile (dT/dr < 0 from P > 0 constancy) is the derived orientation; logarithm argument r2/r1 > 1 from the geometry guards; no branch chosen conclusion-side."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "A countermodel needs a lambda satisfying hformula at R_Th central but outside the band - excluded by monotone interval arithmetic on ln(r2/r1)/(2 pi h R_Th) over the band; the law structures constrain P and the profile, so free reinterpretation breaks Eq. (4)/(6)."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Radial integration of the conduction law yields the C.7 formula",
+                "carrier": "acrylicConductivity_formula (independent in-file theorem; hformula is its restatement)",
+                "status": "covered",
+                "evidence": "FTC over [r1, r2] with int r^{-1} = ln; sorried certified integration, route recorded; the sample theorem consumes the formula as hypothesis by design."
+              },
+              {
+                "claim": "Official sample value within the band",
+                "carrier": "acrylicConductivity_officialSample",
+                "status": "covered",
+                "evidence": "Direct evaluation ln(23.25/16.85)/(2 pi 0.10 1.17) ~ 0.25 with the uncertainty window; certified interval arithmetic contracted to the prover stage; sorried body."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean": {
+      "status": "retry",
+      "reviews": 1,
+      "last_review_iter": 8,
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions",
+      "updated_at": "2026-07-28T02:16:42Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "milestones": [
+          {
+            "schema_version": 2,
+            "checks": {
+              "source_faithfulness": {
+                "status": "passed",
+                "evidence": "Reflection point (R sin th, R cos th) read from Figure 2g; slope/intercept as abstract fields of the reflected line y = m x + b; law of reflection with the axial ray A at incidence angle th; recorded answers cot(2 th), R/(2 cos th)."
+              },
+              "derivability": {
+                "status": "passed",
+                "evidence": "Reflected line passes through the reflection point, so b_A th = P_y - m_A th * P_x; substituting the Figure-2g readout and the slope bridge (reflection law clause 5 fixing the outgoing direction) and trig-simplifying yields R/(2 cos th); conjunction closes the target."
+              },
+              "abstraction_sufficiency": {
+                "status": "passed",
+                "evidence": "HalfCylindricalMirrorReflection keeps R, P, m_A, b_A, m_B, b_B as abstract real fields with documented dimensions plus the quantified law equations; the strengthened clause-5 field is an equation eliminating to the reflected direction; no scalar placeholder aliases."
+              },
+              "uncertainty_propagation": {
+                "status": "not_applicable",
+                "evidence": "Exact geometric slope/intercept; no uncertainty in source for C.1."
+              },
+              "branch_orientation": {
+                "status": "passed",
+                "evidence": "Outgoing orientation is now hypothesis-fixed by clause 5 of the reflection law (the lane's recorded repair); the incoming axial direction and the Figure-2g branch confinement are structure data."
+              },
+              "countermodel_resistance": {
+                "status": "passed",
+                "evidence": "The on-record orientation countermodel is excluded: law-respecting models must now respect the outgoing-direction equation, which pins the slope sign/value; line-only reinterpretations no longer satisfy the strengthened law. No residual hypothesis-true/conclusion-false route identified in this audit."
+              }
+            },
+            "bridge_obligations": [
+              {
+                "claim": "Slope of the A-reflected ray is cot(2 th)",
+                "carrier": "reflected_ray_A_slope",
+                "status": "covered",
+                "evidence": "Outgoing-direction equation (clause 5) + double-angle geometry; sorried proof with documented route."
+              },
+              {
+                "claim": "Intercept is R/(2 cos th)",
+                "carrier": "reflected_ray_A_intercept",
+                "status": "covered",
+                "evidence": "Point-on-line at the Figure-2g readout + slope bridge; trig simplification route recorded."
+              },
+              {
+                "claim": "Joint C.1 answer",
+                "carrier": "reflected_ray_A_slope_and_intercept",
+                "status": "covered",
+                "evidence": "Conjunction of the two bridges; target-level, conclusion-side."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "last_review_iter": 9
+}

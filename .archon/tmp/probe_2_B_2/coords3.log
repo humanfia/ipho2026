@@ -1,0 +1,34 @@
+.archon/tmp/probe_2_B_2/coords3.lean:39:4: error: linarith failed to find a contradiction
+case «0».h1
+v e n : Plane
+he : ‖e‖ = 1
+hn : ‖n‖ = 1
+hperp : inner ℝ n e = 0
+u w : ℝ
+hu : u = inner ℝ v e
+hw : w = inner ℝ v n
+h0e : e.ofLp 0 ^ 2 + e.ofLp 1 ^ 2 = 1
+h0n : n.ofLp 0 ^ 2 + n.ofLp 1 ^ 2 = 1
+hpen : n.ofLp 0 * e.ofLp 0 + n.ofLp 1 * e.ofLp 1 = 0
+hu' : u = v.ofLp 0 * e.ofLp 0 + v.ofLp 1 * e.ofLp 1
+hw' : w = v.ofLp 0 * n.ofLp 0 + v.ofLp 1 * n.ofLp 1
+a✝ : v.ofLp 0 < u * e.ofLp 0 + w * n.ofLp 0
+⊢ False
+failed
+.archon/tmp/probe_2_B_2/coords3.lean:41:4: error: linarith failed to find a contradiction
+case «1».h1
+v e n : Plane
+he : ‖e‖ = 1
+hn : ‖n‖ = 1
+hperp : inner ℝ n e = 0
+u w : ℝ
+hu : u = inner ℝ v e
+hw : w = inner ℝ v n
+h0e : e.ofLp 0 ^ 2 + e.ofLp 1 ^ 2 = 1
+h0n : n.ofLp 0 ^ 2 + n.ofLp 1 ^ 2 = 1
+hpen : n.ofLp 0 * e.ofLp 0 + n.ofLp 1 * e.ofLp 1 = 0
+hu' : u = v.ofLp 0 * e.ofLp 0 + v.ofLp 1 * e.ofLp 1
+hw' : w = v.ofLp 0 * n.ofLp 0 + v.ofLp 1 * n.ofLp 1
+a✝ : v.ofLp 1 < u * e.ofLp 1 + w * n.ofLp 1
+⊢ False
+failed

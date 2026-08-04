@@ -1,0 +1,16 @@
+Iter-009 deterministic review complete. All artifacts written.
+
+**Verdicts: 16 passed / 1 failed** (of the 17 listed candidates; compile from the orchestrator preflight — 17/17 green, no reruns issued).
+
+**Key adjudications**
+- `2_B_2` **passed** — session-8 aperture blocker closed: verified on disk that `full_side_coverage` was strengthened to `Set.Ioo (0:ℝ) p.R` (L122), structurally excluding the recorded thin-fan countermodel; the full bridge chain (`width=R → P/P₀=R/(2a) → 1/(1−cos θ_max)`) is derivable with the target statement untouched.
+- `4_C_6` **failed, 3/3 exhausted** — compile green and all six semantic checks are statement-level green, but the two durable non-statement blockers stand: sample microdata `a=(2.28±0.06)·10⁻³ 1/s`, `m=(89±1) g` remain unverifiable in this checkout (`raw/E1_solution.pdf` absent), and the noise-only grounding-preflight defect is unrouted. Permanently prover-dispatch-blocked; routes: provenance restore (TO_USER) or quarantine-delete fallback. Explicitly not counted toward convergence as a pass.
+- 15 other lanes passed on their final/third or second review, including sorry-free completions `2_B_1`, `3_C_3`, `4_A_1` and asymptotically honest `2_C_2`/`2_C_4`; doctor payload (18 stale `missing-physlib-import`) retired for the 8th iter — not a live blocker.
+
+**Artifacts**
+- `.archon/proof-journal/sessions/session_9/milestones.jsonl` — 17 structured `formalization_review` blocks (6 checks + 4 covered bridges each, machine-validated)
+- `.archon/proof-journal/sessions/session_9/summary.md` / `recommendations.md` — metrics, gate-write spec (R1), `4_C_6` provenance escalation (R2), `3_C_x` factor audit (R3), injector hygiene (R4), prover-stage sorry handoff (R5)
+- `.archon/PROJECT_STATUS.md` — Knowledge Base gained an iter-009 durable-findings section (convergence end-state, coverage-strengthening recipe, provenance-exhaustion class, dual-route pattern, parametrization-guard pattern)
+- `.archon/iter/iter-009/review.md` — born-bounded session narrative
+
+Gate state for the planner: 25 passed + `4_C_6` review-exhausted-provenance + `1_B_1` documented residual — the session-8 R7 convergence end-state, prover stage advance consumable under the recorded caveats.

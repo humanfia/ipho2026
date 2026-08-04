@@ -1,0 +1,12 @@
+Repair complete. `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean` now compiles cleanly with only the 10 expected `sorry` warnings.
+
+**What was fixed**
+- Root cause found at `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean:15`: the literal string `hot-/cold` inside the module doc-comment contained `-/`, which prematurely closed the `/-! ... -/` block — that was the actual `unexpected identifier; expected command`. Verified via `lake env lean --stdin` repro that `$$...$$` in doc-comments is actually accepted, so the planner's stated root cause was slightly off, but I removed all four `$$...$$` blocks anyway per the directive (backslash-free `$...$` inline forms).
+- No declaration-level changes; the Carnot-cycle/EOS model, all theorem statements, and all 10 `by sorry` bodies keep their exact wave-1 shape.
+
+**Verification**
+- `lake env lean` exit 0; only `declaration uses 'sorry'` warnings at lines 213–296 (the intended by-sorry contract).
+
+**Bookkeeping**
+- Task result written to `.archon/task_results/problem_IPhO_2026_3_C_2.md` with the assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit, and branch coverage.
+- Did not touch the blueprint chapter — `\leanok` is owned by the deterministic sync, which should now flip this chapter on its next run.

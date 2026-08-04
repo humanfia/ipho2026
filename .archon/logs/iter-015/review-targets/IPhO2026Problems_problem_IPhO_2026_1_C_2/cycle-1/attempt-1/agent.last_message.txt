@@ -1,0 +1,14 @@
+Review complete — verdict: **solved** (route=solved).
+
+**Checks**
+- **Compilation/sorry**: preflight passed (`compiles=true`, `sorry_count=0`); grep confirms no `sorry`/`admit`/`axiom`/`native_decide`/macro tricks in the source.
+- **Signature/statement**: `IPhO2026_1_C_2.excess_photon_energy_at_threshold` matches blueprint `thm:physics:IPhO_2026_1_C_2:target` — conclusion asserts `0 < gap_eV ∧ |gap_eV − 2.03e-11| < 5e-14` with `2.03e-11` strictly conclusion-side.
+- **Physical semantics**: photon `E=ℏω`, `p=ℏω/c`, non-relativistic fragments (O₂ mass `2m`, O mass `m`), parent at rest, SI units with explicit eV/amu conversions; θ=π/6, ΔU=1.10 eV, m=16.0 amu as calibrated readouts.
+- **Honest hypotheses**: `ThresholdRealizable` supplies a lawful state + the rationalized lower-root threshold balance (the iter-008 redraft replacing the false sqrt-linearization); no answer-as-assumption.
+- **Numerics**: verified the exact rational enclosure `2.0296693184e-11 < gap ≤ 2.0296693187e-11`, error `< 3.31e-15` well inside the `5e-14` tolerance.
+
+**Process warning**: the iter-015 prover trace and matching task-result artifacts are missing; per instructions this is reported as a warning, with the passing preflight and source audit as primary evidence.
+
+Artifacts written:
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_1_C_2/cycle-1/attempt-1/milestones.jsonl`
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_1_C_2/cycle-1/attempt-1/summary.md`

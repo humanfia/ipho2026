@@ -1,0 +1,21 @@
+{
+  "iteration": 7,
+  "jobs": 1,
+  "duration_secs": 9.087,
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 10,
+      "duration_secs": 9.083,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:122:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:127:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:131:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:136:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:150:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:174:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:262:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:292:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:309:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:329:8: warning: declaration uses `sorry`"
+    }
+  ]
+}

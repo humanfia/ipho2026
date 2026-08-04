@@ -1,0 +1,13 @@
+All work is complete. Summary of what this lane accomplished:
+
+**Critical finding and fix:** The frozen iter-007 contract for `problem_IPhO_2026_3_C_3.lean` was physically false — it had the isothermal legs as 1→2/3→4 with a spurious 1/V factor. Against the official solution (T3_solution.pdf p.2), the isothermal legs are 2→3 (cold, absorbs Q_c) and 4→1 (hot, dumps Q_h), and the B.1 law carries no 1/V. With the wrong geometry the file computed Q_c = 0.1704 J; the official value is 0.129 J — outside the recorded band. I redrafted the geometry and law to match the officials and verified numerically (Q_c = 0.12934593… J ✓).
+
+**Result:** Beyond the required by-sorry formalization, the full C.3 derivation is now discharged in Lean:
+
+- `lake env lean` → **0 errors, 0 warnings, 0 sorries** (658-line file)
+- `#print axioms` on all 8 main declarations: only `[propext, Classical.choice, Quot.sound]`
+- All three target theorems proved: `absorbed_heat_value` (|Q_c − 0.129| < 5e-4), `temperature_drop_value` (|ΔT − 9.92e-3| < 5e-5), `final_temperature_value` (|T_f − 0.99008| < 5e-5), plus model lemmas `Qc_cold_leg`, `Qh_hot_leg`, `reservoir_temperature_consistency` (T_h ≈ 2.13 K entailed, never assumed), `TFinal_from_calorimetry`, `helium_cools`
+- Target values appear only conclusion-side (grep-verified); numerics certified via `Real.pi_gt_d4`/`Real.pi_lt_d4` π-bounds with `norm_num`/`nlinarith`
+- Import-bridge check passed in the base checkout (`science-mango-ipho-2026-run`)
+
+Task result written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_3.lean.md`, including the assumption/target split, bridge inventory, countermodel audit, and two cross-file notes for the planner (siblings 3_C_2/3_C_4/3_C_5 and the blueprint chapter's informal proofs encode the same wrong geometry and need a redraft pass when those lanes reopen — I did not touch them, per write permissions).

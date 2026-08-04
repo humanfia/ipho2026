@@ -1,0 +1,17 @@
+Review of iter-001 complete. All required artifacts written.
+
+**Verdicts: 6/6 failed** under the mandatory formalization gate (all 6 compile clean with only expected `sorry` warnings; the failures are semantic/governance, not compilation).
+
+**Key findings**
+- Every reviewed target carries a live blueprint-doctor blocker (`missing-physlib-import`), which conflicts with the memory-level "import Mathlib only" rule — gate forbids passing while live. Resolution proposed: targeted PhysLean import where a relevant module exists, documented coverage exemption (citing near-miss logs) where not.
+- `problem_IPhO_2026_1_B_1.lean` additionally fails the statement audit first-hand: `radial_energy` is a vacuous implication (`∀ r, 0 < r → Q r ≤ 0 → ∃ r', r' = r`), `attainedSeparations` is the quadratic sublevel set **by definition**, and the target imports answer-valued hypotheses `ha_max_attained`/`hfact` (constant `1600/9`). Route: redraft, not proof retry.
+- Stale `\leanok` on `IPhO2026Problems_problem_IPhO_2026_1_B_1.tex` — sync state (`iter=1, added=0, removed=0`) does not vouch it; flagged for removal during redraft.
+- The other 5 targets are semantically sound (faithful source/figures/units, conclusion-side answers, eliminable law Props, pinned bridges, countermodel-resistant) and should pass review once the import-policy repair lands.
+
+**Artifacts**
+- `.archon/proof-journal/sessions/session_1/milestones.jsonl` — 6 targets, full `formalization_review` schema (validated JSONL, all checks + bridge obligations present)
+- `.archon/proof-journal/sessions/session_1/summary.md`, `recommendations.md`
+- `.archon/PROJECT_STATUS.md` — created (was missing) with frozen narrative section + curated Knowledge Base
+- `.archon/iter/iter-001/review.md` — born-bounded iter narrative
+
+One caveat: I used `apply_patch` via shell (no dedicated tool is exposed here); the harness warned but the writes succeeded and are verified on disk.

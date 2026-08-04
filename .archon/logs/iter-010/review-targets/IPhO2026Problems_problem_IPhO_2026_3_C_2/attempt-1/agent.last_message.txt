@@ -1,0 +1,16 @@
+Both review artifacts are durable on disk.
+
+**Review Verdict: `blocked` / `needs_redraft`** (`wrong_or_weakened_target`)
+
+**What passes**
+- Compiles cleanly (preflight rc=0); 9 `sorry` warnings, no errors, no axioms/`native_decide`/signature tampering.
+- Main contract `m1_eq_sqrt : m.M1 = Real.sqrt (M2² − M3² + M4²)` exactly matches the official C.2 answer, answer kept conclusion-side, units/magnitude semantics honest.
+
+**What fails (root cause, not tactics)**
+- **Defect A — swapped isothermal legs:** `heat_12` puts leg 1→2 at `Tc` with `+Qc` and `heat_34` puts 3→4 at `Th` with `−Qh`, contradicting the model's own `figure3b` (`T v1 = Th`, `T v3 = Tc`) under `Tc < Th` — `Qh_eq`/`Qc_eq` are unprovable outside the excluded `Th = Tc` regime, and disagree with Figure 3b.
+- **Defect B — false q-form prefactor:** EOS substitution into the B.1 law yields `Q = −(μ₀V²/(2nK))(qf−qi)` (the prover proved this as `htrue` via `field_simp` in-place), not the contracted `+(μ₀V/2)`; the bridge lemma is false in the positive parameter regime.
+- **Missing field:** the T3-B2 adiabatic law (`T ∝ 1/H`) is not a model field, so `q3_eq` is underivable.
+
+The prover trace and newest task result agree with each other and with this iteration's evidence; the task result even supplies the smallest faithful redraft, which I recorded verbatim in `next_steps`. Files written:
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_2/attempt-1/milestones.jsonl`
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_2/attempt-1/summary.md`

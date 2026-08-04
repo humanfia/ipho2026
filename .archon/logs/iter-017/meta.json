@@ -1,0 +1,180 @@
+{
+  "iteration": 17,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-08-03T06:38:40Z",
+  "plan": {
+    "status": "skipped"
+  },
+  "prover": {
+    "status": "done",
+    "dispatchEligible": 3,
+    "dispatchSkippedNoEligible": false,
+    "pipelineReviewEnabled": true,
+    "pipelineImmediateRedraftEnabled": true,
+    "pipelineFormalizationReviewEnabled": true,
+    "pipelineStartsAt": "mixed",
+    "pipelineReviewMaxCombined": 3,
+    "pipelineReviewMaxReviewers": 3,
+    "pipelineReviewComplete": false,
+    "pipelineReviewTargets": 3,
+    "pipelineReviewReviewed": 3,
+    "pipelineReviewUnresolved": 1,
+    "pipelineReviewReport": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-017/pipelined-review.json",
+    "pipelineFormalizersRequested": 4,
+    "pipelineFormalizersMaterialized": 3,
+    "pipelineFormalizersFailed": 1,
+    "pipelineFormalizationReviews": 0,
+    "pipelineFormalizationPending": 1,
+    "pipelineGateEventsApplied": true,
+    "pipelineGateEvents": 7,
+    "durationSecs": 35635
+  },
+  "pipelineFormalizers": {
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "status": "materialized",
+      "cycle": 1,
+      "origin": "initial",
+      "baselineSha256": "cf11edc335e9be2770f6e48d3b1175f3836e49d2bbd3e38df7894611b4373ebf",
+      "mode": "physics-formalize",
+      "sessionId": "0dc05008-ee17-40df-93d2-fd2100440de9",
+      "runnerOk": true,
+      "changed": true,
+      "compiles": true,
+      "taskResultUpdated": true,
+      "leanSha256": "999c2a6138132223738e3ad4558c3e80efa8be1f7b078f8a74998f7d61e7995a",
+      "error": "",
+      "reviewAttempt": 2
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "materialized",
+      "cycle": 1,
+      "origin": "initial",
+      "baselineSha256": "d2c8266c5adf983447e61d71f66bbe61311b59d1dab020870eb0b88fe34f1c68",
+      "mode": "physics-formalize",
+      "sessionId": "c748adad-2260-4e80-8656-47b60e97a9d0",
+      "runnerOk": true,
+      "changed": true,
+      "compiles": true,
+      "taskResultUpdated": true,
+      "leanSha256": "99638318ef066f8ca3f0bc99095729ed73064a695fd7eb84d1232977c24be404",
+      "error": "",
+      "reviewAttempt": 2
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "status": "error",
+      "cycle": 3,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "reviewAttempt": 3,
+      "sessionId": "010db64c-4739-4d56-ac72-50249d634149",
+      "runnerOk": true,
+      "changed": false,
+      "compiles": true,
+      "taskResultUpdated": true,
+      "leanSha256": "f3e66545ce9ff7c3173604f3030711b715258b8dd31d4e612075fe347cb6267d",
+      "error": "formalizer did not change the Lean target"
+    }
+  },
+  "axiomSweep": {
+    "status": "done",
+    "scope": "current-objectives",
+    "jobs": 2,
+    "targets": 2,
+    "filesChecked": 2,
+    "failedFiles": 0,
+    "durationSecs": 20,
+    "sorryLaunderings": 0
+  },
+  "review": {
+    "status": "running"
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "status": "done",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "d683cdaf-ffe9-442a-95c2-7884ebc2a4d4"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "status": "done",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "735ef431-daae-4d1b-be78-ad482232edde"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "done",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "b6f11d1e-7d0c-418b-901a-8b95a74889bd"
+    }
+  },
+  "pipelineFormalizationReviews": {
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "status": "passed",
+      "cycle": 1,
+      "attempt": 1,
+      "reviews": 4,
+      "reason": "All six semantic checks pass. Every given of T1-B.1 (masses/charges, r0 = 100*a0, antiparallel transverse velocities, per-particle angular momentum mu*hbar about CM, isolated nonrelativistic Coulomb-only, a0 = hbar^2/(k*m*e^2)) has a named answer-free carrier; the bound branch (E < 0) is a structure field with a proved inhabited instance; the target r_max = (1600/9)*a0 and its per-a0 corollary x_max = 1600/9 are asserted only conclusion-side and Lean-proved from a proved sign band. The single sorried declaration (turningQuadratic_normalized_eq) is a value-computation bridge whose statement I independently re-derived from the structure fields: both sides reduce to (hbar^2/m)*(x - 64 - 9*x^2/2500), with turning points 100 and 1600/9 (discriminant 490000 = 700^2). It asserts an equation only \u2014 no attainability or maximality \u2014 so the requested answer is not smuggled into any assumption; sorry proof bodies are allowed at this stage."
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "status": "passed",
+      "cycle": 1,
+      "attempt": 1,
+      "reviews": 4,
+      "reason": "All six checks pass. The iter-017 redraft repaired two genuine statement-level faithfulness defects inherited from iter-011/013: (1) the orientation sign \u2014 verified against the official page image T1_page-2.png (Fig. 1b: positron above electron, moving RIGHT, electron left, separation vertical), so perp sep0 v0 = -(r0*v0) and the signed angular-momentum law -(L/m_red) encode the actual clockwise orbit; under the old +r0*v0 sign the physical attractive orbit has perp u0 u_inf > 0, making IsAsymptoticRelativeVelocity uninhabited and both targets false for the physical model; (2) orbit_eq_conic now states the attractive branch r = p/(1 + eps cos(\u03b8 - polar_angle 0)), satisfiable at t = 0 (independently recomputed: p = 450 a0, eps = 7/2, p/(1+eps) = 100 a0 = r0), whereas the old repulsive branch demanded cos = 11/7 > 1. The corrected contract eps^2 = 49/4 and signed value -arctan(2/sqrt 45) is preserved and independently reproduced from the governing-law field values (E = 1/80 in hbar^2/(m a0^2) units, L = 15 hbar, m_red = m/2 give eps^2 = 1 + 2EL^2/(m_red(ke^2)^2) = 49/4; arctan(2/sqrt 45) = 16.6015 deg, inside both rounding bands, matching the official acos(-2/7) - 90 deg reading). The official -16.60 appears only conclusion-side; the nine sorries are exactly the documented Kepler/Binet/limit leaves, each a true classical-mechanics statement with its derivation route recorded, and the two review-named bridges (exists_asymptoticRelativeVelocity, signed_deflection_eq_formula) are now proved assemblies over those leaves. Minor non-blocking observations: the total_energy_pos docstring's '7/400' arithmetic is stale (operative value E = 1/80, confirmed by the proved eccentricity_sq_eq; the theorem statement 0 < E is unaffected), roundsToOfficialDegreesAbs's upper endpoint 16.615 is looser than the exact rounding interval [16.595,16.605) but non-load-bearing beside the exact-value conjunct, and the blueprint ledger text still shows the pre-redraft sign/conic branch (sync-lane re-key already flagged by the formalizer, not a Lean-statement defect)."
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "status": "passed",
+      "cycle": 2,
+      "attempt": 1,
+      "reviews": 4,
+      "reason": "Iter-017 redraft repaired both certificate defects in the contract, and the file now faithfully and derivably encodes T1-C1. Root cause: IsScatteringAngle is now exactly the cosine law (vacuous at p = 0), admitting the official degenerate critical configuration (O2 at rest) that T1_solution.txt counts as attaining the threshold at every theta >= pi/2 (90-degree tangent point = velocity-circle origin) \u2014 the pre-redraft p != 0 readout made both main theorems refutable, and the redraft lane machine-checked the repair (backward reachability fully proved in scratch, EXIT=0, axioms [propext, Classical.choice, Quot.sound]). Secondary defect: backward hdisc strengthened to the pi/2 reality condition 0 <= 1 - 2*dU/(m*c^2), excluding the vacuous regime dU in (mc^2/2, 3mc^2/2]. The Lean hbarOmegaMin carries the correct official factor 2*dU/(3*m*c^2) (blueprint recorded-answer paragraph is stale, missing the 2; blueprint def prose still says p != 0 \u2014 blueprint-side re-keying debt routed to plan/blueprint-doctor, not a Lean infidelity). Both minimality conjuncts and all helper lemmas are proved in-file; the two remaining sorries are the reachability conjuncts, now true statements with a compiled route (backward) and an explicit coordinate witness route (forward, P0 = 2(E0/c)cos(theta)/3 >= 0 double root). Answer appears only on conclusion sides; no smuggling into assumptions."
+    }
+  },
+  "pipelinePreflights": {
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    }
+  },
+  "pipelineReviews": {
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "status": "done",
+      "attempt": 2,
+      "cycle": 1,
+      "route": "needs_redraft",
+      "error": "expected exactly one milestone row, found 2"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
+    }
+  }
+}

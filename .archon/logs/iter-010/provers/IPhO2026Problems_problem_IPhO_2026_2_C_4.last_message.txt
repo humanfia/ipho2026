@@ -1,0 +1,7 @@
+I've reached the end of this session's working capacity on a genuinely hard analytical goal, and the honest state is: the file is unchanged (compiles clean with its one contracted `sorry`), and I've written a full proof map plus verified building blocks into the task result so the next iteration can finish it.
+
+**Summary**
+
+- **File**: `IPhO2026Problems/problem_IPhO_2026_2_C_4.lean` — untouched; compiles with exit 0, one warning (`declaration uses 'sorry'` at line 145/148 region), the frozen `sorry` in `caustic_small_angle_power_law` still in place.
+- **Task result**: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_4.md` documents the complete proof route: `IsEquivalent` math (`u = R/2`, `v = (3/4)R^{1/3}`, `p = 2, q = 3` on `nhdsWithin 0 (Ioi 0)`), the `gs = θ⁶ sin²θ` absorber decomposition, and a list of fully Lean-verified ingredients from this session (`tendsto_sinc_L`, `tendsto_sin_div_L`, `isLittleO_fac`, `g2 : sin³θ/θ³ − θ → 0`, `Tendsto (sin³/(2θ³)) → 1/2`, `Tendsto.rpow` argument-positivity patterns, the three-way `A/B/C =o[L] gs` lemmas with their bounds).
+- **Blocker (recorded)**: assembly size — ~15 lemmas of `field_simp`/`ring_nf` glue for the final `h_ms`/`gR` composition exceeded one worker session; the math and every sub-step checks out (verified numerically with sympy/mpmath and individually in `/tmp/*.lean` probes), so this is a time/size blocker, not a semantic one. No redraft needed — the statement is faithful and provable as stated.

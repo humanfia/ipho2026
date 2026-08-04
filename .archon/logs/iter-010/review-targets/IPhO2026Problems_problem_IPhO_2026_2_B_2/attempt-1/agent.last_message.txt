@@ -1,0 +1,16 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict: `blocked` / `needs_redraft` (`underdetermined_contract`)**
+
+**Key findings**
+- **The failure is mathematical, not tactical.** Lemma `radius_over_diameter_eq` (`IPhO2026Problems/problem_IPhO_2026_2_B_2.lean:257`) claims `R/(2a) = 1/(1-cos θ)` from the B.1 calibration `a = R sin θ − (R/2) sin 2θ`. After rewriting, the residual goal at line 262 is literally `1 = 2 sin θ` in ring normal form — no tactic can close it because it's false.
+- **Concrete countermodel within the hypotheses**: `R=1, θ=π/4, a = sin θ − ½ sin 2θ ≈ 0.207 > 0` satisfies `CookerParams` + `B1Calibration`, yet `R/(2a) ≈ 2.414 ≠ 1/(1−cos θ) ≈ 3.414`. The theorem is unprovable as stated, so `retry_proof` is ruled out.
+- **Correct identity**: `R/(2a) = 1/(2 sin θ_max (1 − cos θ_max))` — this is what the width accounting plus calibration actually yields; the recorded answer `1/(1−cos θ_max)` would require an extra constraint fixing `θ_max` (the tangent-ray condition) that the contract doesn't carry.
+- **Structural audit passes**: statements, signatures, and structures match the blueprint 1:1, `sorry_count=0`, no axiom laundering, and the three proved lemmas (`impactParam_le_aperture`, `collectedWidth_eq_radius`, `power_ratio_eq_width_ratio`) are honest.
+- **Evidence gaps noted**: no matching task-results artifact exists (process warning only); the 218-event prover trace was used as primary evidence and independently reached the same false-equation impasse.
+
+**Files written**
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/attempt-1/milestones.jsonl` (single validated JSON line)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/attempt-1/summary.md`
+
+**Next step for the owner**: reconcile the recorded official answer with the B.1 calibration — either correct the identity to `1/(2 sin θ_max (1−cos θ_max))` or add an explicit hypothesis forcing `2 sin θ_max = 1` — then regenerate the two affected declarations before reproving.

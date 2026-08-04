@@ -1,0 +1,13 @@
+Review complete. **Verdict: solved.**
+
+**What I found**
+- The iter-010 `underdetermined_contract` defect is **repaired on disk**: `latent_heat_per_unit_mass_target` (IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:322) now takes the readout hypothesis `Lv_reported_central_eq : Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue`, eliminating the `central = 10000` countermodel. This is exactly the hypothesis-side fix the iter-013 prover trace prescribed.
+- **Compilation**: deterministic preflight passed with `sorry_count: 0`; my verbatim scan confirms no `sorry`/`admit`/`axiom`/`native_decide` anywhere (only linter warnings: unused `input`, show-vs-change style).
+- **Proof audit (LSP)**: the final conjunct rewrites via the hypothesis to `|(39/18.0e-3) − 2190| ≤ 110` and `constructor <;> norm_num` leaves **no goals**.
+- **Axioms**: `lean_verify` reports only `[propext, Classical.choice, Quot.sound]`; the five `opaque` catalog constants are the documented domain model, not smuggled axioms.
+- **Faithfulness**: units, PhysLean typed habitats, official answer `2190 ± 110 kJ/kg`, and the `Lᵥ = Qᵥ/M₀` conversion all match the blueprint; the band bound (`|2166.67 − 2190| = 23.33 ≤ 110`) is proved, not assumed. The four auxiliary declarations close honestly.
+- **Process note**: the iter-013 prover trace (ends 12:23) is one repair cycle stale — it documented the former 1-sorry baseline; the fix landed at 12:33 and is certified by preflight + live LSP. No matching task-result artifact exists (warning only, not a semantic failure).
+
+**Artifacts written**
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/attempt-1/milestones.jsonl` — one valid JSON line, `status: solved`, `route: solved`, `redraft_kind: not_applicable`.
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/attempt-1/summary.md` — 10-line summary.

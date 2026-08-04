@@ -1,0 +1,66 @@
+{
+  "iteration": 3,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-07-27T18:14:58Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa4c9-9558-7580-a7d2-d951c70228b9",
+    "durationSecs": 983
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 1
+  },
+  "prover": {
+    "status": "done",
+    "durationSecs": 1558
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa4d8-a06c-7432-a951-ae84154e1292"
+    }
+  },
+  "review": {
+    "status": "done",
+    "deterministic": true,
+    "preflightJobs": 1,
+    "preflightDurationSecs": 10.287,
+    "preflightPassed": 0,
+    "preflightFailed": 1,
+    "preflightPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-003/review-preflight.md",
+    "candidatePackPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-003/deterministic-review-candidates.md",
+    "promptOriginalChars": 31313,
+    "promptCompressedChars": 31313,
+    "promptCompressionOmittedChars": 0,
+    "promptCompressionChanged": false,
+    "sessionId": "019fa4f5-ee56-7ba0-8cab-7d812996089c",
+    "durationSecs": 456,
+    "physicsBlockers": 19,
+    "physicsDoctorBlockers": 19,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "retry",
+    "formalizationGatePassed": 0,
+    "formalizationGateRetry": 15,
+    "formalizationGateExhausted": 1,
+    "formalizationGateReviewed": 1
+  },
+  "sorry_count": 124,
+  "finalize": {
+    "innerGit": {
+      "sha": "1732981"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-27T19:10:56Z",
+  "wallTimeSecs": 3357
+}

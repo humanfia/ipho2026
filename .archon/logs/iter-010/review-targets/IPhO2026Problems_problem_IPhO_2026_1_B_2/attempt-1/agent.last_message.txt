@@ -1,0 +1,13 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: blocked / needs_redraft** (`wrong_or_weakened_target`)
+
+**Key findings**
+- The file compiles cleanly (preflight rc=0, 6 sorries) with no axiom/admit laundering, signatures preserved, and the official `-16.60°` strictly conclusion-side — so checks 2 and 4 pass.
+- Check 1 fails: 6 active sorries remain, including both main targets (`signed_deflection_angle_T1_B2`, `unsigned_deflection_angle_in_degrees_T1_B2`).
+- Check 3 fails at the root: the stated closed form `∓(π − 2·arctan(2/√63))` evaluates to ≈ ∓151.71°, contradicting the theorems' own rounding bands — and the proof bodies themselves contain machine-checked `¬ roundsToOfficialDegrees(Abs)` witnesses (`≤ −90°` / `≥ 90°`), so the statements are unprovable in principle, not merely unproved. Upstream, `eccentricity_sq_eq` claims `67/4` where the faithful governing-law fields give `49/4` (E = 1/80, confirmed by the honestly proved `total_energy_pos`).
+- The iter-010 prover trace and archived task result agree with this analysis and already recorded the correct physics: `δ = −arctan(2/√45) ≈ −16.6015°`, inside the official band, plus banked repair proofs.
+
+**Repair path** (recorded in `next_steps`): redraft only the conclusion layer — `eps² = 49/4`, acute deflection formula, main target `−arctan(2/√45)`, re-based asymptote certificate — then the Kepler-layer bridges (`orbit_eq_conic`, `exists_asymptoticRelativeVelocity`) remain as the honest downstream gap.
+
+Artifacts: `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/attempt-1/milestones.jsonl` and `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/attempt-1/summary.md`

@@ -1,0 +1,40 @@
+Wait — the LAST error shows e1: `5000/2500 * 2500 = 5000`! And e2: `2601/2500 * 2500 = 2601`. After rw, goal: `5000 < 2601` — norm_num disproves... inferring "False" ✓ sound. But line 14's `norm_num` for `14100 < 19392` PASSED?! Lines 3 & 14 compiled. Only line 26 failed — because there I rewrote to `5000 < 2601` (FALSE!). HA — I made an arithmetic slip: 2 = 5000/2500! Not 2 = 2600/2500. My rewrite is wrong, so it SHOULD fail. Soundness restored!!
+
+And `14100 < 19392` passed ✓. `(2:ℝ) < 2601/2500` failed because I rewrote to `5000/2500` — 5000 < 2601 FALSE. My mistake: 2·2500 = 5000 vs numerator 2601... should be (2:ℝ) = 5000/2500 then 5000 < 2601 FALSE — but REAL fact: 2 < 1.0404?? NO! 2 > 1.0404!! `(51/50)² = 1.0404 < 2`!! √2 < 51/50 requires 2 < (51/50)² = 1.0404 — WHICH IS FALSE!!!
+
+MOTHER OF ALL BUGS: (51/50)² = 1.0404, and 2 > 1.0404. So even the FIRST proof — `Real.sqrt 2 < 51/50` — IS UNPROVABLE because it's FALSE! √2 ≈ 1.41421 > 1.02!!! `51/50 = 1.02`!!! I confused myself: 51/50 = 1.02, NOT 1.414!!! 
+
+So my upper bound had a units error: √2 ≈ 1.41421 needs bound 1.415 = 283/200, not 51/50. And lower bound 48/50 = 0.96 < √2 ✓ fine (0.96 < 1.414). So everything was actually SOUND all along; my numeric certificate bounds were just WRONG for the upper side. And the "soundness scare" with linear_combination was me misreading ring normal forms during divided attention. PHEW. And also — earlier "Q/2 = Q" confusion: likely also fine.
+
+Let me now redo the certificate with correct bounds: 1.414 < √2 < 1.415. a = 1.41/(2√2): |a − 0.5| < 1/200.
+- Upper: a < 1.41/(2·1.414) = 1.41/2.828 = 0.49858... < 0.505 ✓
+- Lower: a > 1.41/(2·1.415) = 1.41/2.83 = 0.49823... > 0.495 ✓
+
+Proof: a < 0.505 ⇔ 1.41 < 0.505·(2√2) ⇐ 0.505·(2·1.414) = 1.427...  1.41 < 1.428 ✓. Compute 0.505·2·1.414 = 1.01·1.414 = 1.42814 ✓ > 1.41.
+Lower: 0.495 < a ⇔ 0.495·(2√2) < 1.41 ⇐ 0.495·2·1.415 = 0.99·1.415 = 1.40085 < 1.41 ✓.
+
+Squared-side checks: 1.414 < √2 ⇔ 1.414² < 2: 1.414² = 1.999396 < 2 ✓. √2 < 1.415 ⇔ 2 < 1.415² = 2.002225 ✓.
+
+Fractions: 1.414 = 707/500, 1.415 = 283/200.
+- (707/500)² = 499849/250000 < 2 ⇔ 499849 < 500000 ✓
+- 2 < (283/200)² = 80089/40000 ⇔ 80000 < 80089 ✓
+- 1.41 < 0.505·(2·1.414): 0.505 = 101/200; (101/200)·2·(707/500) = (101·707)/(100·500) = 71407/50000 = 1.42814; 1.41 = 70500/50000; 70500 < 71407 ✓
+- (99/200)·2·(283/200): 0.495 = 99/200; (99/200)·2·(283/200) = (99·283)/(100·200) = 279... 99·283 = 28017; /20000 = 1.40085; < 1.41: 28017/20000 vs 1.41 = 28200/20000 ✓.
+
+Red flags now reconciled: my earlier `norm_num` failures were REJECTING the false `2 < (51/50)²`, `2 < 1.05`, `5000<2601` etc. — the environment was behaving CORRECTLY all along!! And `ring` failures: `Q*2/16 = Q/4` — CHECK: LHS = Q·(1/8)... wait, 2/16 = 1/8, so Q/8 = Q/4 is FALSE — ring correctly rejected!! My original claim "ring said Q/16·2 = Q/4 fails" — CORRECT to fail: (Q/16)·2 = Q/8 ≠ Q/4. And S4's real issue: P·(s·s)/16 with s·s=2 → P·2/16 = P/8. But the goal says P/4! So LHS = P/8 and the CLAIMED RHS P/4 — genuinely DIFFERENT... wait, but P here — for S4 I had e: `LHS * 4 = Q*(√2*√2)/4` i.e., LHS·4 = Q·2/4 = Q/2 → LHS = Q/8. The S4 claim is LHS = Q/4 where Q = ρ·g·Δ·a³. LHS = Q/8 ≠ Q/4. So S4 IS mathematically FALSE as stated — back to my earlier conclusion, this time CORRECTLY diagnosed: pressureCouple = ρ·g·Δ·a³/8, but Step 4 (and hence Step 5's RHS, Step 7's balance, and the MAIN THEOREM) claim /4.
+
+Let me double-check this on DIMENSIONS of the official solution: official T1-A1 marks: `ΔF = a²/√2 · ρ₀ g Δh`, arms `a/(2√2)`; balance: `(a²/√2)ρ₀gΔh · (a/(2√2)) = (ρ−ρ₀)a³g · (a/(2√2))`. LHS = ρ₀gΔh·a³/(2·2) = ρ₀gΔh a³/4 ✓ official. RHS = 2ρ₀a³g·a/(2√2) = ρ₀g a⁴/√2 ✓. Cancel a³gρ₀: Δh/4 = a/√2 → a = Δh√2/4 = Δh/(2√2) ✓. So official pressure couple uses arm a/(2√2) ≈ 0.3536a.
+
+Formalization's pressureCoupleMagnitude = ρ₀gΔh·(a√2/2)·(a/2)·(a√2/4) = ρ₀gΔh·a³·2/16 = ρ₀gΔh a³/8 ✓ computation confirmed. The formalized force ΔF = ρ₀gΔh·(a√2/2)·(a/2) = ρ₀gΔh·a²√2/4 vs official a²/√2·ρ₀gΔh = a²√2/2·ρ₀gΔh — factor 2 too small in formalization (area should be a·(a/√2) = a²/√2 per official "area of opening is a·(a/√2)"; formalization used slotVerticalSize = a√2/2 (the PROJECTION a√2/2 = a/√2 ✓ same!) times lever arm a/2 vs official arm a/(2√2) = a√2/4. So force: official a²/√2; formalization ΔF = ρ₀gΔh·(a√2/2)·... hmm actually the formalized couple formula multiplies THREE factors: (a√2/2)·(a/2)·(a√2/4) — the first is slot VERTICAL SIZE (correct area factor for the resultant on a face per unit width? roughly), the second a/2, third the claimed horizontal arm a√2/4. Official: force couple = (a²/√2)·ρ₀gΔh acting at TWO arms a/(2√2) — the pressure couple moment = each force times its arm... official writes LHS = `((a²/√2)ρ₀gΔh) · (a/(2√2))` = ρ₀gΔh·a³·(1/√2)·(1/(2√2)) = ρ₀gΔh·a³·1/4 — where 1/√2·1/(2√2) = 1/4. Formalization: (a√2/2)·(a/2)·(a√2/4) = a³·(√2/2)·(1/2)·(√2/4) = a³·(2/16) = a³/8. Mismatch factor 2: official couple ρ₀gΔh a³/4 (per... official probably counts moments of BOTH forces of the couple: total = 2·force·arm — and the official "Note" indeed uses force × a/(2√2) once + matching arm for the effective weight once each, symmetry making the net couple = F·(2·arm)? Whatever — physical modeling decision. Either way, the FORMALIZED readout gives a³/8 ⇒ balance a⁴/√2·... restoring ρ₀ga⁴/√2 = ρ₀gΔha³/8 → a·8/√2 = Δh → a = Δh·√2/16??? wait: a/√2 = Δh/8 → a = Δh/(4√2)·2 → a = Δh√2/8 = Δh/(4√2) ≈ 0.249. So main theorem `a = Δh/(2√2) = 0.50` is unattainable from the given hbal — CONFIRMED FALSE combination of hypotheses (well, the theorem is VACUOUSLY... can hbal even hold with all params positive? hbal: restoring = couple ⇔ ρ₀ga⁴/√2 = ρ₀gΔha³/8 ⇔ a = Δh/(4√2) > 0 — satisfiable! But then conclusion a = Δh/(2√2) false. And Δh = 1.41 doesn't constrain a = opaque. So main theorem is REFUTABLE: pick ρ₀=a=... any positive values with a = Δh/(4√2), Δh = 1.41: hbal holds, conclusion fails. UNPROVABLE — proven above via explicit countermodel. CONFIRMED non-provable.)
+
+So S4/S5/main theorem are FALSE for S4/S5; main: hbal is satisfiable while conclusion is false ⇒ main theorem unprovable. S7 algebra: from the STATED hypothesis equation ρ₀ga⁴/√2 = ρ₀gΔha³/4, a = Δh/(2√2) DOES follow ✓ provable. S2, S3 ✓ verified. S1 ✓ verified. S6 ✓ ring. S8 numerical ✓ provable (with 1.414/1.415 bounds). torque_balance_contract ✓ exact IsCriticalTorqueBalance.
+
+So provable: S1, S2, S3, S6, S7, S8(numerical), torque_balance_contract = 7 of 10. Blocked as FALSE: S4, S5, main target. I'll prove the 7, leave focused sorries on the 3, and redraft-document. This follows the workflow precisely: "If the statement is not provable ... keep the signature unchanged, leave a focused sorry, and record a redraft request."
+
+Wait, S5/critical_balance_eq: hypothesis hbal : restoringMoment = pressureCoupleMagnitude. Conclusion: ρ₀ga⁴/√2 = ρ₀gΔha³/4. Given the defs, hbal ⇔ ρ₀ga⁴/√2 = ρ₀gΔha³/8. Is the conclusion inconsistent with hbal for positive params? Both can hold iff a⁴/√2 = Δha³/4 AND a⁴/√2 = Δha³/8 — impossible for positive (Δha³/4 ≠ Δha³/8). So under hbal + positivity, the conclusion is FALSE — the hypothesis is consistent (a = Δh/(4√2) works) and conclusion fails ⇒ S5 UNPROVABLE. Correct — leave sorry, derived-by-rewriting-S3-and-S4-in-hbal gives... unusable since S4 is false.
+
+Now S7 side_length: provable from stated hbal ✓ as shown.
+And numerical_value: provable independently of S4 (uses ha_eq hypothesis) ✓.
+main theorem: hbal is the RAW restoring = couple (not the /4 equation) ⇒ conclusion false ⇒ UNPROVABLE. Leave focused sorry.
+
+Try S7 proof first in final form, then numerical certificate with correct bounds, then the easy ones, then edit the file.

@@ -1,0 +1,15 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: SOLVED** — `IPhO2026Problems/problem_IPhO_2026_3_C_4.lean`, theorem `IPhO2026.Problem3.C4.c4_elapsed_time`.
+
+**Key findings**
+- Preflight clean: compiles rc=0, 0 active sorries, no diagnostics. Independent grep confirms the only `sorry` matches are two stale doc-comment sentences (L58, L319) — no code-level `sorry`/`admit`/custom axioms.
+- Iter-10 `underdetermined_contract` blocker is genuinely fixed: the iter-11 redraft added `RegimeAssumptions` to `heatDumpedDensity_eq` and `residenceDensity_eq`, which rules out both countermodels (`T'=0` via `0 < tempFinal < T'`, `P=0` via `inputPower_pos`). All bridge proofs are honest tactics (`field_simp`, `linear_combination`, a.e. congruence off the measure-zero endpoint set, FTC via `integral_inv`/`integral_one`).
+- Statement preserved: the main conclusion is verbatim the official answer `t=(C_c·T_h/P)·(ln(T_0/T)−(T_0−T)/T_h)`, purely conclusion-side; hypotheses bundle only the per-cycle laws and the operational definition `haccum`.
+- Trace/artifact agreement: the iter-013 prover trace and matching `task_results-archive/problem_IPhO_2026_3_C_4.md` agree with the preflight (axioms = `[propext, Classical.choice, Quot.sound]` only).
+
+**Artifacts written**
+- `.../cycle-1/attempt-1/milestones.jsonl` — one valid JSON line, `status=solved`, `route=solved`, `redraft_kind=not_applicable` (verified parseable).
+- `.../cycle-1/attempt-1/summary.md` — 11-line audit summary.
+
+Cosmetic note (non-blocking): the two stale doc comments still say proofs are `sorry by design`, and the blueprint chapter has no `\leanok` markers yet — the former is a polish-stage item, the latter belongs to the mechanical sync.

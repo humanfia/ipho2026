@@ -1,0 +1,15 @@
+Plan phase for iter 001 is complete. Summary of what I found and decided:
+
+**State found**
+- Iter 001's autoformalize wave is mid-flight: 22/28 Lean files already on disk and compiling (by-sorry, `import Mathlib` only, no cross-imports, axiom-sweep clean) — 86 sorries total.
+- 6 files still missing (lanes in flight): `1_A_1`, `1_B_1`, `2_A_1`, `2_B_1`, `2_C_2`, `3_C_4`.
+- 2 wave-1 outputs are doc-only truncations (`1_B_2`, `3_C_3`) — queued for audit/re-dispatch, not repeated as objectives.
+
+**Decision (two-wave autoformalize)** — dispatched only the 6 missing files as wave-2 objectives in .archon/PROGRESS.md:1, each with chapter/report pointers, physics-specific modeling hints, and acceptance criteria. Repeating the 22 good files would waste worker throughput and risk clobbering in-flight lanes; the truncated stubs wait for their task_results to confirm.
+
+**Bookkeeping written**
+- `.archon/iter/iter-001/plan.md` + `objectives.md` — rationale, decision record, per-lane acceptance.
+- `.archon/STRATEGY.md` — end-state (28 sorry-free formalizations), phase table, wave-1 completed row, known Mathlib gaps.
+- `.archon/task_pending.md` / `task_done.md`, `.archon/TO_USER.md`, `.archon/ARCHON_MEMORY.md` updated; 261-decl blueprint coverage debt and 27 unpinned umbrella nodes explicitly scheduled for post-dispatch transcription (helper sets still churning in the running lanes).
+
+Next iter: audit wave-1 task_results (repair the 2 stubs if confirmed), transcribe helper blueprint entries, then run the 28-target formalization review gate to advance autoformalize → prover.

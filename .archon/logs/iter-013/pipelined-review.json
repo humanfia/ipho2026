@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "iteration": 13,
+  "complete": false,
+  "status": "incomplete",
+  "target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+    "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+    "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean"
+  ],
+  "targets": 13,
+  "reviewed": 11,
+  "unresolved": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean"
+  ],
+  "errors": {
+    "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean": "milestone missing: [Errno 2] No such file or directory: '/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_4/cycle-1/attempt-3/milestones.jsonl'",
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": "milestone missing: [Errno 2] No such file or directory: '/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/cycle-1/attempt-3/milestones.jsonl'"
+  },
+  "requested_jobs": 28,
+  "max_combined_workers": 13,
+  "max_reviewers": 13,
+  "max_attempts": 3,
+  "rounds": [
+    {
+      "attempt": 1,
+      "submitted": 13,
+      "completed": 11,
+      "failed": 2
+    },
+    {
+      "attempt": 2,
+      "submitted": 2,
+      "completed": 0,
+      "failed": 2
+    },
+    {
+      "attempt": 3,
+      "submitted": 2,
+      "completed": 0,
+      "failed": 2
+    }
+  ],
+  "duration_secs": 6443.799,
+  "preflight": {
+    "iteration": 13,
+    "jobs": 1,
+    "duration_secs": 202.388,
+    "summary": {
+      "total": 13,
+      "passed": 7,
+      "failed": 6
+    },
+    "targets": [
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 21.615,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:325:36: warning: Variable name `hp` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:325:52: warning: Variable name `ha` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:326:5: warning: Variable name `hΔ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:326:23: warning: Variable name `hg` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:414:23: warning: Variable name `hp` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:414:39: warning: Variable name `ha` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:414:52: warning: Variable name `hg` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_A_1.lean:484:31: warning: Variable name `S` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 4,
+        "duration_secs": 17.767,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:336:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:402:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:493:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:544:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:574:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:794:5: warning: Variable name `hu` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:795:5: warning: Variable name `hbranch` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:884:53: error: unsolved goals\nhR : ScalingRegime\nS : CoulombScatteringData hR\nhμ : IsAngularMomentumFactor unboundMu\nu : RelativeVelocityVector\nhu : IsAsymptoticRelativeVelocity S u\nleft✝ : ‖u.vec‖ = √(2 * S.total_energy / S.reduced_mass)\nhform : angleBetween (initialDirection S) u.vec = arctan (1 / √(S.eccentricitySq - 1))\nhE : S.eccentricitySq = 49 / 4\nhs45 : √(S.eccentricitySq - 1) = √45 / 2\nhangle : angleBetween (initialDirection S) u.vec = arctan (2 / √45)\nhA_pos : 0 < arctan (2 / √45)\nhz : perp (initialDirection S) u.vec = 0\nha_ne : initialDirection S ≠ 0\nhu_ne : u.vec ≠ 0\nha_norm : 0 < ‖initialDirection S‖\nhu_norm : 0 < ‖u.vec‖\n⊢ ‖(initialDirection S).ofLp 0‖ ^ 2 + ‖(initialDirection S).ofLp 1‖ ^ 2 =\n    (initialDirection S).ofLp 0 ^ 2 + (initialDirection S).ofLp 1 ^ 2\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:886:67: error: unsolved goals\nhR : ScalingRegime\nS : CoulombScatteringData hR\nhμ : IsAngularMomentumFactor unboundMu\nu : RelativeVelocityVector\nhu : IsAsymptoticRelativeVelocity S u\nleft✝ : ‖u.vec‖ = √(2 * S.total_energy / S.reduced_mass)\nhform : angleBetween (initialDirection S) u.vec = arctan (1 / √(S.eccentricitySq - 1))\nhE : S.eccentricitySq = 49 / 4\nhs45 : √(S.eccentricitySq - 1) = √45 / 2\nhangle : angleBetween (initialDirection S) u.vec = arctan (2 / √45)\nhA_pos : 0 < arctan (2 / √45)\nhz : perp (initialDirection S) u.vec = 0\nha_ne : initialDirection S ≠ 0\nhu_ne : u.vec ≠ 0\nha_norm : 0 < ‖initialDirection S‖\nhu_norm : 0 < ‖u.vec‖\nhu0s : ‖initialDirection S‖ ^ 2 = (initialDirection S).ofLp 0 ^ 2 + (initialDirection S).ofLp 1 ^ 2\n⊢ ‖u.vec.ofLp 0‖ ^ 2 + ‖u.vec.ofLp 1‖ ^ 2 = u.vec.ofLp 0 ^ 2 + u.vec.ofLp 1 ^ 2\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:901:21: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern in the current goal\n\nhR : ScalingRegime\nS : CoulombScatteringData hR\nhμ : IsAngularMomentumFactor unboundMu\nu : RelativeVelocityVector\nhu : IsAsymptoticRelativeVelocity S u\nleft✝ : ‖u.vec‖ = √(2 * S.total_energy / S.reduced_mass)\nhform : angleBetween (initialDirection S) u.vec = arctan (1 / √(S.eccentricitySq - 1))\nhE : S.eccentricitySq = 49 / 4\nhs45 : √(S.eccentricitySq - 1) = √45 / 2\nhangle : angleBetween (initialDirection S) u.vec = arctan (2 / √45)\nhA_pos : 0 < arctan (2 / √45)\nhz : perp (initialDirection S) u.vec = 0\nha_ne : initialDirection S ≠ 0\nhu_ne : u.vec ≠ 0\nha_norm : 0 < ‖initialDirection S‖\nhu_norm : 0 < ‖u.vec‖\nhL : dot (initialDirection S) u.vec ^ 2 = ‖initialDirection S‖ ^ 2 * ‖u.vec‖ ^ 2\n⊢ dot (initialDirection S) u.vec ^ 2 / (‖initialDirection S‖ * ‖u.vec‖) ^ 2 = 1"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 2,
+        "duration_secs": 14.42,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:330:4: error: No goals to be solved\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:337:17: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.1339 / S ^ 2 = ?m.1341\nin the target expression\n  S * (X ^ 2 / S ^ 2) - 6 * m * c ^ 2 * (X / S) + 6 * dU * m * c ^ 2 = 0\n\ncase refine_2\nm c dU θ : ℝ\nhm : 0 < m\nhc : 0 < c\nhdU : 0 < dU\nhb : 0 < hbar\nhθ : IsForwardBranch θ\nhθpos : 0 < θ\nhfac : 2 - cos (2 * θ) ≠ 0\nhmc : 0 < 3 * m * c ^ 2\nhmcne : 3 * m * c ^ 2 ≠ 0\nS : ℝ := 2 * sin θ ^ 2 + 1\nhSdef : S = 2 * sin θ ^ 2 + 1\nhS : 1 ≤ S\nhSpos : 0 < S\nhSne : S ≠ 0\nD : ℝ := 1 - 2 * dU / (3 * m * c ^ 2) * S\nhdisc : 0 ≤ D\nhDdef : D = 1 - 2 * dU / (3 * m * c ^ 2) * S\ns : ℝ := √D\nhsdef : s = √D\nhs_nonneg : 0 ≤ s\nhs_sq : s ^ 2 = D\nhfracS : 2 * dU / (3 * m * c ^ 2) * (3 * m * c ^ 2) = 2 * dU\nhsq3 : s ^ 2 * (3 * m * c ^ 2) = 3 * m * c ^ 2 - 2 * dU * S\nhfrac : 0 < 2 * dU / (3 * m * c ^ 2)\nhDlt : 0 < 1 - D\nhsq_lt : s ^ 2 < 1 ^ 2\nhs_lt_one : s < 1\nhone_sub : 0 < 1 - s\nhfac_S : 2 - cos (2 * θ) = S\nhS' : S ≠ 0\nX : ℝ := 3 * m * c ^ 2 * (1 - s)\nhΩ : hbarOmegaMin m c dU θ = X / (hbar * S)\nhE : hbar * hbarOmegaMin m c dU θ = X / S\nhXdef : X = 3 * m * c ^ 2 * (1 - s)\n⊢ S * (X ^ 2 / S ^ 2) - 6 * m * c ^ 2 * (X / S) + 6 * dU * m * c ^ 2 = 0\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:371:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:385:8: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 5,
+        "duration_secs": 16.695,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean:279:4: error: linarith failed to find a contradiction\ncase h1\np : CookerParams\ng : CookerGeometry p\nr : AbsorbedRays p g\ny : ℝ\nhy : y ∈ r.hitSet\nh0e : g.e.ofLp 0 ^ 2 + g.e.ofLp 1 ^ 2 = 1\nh0n : g.n.ofLp 0 ^ 2 + g.n.ofLp 1 ^ 2 = 1\nhpen : g.n.ofLp 0 * g.e.ofLp 0 + g.n.ofLp 1 * g.e.ofLp 1 = 0\nhdote : ∀ (v : Plane), inner ℝ v g.e = v.ofLp 0 * g.e.ofLp 0 + v.ofLp 1 * g.e.ofLp 1\nhdotn : ∀ (v : Plane), inner ℝ v g.n = v.ofLp 0 * g.n.ofLp 0 + v.ofLp 1 * g.n.ofLp 1\nhnormsq : ∀ (v : Plane), ‖v‖ ^ 2 = v.ofLp 0 ^ 2 + v.ofLp 1 ^ 2\nv : Plane\na✝ :\n  (v.ofLp 0 * g.e.ofLp 0 + v.ofLp 1 * g.e.ofLp 1) ^ 2 + (v.ofLp 0 * g.n.ofLp 0 + v.ofLp 1 * g.n.ofLp 1) ^ 2 <\n    v.ofLp 0 ^ 2 + v.ofLp 1 ^ 2\n⊢ False\nfailed\nIPhO2026Problems/problem_IPhO_2026_2_B_2.lean:295:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern in the current goal\n\np : CookerParams\ng : CookerGeometry p\nr : AbsorbedRays p g\ny : ℝ\nhy : y ∈ r.hitSet\nh0e : g.e.ofLp 0 ^ 2 + g.e.ofLp 1 ^ 2 = 1\nh0n : g.n.ofLp 0 ^ 2 + g.n.ofLp 1 ^ 2 = 1\nhpen : g.n.ofLp 0 * g.e.ofLp 0 + g.n.ofLp 1 * g.e.ofLp 1 = 0\nhdote : ∀ (v : Plane), inner ℝ v g.e = v.ofLp 0 * g.e.ofLp 0 + v.ofLp 1 * g.e.ofLp 1\nhdotn : ∀ (v : Plane), inner ℝ v g.n = v.ofLp 0 * g.n.ofLp 0 + v.ofLp 1 * g.n.ofLp 1\nhnormsq : ∀ (v : Plane), ‖v‖ ^ 2 = v.ofLp 0 ^ 2 + v.ofLp 1 ^ 2\nhparseval : ∀ (v : Plane), inner ℝ v g.e ^ 2 + inner ℝ v g.n ^ 2 = ‖v‖ ^ 2\nhon : r.incidentPt y ∈ halfMirrorArc p g\nhmem : r.incidentPt y ∈ mirrorCircle p g\nhnorm : ‖r.incidentPt y - g.C‖ = p.R\nue : ℝ := inner ℝ (r.incidentPt y - g.C) g.e\nhue : ue = inner ℝ (r.incidentPt y - g.C) g.e\nwn : ℝ := inner ℝ (r.incidentPt y - g.C) g.n\nhpv : ue ^ 2 + wn ^ 2 = p.R ^ 2\nhwn : wn = inner ℝ (r.incidentPt y - g.C) g.n\n⊢ |ue| ≤ p.R\nTry this:\n  [apply] ring_nf\n  \n  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.\n    \n  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.\nIPhO2026Problems/problem_IPhO_2026_2_B_2.lean:299:69: error: unsolved goals\np : CookerParams\ng : CookerGeometry p\nr : AbsorbedRays p g\ny : ℝ\nhy : y ∈ r.hitSet\nh0e : g.e.ofLp 0 ^ 2 + g.e.ofLp 1 ^ 2 = 1\nh0n : g.n.ofLp 0 ^ 2 + g.n.ofLp 1 ^ 2 = 1\nhpen : g.n.ofLp 0 * g.e.ofLp 0 + g.n.ofLp 1 * g.e.ofLp 1 = 0\nhdote : ∀ (v : Plane), inner ℝ v g.e = v.ofLp 0 * g.e.ofLp 0 + v.ofLp 1 * g.e.ofLp 1\nhdotn : ∀ (v : Plane), inner ℝ v g.n = v.ofLp 0 * g.n.ofLp 0 + v.ofLp 1 * g.n.ofLp 1\nhnormsq : ∀ (v : Plane), ‖v‖ ^ 2 = v.ofLp 0 ^ 2 + v.ofLp 1 ^ 2\nhparseval : ∀ (v : Plane), inner ℝ v g.e ^ 2 + inner ℝ v g.n ^ 2 = ‖v‖ ^ 2\nhon : r.incidentPt y ∈ halfMirrorArc p g\nhmem : r.incidentPt y ∈ mirrorCircle p g\nhnorm : ‖r.incidentPt y - g.C‖ = p.R\nue : ℝ := inner ℝ (r.incidentPt y - g.C) g.e\nhue : ue = inner ℝ (r.incidentPt y - g.C) g.e\nwn : ℝ := inner ℝ (r.incidentPt y - g.C) g.n\nhpv : ue ^ 2 + wn ^ 2 = p.R ^ 2\nhwn : wn = inner ℝ (r.incidentPt y - g.C) g.n\nhabsue : |ue| ≤ p.R\nh1 : |wn| ^ 2 = wn ^ 2\n⊢ p.R ^ 2 - p.R ^ 2 * |ue| ^ 2 * p.R⁻¹ ^ 2 = p.R ^ 2 - |ue| ^ 2\nIPhO2026Problems/problem_IPhO_2026_2_B_2.lean:309:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  |wn| ^ 2\nin the target expression\n  √(wn ^ 2) = p.R * √(1 - (|ue| / p.R) ^ 2)\n\np : CookerParams\ng : CookerGeometry p\nr : AbsorbedRays p g\ny : ℝ\nhy : y ∈ r.hitSet\nh0e : g.e.ofLp 0 ^ 2 + g.e.ofLp 1 ^ 2 = 1\nh0n : g.n.ofLp 0 ^ 2 + g.n.ofLp 1 ^ 2 = 1\nhpen : g.n.ofLp 0 * g.e.ofLp 0 + g.n.ofLp 1 * g.e.ofLp 1 = 0\nhdote : ∀ (v : Plane), inner ℝ v g.e = v.ofLp 0 * g.e.ofLp 0 + v.ofLp 1 * g.e.ofLp 1\nhdotn : ∀ (v : Plane), inner ℝ v g.n = v.ofLp 0 * g.n.ofLp 0 + v.ofLp 1 * g.n.ofLp 1\nhnormsq : ∀ (v : Plane), ‖v‖ ^ 2 = v.ofLp 0 ^ 2 + v.ofLp 1 ^ 2\nhparseval : ∀ (v : Plane), inner ℝ v g.e ^ 2 + inner ℝ v g.n ^ 2 = ‖v‖ ^ 2\nhon : r.incidentPt y ∈ halfMirrorArc p g\nhmem : r.incidentPt y ∈ mirrorCircle p g\nhnorm : ‖r.incidentPt y - g.C‖ = p.R\nue : ℝ := inner\n... [truncated]"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 0,
+        "duration_secs": 17.277,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:182:40: error: unexpected token '/--'; expected 'lemma'"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 2,
+        "duration_secs": 8.505,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean:151:22: error: unexpected token '≥'; expected ':' or term\nIPhO2026Problems/problem_IPhO_2026_2_C_4.lean:150:17: error(lean.unknownIdentifier): Unknown identifier `𝓝`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 17.209,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 16.901,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+        "status": "failed",
+        "compiles": false,
+        "returncode": 1,
+        "sorry_count": 1,
+        "duration_secs": 5.248,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:163:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_3_B_2.lean:363:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  Tf ^ 2\nin the target expression\n  Ti ^ 2 * (params.lam + params.mu0 * params.K * Hi ^ 2) / (params.lam + params.mu0 * params.K * Hf ^ 2) / Ti ^ 2 =\n    (params.lam + params.mu0 * params.K * Hf ^ 2) / (params.lam + params.mu0 * params.K * Hi ^ 2)\n\nparams : TorusParameters\np : StatePath\nlaws : ParamagneticTorusLaws params p\nhadiabatic : IsAdiabaticPath params p laws\nHi Hf Ti Tf : ℝ\nhendpoints : AdiabaticEndpoints p Hi Ti\nhfinal : ∃ tf, (p tf).field = Hf ∧ (p tf).temperature = Tf\nhTf_pos : 0 < Tf\nhTi : 0 < Ti\nhrel : Tf ^ 2 * (params.lam + params.mu0 * params.K * Hf ^ 2) = Ti ^ 2 * (params.lam + params.mu0 * params.K * Hi ^ 2)\nha_pos : 0 < params.lam + params.mu0 * params.K * Hi ^ 2\nhb_pos : 0 < params.lam + params.mu0 * params.K * Hf ^ 2\nha : params.lam + params.mu0 * params.K * Hi ^ 2 ≠ 0\nhTi' : Ti ≠ 0\nhb : params.lam + params.mu0 * params.K * Hf ^ 2 ≠ 0\nhTf2 : Tf ^ 2 = Ti ^ 2 * (params.lam + params.mu0 * params.K * Hi ^ 2) / (params.lam + params.mu0 * params.K * Hf ^ 2)\n⊢ Ti ^ 2 * (params.lam + params.mu0 * params.K * Hi ^ 2) / (params.lam + params.mu0 * params.K * Hf ^ 2) / Ti ^ 2 =\n    (params.lam + params.mu0 * params.K * Hf ^ 2) / (params.lam + params.mu0 * params.K * Hi ^ 2)"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 1,
+        "duration_secs": 17.679,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean:370:6: warning: declaration uses `sorry`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 16.203,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 16.291,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:158:37: warning: Variable name `ht₂` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:479:5: warning: Variable name `law` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:483:5: warning: Variable name `hT₀` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:484:5: warning: Variable name `hT₀pos` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:502:5: warning: Variable name `law` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:506:5: warning: Variable name `hT₀` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:508:5: warning: Variable name `hβ₀` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_4_A_5.lean:511:13: warning: Variable name `hσ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 16.578,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:322:5: warning: Variable name `input` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      }
+    ]
+  },
+  "session_dir": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/proof-journal/sessions/session_13",
+  "formalizers": {
+    "requested": 0,
+    "materialized": 0,
+    "failed": 0
+  },
+  "formalizer_results": {},
+  "formalizer_history": {},
+  "formalization_handoffs": {},
+  "formalization_reviews": {
+    "enabled": true,
+    "reviewed": 0,
+    "rounds": [],
+    "unresolved": []
+  },
+  "gate_events_applied": false,
+  "gate_events": [
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+      "cycle": 1,
+      "route": "solved"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+      "cycle": 1,
+      "route": "solved"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+      "cycle": 1,
+      "route": "retry_proof"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+      "cycle": 1,
+      "route": "solved"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+      "cycle": 1,
+      "route": "solved"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_3_C_4.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+      "cycle": 1,
+      "route": "solved"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+      "cycle": 1,
+      "route": "solved"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_3_C_2.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+      "cycle": 1,
+      "route": "needs_redraft"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_2_B_2.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+      "cycle": 1,
+      "route": "retry_proof"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "cycle": 1,
+      "route": "needs_redraft"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:13:IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "cycle": 1,
+      "route": "retry_proof"
+    }
+  ],
+  "proof_gate_result": {
+    "solved": [],
+    "retry": [],
+    "needs_redraft": [],
+    "blocked_infrastructure": [],
+    "exhausted": [],
+    "reviewed": []
+  },
+  "formalization_gate_result": {
+    "passed": [],
+    "retry": [],
+    "exhausted": [],
+    "reviewed": []
+  },
+  "proof_redrafts_reopened": [
+    "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean"
+  ],
+  "pending_formalization_targets": []
+}

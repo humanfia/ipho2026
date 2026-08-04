@@ -1,0 +1,13 @@
+Redraft landed and verified. Summary:
+
+**Root-cause repair (per the review certificate)** — `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:321`:
+- Added hypothesis `Lv_reported_central_eq : Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue` to `latent_heat_per_unit_mass_target`. This records the B.6 **measured readout** (the reported scalar produced by the conversion procedure on the B.5 data) — exactly the first step of the blueprint chapter's own proof sketch — and eliminates the free countermodel `central = 10000`.
+- The band conjunct now closes by `rw [withinUncertainty, Lv_reported_central_eq]` + `abs_le`/`norm_num` on `|39/18.0e−3 − 2190| = 23.3̄ ≤ 110`; the previous honest `sorry` and its countermodel comment are gone.
+- The physical conversion `Lᵥ = Qᵥ/M₀` (typed witness `IsSpecificLatentHeatOf`) and the band membership remain genuine proved conclusions, not assumptions.
+
+**Verification**
+- Fresh `lake env lean` on the file: exit 0, 0 errors, 0 sorries, no axioms/`native_decide`/laundering. Only a benign `unusedVariables` linter warning on the `input : PartB6Input` binder (kept deliberately, same pattern as the other three theorems).
+- No other files edited; `archon-protected.yaml` is an empty template, nothing protected.
+
+**Follow-ups recorded in `.archon/task_results/problem_IPhO_2026_4_B_6.md`:**
+- The blueprint chapter prose for the main target still describes the old 3-conjunct contract — the plan agent should note the added readout hypothesis and let the sync mark it `\leanok` (chapter edit is outside my write permissions).

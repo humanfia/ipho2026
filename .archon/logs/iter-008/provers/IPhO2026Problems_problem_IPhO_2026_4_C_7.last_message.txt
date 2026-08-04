@@ -1,0 +1,8 @@
+Both files are untracked (`.archon` is git-ignored), so all edits remain in my lane. Final state is verified.
+
+**Summary of work**
+
+- Audited `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` against the blueprint chapter and the actual exam pages (`E1_page-12/13/14.png`): Part-C Eq. (4), Procedure steps (pump → steady state; IC water level `h = 10 cm` is the wetted height, not the OC `15 cm`), Eq. (6), and C.7 text all match the file's on-disk contract.
+- One faithfulness fix: `acrylicConductivity_officialSample`'s vacuous hypothesis `hR_uncert : 0.03 ≤ 0.03` replaced with the genuine C.6 input window `|R_Th − 1.17| ≤ 0.03`, so the source's `R_Th = 1.17 ± 0.03 K/W` now genuinely propagates to the conclusion `|λ − 0.25| ≤ 0.01`.
+- Verified fresh: `lake env lean` → **0 errors, exactly 2 contracted sorries** (L172 formula theorem, L195 sample-value theorem). Declarations/namespace/`sorry` count unchanged; no blueprint edits needed (pins still grep-verified; `\leanok` left to the deterministic sync).
+- Full audit written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_7.md` (assumption/target split, faithfulness audit, bridge obligations, countermodel audit, uncertainty/branch coverage, grounding gaps — no PhysLean/Mathlib library for lumped wall resistance or radial Fourier conduction, hence the local law structures).

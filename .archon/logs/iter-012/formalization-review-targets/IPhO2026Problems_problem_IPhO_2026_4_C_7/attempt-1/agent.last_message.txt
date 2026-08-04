@@ -1,0 +1,11 @@
+Both review artifacts are durable. Verdict: **blocked** — the iter-012 redraft is still semantically broken on two independent counts.
+
+**Key findings**
+- `acrylicConductivity_officialSample` is refuted by a concrete countermodel: `h = 1`, `H_Th = 0.2629` satisfies every premise, but `λ = ln(465/337)/(2π·0.2629) ≈ 0.1949`, so `|λ − 0.25| ≈ 0.0551 > 0.01`. First-hand recomputation shows the band holds iff `h·H_Th ∈ [0.19708, 0.21350]` — the premise threshold `0.2629 ≤ h·H_Th` is inverted (λ decreases in the product), and the chapter's own certified arithmetic proves the negation.
+- `acrylicConductivity_formula`'s hypothesis bundle is unsatisfiable over Lean's reals: `P₀ = (T_OC−T_IC)/R_Th < 0` under the repaired drive, `steady` fixes `P = P₀` on the wall, `fourier` then forces `deriv T r > 0` at every radius (non-junk — a zero derivative would violate `P₀ ≠ 0`), and MVT yields `T r₂ > T r₁`, i.e. `T_OC > T_IC`, contradicting `hΔT`. The theorem is vacuous, not derivable.
+- Root cause: Eq. (4)'s `P` is heat **into** the IC, while the wall current in `RadialFourierConduction` is outward. The single-sign fix `LumpedHeatFlowLaw D (-P G.r₁)` restores a realizable contract whose FTC route derives the formula honestly.
+- Passed checks: `source_faithfulness` and `abstraction_sufficiency` (structures eliminable, `wall_current` proved, band conclusion-side). Failed: `derivability`, `uncertainty_propagation`, `branch_orientation`, `countermodel_resistance`.
+
+Artifacts written:
+- `.archon/logs/iter-012/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_4_C_7/attempt-1/milestones.jsonl` (single-line JSON, validated)
+- `.archon/logs/iter-012/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_4_C_7/attempt-1/summary.md` (12 lines, with exact redraft steps)

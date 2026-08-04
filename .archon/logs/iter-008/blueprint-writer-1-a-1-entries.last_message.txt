@@ -1,0 +1,3 @@
+1-a-1-entries: COMPLETE — all 32 live Lean declarations of `IPhO2026Problems/problem_IPhO_2026_1_A_1.lean` now have faithful blueprint blocks in `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_A_1.tex` (3 directive-mandated subsections, verified labels/`\lean{}`/`\uses{}`, closed forms confined to conclusion-side blocks, skeleton kept verbatim, physics target wired to the target theorem).
+
+Report: `/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/blueprint-writer-1-a-1-entries.md`

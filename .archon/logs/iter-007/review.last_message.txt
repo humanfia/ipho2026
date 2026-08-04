@@ -1,0 +1,17 @@
+All review artifacts for iter-007 are written and verified.
+
+**Verdict: `4_A_5` PASSED** at gate 2/3 — the first structured-pass certificate under the mandatory `formalization_review` gate.
+
+**What happened**
+- The iter-007 O1 lane landed exactly the session_6-prescribed repair: `(hT12 : T₁ ≠ T₂)` on `IsochoricReadout` (verified on disk at `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:228`) + one doc sentence, diff +2/−1, no construction-site churn.
+- Compile taken from the orchestrator preflight (passed, 0 errors, 10 contracted sorries — no rerun per the bounded rule).
+- The session_6 countermodel (T₁ = T₂ vacuous premise falsifying `|β₀ − 1/T₀| ≤ σ`) is now structurally excluded; the uncertainty bridge flips blocked → covered: deviation reduces to `P₀·(T₂−T₁)·(β₀ − 1/T₀)` and the positive factor `P₀·|T₂−T₁|` cancels via `hP₀` + `hT12`.
+- All 6 structured checks pass (branch_orientation N/A), bridges 6/6 covered, answer values remain strictly conclusion-side.
+
+**Artifacts written**
+- `.archon/proof-journal/sessions/session_7/milestones.jsonl` — full structured verdict
+- `.archon/proof-journal/sessions/session_7/summary.md` and `recommendations.md`
+- `.archon/iter/iter-007/review.md` — this iter's narrative
+- `.archon/PROJECT_STATUS.md` — Knowledge Base gained an iter-007 section (validated neq-guard repair recipe + the preflight-noise scoring rule); narrative log untouched
+
+**Routed forward:** `1_B_1` stays exhausted (prover-stage redraft only), `4_C_6` stays 2/3 provenance-blocked, and the 26-target deterministic final review pass is the recommended endgame. Both systemic items (noise-only grounding preflight, stale 19-finding doctor payload, 6th iter) are routed to loop-level repair, not file churn.

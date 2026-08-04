@@ -1,0 +1,18 @@
+Iter-009 plan phase is complete. The last autoformalize blocker is repaired; the queue is now clean for the deterministic review re-pass.
+
+**Landings this phase**
+- **2_B_2 aperture-coverage repair (session-8 R1, the sole remaining gate blocker)** — dispatched refactor lane `2-b-2-aperture-coverage` (108 s, COMPLETE): `AbsorbedRays.full_side_coverage` strengthened from `Set.Ioo (0:ℝ) p.a` to `Set.Ioo (0:ℝ) p.R` in `IPhO2026Problems/problem_IPhO_2026_2_B_2.lean:122`. Fresh `lake env lean`: 0 errors, exactly the 5 contracted sorries, zero line drift. The countermodel (R=1, a=0.1, P/P₀=5 ≠ 1.005) is structurally excluded; `collectedWidth_eq_radius` is now provable at prover stage.
+- **Incident repaired planner-side** — the `2_B_2` blueprint chapter was found truncated to its 51-line iter-002 skeleton (entire iter-008 ledger lost). Restored fully: umbrella `\uses{}` wiring, import-policy NOTE, all 18 declaration blocks, plus a statement-reconciliation NOTE for the coverage strengthening.
+- **Session-8 R2 landed** — `1_C_2` ledger restated to the redrafted declarations (8 new blocks: `ThresholdBalance`, `LowerRootBranch`, `threshold_excess_enclosure`, `mc2eV_trusted` family, `thresholdBalance_to_ev_units`), target `\uses{}` rewired, factor-2 upstream finding recorded as a NOTE.
+- **3_C_3 readout anchors** — 6 `*_value` rfl lemmas + `vacuumPermeability(_pos)` entered; stale "opaque data" prose modernized (the record is transparent).
+
+**Verified end-state**
+- Fresh `leandag build`: `unmatched` **33** (design floor: `1_B_1` 32 deferred + `hello` 1), `gaps` ∞-holes 0, live `archon blueprint-doctor` clean, `lake env lean` green on all touched files.
+- Gate ledger corrected from disk: **8 passed / 17 retry / `4_C_6` provenance-blocked / `1_B_1` exhausted**.
+
+**State files written**
+- `.archon/PROGRESS.md` — 17-lane review-pass queue with accurate counts; `2_B_2` recorded as this-iter completion (next consumer: deterministic review).
+- `.archon/iter/iter-009/plan.md` + `objectives.md` — decisions, incident record, dispatch table.
+- `TO_USER.md` notice prepended; `ARCHON_MEMORY.md` updated (525 B, within limits); 24 stale `task_results/` collected (28 `physics-grounding-*` registers preserved); `config.json` refactor enable reverted.
+
+**Next consumer**: the deterministic review re-pass over the 17-lane retry queue — expected convergent (the sole semantic failure of session 8 is repaired), after which autoformalize closes and the loop advances to prover.

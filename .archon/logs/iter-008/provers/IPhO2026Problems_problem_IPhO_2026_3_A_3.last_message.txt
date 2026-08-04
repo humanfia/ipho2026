@@ -1,0 +1,13 @@
+Done. Summary of this lane:
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_3_A_3.lean` required **no edits** — PROGRESS.md classifies this gate-queue lane as a sorry-preserving no-op on a planner-frozen file, and my audit confirmed the file is already faithful to the chapter `IPhO2026Problems_problem_IPhO_2026_3_A_3.tex` (which has `% archon:physics` and the full iter-008 helper ledger).
+- Fresh `lake env lean` run: **0 errors, exactly 5 sorry warnings** (the two helper lemmas, two bridge lemmas, and the target `dW_eq_mu0_V_H_dM`), matching the contracted count.
+
+**Audit highlights**
+- Target `dW = μ₀·V·H·dM` appears only as a theorem conclusion — never a hypothesis/field/definition; licensed inputs (A.2 law `dW_emf = V·H·dB`, split, vacuum-core part) live in `PmTWorkBudget`.
+- `μ₀` grounded in PhysLean `FreeSpace`; torus/winding/field-state are role-bearing records, not scalar aliases; signed `I : ℝ` preserves the Ampère orientation branch.
+- All 12 `\lean{}` blueprint pins verified on disk; `\leanok` left to the deterministic `sync_leanok` phase per permissions.
+
+**Artifacts**
+- Result written to `.archon/task_results/problem_IPhO_2026_3_A_3.md:1` with the full assumption/target split, bridge inventory (6/6 covered, none blocked), countermodel audit, and grounding record.

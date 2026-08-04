@@ -1,0 +1,3 @@
+2-c-4-entries: COMPLETE — all 7 `IPhO2026_2_C_4.*` declarations now have ledger blocks in the chapter (7/7 pins, 0 unknown `\uses`, official C.4 power-law confined to the target theorem, umbrella wired).
+
+Report: `.archon/task_results/blueprint-writer-2-c-4-entries.md`

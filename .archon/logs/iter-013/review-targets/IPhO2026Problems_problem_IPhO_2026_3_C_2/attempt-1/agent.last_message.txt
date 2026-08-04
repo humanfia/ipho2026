@@ -1,0 +1,9 @@
+Both files are durable and validated. Review complete.
+
+**Verdict: solved** for target `IPhO2026.Problem3.C2.CarnotMagnetizationModel.m1_eq_sqrt`.
+
+**Audit findings**
+- **Compilation/sorries**: Compiles rc=0; exactly one `sorry` (line 423), confined to `q_relation`. No `axiom`/`admit`/`native_decide`. The target chain (`q4_eq_adiabatic_41`, `q3_eq` → `m1_sq` → `m1_eq_sqrt`, `m1_sq_arg_nonneg`) contains no sorry and never cites `q_relation` — verified all 5 grep occurrences are its own statement/body/comments.
+- **Signature/semantics**: Exact official answer `M1 = √(M2² − M3² + M4²)`, conclusion-side only. The m1_sq proof honestly derives from the two adiabatic-leg laws (log terms collapse at Figure-3b equal temperatures) + `ring`; sqrt branch justified by `M_nonneg v1`. Iter-10 defects (wrong leg temperatures, wrong q-form prefactor) are genuinely fixed.
+- **Trace agreement**: Iter-013 prover trace and archived task result match the on-disk file. The empty supplied task-result list is a process warning, not a semantic failure; the iter-013 archive at `.archon/logs/iter-013/task_results-archive/problem_IPhO_2026_3_C_2.md` agrees with the trace.
+- **Ledger note**: The sorried `q_relation` is genuinely underdetermined by the model fields (legs give only M₁²=M₄², M₃²=M₂²; the statement reduces to the independent amplitude T_h·M₄² = T_c·M₂²) and warrants a separate `needs_redraft/underdetermined_contract` ruling when it is itself the reviewed target — consistent with the existing cycle-1 record — but it is eliminable and does not taint `m1_eq_sqrt`.

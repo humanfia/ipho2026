@@ -1,0 +1,19 @@
+# Session 2 (iter-002) recommendations
+
+## §0 Highest-leverage (director/infra, blocks 8–10 files)
+1. **Reconcile doctor `missing-physlib-import` with the import policy (one central fix):** teach the check to (a) honor the planner-recorded `% NOTE: PhysLean-coverage exemption …` chapters as resolved (the iter-001 review ruling made this the standing answer), and (b) treat ANY actual `import Physlib…` line (incl. blanket `import Physlib` and `Physlib.Electromagnetism.Dynamics.Basic`) as importing the domain library — currently both are flagged. After the fix, re-review as review-retry WITHOUT file changes: `1_B_2, 1_C_1, 1_C_2, 2_C_4, 3_A_1, 3_B_1, 3_C_2, 3_C_3` (all judged semantics-green this session). Do not make these files oscillate with import churn.
+2. **Rerun the LeanExplore grounding preflight for 3_A_2 and 4_C_6:** both deterministic `physics-grounding-*.md` registers contain only noise hits (`Path.target`, `semiformal_result`, `stereographic_target`); 4_C_6's register contradicts its own compile-verified, genuinely-used six targeted Physlib imports. Where the preflight is noise, accept the task-report LeanExplore section as the register of record. No statement changes needed for 3_A_2.
+
+## §1 Redraft routes (statement-level; prover dispatch blocked)
+3. **1_B_1 (2nd failed review):** record the bound branch where it is used — e.g. add to `CoulombPairData` a field `bound_branch : total_energy < 0` (derivable inside the structure from the governing fields + figure data via `IsBoundMu`-style arithmetic) or a two-turning-point interval law (`∃ r₁ < r₂, attained = Icc r₁ r₂`-shape with boundary equations), so no `E>0` instance satisfies the hypotheses. Optionally strengthen `orbit_support` to quantify over the full attained set. Keep the conclusion-side `1600/9` placements and the proved certificates; the `sorry` bridges `orbitBound_T1_B1`/`apogee_attained_T1_B1` stay. While editing, remove the annotated stale `\leanok` from the chapter theorem block (sync iter-002 took no action on it).
+4. **4_C_6:** restate `official_sample_value` — either re-anchor the band claim to readouts consistent with the recorded sample (`c₀·m ≈ 1900 J/K` — i.e. use the calibration actually implied by the C.4/C.5 data, or the corrected C.5-graph slope readout), or replace the instance with the honest derived model value 0.595 K/W plus a note that the recorded sample uses different readouts. Keep `wall_thermal_resistance_from_C5`, `cooling_model_inversion_key`, `uncertainty_propagates_to_resistance` unchanged — they are faithful.
+
+## §2 Review-loop hygiene
+5. Do NOT dispatch proof attempts on any file whose `formalization_review.status` is `failed`; retry budget: review-retry (no rewrite) for the §0 cohort; redraft+re-review for §1.
+6. Cosmetic: 1_C_2 has 2 `unusedVariables` linter warnings (`h`, `hmc2`) — rename to `_h`-style on next touch.
+7. Planner bookkeeping unchanged from iter-002 plan: ~359 helper blueprint entries + umbrella `\lean{}` pins; 4_A_5 tail comment.
+
+## §3 Detector additions for the review checklist (knowledge base)
+8. Branch-predicate locality: for every branch/admitted-case predicate a proof route uses, check it is a *field of the data structure* (or a proved eliminator attached to it), not merely an external theorem hypothesis over opaque constants — external placement enabled 1_B_1's countermodel.
+9. Answer-instance arithmetic: for every theorem whose conclusion is an official `value ± band`, independently evaluate the model value from the file's own stated constants before accepting (caught 4_C_6).
+10. Grounding-register cross-check: compare the deterministic grounding log against the task-report LeanExplore section; a log listing only generic hits (`Path.target`, `stereographic_target`, `semiformal_result`) is noise — route to preflight rerun, not redraft.

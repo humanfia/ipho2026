@@ -1,0 +1,8 @@
+2-b-3-entries: COMPLETE — appended the 10-block coverage ledger to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_2_B_3.tex` and wired the umbrella theorem.
+
+**Summary**
+- Ledger added after the Archon skeleton (verbatim): 5 subsections, 10 blocks in dependency order — abbrevs/units (`thetaMaxRecorded`, `metreInCentimetres`), geometry (`CrossSectionPlane`, `SolarCookerGeometry`), laws/interfaces (`HalfCylindricalMirrorPhysics`, `PreviousPartResults`), 3-4-5 trig certificates (`thetaMaxRecorded_mem_Ioo`, `sin_thetaMaxRecorded`, `sin_two_mul_thetaMaxRecorded`), and the target value theorem (`container_diameter_for_quintuple_power`).
+- Umbrella `thm:physics:IPhO_2026_2_B_3:target` now carries `\uses{thm:...:container_diameter_for_quintuple_power}` — the only pre-existing-line edit.
+- Verified: pins 10/10 (root-level names, grep-matched against disk decls; scan-invisible: `thetaMaxRecorded`, `metreInCentimetres`, `CrossSectionPlane`), `\uses` 0 unknown, begin/end balanced 23/23, labels unique, official answers (`4/5`, `0.12 m`, `12 cm`) conclusion-side only, markers untouched, no other file modified.
+
+Full report: `.archon/task_results/blueprint-writer-2-b-3-entries.md`

@@ -1,0 +1,13 @@
+Review complete — both artifacts are durable.
+
+**Verdict: passed** (status `solved`) for `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean`.
+
+**Key findings**
+- **Source faithfulness**: All figure/Coulomb data live hypothesis-side (`CoulombScatteringData` fields, `ScalingRegime`); the recorded `-16.60°`, `arctan(2/√45)`, and `49/4` appear only in conclusions of the two main theorems — no answer smuggling.
+- **Iter-13 gate issue repaired**: `newton_relative_law` upgraded to the faithful vector central-force law, plus 15 proved infrastructure/consistency lemmas (e.g. `perp_sep_is_const_of_central_force`); the old main-theorem internal sorry (former L902) is now a fully proved parallelogram/arccos argument.
+- **Remaining sorries (3)**: `orbit_eq_conic` (L739), `exists_asymptoticRelativeVelocity` (L790), `signed_deflection_eq_formula` (L820) — proof-side Kepler-integration gaps, allowed at this semantic gate; their statements are the correct derivable Hint-1/Hint-2 bridges, recorded as `blocked` in bridge_obligations.
+- **Checks**: source_faithfulness / derivability / abstraction_sufficiency / branch_orientation / countermodel_resistance all pass with concrete carriers; uncertainty_propagation `not_applicable` (marking-scheme band, not an error budget). The internally inconsistent iter-11 `67/4`/`151.71°` chain is fully gone.
+
+Artifacts written:
+- `.archon/logs/iter-014/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/cycle-2/attempt-1/milestones.jsonl` (single JSON line, schema v2, 10 bridge obligations)
+- `.archon/logs/iter-014/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/cycle-2/attempt-1/summary.md` (8 lines)

@@ -1,0 +1,15 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict: `passed` (status=solved)** for `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean`, main declaration `IPhO2026.Problem1.B2.signed_deflection_angle_T1_B2`.
+
+**Check results**
+- `source_faithfulness`: passed — governing-law fields restate only source physics (r0=100·a0, per-particle μℏ, m_red=m/2, Coulomb law, iter-014 vector central-force Newton equation, periapsis turning point); Hints 1/2 encoded as derivable bridges; the recorded answer appears only conclusion-side.
+- `derivability`: passed — proved chain `eps² = 49/4` → `2/√45` → `-arctan(2/√45) ≈ -16.6015°` inside both official bands (`arctan_deg_band`, `signed_deflection_certificate` all proved); only the permitted Kepler-integration hops remain sorried.
+- `abstraction_sufficiency`: passed — genuine `Filter.Tendsto` u_inf predicate, plain-def angle/signed-deflection layer, no answer-shaped abstraction.
+- `uncertainty_propagation`: not_applicable — marking-scheme rounding band, not an error budget.
+- `branch_orientation`: passed — "below the initial line of motion" fixed by `initial_transverse` + `direction_toward_pair`, sign chain now machine-checked.
+- `countermodel_resistance`: passed — the vector `newton_relative_law` closes the norm-only underdetermination; the false 67/4 / ~151.71° chain is fully purged in favor of the proved-consistent 49/4 chain.
+
+All 10 bridge obligations covered (7 proved, 3 sorried-but-allowed). Written:
+- `.archon/logs/iter-014/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/cycle-2/attempt-2/milestones.jsonl` (valid single JSON line)
+- `.archon/logs/iter-014/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_1_B_2/cycle-2/attempt-2/summary.md`

@@ -1,0 +1,8 @@
+Task result written. Summary of this lane:
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_2_C_4.lean` re-verified unchanged as the planner-frozen contract: fresh `lake env lean` run gives exit 0 with exactly the 1 contracted sorry (L145, `caustic_small_angle_power_law`) and no other diagnostics.
+- Blueprint chapter already has the complete declaration ledger with correct `IPhO2026_2_C_4.*` pins and the iter-002 PhysLean-exemption NOTE, so no chapter, pin, or marker edits were made (`\leanok` belongs to the sync/review agent).
+- Task result written to `.archon/task_results/problem_IPhO_2026_2_C_4.lean.md` covering the assumption/target split, goal-faithfulness audit (recorded constants `u=R/2, v=(3/4)R^{1/3}, p=2, q=3` appear conclusion-side only), derivability bridges (regime/filter bridge proved; the two `IsEquivalent` asymptotic obligations are the contracted sorry), countermodel audit, and branch coverage (positive-angle branch via `smallAngleFilter = nhdsWithin 0 (Ioi 0)` subsumes `|X_c|`).
+
+File stays in the review-gate queue (retry 1/3), expected green at the deterministic review pass.

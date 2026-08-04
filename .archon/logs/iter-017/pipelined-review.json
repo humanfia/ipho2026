@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "iteration": 17,
+  "complete": false,
+  "status": "incomplete",
+  "pipeline_mode": "target_lifecycle",
+  "starts_at": "mixed",
+  "target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+  ],
+  "formalizer_start_target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+  ],
+  "proof_start_target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+  ],
+  "review_only_target_files": [],
+  "settled_target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+  ],
+  "proof_review_target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+  ],
+  "targets": 3,
+  "reviewed": 3,
+  "unresolved": [
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+  ],
+  "errors": {
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean": "formalizer did not change the Lean target"
+  },
+  "requested_jobs": 4,
+  "max_combined_workers": 3,
+  "max_reviewers": 3,
+  "max_attempts": 3,
+  "rounds": [
+    {
+      "attempt": 1,
+      "submitted": 4,
+      "completed": 3,
+      "failed": 1
+    },
+    {
+      "attempt": 2,
+      "submitted": 1,
+      "completed": 1,
+      "failed": 0
+    }
+  ],
+  "duration_secs": 35635.521,
+  "preflight": {
+    "iteration": 17,
+    "jobs": 1,
+    "duration_secs": 58.144,
+    "summary": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "targets": [
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 12.293,
+        "diagnostics": ""
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 28.823,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1225:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1259:28: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1531:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1602:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:2481:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:2833:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```"
+      },
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 17.028,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:320:5: warning: Variable name `hθ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:320:30: warning: Variable name `hθpos` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:321:5: warning: Variable name `hfac` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:490:5: warning: Variable name `hrange` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      }
+    ]
+  },
+  "session_dir": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/proof-journal/sessions/session_17",
+  "formalizers": {
+    "requested": 4,
+    "materialized": 3,
+    "failed": 1
+  },
+  "formalizer_results": {
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean": {
+      "iteration": 17,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "cycle": 1,
+      "status": "materialized",
+      "review_attempt": 1,
+      "runner_ok": true,
+      "baseline_sha256": "cf11edc335e9be2770f6e48d3b1175f3836e49d2bbd3e38df7894611b4373ebf",
+      "lean_sha256": "999c2a6138132223738e3ad4558c3e80efa8be1f7b078f8a74998f7d61e7995a",
+      "changed": true,
+      "task_result_updated": true,
+      "task_result_fingerprints": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_1.md": "ae4b1b1a35ae8b71d2bc054d1d083621305eceeef2352d74da5b0fce97718d3c"
+      },
+      "task_result_mtimes": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_1.md": 1785748824898804576
+      },
+      "preflight": {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 1,
+        "duration_secs": 12.628,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:432:8: warning: declaration uses `sorry`"
+      },
+      "error": ""
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": {
+      "iteration": 17,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "cycle": 1,
+      "status": "materialized",
+      "review_attempt": 1,
+      "runner_ok": true,
+      "baseline_sha256": "d2c8266c5adf983447e61d71f66bbe61311b59d1dab020870eb0b88fe34f1c68",
+      "lean_sha256": "99638318ef066f8ca3f0bc99095729ed73064a695fd7eb84d1232977c24be404",
+      "changed": true,
+      "task_result_updated": true,
+      "task_result_fingerprints": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md": "33ca29f549ece6caa24bf275ff3f663900545ad4fda09f432508eaf38ca76007"
+      },
+      "task_result_mtimes": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md": 1785752335092742561
+      },
+      "preflight": {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 9,
+        "duration_secs": 21.549,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:895:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:950:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:973:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1010:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1065:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1082:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1093:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1109:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1133:8: warning: declaration uses `sorry`"
+      },
+      "error": ""
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean": {
+      "iteration": 17,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "cycle": 3,
+      "status": "error",
+      "review_attempt": 3,
+      "runner_ok": true,
+      "baseline_sha256": "f3e66545ce9ff7c3173604f3030711b715258b8dd31d4e612075fe347cb6267d",
+      "lean_sha256": "f3e66545ce9ff7c3173604f3030711b715258b8dd31d4e612075fe347cb6267d",
+      "changed": false,
+      "task_result_updated": true,
+      "task_result_fingerprints": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md": "9ec37a0ffc7fdf4e48987f5ede42e2379d0540c6757b0cd1e1b002993b1fe911"
+      },
+      "task_result_mtimes": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md": 1785761760948768578
+      },
+      "preflight": {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 0,
+        "duration_secs": 17.028,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:320:5: warning: Variable name `hθ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:320:30: warning: Variable name `hθpos` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:321:5: warning: Variable name `hfac` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:490:5: warning: Variable name `hrange` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      },
+      "error": "formalizer did not change the Lean target"
+    }
+  },
+  "formalizer_history": {
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean": [
+      {
+        "iteration": 17,
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+        "cycle": 1,
+        "status": "materialized",
+        "review_attempt": 1,
+        "runner_ok": true,
+        "baseline_sha256": "cf11edc335e9be2770f6e48d3b1175f3836e49d2bbd3e38df7894611b4373ebf",
+        "lean_sha256": "999c2a6138132223738e3ad4558c3e80efa8be1f7b078f8a74998f7d61e7995a",
+        "changed": true,
+        "task_result_updated": true,
+        "task_result_fingerprints": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_1.md": "ae4b1b1a35ae8b71d2bc054d1d083621305eceeef2352d74da5b0fce97718d3c"
+        },
+        "task_result_mtimes": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_1.md": 1785748824898804576
+        },
+        "preflight": {
+          "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+          "status": "passed",
+          "compiles": true,
+          "returncode": 0,
+          "sorry_count": 1,
+          "duration_secs": 12.628,
+          "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:432:8: warning: declaration uses `sorry`"
+        },
+        "error": ""
+      }
+    ],
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": [
+      {
+        "iteration": 17,
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "cycle": 1,
+        "status": "materialized",
+        "review_attempt": 1,
+        "runner_ok": true,
+        "baseline_sha256": "d2c8266c5adf983447e61d71f66bbe61311b59d1dab020870eb0b88fe34f1c68",
+        "lean_sha256": "99638318ef066f8ca3f0bc99095729ed73064a695fd7eb84d1232977c24be404",
+        "changed": true,
+        "task_result_updated": true,
+        "task_result_fingerprints": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md": "33ca29f549ece6caa24bf275ff3f663900545ad4fda09f432508eaf38ca76007"
+        },
+        "task_result_mtimes": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md": 1785752335092742561
+        },
+        "preflight": {
+          "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+          "status": "passed",
+          "compiles": true,
+          "returncode": 0,
+          "sorry_count": 9,
+          "duration_secs": 21.549,
+          "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:895:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:950:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:973:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1010:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1065:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1082:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1093:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1109:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1133:8: warning: declaration uses `sorry`"
+        },
+        "error": ""
+      }
+    ],
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean": [
+      {
+        "iteration": 17,
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "cycle": 2,
+        "status": "materialized",
+        "review_attempt": 2,
+        "runner_ok": true,
+        "baseline_sha256": "08e3264c4c3415f960806e12949a1f931698e0ad74e14052e053091384334787",
+        "lean_sha256": "395513f9736e9c4f44bb3b6e21a6e2135ce2572c012280fe2e903fcbca5ffd4a",
+        "changed": true,
+        "task_result_updated": true,
+        "task_result_fingerprints": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md": "7787f30f4712248486b0f35ac8666e376cc64c5385006032e611c8dfadeb0076"
+        },
+        "task_result_mtimes": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md": 1785753822823608062
+        },
+        "preflight": {
+          "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+          "status": "passed",
+          "compiles": true,
+          "returncode": 0,
+          "sorry_count": 2,
+          "duration_secs": 17.946,
+          "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:313:5: warning: Variable name `hθ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:313:30: warning: Variable name `hθpos` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:314:5: warning: Variable name `hfac` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:481:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:608:8: warning: declaration uses `sorry`"
+        },
+        "error": ""
+      },
+      {
+        "iteration": 17,
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "cycle": 3,
+        "status": "error",
+        "review_attempt": 3,
+        "runner_ok": true,
+        "baseline_sha256": "f3e66545ce9ff7c3173604f3030711b715258b8dd31d4e612075fe347cb6267d",
+        "lean_sha256": "f3e66545ce9ff7c3173604f3030711b715258b8dd31d4e612075fe347cb6267d",
+        "changed": false,
+        "task_result_updated": true,
+        "task_result_fingerprints": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md": "9ec37a0ffc7fdf4e48987f5ede42e2379d0540c6757b0cd1e1b002993b1fe911"
+        },
+        "task_result_mtimes": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md": 1785761760948768578
+        },
+        "preflight": {
+          "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+          "status": "passed",
+          "compiles": true,
+          "returncode": 0,
+          "sorry_count": 0,
+          "duration_secs": 17.028,
+          "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:320:5: warning: Variable name `hθ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:320:30: warning: Variable name `hθpos` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:321:5: warning: Variable name `hfac` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_C_1.lean:490:5: warning: Variable name `hrange` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+        },
+        "error": "formalizer did not change the Lean target"
+      }
+    ]
+  },
+  "formalization_handoffs": {
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean": {
+      "iteration": 17,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "cycle": 1,
+      "status": "materialized",
+      "review_attempt": 1,
+      "runner_ok": true,
+      "baseline_sha256": "cf11edc335e9be2770f6e48d3b1175f3836e49d2bbd3e38df7894611b4373ebf",
+      "lean_sha256": "999c2a6138132223738e3ad4558c3e80efa8be1f7b078f8a74998f7d61e7995a",
+      "changed": true,
+      "task_result_updated": true,
+      "task_result_fingerprints": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_1.md": "ae4b1b1a35ae8b71d2bc054d1d083621305eceeef2352d74da5b0fce97718d3c"
+      },
+      "task_result_mtimes": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_1.md": 1785748824898804576
+      },
+      "preflight": {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 1,
+        "duration_secs": 12.628,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:432:8: warning: declaration uses `sorry`"
+      },
+      "error": ""
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": {
+      "iteration": 17,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "cycle": 1,
+      "status": "materialized",
+      "review_attempt": 1,
+      "runner_ok": true,
+      "baseline_sha256": "d2c8266c5adf983447e61d71f66bbe61311b59d1dab020870eb0b88fe34f1c68",
+      "lean_sha256": "99638318ef066f8ca3f0bc99095729ed73064a695fd7eb84d1232977c24be404",
+      "changed": true,
+      "task_result_updated": true,
+      "task_result_fingerprints": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md": "33ca29f549ece6caa24bf275ff3f663900545ad4fda09f432508eaf38ca76007"
+      },
+      "task_result_mtimes": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md": 1785752335092742561
+      },
+      "preflight": {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 9,
+        "duration_secs": 21.549,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:895:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:950:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:973:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1010:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1065:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1082:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1093:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1109:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1133:8: warning: declaration uses `sorry`"
+      },
+      "error": ""
+    }
+  },
+  "formalization_reviews": {
+    "enabled": true,
+    "reviewed": 0,
+    "rounds": [
+      {
+        "cycle": 1,
+        "attempt": 1,
+        "submitted": 2,
+        "completed": 2,
+        "failed": 0
+      },
+      {
+        "cycle": 2,
+        "attempt": 1,
+        "submitted": 1,
+        "completed": 1,
+        "failed": 0
+      }
+    ],
+    "unresolved": [
+      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+    ]
+  },
+  "gate_events_applied": true,
+  "gate_events": [
+    {
+      "kind": "formalization",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:formalization:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "cycle": 1,
+      "applied": true,
+      "decision": "passed"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "cycle": 1,
+      "applied": true,
+      "route": "needs_redraft"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "cycle": 1,
+      "applied": true,
+      "route": "solved"
+    },
+    {
+      "kind": "formalization",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:formalization:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "cycle": 1,
+      "applied": true,
+      "decision": "passed"
+    },
+    {
+      "kind": "formalization",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:formalization:2",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "cycle": 2,
+      "applied": true,
+      "decision": "passed"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "cycle": 1,
+      "applied": true,
+      "route": "solved"
+    },
+    {
+      "kind": "proof",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:proof:1",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "cycle": 1,
+      "applied": true,
+      "route": "solved"
+    }
+  ],
+  "proof_gate_result": {
+    "solved": [],
+    "retry": [],
+    "needs_redraft": [],
+    "blocked_infrastructure": [],
+    "exhausted": [],
+    "reviewed": []
+  },
+  "formalization_gate_result": {
+    "passed": [],
+    "retry": [],
+    "exhausted": [],
+    "reviewed": []
+  },
+  "proof_redrafts_reopened": [
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+  ],
+  "pending_formalization_targets": [
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+  ]
+}

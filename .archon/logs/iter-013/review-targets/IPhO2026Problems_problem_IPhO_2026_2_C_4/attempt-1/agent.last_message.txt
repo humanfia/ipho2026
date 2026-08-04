@@ -1,0 +1,14 @@
+Review complete for the assigned target. Both artifacts are durable on disk:
+
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_4/attempt-1/milestones.jsonl` (validated single JSON line)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_4/attempt-1/summary.md` (9 lines)
+
+**Verdict: `partial`, route `retry_proof`.**
+
+Key findings:
+- **Regression since iter-010**: the file no longer compiles. Line 150 uses `𝓝` with no `open Topology` (only `open Real`/`open Asymptotics` remain), and line 151's `𝓝[≥] 0` triggers a parse error on the raw `≥` token. Previously it compiled with one sorry.
+- **Two genuine sorries** (lines 223, 238): the core Taylor remainder `Y_c θ − ((3/2)Rθ² + R/2) = o(θ²)` — sitting after a false placeholder identity `hdecomp` — and the final `IsEquivalent` assembly.
+- **Contract is faithful and honest**: C.3 formulas enter only as structure hypotheses, recorded constants are conclusion-side only, `|X_c|` is handled via the positive-angle branch, and the `IsEquivalent`-on-`nhdsWithin 0 (Ioi 0)` reading matches the blueprint exactly. No axioms, no weakening, no checker-gaming.
+- **Trace evidence**: 338 turns across two sessions, terminated by an API 429 retry-limit at 15:24Z while debugging `ring` identities for the remainder decomposition (probes 77–84). No task-result artifact exists — recorded as a process warning, not a semantic failure.
+
+Repair is purely proof-side: restore the topology notation (open `Topology` or rewrite as `nhdsWithin 0 (Set.Ici 0)`), then close the two sorries with an honest second-order Taylor/`IsLittleO` argument. No redraft needed.

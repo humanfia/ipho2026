@@ -1,0 +1,12 @@
+{
+  "role": "review",
+  "enabled": true,
+  "changed": false,
+  "original_chars": 39502,
+  "compressed_chars": 39502,
+  "omitted_chars": 0,
+  "target_chars": 40000,
+  "section_chars": 6000,
+  "created_at": "2026-07-27T21:56:28Z",
+  "sections": []
+}

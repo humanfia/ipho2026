@@ -1,0 +1,3 @@
+3-b-1-entries: COMPLETE — appended the named-quantities ledger to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_B_1.tex` covering all 15 live `IPhO2026.Problem3.B1` decls (14 blocks, 17 `\lean{}` pins verified 17/17 on disk), umbrella wired to `official_answer_value`, `\uses{}` resolves 0 unknown, environments balanced, no markers touched, no other file modified.
+
+Report: `.archon/task_results/blueprint-writer-3-b-1-entries.md`

@@ -1,0 +1,126 @@
+{
+  "iteration": 2,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-07-27T17:03:43Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa488-4b7b-7782-bb06-ef0021a25773",
+    "durationSecs": 1100
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 11
+  },
+  "prover": {
+    "status": "done",
+    "durationSecs": 2089
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-5347-7a61-b7c9-cadbe99c90bf"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-5349-7d80-aa3c-315543683310"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-534d-7cc2-aca3-8bc92d920b40"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-534f-72d2-98a9-ebfcebc16cef"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_4": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-534f-7920-89bf-1751b49bc30d"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_A_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-5356-7000-816d-b9327060e619"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_A_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-5357-7c31-b9ac-5398b6d2d402"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-536c-79d1-ad15-d1748552ecee"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-5374-7aa1-828c-2093e29da2bb"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_3": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa4b3-5f2f-7e41-978b-d73837d323e3"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_C_6": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa499-536c-7440-9818-a4ac96da4712"
+    }
+  },
+  "review": {
+    "status": "done",
+    "deterministic": true,
+    "preflightJobs": 11,
+    "preflightDurationSecs": 13.688,
+    "preflightPassed": 11,
+    "preflightFailed": 0,
+    "preflightPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-002/review-preflight.md",
+    "candidatePackPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-002/deterministic-review-candidates.md",
+    "promptOriginalChars": 23708,
+    "promptCompressedChars": 23708,
+    "promptCompressionOmittedChars": 0,
+    "promptCompressionChanged": false,
+    "sessionId": "019fa4be-adec-7653-b7b3-180687863119",
+    "durationSecs": 723,
+    "physicsBlockers": 19,
+    "physicsDoctorBlockers": 19,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "retry",
+    "formalizationGatePassed": 0,
+    "formalizationGateRetry": 16,
+    "formalizationGateExhausted": 0,
+    "formalizationGateReviewed": 11
+  },
+  "sorry_count": 124,
+  "finalize": {
+    "innerGit": {
+      "sha": "3eae245"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-27T18:14:58Z",
+  "wallTimeSecs": 4275
+}

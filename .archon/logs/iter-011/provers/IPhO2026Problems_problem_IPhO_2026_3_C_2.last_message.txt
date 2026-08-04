@@ -1,0 +1,11 @@
+Redraft complete. Summary of what was done:
+
+**Diagnosis confirmed.** The iter-010 Proof-Review finding was real: the old contract attached the B.1 isothermal law at leg temperatures contradicting its own `figure3b` (legs 3→4 at `Th` while the figure puts vertex 3 at `Tc`), and the q-form prefactor `μ₀V/2` was algebraically false (EOS substitution gives `-μ₀V²/(2nK)`); no adiabatic law was recorded, blocking `q3_eq`.
+
+**Redraft landed in** `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean`:
+- Corrected q-form prefactor in `IsothermalHeatQForm` and the proved bridge `heat_isothermal_via_q`.
+- New governing-law def `AdiabaticLegStateLaw` (entropy conservation on no-heat legs: `Cv·log(Tf/Ti) = (μ₀V²/(2nK))(Mf² − Mi²)`), modeled on Physlib's `adiabatic_relation_log` (a near-miss: ideal-gas only), with model fields `heat_leg23_adiabatic`/`heat_leg41_adiabatic`; `TorusParams` gained the heat capacity `Cv`.
+- Blueprint-pinned names kept (`Qh_eq`, `Qc_eq`, `q_relation`, `q4_eq_adiabatic_41`, `q3_eq`) with corrected statements.
+- Fresh `lake env lean`: **0 errors, 1 sorry** (`q_relation`, line 370). `m1_sq`, `m1_eq_sqrt` (main C.2 target), `m1_sq_arg_nonneg`, both leg identities, both adiabatic lemmas, and the EOS bridge are fully proved — the file is *not* a bare-sorry skeleton. The remaining sorry is analyzed in the task result: `q_relation` follows from the leg identities plus the `q3_eq` collision term via one `linear_combination` (exact recipe recorded).
+
+Task result written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_2.md`, including the assumption/target split, countermodel audit, bridge inventory, and a recorded tactic-pitfall list (`mul_pos` nesting, `ring`/`ring_nf` mirrored-subtraction blindness, `linear_combination` negation collapse).

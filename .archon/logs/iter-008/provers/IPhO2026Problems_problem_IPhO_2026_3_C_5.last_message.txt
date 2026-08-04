@@ -1,0 +1,15 @@
+Task complete. Summary of this lane (`problem_IPhO_2026_3_C_5.lean`, physics-formalize, iter-008):
+
+**Outcome**
+- Per `PROGRESS.md`, `3_C_5` is one of the 26 planner-frozen review-gate lanes: this was a sorry-preserving audit + verification pass, not a redraft. The `.lean` file is byte-identical to its frozen state.
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_3_C_5.lean`: **0 errors, exactly the 2 contracted `sorry` warnings** (L184 `overall_coefficient_of_performance`, L198 `coefficient_of_performance_via_energy_balance`).
+
+**Audits performed**
+- Blueprint ledger ↔ file: all 12 `\lean{}` pins match declarations 1:1 (`IPhO2026.Problem3.C5.*`).
+- Goal-faithfulness: the official answer `[(T_h/(T_0−T))·ln(T_0/T) − 1]⁻¹` appears conclusion-side only; all law carriers are equation-valued `Prop` defs over `opaque` scalars — no unfolding closure, no smuggled target.
+- DAG (read-only): umbrella `thm:physics:...:target` consumes `overall_coefficient_of_performance`; all 8 ancestors resolve in-file.
+- Grounding: 4 fresh LeanExplore queries confirm the iter-001/002 exemption — no Mathlib/PhysLean Carnot-COP, refrigerator first-law, or Curie-law API; `Real.log` is the only library name used; local equation abstractions retained per the chapter's exemption NOTE.
+
+**Artifacts**
+- Task result written: `.archon/task_results/problem_IPhO_2026_3_C_5.md` (assumption/target split, faithfulness audit, 8 bridge obligations all `covered`, countermodel audit, uncertainty `not applicable`, branch `covered`).
+- Scratch probe files removed; workspace clean. No edits to blueprint chapters, PROGRESS.md, or gate state files.

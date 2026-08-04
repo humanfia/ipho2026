@@ -1,0 +1,144 @@
+{
+  "iteration": 12,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-07-28T11:06:05Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa880-4c89-7de3-b83a-51e9689b946f",
+    "durationSecs": 1678
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 14
+  },
+  "prover": {
+    "status": "done",
+    "formalizationReviewGateDropped": [
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+        "reason": "passed"
+      }
+    ],
+    "formalizationReviewGateEligible": 2,
+    "durationSecs": 174
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_3_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa89b-5f4b-7e73-8745-f1826fc0e904"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_C_7": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa89b-5f32-74d3-ad51-ab9321c56681"
+    }
+  },
+  "axiomSweep": {
+    "status": "done",
+    "scope": "current-objectives",
+    "jobs": 2,
+    "targets": 2,
+    "filesChecked": 2,
+    "failedFiles": 0,
+    "durationSecs": 9,
+    "sorryLaunderings": 0
+  },
+  "review": {
+    "status": "done",
+    "deterministic": true,
+    "preflightJobs": 2,
+    "preflightDurationSecs": 9.317,
+    "preflightPassed": 2,
+    "preflightFailed": 0,
+    "preflightPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-012/review-preflight.md",
+    "candidatePackPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-012/deterministic-review-candidates.md",
+    "parallelFormalizationEnabled": true,
+    "parallelFormalizationRequestedJobs": 28,
+    "parallelFormalizationTargets": 2,
+    "parallelFormalizationReviewed": 2,
+    "parallelFormalizationUnresolved": 0,
+    "parallelFormalizationRounds": [
+      {
+        "attempt": 1,
+        "jobs": 2,
+        "submitted": 2,
+        "completed": 2,
+        "failed": 0
+      }
+    ],
+    "parallelFormalizationDurationSecs": 388.937,
+    "parallelFormalizationReport": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-012/parallel-formalization-review.json",
+    "durationSecs": 399,
+    "physicsBlockers": 0,
+    "physicsDoctorBlockers": 0,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "exhausted",
+    "formalizationGatePassed": 25,
+    "formalizationGateRetry": 0,
+    "formalizationGateExhausted": 3,
+    "formalizationGateReviewed": 2
+  },
+  "sorry_count": 53,
+  "finalize": {
+    "innerGit": {
+      "sha": "9e833b6"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-28T12:13:01Z",
+  "wallTimeSecs": 2373
+}

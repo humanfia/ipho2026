@@ -1,0 +1,15 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict: `blocked` / `needs_redraft` (`underdetermined_contract`)** for `IPhO2026.Problem4.latent_heat_per_unit_mass_target`.
+
+**Audit results**
+- Compilation: preflight rc=0, exactly 1 sorry at `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:296`, no admits/axioms/laundering.
+- Root cause: the final conjunct `Lv_reported.withinUncertainty officialSpecificLatentHeatValue` universally quantifies `Lv_reported` with no hypothesis tying it to `Qv/M0` — countermodel `central = 10000` falsifies `|c − 2190| ≤ 110`. Unprovable as stated; not a tactic/budget issue, so retry_proof is excluded.
+- Faithfulness: signature matches the blueprint theorem; `Lv = Qv/M0` appears only in the conclusion via `IsSpecificLatentHeatOf`; catalog values (39 kJ/mol, 18.0×10⁻³ kg/mol, 2190 ± 110 kJ/kg), units, and PhysLean typed `Temperature`/`DimPressure`/`DimLength` are all honored.
+- The four auxiliary theorems (`latent_heat_per_unit_mass_formula`, `computed_value_within_official_uncertainty`, `qv_from_clausius_clapeyron_slope`, `reference_temperature_calibration`) are honestly proved via `abs_le`/`norm_num`/field equations.
+- Evidence agreement: the iter-010 prover trace reports the identical diagnosis; its referenced task-result `.archon/task_results/problem_IPhO_2026_4_B_6.md` is missing from disk — process warning only, not a semantic failure.
+- Exact repair: add hypothesis `Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue` (or existentially bind `Lv_reported`), then close with `rw [h]; exact computed_value_within_official_uncertainty`.
+
+Files written:
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/attempt-1/milestones.jsonl` (one validated JSON line)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_6/attempt-1/summary.md` (10 lines)

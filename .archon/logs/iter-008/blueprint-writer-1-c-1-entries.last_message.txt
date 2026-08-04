@@ -1,0 +1,3 @@
+1-c-1-entries: COMPLETE — ledger appended to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_C_1.tex` with 17/17 pins grep-verified, 0 unknown `\uses`, balanced begin/end, official values confined to the two minimum-frequency target theorems, skeleton and markers untouched.
+
+Full report: `.archon/task_results/blueprint-writer-1-c-1-entries.md`

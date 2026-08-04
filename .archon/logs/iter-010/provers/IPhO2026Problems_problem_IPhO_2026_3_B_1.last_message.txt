@@ -1,0 +1,9 @@
+All three sorries in `IPhO2026Problems/problem_IPhO_2026_3_B_1.lean` are **false as stated** — none can be honestly closed. The file is byte-identical to iter-009 (signatures frozen), compiles with 0 errors and the original 3 sorry warnings.
+
+**Key findings** (each backed by a compiling countermodel negation-proof, saved under `.archon/task_results/witness_*.lean`):
+
+- `leg_mem_tracked_range` (`IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:199`) — conflates the field range `Icc(min 0 (min H_i H_f))…` with the magnetization locus `uIcc 0 (M_of_H H)`; countermodel `badProc` gives leg points outside the range while EOS holds globally.
+- `leg_work_integral_eval` (`IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:215`) — `IsMagneticWorkDensity` samples `M_of_H` at magnetization values off the EOS-constrained field range; countermodel `weirdProc` yields `∫ = 0` vs required `-16`.
+- `isothermal_heat_into_torus` (`IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:257`) — countermodel `linProc` (global-linear EOS, honest first-law heat `Q_in M = -∫₀..M wd`) satisfies every hypothesis but gives `Q = -12` vs the closed form `-3`; the formalization substituted `M_of_H` for the true `H_of_M`, losing the `dM/dH` Jacobian factor.
+
+Full redraft spec (minimal fix: add `h_eos_global`, or reparametrize work by `H`) is in `.archon/task_results/problem_IPhO_2026_3_B_1.md`; the witnesses double as regression tests for the redraft lane.

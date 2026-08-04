@@ -1,0 +1,16 @@
+Done. Summary of the lane's work on `IPhO2026Problems/problem_IPhO_2026_3_C_4.lean`:
+
+**Outcome** — 6 of 8 sorries closed; file compiles clean (`0 errors`, 2 remaining `sorry` warnings).
+
+**Proved**
+- `magnetization_of_eos` — `field_simp` + `linear_combination` on the EOS.
+- `heat_leaves_torus_on_field_increase` — positivity chain + `nlinarith`.
+- `workDensity_eq` — first-law rewrite + `ring`.
+- `elapsedTime_eq_integral` — `setIntegral_congr_ae` with the two endpoints shown measure-zero (countable set).
+- `cooling_time_integral_eval` — full FTC route: `integral_inv` off `0 ∉ uIcc`, `integral_one`, `integral_const_mul`, continuity-backed split integrability.
+- `c4_elapsed_time` (main target) — chaining both theorems + `field_simp` with `T_h ≠ 0` from the regime.
+
+**Remaining 2 sorries (one root cause, flagged for redraft)**
+- `heatDumpedDensity_eq`, `T' = 0` branch (`problem_IPhO_2026_3_C_4.lean:344`) and `residenceDensity_eq`, `P = 0` branch (`problem_IPhO_2026_3_C_4.lean:379`). The frozen lemma signatures carry no `RegimeAssumptions` hypothesis, and the per-cycle law bundle alone is consistent with the degenerate configurations (countermodels documented inline and in the task result). The physical `T' ≠ 0` / `P ≠ 0` branches are fully proved. Smallest fix: add `(regime : RegimeAssumptions)` to those two bridge lemmas — all downstream contracts already transport a regime.
+
+**Report** written to `.archon/task_results/problem_IPhO_2026_3_C_4.md` with the redraft request, per-declaration proof table, blueprint `\leanok` recommendations, and the no-axioms audit (`propext, Classical.choice, Quot.sound` only). No statements or signatures were altered.

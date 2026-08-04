@@ -1,0 +1,17 @@
+All objectives met. The file compiles clean with zero sorries.
+
+**Result: COMPLETE — all 4 sorry targets in `IPhO2026Problems/problem_IPhO_2026_2_C_1.lean` are proved; fresh `lake env lean` exits 0 with no warnings.**
+
+**What was proved** (signatures untouched, proof bodies only):
+- `reflected_ray_A_slope` — `m_A θ = cot (2θ)`. Key insight: clause 3 of `reflection_law` (angle-of-reflection-angle-of-incidence) alone determines the slope. New private helper `slope_reflection_key` derives `2·(m_A θ)·sin θ·cos θ = cos²θ − sin²θ` by clearing the denominator `R·√(m²+1)` (`div_eq_iff` + field algebra), squaring (`Real.sq_sqrt`), factoring out and cancelling the positive `R²` (`mul_left_cancel₀`), then `linear_combination`. Double-angle rewrites (`sin_two_mul`, `cos_two_mul'`, `cot_eq_cos_div_sin`) plus acute-branch positivity from `θ_branch` finish it.
+- `reflected_ray_A_intercept` — `b_A θ = R/(2·cos θ)`, from clause 1 (reflected line passes through `(R sin θ, R cos θ)`), the proved slope, and `sin²+cos²=1` via `field_simp` + `linear_combination`.
+- `reflected_ray_A_slope_and_intercept` — direct conjunction of the two bridges.
+- `intercept_is_length` — exhibits `L := R/(2 cos θ)`; moved after `reflected_ray_A_intercept` in-file (body-only reorder) since anonymous-constructor projections can't reference later declarations.
+
+**Artifacts**
+- Task report: `.archon/task_results/problem_IPhO_2026_2_C_1.md` (proof routes, verification log, no redraft needed).
+- Scratch test files cleaned up.
+
+**Notes for review agent**
+- All five blueprint environments (`HalfCylindricalMirrorReflection`, `intercept_is_length`, `reflected_ray_A_slope`, `reflected_ray_A_intercept`, `reflected_ray_A_slope_and_intercept`) are ready for `\leanok` by the deterministic sync; I did not touch the chapter file per role rules.
+- Law clauses 4 (tangential reversal) and 5 (outgoing orientation) of `reflection_law` aren't needed for C.1 (clause 3 + point-on-line + branch signs are strictly stronger) and remain available for C.2–C.4.

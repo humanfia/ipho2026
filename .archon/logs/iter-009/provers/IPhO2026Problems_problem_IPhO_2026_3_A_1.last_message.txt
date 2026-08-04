@@ -1,0 +1,15 @@
+Audit complete. Summary of this iter-009 physics-formalize lane for `IPhO2026Problems/problem_IPhO_2026_3_A_1.lean`:
+
+**Outcome: no code change needed** — the frozen autoformalization is already in its intended end-state.
+
+**Verified**
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_3_A_1.lean`: exit 0, **0 errors**, exactly the 6 contracted `declaration uses sorry` warnings (L529–L579: bridges 1–4 + the two A.1 target theorems), no other diagnostics.
+- Blueprint chapter contains `% archon:physics` and all 34 `\lean{}` pins resolve to declarations in the file — chapter ↔ Lean 1:1, no drift.
+- Faithfulness holds: the target `H = N·I·A/V` appears only on the conclusion side; `fieldMagnitude` is constrained by the embedded `AmpereLawThinMeanPath` law fields (circulation equation + uniformity + series current), never by fiat; currents stay typed via `InstantaneousCurrent`.
+
+**Gate state**
+- Review-gate lane is `retry` 2/3 recorded-stale; the sole finding ("does not import Physlib/PhysLean") is answered by the chapter's iter-003 planner-recorded PhysLean-coverage exemption NOTE. Per PROGRESS.md the lane's next consumer is the deterministic review re-pass — no redraft dispatched, statements left planner-frozen.
+- `\leanok` not applied: 6 sorries remain by design of the by-sorry stage; marker sync belongs to `sync_leanok` after the prover stage closes them (flagged in the task result).
+
+**Written**
+- `.archon/task_results/problem_IPhO_2026_3_A_1.md` with all required sections: assumption/target split, goal-faithfulness audit, 6-entry derivability/bridge table (all `covered`), countermodel audit per abstraction, uncertainty/branch `not applicable` with justification, declaration↔blueprint-label map, grounded Mathlib/PhysLean names with near-miss mismatches, and standing grounding-gap record.

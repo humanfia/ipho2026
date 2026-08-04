@@ -1,0 +1,12 @@
+Both review artifacts are durable on disk. Review complete.
+
+**Verdict: blocked / needs_redraft** (`redraft_kind: missing_foundational_bridge`)
+
+**Key findings**
+- **Preflight confirmed**: compiles=false — 1 error (`problem_IPhO_2026_3_B_2.lean:363` rewrite fails: the goal requires `(Tf/Ti)² = B/A` but the frozen `endpoint_relation` only yields the reciprocal `A/B`), 1 sorry (`adiabatic_invariant_along_path`, L163/286).
+- **Target statement is faithful**: `adiabatic_temperature_change` matches the blueprint and official answer, conclusion-side, hypotheses honest, no axioms/admit/native_decide — it must be preserved verbatim.
+- **Root cause is semantic, not tactical**: `IsAdiabaticPath` states the first law as `Cm·Ṫ = −w`, while the official T3-B2 solution (`T3_solution.txt:23-60`) uses `dU = dW` i.e. `+w`. Consequently `T²(λ+μ₀KH²)` is not conserved (`F′ = 4μ₀KH²T·Ṫ`); the true invariant is `(λ+μ₀KH²)/T²`. The iter-13 prover trace (session 019fa8a9, 173 turns) and matching `task_results/problem_IPhO_2026_3_B_2.md` independently supply a sympy-verified smooth countermodel satisfying every premise while refuting the bridge lemma — so the sorry is logical, and `route=retry_proof` is not applicable.
+
+**Artifacts written**
+- `…/cycle-1/attempt-1/milestones.jsonl` — one validated JSON line, route `needs_redraft`, with full evidence and the machine-tested minimal repair (flip balance sign, invariant → `(λ+μ₀KH²)/T²`, swap endpoint brackets, keep all names and the target conclusion).
+- `…/cycle-1/attempt-1/summary.md` — 12-line summary.

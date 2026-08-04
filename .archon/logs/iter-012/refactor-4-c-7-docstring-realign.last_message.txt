@@ -1,0 +1,6 @@
+4-c-7-docstring-realign: COMPLETE — module docstring bullet for `acrylicConductivity_officialSample` rewritten to the redrafted (sound-direction, `0.2629 ≤ h·R_Th` → `|λ − 0.25| ≤ 0.01`) contract; doc-only diff.
+
+- New sorries introduced: none (sorry count unchanged at 2 — `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:179` and `:203`).
+- Divergence from directive: none in content; the two sorry warnings sit at L179/L203 instead of L178/L202 purely because the replacement bullet is one line longer — coordinates only, sites untouched.
+- Verification: fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` → exit 0, 0 errors, exactly 2 `sorry` warnings.
+- Full report: `.archon/task_results/refactor-4-c-7-docstring-realign.md`

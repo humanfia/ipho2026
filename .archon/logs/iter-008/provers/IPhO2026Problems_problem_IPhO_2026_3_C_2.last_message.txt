@@ -1,0 +1,8 @@
+Done. Summary of the lane:
+
+**Outcome** — `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean` verified clean by-sorry; **no edits needed** (sorry-preserving gate-retry lane, planner-frozen file).
+
+- Fresh `lake env lean` on the file: exit 0, **0 errors**, exactly the **10 contracted `sorry` warnings** — matches the iter-008 ledger count for `3_C_2`.
+- Faithfulness audit against the chapter: assumption side (`EquationOfStateParamagnet`, `IsothermalHeatIntoTorus`, `CarnotHeatRatio`, `Figure3bAssignment`, `CarnotMagnetizationModel` fields) carries governing laws, B.1/C.1 previous-part results, and figure/branch data only; the C.2 answer appears solely in the conclusion-side theorems `m1_sq`, `m1_eq_sqrt`, `m1_sq_arg_nonneg`. All 22 `\lean{}` pins match on-disk declarations 1:1.
+- No `/- USER: ... -/` hints in the file; no other `.lean` file touched.
+- Results written to `.archon/task_results/problem_IPhO_2026_3_C_2.md` with the required sections (assumption/target split, goal-faithfulness audit, 10-entry bridge inventory, countermodel audit, uncertainty `not applicable` / branch `covered`, grounding log pointers). One transparency note flagged: the adiabatic-leg bridge `q3_eq`/`q4_eq_adiabatic_41` is the deepest proof obligation for the prover stage — carrier route is recorded in docstrings, no modeling gap.

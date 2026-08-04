@@ -1,0 +1,15 @@
+The routed redraft for `4_A_5` is landed and fully verified. Summary:
+
+**What changed** (`IPhO2026Problems/problem_IPhO_2026_4_A_5.lean` only)
+- `beta0_close_to_ideal` now carries the `(hvar : ∃ t₁ t₂, absTemp (proc.T t₁) ≠ absTemp (proc.T t₂))` premise — verbatim the guard `main` already carries (IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:408), so `main` was not touched.
+- The former `sorry` (constant-temperature orbit, previously line 446, exactly the Review-flagged gap) is replaced by a genuine proof: pigeonhole the `hvar` witnesses against the reference instant → `slope*V = n*R` via `slope_eq_div` + Eq. (1) → `offset·V = 0` → `offset = 0` → `slope = P₀/T₀` → `β₀ = 1/T₀`. This discharges the blueprint's iter-010 NOTE recommending precisely this repair.
+- Stale header sentence claiming all bodies are `sorry` replaced with a note documenting the `hvar` guard.
+
+**Verification**
+- Fresh `lake env lean`: 0 errors, 0 `declaration uses 'sorry'` warnings, 0 `sorry` tokens in the file (only 8 pre-existing unused-variable linter warnings).
+- Full `lake build`: "Build completed successfully (4 jobs)."
+
+**Audit**
+- The pre-redraft countermodel (T≡P≡1, n=R=V=1, slope=offset=½ ⇒ β₀=½≠1/T₀) falsifies `hvar`, hence is now excluded; the conclusion stays strictly conclusion-side. No other statement, hypothesis, or structure field was altered (diff audited — only proof-body text and the doc note changed). No blueprint files touched; chapter NOTE retirement and `\leanok` remain with the planner/sync per permissions.
+
+Task result: `.archon/task_results/problem_IPhO_2026_4_A_5.md`.

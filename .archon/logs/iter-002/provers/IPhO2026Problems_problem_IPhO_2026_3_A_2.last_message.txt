@@ -1,0 +1,12 @@
+Repair lane complete for `IPhO2026Problems/problem_IPhO_2026_3_A_2.lean`.
+
+**Repairs**
+- Added `import Mathlib` baseline (fixes both `Unknown constant Real.pi`); kept the single allowed targeted Physlib import (`Physlib.Electromagnetism.Dynamics.Basic`) for `FreeSpace.μ₀`, which is genuinely used in the constitutive law.
+- Rewrote the stray `where`-binder in `ampere` as the plain projection `t.N * I / (2 * Real.pi * t.R)`.
+- Fixed the deeper honesty defect: the old target theorem assumed the recorded answer `dW_emf = V * H * dB` as a hypothesis and re-concluded it. The file now models the full energy chain — Ampère's law, ring-volume law, Faraday's law (`emf · dt = N · A · dB`), and the source power law — and the answer appears **conclusion-side only** in `work_emf_eq_V_mul_H_mul_dB`.
+
+**Verification**: `lake env lean` exits 0 with only the two expected `sorry` warnings (bridge lemma `fieldStrength_eq_N_mul_I_mul_A_div_V` and the A.2 target).
+
+**Reporting**: full assumption/target split, bridge inventory, countermodel audit, and grounding gaps written to `.archon/task_results/problem_IPhO_2026_3_A_2.md`. No blueprint chapter edits (`\leanok` left to the sync); no other files touched.
+
+One observation for the next review pass: PhysLean at this revision has no circuit-level Faraday/EMF or work/energy type — the induction law is encoded as a local law field (`InducedEMFChange.faraday`), noted under grounding gaps in the task result.

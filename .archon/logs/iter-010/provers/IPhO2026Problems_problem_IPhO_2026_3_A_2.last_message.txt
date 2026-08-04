@@ -1,0 +1,15 @@
+Done. Both sorries in `IPhO2026Problems/problem_IPhO_2026_3_A_2.lean` are proved:
+
+**Proofs landed**
+- `fieldStrength_eq_N_mul_I_mul_A_div_V` — derived `2πR = V/A` from the bundled ring-volume law via `mul_div_cancel_right₀`, then rewrote Ampère's law into `H = N·I·A/V`.
+- `work_emf_eq_V_mul_H_mul_dB` — established `N·I·A = V·H` via the bridge lemma + `mul_div_cancel₀`, then closed `emf·I·dt = V·H·dB` with `linear_combination key * e.dB + e.faraday * op.I` (matches the blueprint's informal derivation).
+
+**Verification**
+- Fresh `lake env lean`: 0 errors, 0 warnings, no `sorry` left.
+- `lake build`: succeeded.
+- `#print axioms` for both theorems: `[propext, Classical.choice, Quot.sound]` only — no `sorryAx`, no escape hatches.
+- Statements/signatures untouched; only proof bodies after `:= by` edited.
+
+**Housekeeping**
+- `\leanok` added to the two proved environments in the blueprint chapter.
+- Results written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_2.md`, including Mathlib v4.31.0 API notes (`mul_div_cancel_right₀`'s first arg is explicit; `mul_div_cancel'` doesn't exist) for other lanes.

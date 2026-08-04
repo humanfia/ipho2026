@@ -1,0 +1,14 @@
+Both deliverables are in place. Summary of this lane:
+
+**Lane outcome** — `IPhO2026Problems/problem_IPhO_2026_2_C_1.lean` redrafted and verified.
+
+**What I found and did**
+- The frozen iter-008 file already faithfully modeled Figure 2g (mirror radius `R`, reflection point `(R sin θ, R cos θ)`, specular law as 4 geometric clauses, branch confinement `θ ∈ Set.Ioo 0 (π/2)`, target theorems `m_A θ = cot (2θ)` and `b_A θ = R/(2 cos θ)` all conclusion-side with 4 contracted sorries).
+- A countermodel sanity check exposed a genuine hole: the 4 law clauses admitted `m_A = −cot(2θ)` (reflected line with reversed direction orientation), in which every law holds but all target theorems are false — the contract was underdetermined.
+- Per the physics-formalize workflow I closed it at the assumption level: added a fifth clause to `reflection_law`, `0 < P_x θ + m_A θ * P_y θ`, stating the reflected ray leaves the mirror on the outward-normal side (the orientation half of the law of reflection). Verified numerically that for the physical solution this quantity equals `1/(2 sin θ) > 0` on the whole acute branch, so the strengthened structure is inhabited and forces the targets.
+
+**Verification**
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_2_C_1.lean`: 0 errors, exactly the 4 expected `sorry` warnings (L122/129/136/144); LSP diagnostics agree. `+/-` comment trap clean.
+- No target statement, blueprint pin, or sorry count changed; the 5 flat `IPhO2026_2_C_1.*` ledger pins still match verbatim, so no blueprint chapter edit was needed (the definition prose already speaks of "the outgoing ray").
+
+**Task result** written to `.archon/task_results/problem_IPhO_2026_2_C_1.lean.md` with the full assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit (including the fixed `−cot(2θ)` counterexample), branch/uncertainty coverage, and grounding-log confirmation that PhysLean has no geometric-optics reflection API (chapter exemption NOTE stands).

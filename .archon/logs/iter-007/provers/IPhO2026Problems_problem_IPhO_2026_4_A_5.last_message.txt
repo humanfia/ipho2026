@@ -1,0 +1,9 @@
+Done. Summary of this lane:
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean` was already in its iter-007 end-state (byte-identical to the baseline snapshot); the planner-completed O1 repair (`hT12 : T₁ ≠ T₂` on `IsochoricReadout`) is on disk, so no Lean edit was needed and none was made.
+- Fresh verification: `lake env lean` exits 0 with **0 errors and exactly 10 contracted `sorry` warnings** (L122/127/131/136/150/174/262/292/309/329).
+- Per iter-007 PROGRESS there is explicitly "no further prover dispatch" for this file — its next consumer is the deterministic review pass at gate 2/3, so I did not redraft anything.
+
+**Task result written**
+- `.archon/task_results/problem_IPhO_2026_4_A_5.md` with the full `physics-formalize` audit: assumption/target split, goal-faithfulness audit, six bridge obligations (all `covered`, incl. the uncertainty-propagation closure algebra via `hP₀` + `hT12`), countermodel audit for all four local `Prop`-valued interfaces, uncertainty/branch coverage (both covered), declaration ↔ `thm:physics:IPhO_2026_4_A_5:target` mapping, the five LeanExplore queries actually used, grounded PhysLean names (`Temperature`, `Temperature.toReal`, `Temperature.instCoeReal`), and the recorded near-miss gap (`IdealGas.ideal_gas_law` hard-codes `R = 1`; no thermal-pressure-coefficient API downstream bookkeeping (planner-side): the 23-declaration `4_A_5` helper batch transcription into blueprint entries is still owed per task_pending iter-007; the theorem env should get `\leanok` from the deterministic `sync_leanok` once the review pass confirms the green state.

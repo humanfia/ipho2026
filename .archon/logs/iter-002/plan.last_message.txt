@@ -1,0 +1,14 @@
+Plan phase complete for iter 002. Summary of what was done:
+
+**Ground truth established** — ran a full `lake env lean` audit of all 28 files (wave-1's spot-check had missed 8 broken files):
+- 15 clean by-sorry; 1 benign (`4_A_5` tail comment); 8 with compile errors; 2 stubs; 1 review-mandated redraft.
+
+**Dispatched — 11 repair objectives** in `.archon/PROGRESS.md` (all `[prover-mode: physics-formalize]`):
+- Redrafts: `1_B_1` (vacuous law + answer-valued hypotheses, per iter-001 review), `1_B_2` (from-stub), `3_C_3` (from-scratch)
+- Repairs with diagnostic-level directives: `1_C_1` (parse), `1_C_2` (unsolved-goals bridge), `2_C_4` (dot-notation-on-function), `3_A_1` (47 errors + typed-Current model clearing the doctor's `scalar-fallback`), `3_A_2` (`Real.pi`/Mathlib import), `3_B_1` (application mismatch), `3_C_2` (`$$` in doc-comment), `4_C_6` (Physlib-units parse cascade)
+
+**Import-policy contradiction resolved (decision recorded)** — no cosmetic imports, no config edits: 16 blueprint chapters got planner-side `% NOTE:` PhysLean-coverage exemptions citing each file's LeanExplore near-miss grounding log, per the iter-001 reconciled ruling. The 5 semantics-green review-retry targets (`1_A_1, 2_A_1, 2_B_1, 2_C_2, 3_C_4`) need no Lean churn.
+
+**State files updated** — `task_pending.md`/`task_done.md` rewritten to the audited state (wave-2 task_results merged + archived; wave-1 "compiling" verdict corrected), `STRATEGY.md` (wave 3 = repair wave ACTIVE), `ARCHON_MEMORY.md` (reconciled import rule + recurring defect-catalog), `TO_USER.md` pruned/updated, sidecars written to `.archon/iter/iter-002/{plan,objectives}.md`, and `1_B_1`'s stale `\leanok` annotated (marker itself untouched — sync owns it).
+
+**Deferred deliberately** — ~359 helper blueprint-entry transcriptions (decl sets still churning under the repair wave; batched per problem part from iter-003, starting with the stable clean-15) and the `4_A_5` comment terminator (bundled with its next touch). Frontier not prover-dispatched: the autoformalize→review gate isn't met and 11 files don't typecheck yet.

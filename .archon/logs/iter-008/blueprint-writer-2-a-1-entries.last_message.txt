@@ -1,0 +1,12 @@
+All done. The ledger is appended, verified, and the report written.
+
+2-a-1-entries: COMPLETE — added the ledger for all 6 live decls of `IPhO2026_2_A_1.*` to the chapter; pins 6/6, `\uses` 0 unknown, begin/end balanced, official formulas confined conclusion-side; report at `.archon/task_results/blueprint-writer-2-a-1-entries.md`.
+
+**Summary**
+- Edited only `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_2_A_1.tex` (+125, −0); all skeleton content and the iter-002 PhysLean NOTE kept verbatim.
+- Wired the umbrella `thm:physics:IPhO_2026_2_A_1:target` with `\uses{threshold_x_N, limiting_ray_reflection_count}` per the directive.
+- Appended `% --- Archon named-quantities coverage (blueprint-writer 2-a-1-entries) ---` + import-policy NOTE, then three ledger subsections in dependency order:
+  - `def:...:HalfCylindricalMirror` (structure; bundled Figure-2e readouts + specular reflection-count law recorded assumption-side; "Definition; no claim.")
+  - bridges `thm:...:limiting_ray_reflection_count`, `thm:...:threshold_forms_agree`
+  - targets `thm:...:threshold_x_N_cos`, `thm:...:threshold_x_N_sin`, `thm:...:threshold_x_N` with 1–3-line informal proofs, no tactic names.
+- Verification (scripted, since `leandag` CLI isn't on PATH in this worker): 6/6 `\lean{}` pins grep-match exact disk decls in flat namespace `IPhO2026_2_A_1`; all 10 `\uses` refs resolve in-chapter; no dup labels; 0 `\leanok`/`\mathlibok` added; no other file touched by me.

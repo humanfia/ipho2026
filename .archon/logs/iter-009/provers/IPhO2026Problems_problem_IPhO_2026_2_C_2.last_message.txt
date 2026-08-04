@@ -1,0 +1,12 @@
+Done. This was a statement-frozen review-gate retry lane, so I audited rather than redrafted.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:1` — compiles clean under fresh `lake env lean`: 0 errors, exactly the 3 contracted sorries (L138 `branch_denominators_ne_zero`, L148 `ray_B_slope_first_order`, L161 `ray_B_intercept_first_order`); main target `ray_B_first_order_expansion` remains proved by pair introduction.
+- Assumption/target split verified intact: C.2's first-order coefficients appear only conclusion-side; hypotheses carry the reflection family, family-membership equations, C.1 zeroth-order values, the acute-branch datum, and `IsLittleO` smoothness interfaces.
+- The sole outstanding gate reason ("no Physlib import") is a documented exemption, not a defect: the blueprint chapter carries the iter-002 PhysLean-coverage NOTE, fresh LeanExplore probes this iter confirm no geometric-optics/specular-reflection module exists in PhysLean or Mathlib (only `Submodule.reflection`/`EuclideanGeometry.reflection` isometries — near misses), and the asymptotic content is genuinely grounded on `Asymptotics.IsLittleO`. I added an in-file docstring note recording this reconciliation (comment-only edit, verified no line drift in sorry positions).
+
+**Files touched**
+- `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean` — docstring audit note only.
+- `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_2.md` — full audit: assumption/target split, goal-faithfulness, 7 bridge obligations (all covered), countermodel audit, uncertainty (`not applicable`) and branch coverage (covered), declarations ↔ blueprint labels, LeanExplore log, grounding-gap record.
+
+Next consumer is the deterministic review re-pass, as scheduled.

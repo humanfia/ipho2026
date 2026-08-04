@@ -1,0 +1,21 @@
+{
+  "iteration": 3,
+  "jobs": 1,
+  "duration_secs": 10.287,
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "status": "failed",
+      "compiles": false,
+      "returncode": 1,
+      "sorry_count": 5,
+      "duration_secs": 10.28,
+      "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:137:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:319:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:361:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:401:4: error: linarith failed to find a contradiction\nhR : ScalingRegime\nD : CoulombPairData hR\nhm : 0 < D.reduced_mass\nr : ℝ\nhr : coulombK * elementaryCharge ^ 2 / -D.total_energy ≤ r\nhE : D.total_energy < 0\nhneg : 0 < -D.total_energy\nhe : elementaryCharge ≠ 0\nhnum_pos : 0 < coulombK * elementaryCharge ^ 2\nhr_pos : 0 < r\nhnn : 0 ≤ coulombK * elementaryCharge ^ 2\nhmul : coulombK * elementaryCharge ^ 2 ≤ r * -D.total_energy\nhcast : D.total_energy * r = -(r * -D.total_energy)\na✝ : -(r * -D.total_energy) + coulombK * elementaryCharge ^ 2 < 0\n⊢ False\nfailed\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:404:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:419:4: error: linarith failed to find a contradiction\nhR : ScalingRegime\nD : CoulombPairData hR\nhm : 0 < D.reduced_mass\nr : ℝ\nhr : coulombK * elementaryCharge ^ 2 / -D.total_energy ≤ r\nhE : D.total_energy < 0\nhneg : 0 < -D.total_energy\nhe : elementaryCharge ≠ 0\nhnum_pos : 0 < coulombK * elementaryCharge ^ 2\nhr_pos : 0 < r\nhnn : 0 ≤ coulombK * elementaryCharge ^ 2\nhkey : 0 ≤ D.total_energy * r + coulombK * elementaryCharge ^ 2\nhnotpos : D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) ≤ 0\nhinit_pos : 0 < D.initial_separation\nhterm : D.total_energy * D.initial_separation ^ 2 < 0\nhcoul : 0 < coulombK * elementaryCharge ^ 2 * D.initial_separation\nhnonneg_L : 0 ≤ D.total_angular_momentum ^ 2 / (2 * D.reduced_mass)\nhL0 : D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) = 0\nhturn : D.total_energy * D.initial_separation ^ 2 + coulombK * elementaryCharge ^ 2 * D.initial_separation = 0\n⊢ False\nfailed\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:427:2: error: linarith failed to find a contradiction\nhR : ScalingRegime\nD : CoulombPairData hR\nhm : 0 < D.reduced_mass\nr : ℝ\nhr : coulombK * elementaryCharge ^ 2 / -D.total_energy ≤ r\nhE : D.total_energy < 0\nhneg : 0 < -D.total_energy\nhe : elementaryCharge ≠ 0\nhnum_pos : 0 < coulombK * elementaryCharge ^ 2\nhr_pos : 0 < r\nhnn : 0 ≤ coulombK * elementaryCharge ^ 2\nhkey : 0 ≤ D.total_energy * r + coulombK * elementaryCharge ^ 2\nhL : 0 < D.total_angular_momentum ^ 2 / (2 * D.reduced_mass)\nhexpand :\n  D.turningQuadratic r =\n    r * (D.total_energy * r + coulombK * elementaryCharge ^ 2) - D.total_angular_momentum ^ 2 / (2 * D.reduced_mass)\nhnonneg : 0 ≤ r * (D.total_energy * r + coulombK * elementaryCharge ^ 2)\na✝ :\n  r * (D.total_energy * r + coulombK * elementaryCharge ^ 2) - D.total_angular_momentum ^ 2 / (2 * D.reduced_mass) ≤ 0\n⊢ False\nfailed\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:441:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.\nIf you'd rather continue using `push_neg` in your project, you can implement it as follows:\n```\nopen Lean.Parser.Tactic in\nmacro \"push_neg\" cfg:optConfig loc:(location)? : tactic =>\n  `(tactic| push $cfg:optConfig Not $[$loc]?)\n```\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:563:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_1.lean:576:8: warning: declaration uses `sorry`"
+    }
+  ]
+}

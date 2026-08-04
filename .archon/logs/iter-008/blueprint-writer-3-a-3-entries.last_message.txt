@@ -1,0 +1,8 @@
+3-a-3-entries: COMPLETE — all 12 `IPhO2026.T3A3.*` declarations now have ledger entries in dependency order with the A.3 target last, and the umbrella target theorem is wired to it; leandag reports no `unknown_uses`, no `unmatched_lean` for T3A3, and zero isolated nodes in the chapter.
+
+Full report: `.archon/task_results/blueprint-writer-3-a-3-entries.md`
+
+Summary of what changed in `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_A_3.tex`:
+- Kept the chapter skeleton (source paragraphs, target block, iter-004 PhysLean NOTE) verbatim; only added `\uses{thm:IPhO2026Problems_problem_IPhO_2026_3_A_3:dW_eq_mu0_V_H_dM}` to `thm:physics:IPhO_2026_3_A_3:target`.
+- Added `\subsection*{Named quantities and governing-law hypotheses}` with one environment per Lean declaration: 7 definitions/structures (`PmTTorus`, `PmTWinding`, `AmpereLawTorus`, `PmTFieldState`, `ConstitutiveBH`, `PmTVariation`, `PmTWorkBudget`), 4 bridge lemmas (`meanCircumference_eq`, `dB_of_vacuum_core`, `dW_eq_sub_vac`, `dW_eq_VH_dB_sub_mu0_dH`), and the target theorem `dW_eq_mu0_V_H_dM` — each with its exact dotted `\lean{}` pin and informal 1–3-line proofs, no tactic names.
+- Fidelity preserved: `V = 2πR·A`, `B = μ₀(H+M)`, A.2 law, split, and vacuum-core subtraction are marked as assumed inputs; `dW = μ₀·V·H·dM` appears only as the target conclusion; the formal-differentials-as-reals modeling choice is noted in the `PmTVariation` entry. No `\leanok`/`\mathlibok` markers touched; no other files edited.

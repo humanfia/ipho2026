@@ -1,0 +1,16 @@
+All done. Summary of the completed autoformalization:
+
+**Deliverables**
+- `IPhO2026Problems/problem_IPhO_2026_1_A_1.lean` (357 lines) — compiles clean: `lake env lean` exits 0 with exactly the 10 expected `declaration uses sorry` warnings, no other diagnostics.
+- `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_A_1.md` — full audit (assumption/target split, goal-faithfulness, 9 bridge obligations B1–B9, countermodel audit, uncertainty/branch coverage).
+
+**Model** (`IPhO2026_1_A_1` namespace)
+- **Laws as eliminable predicates**: `IsHydrostaticPressure` (`p = ρ g d`), `IsWeightForce`, `IsBuoyantForce`, `IsNetImmersedWeight`, `IsCriticalTorqueBalance` (restoring moment = hydrostatic couple about the frictionless hinge O), bundled in `HydrostaticGateSetup`.
+- **Figure 1a readouts**: opaque `rho0`, `a`, `DeltaH = 1.41` data-side, `g`; density `3ρ₀` via `cubeMass`; slot height `a√2/2`; diamond-at-45° geometry giving the weight arm `(a/2)sin(π/4)` and pressure-couple arm `(a√2)/4`.
+- **Bridge chain** (all `by sorry`): weight `2ρ₀a³g` → moment `ρ₀ga⁴/√2`, couple `ρ₀gΔha³/4` → critical balance → `a = Δh/(2√2)` → numeric `|a − 0.50| < 1/200`.
+- **Target theorem** `hydrostatic_gate_side_length_a_target` keeps the recorded answer strictly conclusion-side; an honest precision interval is used instead of exact `a = 0.50`.
+
+**Notes for the orchestrator**
+- Blueprint chapter intentionally untouched; `thm:physics:IPhO_2026_1_A_1:target` is covered and ready for the deterministic `\leanok` sync.
+- This toolchain rejects Unicode `−` (U+2212) in *code* terms (fine in comments) — worth a memory bullet.
+- Sibling wave-1 file `problem_IPhO_2026_1_C_1.lean` currently fails `lake env lean` (pre-existing `ℏannotated`/`where` parse errors) — flagged in my task result for the plan agent; I did not touch it.

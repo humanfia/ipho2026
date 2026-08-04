@@ -1,0 +1,18 @@
+Review complete. All four required artifacts plus the iter-008 sidecar are written.
+
+## Verdicts: 24 passed / 1 failed (of 25 deterministic candidates)
+
+**The one failure — `2_B_2`** (`power_ratio_in_terms_of_theta_max`, gate 0/3 → 1/3): the target's advertised route needs `collectedWidth = R`, but `AbsorbedRays.full_side_coverage` only covers the container silhouette band `(0, a)`. I recorded a constructive countermodel in `milestones.jsonl` (`R=1, a=0.1`, thin fan: every hypothesis holds, `P/P₀=5 ≠ 1/(1−cosθ)≈1.005`). The lane's own report had flagged this exact hole. Repair contract is R1 in `recommendations.md` (strengthen coverage to `Set.Ioo 0 p.R` or add an explicit coverage field — never weaken the target).
+
+**Key adjudications**
+- `1_C_2` **passed** after an honest in-window redraft: the frozen C.1 linearization was arithmetically inconsistent with the recorded `2.03e-11 eV`; the lane's balance-root form is fully proved (0 sorries). Blueprint ledger restatement routed to R2.
+- `2_B_1` **passed** as an over-completion (0 sorries, statements byte-frozen).
+- `2_C_1` **passed** — the clause-5 orientation strengthening closes the on-record countermodel.
+- `3_C_2/3_C_4/3_C_5` **passed provisionally** under the factor-insensitivity rule; the cross-file geometry audit and `3_C_3` chapter prose fix go to planner audit R3.
+- The injected 18-finding `missing-physlib-import` doctor payload was adjudicated as the iter-003 stale snapshot (7th iter) and **not** counted as a live blocker; loop-level repair escalated in R5.
+
+**Residuals unchanged**: `1_B_1` (gate-exhausted, prover-stage redraft only), `4_C_6` (2/3, `raw/E1_solution.pdf` provenance — R6/TO_USER).
+
+**Stage disposition (R7)**: one redraft lane (`2_B_2`) + one re-review stands before a 26/26 queue closure; stage advance belongs to the review phase after that re-review.
+
+Artifacts: `session_8/milestones.jsonl` (25 schema-validated `formalization_review` blocks), `session_8/summary.md`, `session_8/recommendations.md` (R1–R7), `.archon/iter/iter-008/review.md`, and the Knowledge Base append in `PROJECT_STATUS.md`.

@@ -1,0 +1,145 @@
+{
+  "iteration": 14,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-07-28T17:04:52Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa9de-f356-7b60-9199-b21bef521bbe",
+    "durationSecs": 2652
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 7
+  },
+  "prover": {
+    "status": "done",
+    "formalizationReviewGateDropped": [
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+        "reason": "passed"
+      },
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+        "reason": "review_exhausted"
+      }
+    ],
+    "formalizationReviewGateEligible": 1,
+    "pipelineReviewEnabled": true,
+    "pipelineImmediateRedraftEnabled": true,
+    "pipelineFormalizationReviewEnabled": true,
+    "pipelineStartsAt": "formalizer",
+    "pipelineReviewMaxCombined": 1,
+    "pipelineReviewMaxReviewers": 1,
+    "pipelineReviewComplete": true,
+    "pipelineReviewTargets": 1,
+    "pipelineReviewReviewed": 0,
+    "pipelineReviewUnresolved": 0,
+    "pipelineReviewReport": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-014/pipelined-review.json",
+    "pipelineFormalizersRequested": 2,
+    "pipelineFormalizersMaterialized": 1,
+    "pipelineFormalizersFailed": 1,
+    "pipelineFormalizationReviews": 1,
+    "pipelineFormalizationPending": 0,
+    "pipelineGateEventsApplied": true,
+    "pipelineGateEvents": 1,
+    "durationSecs": 190
+  },
+  "pipelineFormalizers": {
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "error",
+      "cycle": 2,
+      "origin": "initial",
+      "baselineSha256": "cad85f34e238b28125363737cf1330bc9e4e25febb2e289f418b506c8369f723",
+      "mode": "physics-formalize",
+      "sessionId": "019faa15-1c5c-7cb2-ad6b-d3ec82b7c2e3",
+      "runnerOk": true,
+      "changed": true,
+      "compiles": true,
+      "taskResultUpdated": false,
+      "leanSha256": "20ec907bb1afaad279598356dc2f5b04d26baa532530d78953a4270a4d962e13",
+      "error": "formalizer did not update its task result",
+      "reviewAttempt": 2
+    }
+  },
+  "axiomSweep": {
+    "status": "done",
+    "scope": "current-objectives",
+    "jobs": 1,
+    "targets": 1,
+    "filesChecked": 1,
+    "failedFiles": 0,
+    "durationSecs": 18,
+    "sorryLaunderings": 0
+  },
+  "review": {
+    "status": "done",
+    "pipelineTargetConsumed": true,
+    "pipelineTargetReport": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-014/pipelined-review.json",
+    "deterministic": true,
+    "preflightJobs": 1,
+    "preflightDurationSecs": 24.404,
+    "preflightPassed": 1,
+    "preflightFailed": 0,
+    "pipelineGateEventsConsumed": true,
+    "pipelineFormalizationPending": 0,
+    "durationSecs": 601,
+    "physicsBlockers": 5,
+    "physicsDoctorBlockers": 5,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "exhausted",
+    "formalizationGatePassed": 0,
+    "formalizationGateRetry": 0,
+    "formalizationGateExhausted": 1,
+    "formalizationGateReviewed": 1,
+    "proofGateEnabled": true,
+    "proofGateSolved": 0,
+    "proofGateRetry": 0,
+    "proofGateNeedsRedraft": 0,
+    "proofGateInfrastructureBlocked": 0,
+    "proofGateRedraftsReopened": 0,
+    "proofGateExhausted": 0,
+    "proofGateReviewed": 0
+  },
+  "pipelineFormalizationReviews": {
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "status": "review_exhausted",
+      "cycle": 2,
+      "attempt": 2,
+      "reviews": 3,
+      "reason": "maximum formalization Review attempts already reached (3/3)"
+    }
+  },
+  "sorry_count": 24,
+  "finalize": {
+    "innerGit": {
+      "sha": "9a69738"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-29T02:40:14Z",
+  "wallTimeSecs": 610
+}

@@ -1,0 +1,28 @@
+# Objectives — iter 004 dispatch (repair wave)
+
+Stage: autoformalize. Both lanes mode `physics-formalize` (stage default; the
+chapters carry `% archon:physics`, statements and proof-body stubs are being
+surgically repaired inside the mode's editing domain — no full redraft).
+
+## O1 — `IPhO2026Problems/problem_IPhO_2026_1_B_1.lean` (REPAIR; gate-exhausted route, 3/3)
+**Defect (verified iter-004):** 3 `linarith failed to find a contradiction` errors at L401/L419/L427, all inside the lane-added `CoulombPairData.quadratic_pos_of_large` (L386–L431). Root cause is a sign-flipped key step: `hkey : 0 ≤ D.total_energy * r + coulombK * elementaryCharge^2`. From the hypothesis `hr : C/(-E) ≤ r` with `0 < -E` one derives `C ≤ r·(-E)`, i.e. `E·r + C ≤ 0` — the claimed direction is false in general, which is exactly why linarith fails (the lane's own last_message documents this: `a=0, b=1 ⇒ -b+a = -1 < 0`).
+
+**Repair (do not redraft):**
+1. Rewrite the sign chain to `hkey : D.total_energy * r + coulombK * elementaryCharge^2 ≤ 0` — after `rw [hcast]` the goal is `-(r * (-E)) + C ≤ 0`, closed by `linarith [hmul]`.
+2. Adapt the rest of the proof so the conclusion `0 < turningQuadratic r` still follows honestly — WITH the bound-branch field `E < 0` the turning quadratic opens DOWNWARD, so audit what the lemma should actually state: for large `r`, `r*(E r + C) ≤ 0` and then `q = r*(E r + C) − L^2/(2·μ_red) < 0` whenever `L ≠ 0` (the existing `hL` block already proves `0 < L^2/(2·μ_red)` via `turning_100` + `E < 0` + positivity of the Coulomb term — keep it). If the final composition needs `q ≤ r*(E r + C)` (true: subtracting a positive), state it and close with `nlinarith [hL, hr_pos, hkey]` or explicit `have` steps. The lemma as stated (`0 < q`) may itself be the wrong statement for a downward parabola — in that case restate it as `turningQuadratic r < 0` (that is the true, useful boundedness-side content: beyond the root the quadratic is negative, so the ATTAINED set `{q ≤ 0}` contains a tail — the sharp bound stays conclusion-side in `orbitBound_T1_B1`). Choose the mathematically-true restatement; a false-but-compiling lemma is worse than none.
+3. FIRST verify whether `quadratic_pos_of_large` or `attainedSeparations_lt_energy_threshold` is referenced anywhere else (they currently are not cited by the proved theorems); keep/repair them only as the honest boundedness bridge feeding `orbitBound_T1_B1`'s future proof. Do NOT DELETE the boundedness content wholesale — the iter-003 review's derivability FAIL requires a sound boundedness bridge to exist.
+4. PRESERVE exactly: `bound_branch` structure field (the iter-003 design — reviewed sound), `AnchoredValues`, `certified_factorization`, `turning_root_cases`, `turningQuadratic_normalized_eq`, `orbit_support`, `initial_separation_attained`, all conclusion-side bridges (`orbitBound_T1_B1`, `apogee_attained_T1_B1`, `maximum_separation_T1_B1`, `maximum_separation_in_bohr_radii_T1_B1`), `1600/9` strictly conclusion-side, all 5 `by sorry` bodies, the `import Mathlib` baseline (chapter carries the `% NOTE: PhysLean-coverage exemption`).
+5. Per-file gate: `lake env lean IPhO2026Problems/problem_IPhO_2026_1_B_1.lean` → 0 errors (sorry warnings equal the contracted `by sorry` sites). This clean compile is the planner evidence for future gate re-enrollment — report it explicitly.
+
+## O2 — `IPhO2026Problems/problem_IPhO_2026_4_C_6.lean` (REPAIR · finish iter-003 quarantine; reviews 1/3)
+**Defect (verified iter-004 — the iter-003 lane never executed its directive):** `theorem official_sample_value` (L~409) is still on disk verbatim. It is numerically false: `1/(4186·0.55·7.3e-4) = 0.595 K/W` and `|0.595 − 1.17| = 0.575 > 0.03` — the existential witnesses `R.valSI.val := 1.17` while asserting proximity to a model value that is NOT near 1.17. No honest proof can discharge it, and its docstring commits the false calibration claim.
+
+**Repair (quarantine, per the iter-003 planner decision — re-verified arithmetic: `c₀·m ≈ 1903 J/K` or `s ≈ 8.9e-4` would be needed; both contradict the file's stated readouts; `s = 1.9e-3` gives 0.2287):**
+1. Delete `theorem official_sample_value` entirely (statement + sorry).
+2. In its place leave a documented quarantine comment block: the recorded official sample `R_Th = 1.17 ± 0.03 K/W` is not jointly consistent with the file's stated readouts (`c₀ = 4186 J/(kg·K)`, `m = 0.55 kg`, `s = 7.3e-4`); consistent inversion would need `c₀·m ≈ 1903 J/K`; the printed sample's microdata appears rounded in ways not recoverable from the C.5 source page; the faithful model law `wall_thermal_resistance_from_C5` (`R = 1/(c·m·s)`) and the uncertainty carrier `uncertainty_propagates_to_resistance` remain and carry the physics content.
+3. PRESERVE: `wall_thermal_resistance_from_C5`, `uncertainty_propagates_to_resistance`, all 6 targeted Physlib imports (`Physlib.Units.*`, `Physlib.Thermodynamics.Temperature.*`, `Physlib.SpaceAndTime.Time.Basic`), the `DimThermalResistance` typed model, all other theorems, all remaining `by sorry` bodies.
+4. Per-file gate: `lake env lean IPhO2026Problems/problem_IPhO_2026_4_C_6.lean` → 0 errors; sorry count drops by exactly 1 (the deleted theorem).
+
+## Not dispatched (recorded for the loop)
+- 26 gate-enrolled review-queue targets — deterministic review audits them from gate state next pass (15 retry at 1/3 + 11 eager at 0/3); no lane exists for "review a clean file" in autoformalize, and no statement change is warranted.
+- Helper-blueprint transcription (471-debt) + umbrella-node `\lean{}`/`\uses{}` wiring — starts iter-005, per-problem-part batches (1_B_1 family first).

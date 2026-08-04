@@ -1,0 +1,13 @@
+Review complete. Both required artifacts are durable on disk.
+
+**Verdict: solved** (route `solved`, all five checks pass)
+
+- **Compilation/escape hatches**: preflight compiles (rc 0, 14.59s, sorry_count 0); grep confirms no `sorry`/`admit`/`axiom`/`native_decide` in `IPhO2026Problems/problem_IPhO_2026_3_A_2.lean`.
+- **Signature preservation**: theorem statement and bundled governing-law hypotheses (constitutive law, Ampère, Faraday, ring-volume, source power) are intact; the conclusion `sourceWork fs t op e = ⟨t.V * op.H * e.dB⟩` is the recorded answer `dW_emf = V*H*dB` as a defined readout, not an assumption.
+- **Semantic audit**: I independently verified the algebra — `emf*dt = N*A*dB` times `I`, plus the bridge `N*I*A = V*H` (proved from `volume_eq` + `ampere`, itself sorry-free), is exactly the `linear_combination key * e.dB + e.faraday * op.I` certificate. Sign convention and units faithfully documented; constitutive law correctly unused for A.2, matching the blueprint.
+- **Trace**: iter-010 prover log agrees with the on-disk file (fresh `lake env lean` clean, `lake build` success, axioms only `[propext, Classical.choice, Quot.sound]`).
+- **Process warning only**: the task-results md the prover cited is absent on disk; per policy the trace was used as primary evidence — not a semantic failure.
+
+Artifacts written:
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_A_2/attempt-1/milestones.jsonl` (1 validated JSON line)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_A_2/attempt-1/summary.md` (11 lines)

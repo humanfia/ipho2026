@@ -1,0 +1,15 @@
+All 12 sorries closed and the file compiles clean. Summary of the run:
+
+**Result**
+- `IPhO2026Problems/problem_IPhO_2026_1_A_1.lean` — all 12 proof obligations filled, `lake env lean` reports **0 errors**, 0 proof-`sorry`s (only prose mentions remain), whole-project `lake build` succeeds, and `lean_verify` shows only standard axioms (`propext`, `Classical.choice`, `Quot.sound`) — no `sorryAx`.
+- No signatures, hypotheses, or conclusions were touched; only proof bodies after `:= by` were edited.
+
+**Proof chain (as sketched by the blueprint)**
+- Steps 1–4c: unfolded the local physics defs, used `Real.sin_pi_div_four`, `field_simp` with `√2≠0`, and `nlinarith` with `Real.sq_sqrt` certificates for the lever arms, restoring moment `ρ₀ga⁴/√2`, pressure force, and couple `ρ₀gΔha³/4`.
+- Step 7 (`side_length_eq_delta_h_over`): cross-multiplied the balance by `√2·4` (`congrArg` + `field_simp` calc), cancelled the nonzero factor `ρ₀ga³` via `mul_left_cancel₀`, obtaining `a·4 = Δh·√2`, hence `a = Δh/(2√2)`.
+- `numerical_value`: bounds `1.414 < √2 < 1.415` via `nlinarith [sq_nonneg (√2 − c), Real.sq_sqrt]` (noting `norm_num` spuriously fails on mixed decimal-pow goals, so bounds route through nlinarith), giving `|a − 0.50| < 1/200`.
+- Target theorem and `torque_balance_contract` assemble from the above plus positivity projected out of `S : HydrostaticGateSetup`.
+
+**Other artifacts**
+- Blueprint chapter: added `\leanok` to all 12 declaration environments in `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_A_1.tex`.
+- Task report written to `.archon/task_results/problem_IPhO_2026_1_A_1.md` with verification details — no redraft needed; the contract was faithful and derivable as-is.

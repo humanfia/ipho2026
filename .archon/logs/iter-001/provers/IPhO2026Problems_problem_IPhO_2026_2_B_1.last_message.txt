@@ -1,0 +1,13 @@
+Autoformalization complete and verified.
+
+**Result**
+- Created `IPhO2026Problems/problem_IPhO_2026_2_B_1.lean` (self-contained, `import Mathlib` only). `lake env lean` exits 0 with exactly 4 expected `sorry` warnings.
+- **`α = R ∧ β = -R / 2` appears conclusion-side only**, in the target theorem `alpha_beta_in_terms_of_R` (`thm:physics:IPhO_2026_2_B_1:target`) — never in any hypothesis, structure field, or definition.
+
+**Model** (frame cross-checked against the official B.2/B.3 answers from the source page image)
+- Cross-section with `C = (0,0)`, `A = (0, -R/2)` on the symmetry axis toward the mirrored belly, sunlight along `(0,-1)`, absorbed fan symmetric in `±x`.
+- Governing laws as hypotheses: `reflection_law` (specular reflection as an unsolved 2×2 incidence system on the reflected line's `(m, b)`), `absorbed_law`, `no_gap`, `hit_branch`.
+- `ExtremalRaySpec` encodes the tangency of the limiting ray (`|distToLine … A| = a`, `off_axis`), which is the load-bearing bridge: the 2×2 system solves to `b = -R²/(2√(R²-x²))` and tangency evaluates — no sign branch lost — to `a = R sin θ − (R/2) sin 2θ` (theorem `container_radius_at_extremal_angle`).
+- `CoeffSpec` formalizes the *given* ansatz as a family identity (as the problem itself uses it in B.2/B.3); uniqueness of the coefficient pair follows from `SecondExtremalConfig`, a second extremal angle giving an invertible 2×2 system.
+
+**Audit + task result** written to `.archon/task_results/problem_IPhO_2026_2_B_1.md` with the assumption/target split, derivability/bridge inventory, countermodel audit, and LeanExplore grounding notes (PhysLean has no geometric-optics reflection API — near miss recorded; explicit Cartesian incidence used, matching the sibling C.1 file's idiom). Blueprint chapter was left untouched per write permissions; the `theorem` block there describes the autoformalize task itself, so no `\leanok` was applicable — flagged in the task result for the review agent/sync.

@@ -1,0 +1,10 @@
+2-c-3-entries: COMPLETE — chapter `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_2_C_3.tex` now has a `Named quantities and modeling structures` subsection covering all 7 unmatched decls (6 definitions + the target theorem) with the 3 field projections folded into their parents; skeleton, umbrella target, and PhysLean NOTE preserved.
+
+**Key facts:**
+- **Blocks added:** `PhysicalLength` → `Figure2gLengthProjection` (+`readout`) → `Figure2gMirror` (+`OnReflectingSurface`) → `Figure2gPoint` → `ReflectedRayLine` (+`Contains`) → `IsNeighboringReflectedIntersection`, each with `Definition; no claim.` proofs and logical `\uses{}` chains; the projection entry states the single-fixed-unit typed-readout modeling choice.
+- **Theorem revised:** corrected pin to the on-disk name `IPhO2026_2_C_3.limitingIntersectionCoordinates` (was the stale `IPhO2026Problems.IPhO2026_2_C_3.*` variant), C.1/C.2 kept assumption-side, informal proof follows the mandated subtract-divide-limit derivation (trig identity verified numerically).
+- **Umbrella wired:** `thm:physics:IPhO_2026_2_C_3:target` now `\uses{}` the target-theorem label.
+- **Verified:** 9 unique labels, no broken `\uses{}`, no isolated chapter nodes (14 edges), `archon blueprint-doctor` clean, `archon dag-query unmatched` shows 0 unblueprinted decls for this file.
+- **Flagged for planner:** the true namespace is `IPhO2026Problems.IPhO2026_2_C_3` (line 6 of the .lean), so the directive-mandated short pins differ by the outer segment and land in `leandag build`'s `\lean{}`-with-no-scan-decl bucket (10 entries) — a name-vs-scan artifact documented in the report.
+
+Report: `.archon/task_results/blueprint-writer-2-c-3-entries.md`

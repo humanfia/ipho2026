@@ -1,0 +1,10 @@
+Review complete — verdict **solved**. Both artifacts are durable:
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_1/cycle-1/attempt-1/milestones.jsonl` (valid JSON, one line)
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_1/cycle-1/attempt-1/summary.md` (11 lines)
+
+**Audit findings**
+- **Compilation**: preflight passed (rc=0, `sorry_count`=0); the 3 `sorry` matches in the file are comment text only. All declarations depend solely on `[propext, Classical.choice, Quot.sound]` — no axiom laundering.
+- **Contract fidelity**: theorem `alpha_beta_in_terms_of_R` concludes `α = R ∧ β = -R/2` strictly conclusion-side; no hypothesis or structure field pre-states the answer. Signature and statement layer match blueprint `thm:physics:IPhO_2026_2_B_1:target`.
+- **Semantics**: Figure-2f cooker geometry (mirror radius `R`, container at `(0, -R/2)`, absorber radius `a`), specular reflection law, contiguous symmetric fan, extremal-ray tangency, and second extremal configuration are all real hypotheses, honestly used.
+- **Proof**: bridge lemma `container_radius_at_extremal_angle` is fully proved (2×2 linear solve, strict `b < -R/2` resolves the `|dist|` sign branch, double-angle step); the target then closes via the invertible 2×2 system with nonzero determinant `2 sin θ sin θ' (cos θ' - cos θ)`.
+- **Process warning** (non-blocking): the iter-015 prover trace `IPhO2026Problems_problem_IPhO_2026_2_B_1.jsonl` and matching task results do not exist; review was based on the Lean source and the deterministic preflight, as instructed.

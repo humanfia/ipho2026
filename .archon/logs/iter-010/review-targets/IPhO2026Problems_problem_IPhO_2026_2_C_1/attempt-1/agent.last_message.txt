@@ -1,0 +1,9 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: SOLVED** — `IPhO2026_2_C_1.HalfCylindricalMirrorReflection.reflected_ray_A_slope_and_intercept`
+
+- **Compilation**: deterministic preflight passed (rc=0, `sorry_count=0`, no diagnostics); source audit found no sorry/admit/axiom laundering.
+- **Contract fidelity**: statements match the blueprint exactly — `m_A θ = cot (2*θ)` and `b_A θ = R / (2*cos θ)` are conclusion-side theorems over uninterpreted structure fields, not assumptions.
+- **Physics**: the `reflection_law` structure honestly encodes Figure-2g specular reflection (point-on-line, `P_y/R = cos θ`, normalized angle-equality, tangential reversal, outgoing-orientation positivity); the slope proof uses only the angle-equality clause via sign-safe squaring on the acute branch; intercept follows from point-on-line + `sin²+cos²=1`.
+- **Evidence**: iter-010 prover trace reports COMPLETE (4/4 sorries, exit 0). No matching task-result JSON was supplied — logged as a process warning only, per fail-open-on-missing-artifact guidance.
+- Wrote `milestones.jsonl` (1 JSON line, `status=solved`, `route=solved`) and a 9-line `summary.md` under `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_1/attempt-1/`.

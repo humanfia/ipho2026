@@ -1,0 +1,12 @@
+Review complete. Both required artifacts are durable on disk:
+
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_4/attempt-1/milestones.jsonl` — single JSON object line
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_4/attempt-1/summary.md` — 11 content lines (≤12)
+
+**Verdict:** `status=blocked`, `route=needs_redraft`, `redraft_kind=underdetermined_contract`.
+
+Key findings:
+- Preflight confirms compile rc=0 with exactly 2 sorries at `IPhO2026Problems/problem_IPhO_2026_3_C_4.lean:344` (`heatDumpedDensity_eq`, T′=0 branch) and `:379` (`residenceDensity_eq`, P=0 branch). Main target `c4_elapsed_time` plus 5 supporting declarations are fully proved; no axiom laundering, signatures preserved, answer kept conclusion-side.
+- The gap is genuine, not tactical: both bridge lemmas omit `RegimeAssumptions`, and their degenerate branches admit real countermodels (e.g. `tempFinal=0, tempHot=0` satisfies the per-cycle law bundle; `inputPower=0, tempHot=T'` satisfies the power law with arbitrary residence density). Those branches are unprovable as stated.
+- Exact repair recorded: thread `(regime : RegimeAssumptions)` into `heatDumpedDensity_eq` and `residenceDensity_eq` (and `workDensity_eq`); all downstream call sites already transport a regime.
+- Process warning noted: no matching task_results artifact was supplied in the packet, so the iter-010 prover trace (whose session-end summary agrees with preflight) was used as primary evidence.

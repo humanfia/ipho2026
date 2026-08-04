@@ -1,0 +1,12 @@
+Redraft landed and verified. Final state, honestly reported:
+
+**Outcome — `IPhO2026Problems/problem_IPhO_2026_2_B_2.lean`**
+
+- **Compiles clean**: fresh `lake env lean` → 0 errors, exit 0, 6 expected `declaration uses 'sorry'` warnings (lines 230/239/249/260/270/283). All proof bodies are honest `sorry` per the physics-formalize mode — nothing is closed by shortcuts.
+- **Root cause addressed**: the iter-010 refutation came from a physically wrong substrate — container offset along `n` and a one-sided `collectedWidth = R` model, which forced `P/P₀ = R/(2a) = 1/(2 sin θ(1−cos θ))` under B.1, equal to the recorded answer only on the unassumed locus `2 sin θ = 1`.
+- **Fix (two-sided model, faithful to Figure 2f)**:
+  - `CookerGeometry.A_offset`: `A − C = (R/2) • e` (container on the optical axis).
+  - `AbsorbedRays`: signed impact parameters with `readout_eq`, open symmetric band `hitSet_Ioo`, band filling `hit_offsets_fill`, specular `reflected_point_law` (explicit reflected-direction equation, `q ∈ containerDisk`, `t > 0`).
+  - `collectedWidth = sSup − sInf` of transverse readouts; bridge chain: `collectedWidth_eq_two_mul_yOff` → `yOff_eq_R_sin_thetaMax` (= `R sin θ_max`) → `power_ratio_eq_width_ratio` → `two_r_sin_over_diameter_eq`, which (unlike the deleted false `radius_over_diameter_eq`) is derivable for the whole B.1 family: `2a = 2R sin θ(1−cos θ)`.
+  - Main theorem unchanged in conclusion form: `P/P₀ = 1/(1−cos θ_max)`, the recorded official answer. Former countermodel (`R=1, θ=π/4`) now *satisfies* the conclusion (3.414 ✓).
+- **Report**: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_2.md` contains the assumption/target split, goal-faithfulness audit, bridge ledger, countermodel audit, uncertainty/branch coverage (uncertainty genuinely not applicable), and a **planner reconciliation request**: 5 chapter blocks (`CookerGeometry` offset `(R/2)•n`, one-sided `full_side_coverage` clause + its NOTE, `collectedWidth`, `impactParam_le_aperture`/`collectedWidth_eq_radius`, `radius_over_diameter_eq`) are now stale relative to the compiled file — planner-owned, flagged precisely since I may not edit the chapter and `\leanok` syncing belongs to the deterministic phase.

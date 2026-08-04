@@ -1,0 +1,14 @@
+Both review artifacts are durable on disk. Review complete.
+
+**Verdict: `solved`** for `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean` (`ray_B_first_order_expansion`).
+
+**Audit highlights**
+- **Compiles clean**: supplied deterministic preflight passes (rc 0, 0 sorries, no diagnostics); source grep confirms no `sorry`/`admit`/`axiom`/`native_decide` — only two narrative comments mention "sorry".
+- **Statement preserved**: the target is the exact conjunction of the two recorded C.2 `IsLittleO` expansions about `Δθ = 0`; coefficients (`-2 csc(2θ)²`, `(R/(2 cos θ)) tan θ`) are strictly conclusion-side; no equality weakened, no existential generalization.
+- **Faithful physics**: matches blueprint `thm:physics:IPhO_2026_2_C_2:target`; acute branch `θ ∈ Ioo 0 (π/2)` and `R > 0` used honestly; `o(Δθ)` documented as faithful first-order content of the official `O(Δθ²)`.
+- **Derivable contract**: the iter-013 redraft fields `M_specular_deriv`/`B_specular_deriv` exclude the certified iter-010 affine countermodel; proofs pin the hidden little-o coefficient via `hasDerivAt_iff_isLittleO_nhds_zero` + `HasDerivAt.deriv` uniqueness — no answer-as-assumption.
+- **Evidence agrees**: iter-015 prover trace (ends 02:59:37Z, `lake env lean` EXIT:0) and the newest task result both confirm the only repair was deleting the 6-line dangling doc comment causing the iter-013 parse error.
+
+Minor non-blocking note: 3 blueprint `\lean` pointers reference pre-redraft helper names now folded inline — writer-side sync only, not a Lean defect.
+
+Files written: `milestones.jsonl` (1 validated JSON line) and `summary.md` at `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_2/cycle-1/attempt-1/`.

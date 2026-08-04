@@ -1,0 +1,8 @@
+# Formalization Review: IPhO2026Problems/problem_IPhO_2026_1_B_2.lean (iter-014, cycle-2/attempt-2)
+
+- Verdict: **passed** (status=solved). Main declaration: `IPhO2026.Problem1.B2.signed_deflection_angle_T1_B2`.
+- Preflight: compiles rc=0; exactly 3 sorries, all documented Kepler-integration bridges (`orbit_eq_conic`, `exists_asymptoticRelativeVelocity`, `signed_deflection_eq_formula`) — allowed at autoformalize stage; only unused-variable linter warnings.
+- source_faithfulness: passed — governing-law fields (r0=100*a0, per-particle mu*hbar, m_red=m/2, Coulomb energy, vector central-force Newton law, AM/energy laws, periapsis) restate the source; Hints 1/2 are derivable bridges; no answer value (16.60, 49/4, arctan(2/sqrt 45)) appears hypothesis-side — recorded answer is conclusion-only.
+- derivability: passed — proved chain eps^2=49/4 (`eccentricity_sq_eq`) -> 2/sqrt 45 (`asymptote_factor_certificate`) -> signed -arctan(2/sqrt 45) via proved `signedDeflection_eq_neg_angle`; rounding bands discharged by proved `arctan_deg_band`/`signed_deflection_certificate`; only sorried hops are the two permitted Kepler bridges.
+- abstraction/uncertainty/branch: `Filter.Tendsto`-based u_inf predicate, plain-def angle/signed-deflection layer; uncertainty n/a (marking-scheme band, not error budget); Fig.-1b "below" sign fixed by `initial_transverse` + `direction_toward_pair`, now machine-checked by `perp_sep_initial`/`angular_momentum_conserved_value`.
+- countermodel_resistance: passed — iter-014's vector `newton_relative_law` closes the norm-only underdetermination; the false iter-011 pair (67/4, ~151.71 deg) is fully replaced by the proved-consistent 49/4 / -16.6015 deg chain; 10/10 bridge obligations covered (7 proved, 3 sorried-but-allowed).

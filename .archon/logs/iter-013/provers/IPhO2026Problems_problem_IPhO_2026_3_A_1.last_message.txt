@@ -1,0 +1,9 @@
+Done. Lane 7 (`problem_IPhO_2026_3_A_1.lean`) is closed, sorry-free.
+
+**Summary**
+- **Situation found**: the working tree held the *pre-redraft* HEAD snapshot of the file — the summed Ampère field side `∑_t 2πR·H_t = ∑_t I_t` with the `underdetermined_contract` `sorry` at old L579 (review-verified false; countermodel 2πR=2, N=2, H=1, I=2).
+- **Action**: restored exactly the iter-013 baseline contract (`.archon/logs/iter-013/snapshots/.../baseline.lean`), i.e. the iter-011 mandatory redraft the review agent itself prescribed — `ampere_sum : (2πR)·HPerimeter = ∑_t I_t` (circulation traversed once), plus `fieldMagnitudePerimeter` / `ampere_HPerimeter` / `perimeter_eq_interior` embedding fields. The restored file is byte-identical to that snapshot and matches the blueprint chapter's ledger; target conclusions unchanged (no weakening).
+- **Verification**: fresh `lake env lean` → exit 0, empty log, 0 sorries; `#print axioms` on all 34 declarations → only Mathlib-standard `[propext, Classical.choice, Quot.sound]`; no `axiom`/`native_decide`/`admit`.
+- **Artifacts**: `IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:1` repaired; results at `.archon/task_results/problem_IPhO_2026_3_A_1.md:1`. `\leanok` application left to `sync_leanok` per role rules (chapter untouched).
+
+For the proof-Review re-gate: the reviewed failure was the stale snapshot in the tree, not a regression in the repaired contract.

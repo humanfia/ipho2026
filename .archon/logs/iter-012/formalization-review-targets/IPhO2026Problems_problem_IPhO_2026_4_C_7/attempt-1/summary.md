@@ -1,0 +1,9 @@
+# Formalization Review: problem_IPhO_2026_4_C_7 (iter-012, attempt-1)
+
+- Verdict: **blocked** (formalization_review: failed). Preflight compiles, 2 sorries at L179/L203 as expected; the failure is semantic, not compilation.
+- `acrylicConductivity_officialSample` is refuted by an explicit countermodel: `h = 1`, `H_Th = 0.2629` satisfies `0.2629 <= h*H_Th`, but lambda = ln(465/337)/(2*pi*0.2629) = 0.194905, so `|lam - 0.25| = 0.0551 > 0.01`. The threshold is inverted: lambda decreases in `h*H_Th`, and the band holds iff `h*H_Th in [0.19708, 0.21350]` (first-hand recomputation, ln ratio = 0.3219544752349946).
+- `acrylicConductivity_formula` hypothesis bundle is unsatisfiable over Lean reals: `P0 = (T_OC-T_IC)/R_Th < 0` under `T_OC < T_IC`, `steady` fixes P = P0 on `[r1,r2]`, `fourier` then forces `deriv T r > 0` everywhere (non-junk, since `deriv T r = 0` would violate `P0 != 0`), and MVT gives `T(r2) > T(r1)`, i.e. `T_OC > T_IC` - contradiction. The theorem is vacuous, not derivable.
+- Root cause: Eq. (4)'s P is heat INTO the IC (inward); the wall current in `RadialFourierConduction` is outward. Under the repaired drive the coupling must be `LumpedHeatFlowLaw D (-P G.r1)`; with that single sign flip the FTC route derives the formula non-vacuously.
+- Checks: source_faithfulness passed (declaration-level mirror of Eq. (4)/(6), Fig. 17 geometry, answer kept conclusion-side), abstraction_sufficiency passed (structures eliminable; `wall_current` proved); derivability, uncertainty_propagation, branch_orientation, countermodel_resistance failed per above.
+- Bridges blocked: formula derivation (`acrylicConductivity_formula`, vacuous) and sample band (`acrylicConductivity_officialSample`, refuted); `wall_current` and both law structures covered.
+- Redraft: (1) flip `hflow` to act on `-P G.r1`; (2) replace the inverted threshold with the two-sided window `0.19708 <= h*H_Th <= 0.2135` (or a C.6-anchored sub-interval thereof).

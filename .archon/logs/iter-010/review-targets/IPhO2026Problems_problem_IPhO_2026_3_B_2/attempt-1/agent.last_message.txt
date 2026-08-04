@@ -1,0 +1,12 @@
+Both review artifacts are durable on disk.
+
+**Review verdict for `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean`: status=blocked, route=needs_redraft** (`missing_foundational_bridge`)
+
+**Key findings**
+- **Compilation**: preflight passed — 0 errors, exactly 3 honest sorries at L148 (`adiabatic_invariant_along_path`), L159 (`endpoint_relation`), L190 (`adiabatic_temperature_change`); `lam_add_mu0_K_sq_pos` is genuinely proved via `positivity`. No axioms, `admit`, `native_decide`, or laundering.
+- **Contract faithfulness**: the main statement matches the blueprint exactly — official answer `Tf − Ti = Ti·(√((λ + μ₀·K·Hf²)/(λ + μ₀·K·Hi²)) − 1)` is conclusion-side only; hypotheses honestly carry governing laws, adiabatic balance, and `Hi ≥ 0`, `Ti > 0`, `Tf > 0`. No weakening.
+- **Root cause**: `ParamagneticTorusLaws` never requires the path to be differentiable/continuous — `deriv` is 0 at non-differentiable points, and the integrable witnesses don't constrain `p` — so `adiabatic_invariant_along_path` is *false as stated* (jump paths satisfy all hypotheses but violate the invariant). The sorries are logical, not tactic-level.
+- **Prover evidence**: iter-010 trace (session `biui-0724`, ~700 lines of scratch work) independently reached the same semantic-gap conclusion with three concrete redraft options. No matching task-result artifact exists — recorded as a process warning per instructions.
+- **Exact repair**: add path regularity (differentiable temperature/field/magnetization) or restate the adiabatic law as an integrated first law (FTC bridge), then prove constancy of `T²·(λ + μ₀·K·H²)`, specialize to endpoints, and finish via `Real.sqrt` of the positive quotient.
+
+Written: `milestones.jsonl` (single validated JSON line) and `summary.md` (9 lines) under `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_B_2/attempt-1/`.

@@ -1,0 +1,15 @@
+Done. The lane is complete — summary below.
+
+**Outcome**
+- Redrafted `latent_heat_per_unit_mass_target` in `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:300` to discharge the iter-010 Proof-Review finding (`underdetermined_contract`, 1/3 attempts).
+- Fresh `lake env lean`: 0 errors, exactly 1 declaration-level `sorry` warning (line 300). Other four theorems still close honestly by `norm_num`/field equations.
+
+**The fix**
+- Root cause: the band conjunct `Lv_reported.withinUncertainty officialSpecificLatentHeatValue` was unprovable because `Lv_reported` was universally quantified with no tie to `Qᵥ/M₀` (countermodel `central = 10000`).
+- Minimal faithful redraft (conclusion-side only): added the conjunct `Lv_reported.central_kJ_per_kg = witness.Lv_magnitude_kJ_per_kg`, tying the reported scalar to the conversion witness. Both new sub-goals (`IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:311` and `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:314`) are grounded — the first is `rfl`-provable once the prover instantiates the reported value, the second follows by rewriting through `computed_value_within_official_uncertainty` (proved in-file: `|39/18.0e-3 − 2190| ≈ 23.3 ≤ 110`). Per autoformalize mode discipline, both remain honest `sorry`s.
+- Countermodel audit re-run: with the tie conjunct, no interpretation of the opaque wrappers keeps all records true while falsifying the conclusion.
+
+**Notes for the next phase**
+- Task result written: `.archon/task_results/problem_IPhO_2026_4_B_6.md` (assumption/target split, goal-faithfulness audit, 8 bridge obligations all `covered`, uncertainty coverage, grounding gaps).
+- The blueprint chapter's ledger prose for `thm:…:latent_heat_per_unit_mass_target` still describes the pre-redraft three-conjunct form; flagged in the task result for the review agent (I may not edit chapters). `\uses{}` wiring and `\lean{}` pins are unaffected.
+- No new axioms/sorry-laundering; only `sorry` warnings expected by the stage remain.

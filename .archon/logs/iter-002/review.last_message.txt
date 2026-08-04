@@ -1,0 +1,17 @@
+Iter-002 review complete. All 11 repair-wave targets reviewed using preflight compile results (11/11 passed, 53 sorries, no reruns) and the blueprint-doctor JSON; no targets outside the candidate set were audited.
+
+**Verdicts: 0 passed / 11 failed** under the mandatory `formalization_review` gate (all `status=partial`). Root blockers:
+
+- **Doctor-only (8 files):** `1_B_2, 1_C_1, 1_C_2, 2_C_4, 3_A_1, 3_B_1, 3_C_2, 3_C_3` — semantics judged green; fail only because the doctor's `missing-physlib-import` conflicts with the iter-002 `% NOTE:` exemption policy. Notably the check also flags files with genuine `import Physlib` (1_C_2) and a used `Physlib.Electromagnetism.Dynamics.Basic` import (3_A_2) — it's a restricted-allowlist misfire, so the fix is director-side, then review-retry with no file churn.
+- **Real statement defects (2 files):**
+  - `1_B_1`: redraft goals met (vacuous implication gone, `1600/9` conclusion-side, main theorem genuinely proved from sorry bridges), but `attainedSeparations := {r | 0<r ∧ Q(r)≤0}` is universal while the bound branch `E<0` is only an external hypothesis — lawful `E>0` instances falsify the stated maximum (verified numerically). Route: redraft, make the branch a structure constraint.
+  - `4_C_6`: `official_sample_value`'s own readouts (4186, 0.55, 7.3e-4) give 0.595 K/W, falsifying its documented 1.17±0.03 claim — answer-abbreviation instance. Main inversion + uncertainty carrier are faithful and should be kept.
+- **Grounding-register blockers (2 files):** `3_A_2` and `4_C_6` deterministic grounding logs contain only noise hits (`Path.target` etc.); 4_C_6's log contradicts its own compile-verified PhysLean units usage. Rerun the grounding preflight.
+
+Artifacts written:
+- `.archon/proof-journal/sessions/session_2/milestones.jsonl` — 11 entries, each with the full 6-check block + bridge obligations (validated JSON)
+- `.archon/proof-journal/sessions/session_2/summary.md` and `recommendations.md`
+- `.archon/iter/iter-002/review.md` — session narrative
+- `.archon/PROJECT_STATUS.md` — Knowledge Base updated with iter-002 durable findings (narrative section left frozen as instructed)
+
+Also noted: sync_leanok (iter=2, added=0/removed=0) covers the 1_B_1 chapter, so its surviving `\leanok` is the script's non-action, not laundering — flagged for planner cleanup during the 1_B_1 redraft.

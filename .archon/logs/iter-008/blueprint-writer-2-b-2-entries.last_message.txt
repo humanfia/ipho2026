@@ -1,0 +1,3 @@
+2-b-2-entries: COMPLETE — appended the 18-block named-quantities ledger (geometry → structures → bridges → target) to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_2_B_2.tex`, wired the umbrella `\uses{}` to the target theorem, and verified pins 18/18 with 0 unknown `\uses`.
+
+Report: `.archon/task_results/blueprint-writer-2-b-2-entries.md`

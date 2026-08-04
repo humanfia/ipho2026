@@ -1,0 +1,11 @@
+**Done.** Summary of the `4_B_6` lane:
+
+**Findings**
+- A mid-lane working-tree edit (predating my session) had re-applied the iter-011 autoformalize-agent "repair": an extra conjunct `Lv_reported.central_kJ_per_kg = witness.Lv_magnitude_kJ_per_kg` plus two `sorry`s in `latent_heat_per_unit_mass_target`.
+- I tested closing those sorries per the iter-013 plan — both fail on fresh `lake env lean`: the `rfl` goal compares a universally quantified input field against the existential witness (not definitionally equal), and the band goal stays unconstrained by `Lv_reported`. The conjunct is exactly as unprovable as the original — the iter-011 repair changed nothing semantically.
+
+**Resolution**
+- Restored the committed formalization-gate baseline (1 honest `sorry` at `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:318` with its countermodel comment; final `git diff` on the file is empty), per the iter-013 cross-cutting rule that provers keep the honestly-marked `sorry` at the documented `4_B_6` tie-out rather than edit statements.
+- Verified: fresh `lake env lean` → **0 errors, exactly 1 `sorry` warning**; the other four declarations (`latent_heat_per_unit_mass_formula`, `computed_value_within_official_uncertainty`, `qv_from_clausius_clapeyron_slope`, `reference_temperature_calibration`) all close honestly.
+
+**Redraft request** (recorded in `.archon/task_results/problem_IPhO_2026_4_B_6.md`): the only provable fix is hypothesis-side — bind `Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue` as an input hypothesis (or existentially bind `Lv_reported`), after which the body closes by `rw [h]; exact computed_value_within_official_uncertainty`. That is a formalization-gate change, not prover-permitted, and the previously-landed iter-011 conclusion-side variant is documented as non-working.

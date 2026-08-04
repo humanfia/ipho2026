@@ -1,0 +1,11 @@
+Review complete. Verdict: **solved**.
+
+**Audit results**
+- **Compilation/integrity**: Preflight passed (`compiles=true`, returncode 0, `sorry_count=0`); only unused-variable linter warnings. Trace `lean_verify` on the target reports exactly `[propext, Classical.choice, Quot.sound]` — no `sorryAx`, no macros/elaborators/`native_decide`.
+- **Signature**: `hydrostatic_gate_side_length_a_target` takes only `S : HydrostaticGateSetup`, `hΔ : DeltaH = 1.41`, and the moment balance; the official answer `a = Δh/(2√2) ∧ |a−0.50| < 1/200` stays conclusion-side; parameters are `opaque`, so nothing trivializes by unfolding.
+- **Semantics**: The iter-010 factor-2 defect is genuinely fixed — `pressureCoupleMagnitude = ρ₀gΔh·(a²/√2)·(a/(2√2)) = ρ₀gΔh·a³/4` against `restoringMoment = ρ₀ga⁴/√2`, so the balance now yields `a = Δh/(2√2)` and the old countermodel `a = Δh/(4√2)` is gone. The model (weight, buoyancy, lever arms at 45°, constant pressure-difference law) matches the blueprint's official-solution readout.
+- **Trace**: Iter-13 prover session `019fa8a9` (107 turns) closed all 12 obligations with 0 errors and a successful whole-project build. No matching task-results artifact exists (list empty) — recorded as a process warning only, per instructions.
+
+**Artifacts written**
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_1_A_1/attempt-1/milestones.jsonl` — single validated JSON line, `status=solved`, `route=solved`, `redraft_kind=not_applicable`.
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_1_A_1/attempt-1/summary.md` — 11-line summary.

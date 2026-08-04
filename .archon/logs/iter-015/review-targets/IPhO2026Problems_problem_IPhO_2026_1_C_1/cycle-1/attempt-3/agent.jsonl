@@ -1,0 +1,8 @@
+{"ts": "2026-07-29T06:53:30.714101Z", "event": "session_start", "model": "biui-0724", "runner": "codex", "role": "review"}
+{"ts": "2026-07-29T06:53:30.902057Z", "event": "session_meta", "session_id": "019faca6-597e-7f51-a047-ebbc4b0c173a"}
+{"ts": "2026-07-29T06:53:32.224381Z", "event": "text", "content": "[error] exceeded retry limit, last status: 429 Too Many Requests"}
+{"ts": "2026-07-29T06:53:32.237461Z", "event": "session_end", "num_turns": 0, "num_items": 0, "input_tokens": 0, "output_tokens": 0, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0, "reasoning_output_tokens": 0, "input_tokens_total": 0, "model_usage": {"biui-0724": {"inputTokens": 0, "outputTokens": 0}}, "summary": "[turn.failed] {\"message\": \"exceeded retry limit, last status: 429 Too Many Requests\"}", "runner": "codex"}
+{"ts": "2026-07-29T06:56:11.732902Z", "event": "session_start", "model": "biui-0724", "runner": "codex", "role": "review"}
+{"ts": "2026-07-29T06:56:11.905016Z", "event": "session_meta", "session_id": "019faca8-ce69-77e0-b831-e10e3c13280e"}
+{"ts": "2026-07-29T06:56:13.195456Z", "event": "text", "content": "[error] exceeded retry limit, last status: 429 Too Many Requests"}
+{"ts": "2026-07-29T06:56:13.206434Z", "event": "session_end", "num_turns": 0, "num_items": 0, "input_tokens": 0, "output_tokens": 0, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0, "reasoning_output_tokens": 0, "input_tokens_total": 0, "model_usage": {"biui-0724": {"inputTokens": 0, "outputTokens": 0}}, "summary": "[turn.failed] {\"message\": \"exceeded retry limit, last status: 429 Too Many Requests\"}", "runner": "codex"}

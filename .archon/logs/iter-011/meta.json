@@ -1,0 +1,138 @@
+{
+  "iteration": 11,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-07-28T09:11:11Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa7fe-0c3a-7b51-bc00-1adc36d12b52",
+    "durationSecs": 196
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 13
+  },
+  "prover": {
+    "status": "done",
+    "durationSecs": 3931
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_1_A_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f17-7602-984d-7a857242c1e3"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f1c-72c3-b604-a3d4e10a8b34"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f31-7853-8c82-7838d842631c"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f40-7981-b705-999ba9bb3a86"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_2_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f3e-76f3-aae5-6fcdd7d84c55"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_A_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f47-7540-9bc1-2417cd39d8dd"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_B_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f4f-73a0-9cb9-1d143f2a534d"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_B_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f6a-7ee3-ba07-634ac4cf6957"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_2": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f7c-7551-b3c3-7564c1d2ff6e"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_4": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f6f-77e3-99fe-b68ccf4845fb"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_A_5": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f83-70b2-8cdd-cc38e31f4f0b"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_B_6": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f84-7f52-8ea9-30d96cdd9959"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_4_C_7": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa802-7f8a-7c42-8cf0-b92efc1e4f54"
+    }
+  },
+  "review": {
+    "status": "done",
+    "deterministic": true,
+    "preflightJobs": 13,
+    "preflightDurationSecs": 15.688,
+    "preflightPassed": 13,
+    "preflightFailed": 0,
+    "preflightPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-011/review-preflight.md",
+    "candidatePackPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-011/deterministic-review-candidates.md",
+    "promptOriginalChars": 34110,
+    "promptCompressedChars": 34110,
+    "promptCompressionOmittedChars": 0,
+    "promptCompressionChanged": false,
+    "sessionId": "019fa85a-85e0-7a12-82ef-31ac35e1fcec",
+    "durationSecs": 842,
+    "physicsBlockers": 0,
+    "physicsDoctorBlockers": 0,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "retry",
+    "formalizationGatePassed": 24,
+    "formalizationGateRetry": 2,
+    "formalizationGateExhausted": 2,
+    "formalizationGateReviewed": 13
+  },
+  "sorry_count": 55,
+  "finalize": {
+    "innerGit": {
+      "sha": "a34db8a"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-28T11:06:05Z",
+  "wallTimeSecs": 6601
+}

@@ -1,0 +1,3783 @@
+/-
+  IPhO 2026, Theoretical Problem 1 (T1), Part T1-B2 (labeled B.2) —
+  the unbound electron–positron pair of Figure 1b: asymptotic relative
+  velocity and signed deflection angle.
+
+  Autoformalized from blueprint chapter
+  `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_1_B_2.tex`
+  (marked `% archon:physics`) and the official source page `T1_page-2.png`.
+
+  Physical situation (Fig. 1b, official page 5/14 — same setting as B.1):
+  A positron `e+` is located at a distance `100 * a0` from an electron `e-`.
+  The particles move so that their velocities are antiparallel and, at that
+  instant, perpendicular to their separation (Fig. 1b).  Each particle
+  carries angular momentum of magnitude `mu * hbar` about the system's
+  center of mass, `mu` a dimensionless numerical factor.  The only
+  interaction between `e+` and `e-` is electrostatic (Coulomb); both
+  particles have the same inertial mass `m` and equal charge magnitude `e`
+  of opposite sign.  The system is isolated, classical, non-relativistic.
+  The Bohr radius is `a0 = 4*pi*eps0*hbar^2/(m e^2)`, and the Coulomb
+  constant is `k = 1/(4*pi*eps0)`.
+
+  Current subquestion (T1-B2, 2.5 pts):
+    For `mu = 15/2` the pair is unbound (hyperbolic scattering).  Let
+    `u_inf` be the relative velocity of `e+` with respect to `e-` as the
+    separation tends to infinity.  Find the angle between `u_inf` and the
+    initial line of motion of `e+`, in degrees.
+
+  Recorded official answer: signed deflection `-16.60` degrees, i.e. the
+  asymptotic direction of `u_inf` lies 16.60 degrees BELOW the initial
+  positron line of motion.  This value appears ONLY on the conclusion side
+  of `signed_deflection_angle_T1_B2` and of its magnitude corollary
+  `unsigned_deflection_angle_in_degrees_T1_B2`.  No assumption, premise
+  field, or local definition mentions `16.60`, the exact value
+  `arctan(2/sqrt 45)`, or any numeric deflection — the sign toward the
+  line connecting the pair and the magnitude are exactly what must be
+  proved.
+
+  ITER-011 REDRAFT LOG (routed by Proof Review,
+  wrong_or_weakened_target): the previous version stated the exact
+  closed forms via the pair (`eps^2 = 67/4`, `2/sqrt 63`),
+  `pi - 2 arctan(2/sqrt 63)` (≈ 151.71 deg) for the unsigned angle and
+  its negation for the signed one.  That chain was false in principle:
+  the governing-law fields evaluate `eps^2` to `49/4` exactly
+  (machine-checked below in `eccentricity_sq_eq`), and the
+  apocenter-referenced Rutherford formula is the wrong reference for
+  this periapsis-referenced scenario.  The corrected, mutually
+  consistent chain is `eps^2 = 49/4` → asymptote factor `2/sqrt 45`
+  (proved in `asymptote_factor_certificate`) →
+  `angleBetween = arctan(1/sqrt(eps^2-1))` (periapsis-referenced, in
+  `signed_deflection_eq_formula`) → signed value
+  `-arctan(2/sqrt 45) ≈ -16.6015°`, inside both rounding bands.
+
+  ITER-017 REDRAFT LOG (routed by the user-granted budget extension,
+  redraft_kind: missing_foundational_bridge): two latent statement
+  defects were found and corrected, and the Kepler/Binet and
+  limiting-velocity bridges were decomposed into an explicit lemma
+  layer.
+  (1) ORIENTATION.  The official page image (T1_page-2.png, Fig. 1b)
+  shows the positron ABOVE the electron moving to the RIGHT (the
+  electron to the left), so the physical signed bracket is
+  `perp sep0 v0 = -(r0 * v0)` (CLOCKWISE orbit);
+  `initial_transverse` and the signed angular-momentum law
+  `angular_momentum_law` (now `perp (sep) (sep') = -(L/m_red)`) were
+  re-signed accordingly.  With the previous `+r0 * v0` sign (positron
+  misread as moving left), the attractive orbit's asymptotic velocity
+  has `perp u0 u_inf > 0`, so no `u` could satisfy
+  `IsAsymptoticRelativeVelocity` on any model of the data: the two
+  main targets were false as stated for the physical model.  The
+  re-signed fields are exactly the branch under which the official
+  `-16.60°` is the clockwise deflection below the initial line of
+  motion.
+  (2) CONIC BRANCH.  `orbit_eq_conic` previously asserted the branch
+  `r = p/(eps cos(θ-θ0) - 1)` with positive denominator — the
+  repulsive/far branch (it satisfies the repulsive Binet equation
+  `u'' + u = -1/p`, not the attractive `u'' + u = +1/p`); worse, at
+  `t = 0` with `p = 450 a0`, `r0 = 100 a0`, `eps = 7/2` it would
+  require `cos(θ(0)-θ0) = 11/7 > 1`, so the statement was false for
+  the actual orbit.  The attractive, Hint-2-compatible branch
+  `r = p/(1 + eps cos(θ - θ0))` with periapsis normalization
+  `θ0 = polar_angle 0` is now stated; at `t = 0` it reads
+  `100 a0 = 450 a0/(1 + 7/2)` ✓.
+  (3) BRIDGE LAYER.  New explicit declarations: the Euclidean toolbox
+  `dirVec`, `norm_dirVec`, `dot_dirVec`, `perp_dirVec`,
+  `dot_smul_right`, `dot_smul_left` (all proved); the polar layer
+  `angular_momentum_polar` (leaf), `polar_angle_deriv`,
+  `polar_angle_deriv_neg`, `polar_angle_strictAnti` (proved); the
+  Binet layer `binet_ode`, `harmonic_solution_on_interval` (leaves);
+  the energy/escape layer `energy_conservation`,
+  `separation_tendsto_atTop`, `speed_tendsto_atTop` (leaves); the
+  direction layer `initialDirection_eq` (leaf),
+  `velocity_tendsto_atTop` (leaf), `asymptote_perp_neg` (proved); the
+  angle layer `asymptote_angle_eq_arctan`,
+  `angleBetween_initialDirection_asymptote` (proved from the leaves).
+  The named bridges `exists_asymptoticRelativeVelocity` and
+  `signed_deflection_eq_formula` are now PROVED from the leaves; the
+  remaining sorries are exactly the fine Kepler-layer leaves, each
+  documented with the derivation it carries.
+
+  Official hints recorded on the problem page (governing-law input, not
+  target): Hint 1: eccentricity `eps = sqrt(1 + 4 L^2 E / (k^2 e^4 m))`
+  with `E` and `L` the total energy and the magnitude of the total angular
+  momentum, `k` the Coulomb constant; Hint 2: polar equation of the conic
+  trajectory `r = a / (1 - eps cos theta)`.  They are encoded as
+  *derivable bridge lemmas* (`eccentricity_sq_eq`, proved, and
+  `orbit_eq_conic`, the remaining Kepler-layer leaf).
+
+  Conventions:
+  * Two-body -> one-body reduction is encoded in
+    `CoulombScatteringData.reduced_mass_eq` (`m_red = m/2`) and
+    `CoulombScatteringData.relative_kinetic_law` (kinetic energy of the
+    two opposite CM-frame velocities equals `(1/2) m_red u^2` with
+    `u = 2 v0`).
+  * The trajectory is an abstract planar curve `sep : R -> R^2`, the
+    relative coordinate `r_positron - r_electron` as a function of time,
+    constrained by governing-law fields (Newton's equation for the
+    reduced particle under attractive Coulomb, the SIGNED
+    angular-momentum conservation law, the multiplied-out radial-energy
+    identity, the turning point at `t = 0`, polar decomposition).  No
+    closed orbit shape is assumed: the conic form appears only in the
+    bridge lemma `orbit_eq_conic`.
+  * `u_inf` carries a *definition* (`IsAsymptoticRelativeVelocity`, a
+    `Filter.Tendsto` statement of the trajectory's relative velocity at
+    `Filter.atTop`), so its existence is a theorem
+    (`exists_asymptoticRelativeVelocity`, proved below from the
+    explicit limiting-velocity leaf `velocity_tendsto_atTop`), not an
+    assumption.
+  * The Kepler-layer leaves (formerly `by sorry`, each documented with
+    the derivation it carries) are now ALL PROVED: the radial first
+    integral (`radial_sq_identity`), the strict periapsis
+    (`r_gt_initial` via `not_const_initial`), the conic first integral
+    (`conic_first_integral`, the arccos quadrature), the Binet ODE
+    (`binet_ode`), the orbit (`orbit_eq_conic`), and the
+    limiting-velocity layer (`velocity_tendsto_atTop`).  All pure
+    definitional/algebraic certificates, the whole
+    polar/direction/angle layer, the two named bridges
+    `exists_asymptoticRelativeVelocity` and
+    `signed_deflection_eq_formula`, and both main-target assemblies are
+    closed proofs; none of them asserts any deflection-angle value.
+  * The orientation convention for the signed answer (Fig. 1b on the
+    official page, T1_page-2.png): the positron is above the electron
+    and moves to the RIGHT (the electron to the left), so the orbit is
+    CLOCKWISE and the signed planar bracket of the separation with the
+    positron velocity is negative, `perp sep0 v0 = -(r0 * v0)`
+    (`initial_transverse`); the polar angle strictly decreases
+    (`polar_angle_strictAnti`).  The attraction bends the trajectory
+    toward the line connecting the pair, hence BELOW the initial line
+    of motion: `perp (initialDirection) u_inf < 0` — the clockwise case
+    of `signedDeflection`, i.e. the official "16.60 degrees BELOW the
+    initial line of motion".  (The iter-011 draft read the figure with
+    the positron moving LEFT and took `perp sep0 v0 = +r0 * v0`; for
+    the attractive Coulomb orbit that sign forces the deflection
+    bracket positive, contradicting `direction_toward_pair` on every
+    model of the data — see the iter-017 redraft log above.)
+-/
+
+import Mathlib
+
+/- USER: This target received an explicit additional Review budget after the
+first three formalization attempts.  Preserve the corrected physical chain
+`eps^2 = 49/4` and signed deflection `-arctan (2 / sqrt 45)`; do not restore
+the refuted `67/4`, `sqrt 63`, or approximately `-151.71` degree contract.
+Concentrate the redraft/proof effort on the Kepler/Binet and limiting-velocity
+bridges `orbit_eq_conic`, `exists_asymptoticRelativeVelocity`, and
+`signed_deflection_eq_formula`. -/
+
+open Real Set Filter
+
+namespace IPhO2026.Problem1.B2
+
+noncomputable section
+
+/-! ### Planar vectors: dot product and perpendicular bracket -/
+
+/-- The scattering plane (CM frame): `R^2` with its standard inner product. -/
+abbrev Plane := EuclideanSpace ℝ (Fin 2)
+
+/-- Dot product of two planar vectors. -/
+def dot (v w : Plane) : ℝ := v 0 * w 0 + v 1 * w 1
+
+/-- Planar perpendicular bracket `perp v w = v_x w_y - v_y w_x`: the signed
+z-component of the 2D cross product.  Positive when `w` is reached from `v`
+by a counterclockwise rotation of less than 180 degrees.  Used to express
+angular momentum and the side (branch/orientation) of the deflection. -/
+def perp (v w : Plane) : ℝ := v 0 * w 1 - v 1 * w 0
+
+/-! ### Universal constants and fixed problem parameters -/
+
+/-- Mass `m` of each particle (electron and positron inertial mass, kg). -/
+opaque particleMass : ℝ
+
+/-- Reduced Planck constant `ℏ` (J·s). -/
+opaque hbar : ℝ
+
+/-- Coulomb constant `k = 1/(4 pi eps0)` (N·m²·C⁻²). -/
+opaque coulombK : ℝ
+
+/-- Elementary charge magnitude `e`: the electron has charge `-e`, the
+positron `+e` (C). -/
+opaque elementaryCharge : ℝ
+
+/-- Bohr radius `a0 = 4 pi eps0 ℏ²/(m e²) = ℏ²/(k·m·e²)` (m).  Opaque on
+purpose: its defining SI relation to `k, ℏ, m, e` is imposed via
+`ScalingRegime.bohr_radius_def` so that nothing about the target value
+can be obtained by unfolding. -/
+opaque bohrRadius : ℝ
+
+/-- Positivity of the constants plus the defining relation of the Bohr
+radius (`a0 = ℏ²/(k·m·e²)`, i.e. the page's `a0 = 4 pi eps0 ℏ²/(m e²)`
+with `k = 1/(4 pi eps0)`). -/
+structure ScalingRegime : Prop where
+  particleMass_pos : 0 < particleMass
+  hbar_pos : 0 < hbar
+  coulombK_pos : 0 < coulombK
+  elementaryCharge_pos : 0 < elementaryCharge
+  bohrRadius_pos : 0 < bohrRadius
+  bohr_radius_def : bohrRadius = hbar ^ 2 / (coulombK * particleMass * elementaryCharge ^ 2)
+
+/-- The dimensionless angular-momentum factor `mu` of the statement: each
+particle carries angular momentum `mu * ℏ` about the centre of mass. -/
+def IsAngularMomentumFactor (μ : ℝ) : Prop :=
+  0 < μ
+
+/-- The value `mu = 15/2` of subquestion B.2 (unbound case). -/
+def unboundMu : ℝ := 15 / 2
+
+/-- `15/2` is a valid angular-momentum factor. -/
+theorem unboundMu_isAngularMomentumFactor : IsAngularMomentumFactor unboundMu := by
+  norm_num [unboundMu, IsAngularMomentumFactor]
+
+/-! ### Two-body Coulomb scattering data and governing laws -/
+
+/-- Data and governing laws of the isolated, classical, non-relativistic
+electron–positron pair with purely electrostatic interaction, with the
+two-body -> one-body (relative coordinate, reduced mass) reduction encoded.
+
+`sep t` is the relative coordinate `r_e+(t) - r_e-(t)` in the centre-of-mass
+plane (metres).  Energies are in joules, angular momenta in J·s, speeds in
+m/s.  No field mentions the asymptotic velocity or any deflection angle:
+those are conclusion-side concepts defined after this structure. -/
+structure CoulombScatteringData (hR : ScalingRegime) where
+  /-- Relative position `r_e+(t) - r_e-(t)` in the CM frame (m). -/
+  sep : ℝ → Plane
+  /-- Initial relative position at the recorded instant `t = 0` (m). -/
+  sep0 : Plane
+  /-- Initial CM-frame velocity of the positron (m/s); the electron's is
+  `-v0` (equal masses, antiparallel velocities, CM at rest). -/
+  v0 : Plane
+  /-- A continuous polar angle of the relative coordinate (rad). -/
+  polar_angle : ℝ → ℝ
+  /-- Reduced inertial mass of the two equal masses (kg). -/
+  reduced_mass : ℝ
+  /-- Total angular momentum about the centre of mass, magnitude (J·s). -/
+  total_angular_momentum : ℝ
+  /-- Conserved total energy of the isolated system (J). -/
+  total_energy : ℝ
+  /-- Initial separation (Fig. 1b readout), in metres. -/
+  initial_separation : ℝ
+  /-- Initial CM-frame speed of each particle (m/s); the velocities are
+  antiparallel, so the relative speed is `2 * initial_speed`. -/
+  initial_speed : ℝ
+  /-- The pair is never at zero separation (attractive Coulomb scattering
+  with nonzero angular momentum). -/
+  sep_ne_zero : ∀ t : ℝ, sep t ≠ 0
+  /-- Regularity of the trajectory (Newtonian dynamics, twice continuously
+  differentiable). -/
+  smooth_sep : ContDiff ℝ 2 sep
+  /-- Regularity of the polar angle: the argument of a `C²` planar curve
+  that avoids the origin (`sep_ne_zero`) is locally `C²`.  Needed for the
+  Binet (`d²/dθ²`) layer of the conic bridge. -/
+  smooth_polar_angle : ContDiff ℝ 2 polar_angle
+  /-- The recorded instant `t = 0` has the Fig.-1b relative configuration
+  and the antiparallel velocities: `sep 0 = sep0` and the relative
+  velocity is `2 * v0`. -/
+  initial_instant : sep 0 = sep0 ∧ deriv sep 0 = (2 : ℝ) • v0
+  /-- Reduced mass of two equal point masses: `m_red = m/2`. -/
+  reduced_mass_eq : reduced_mass = particleMass / 2
+  /-- Fig. 1b readout: `r0 = 100 * a0`. -/
+  initial_separation_value : initial_separation = 100 * bohrRadius
+  /-- The relative position at `t = 0` has magnitude `r0`. -/
+  initial_separation_is_norm : ‖sep0‖ = initial_separation
+  /-- Nonzero initial motion; `v0` has magnitude `initial_speed`. -/
+  initial_speed_value : v0 ≠ 0 ∧ ‖v0‖ = initial_speed
+  /-- Angular momentum per particle about the centre of mass is `mu * ℏ`
+  (given data): each particle orbits at radius `r0/2` with velocity
+  perpendicular to its radius vector, so `m v0 (r0/2) = mu ℏ`. -/
+  angular_momentum_per_particle :
+    particleMass * initial_speed * (initial_separation / 2) = unboundMu * hbar
+  /-- Total angular momentum is the sum of the two equal per-particle
+  contributions (equal masses, antiparallel velocities, centre of mass at
+  the midpoint): `L = 2 mu ℏ`. -/
+  total_angular_momentum_eq :
+    total_angular_momentum =
+      2 * (particleMass * initial_speed * (initial_separation / 2))
+  /-- Fig. 1b geometry and orientation: at `t = 0` the velocities are
+  perpendicular to the separation, with the recorded orientation of the
+  figure (positron above the electron, moving to the RIGHT — see the
+  official page image `T1_page-2.png` — so the orbit is CLOCKWISE): the
+  signed planar bracket of the separation with the positron velocity is
+  `-(r0 * v0)` (`perp sep0 v0 = 0` would mean collinear, `+r0 * v0` the
+  mirrored figure with counterclockwise orbit).  ITER-017 REDRAFT:
+  previously `+r0 * v0`, the misread-leftward orientation, which makes
+  the true deflection bracket positive and contradicts
+  `IsAsymptoticRelativeVelocity.direction_toward_pair` on every model
+  of the data. -/
+  initial_transverse :
+    perp sep0 v0 = -(initial_separation * initial_speed)
+  /-- Polar decomposition of the planar relative coordinate:
+  `sep t = |sep t| * (cos θ(t), sin θ(t))`. -/
+  polar_decomposition :
+    ∀ t : ℝ, sep t 0 = ‖sep t‖ * Real.cos (polar_angle t) ∧
+      sep t 1 = ‖sep t‖ * Real.sin (polar_angle t)
+  /-- Angular-momentum conservation for the reduced one-body problem
+  (the `r² θ' = const` law in bracket form): at every time the signed
+  planar angular momentum per unit reduced mass is the constant
+  `-(L / m_red)` — NEGATIVE because the Fig.-1b orbit is clockwise (see
+  `initial_transverse`); `L = total_angular_momentum` is the MAGNITUDE
+  of the total angular momentum.  Sign consistency: at `t = 0`,
+  combining `initial_instant`, `initial_transverse` and
+  `reduced_mass_eq` gives `perp sep0 (2 · v0) = -(2 r0 v0)
+  = -(L / (m/2))`, i.e. exactly the stated RHS — the trajectory already
+  starts on the decreasing-angle branch (see `polar_angle_deriv_neg`;
+  the certificate `angular_momentum_conserved_value` records the
+  magnitude identity `L / m_red = 2 r0 v0`).  ITER-017 REDRAFT:
+  previously `+L/m_red`, consistent only with the misread
+  counterclockwise orientation. -/
+  angular_momentum_law :
+    ∀ t : ℝ, perp (sep t) (deriv sep t) = -(total_angular_momentum / reduced_mass)
+  /-- Relative-coordinate kinetic energy: the sum of the two Newtonian
+  kinetic energies equals `(1/2) m_red u^2` with `u = 2 v0`. -/
+  relative_kinetic_law :
+    2 * ((1 / 2) * particleMass * initial_speed ^ 2) =
+      (1 / 2) * reduced_mass * (2 * initial_speed) ^ 2
+  /-- Coulomb's law: potential energy `U(r) = -k e²/r`; at the transverse
+  initial instant the conserved total energy is kinetic plus Coulomb. -/
+  coulomb_law :
+    total_energy =
+      2 * ((1 / 2) * particleMass * initial_speed ^ 2) -
+        coulombK * elementaryCharge ^ 2 / initial_separation
+  /-- Newton's equation for the reduced particle under the attractive
+  Coulomb force (two-body reduction: acceleration of the reduced particle
+  is `(m/2)⁻¹` times the Coulomb force along the separation), in VECTOR
+  form: the acceleration is directed along `-sep` (attractive),
+  `sep'' = -(k e² / (m_red r³)) • sep` with `m_red = m/2`, i.e. magnitude
+  `k e² / (m_red r²) = 2 k e² / (m r²)`.  The CENTRAL (radial) character
+  of the acceleration is what makes the specific angular momentum
+  `perp (sep) (sep')` constant in time (see the proved certificate
+  `perp_sep_is_const_of_central_force` below); a norm-only equation
+  would lose the radial direction. -/
+  newton_relative_law :
+    ∀ t : ℝ, deriv (deriv sep) t =
+      -(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) •
+        ((‖sep t‖ ^ 3)⁻¹ • sep t)
+  /-- Energy + angular-momentum conservation for the inverse-square
+  attraction, multiplied through by `r^2 > 0` (with `radial speed = r'`):
+  `E r^2 = (1/2) m_red (r' r)^2 + L^2/(2 m_red) - k e^2 r`.  The left-hand
+  rearrangement `E r^2 + k e^2 r - L^2/(2 m_red)` is the turning-point
+  quadratic `turningQuadratic`; it vanishes exactly where the radial speed
+  vanishes. -/
+  radial_energy_law :
+    ∀ t : ℝ,
+      total_energy * ‖sep t‖ ^ 2 +
+          coulombK * elementaryCharge ^ 2 * ‖sep t‖ -
+        total_angular_momentum ^ 2 / (2 * reduced_mass) =
+      (1 / 2) * reduced_mass * (deriv (fun s => ‖sep s‖) t * ‖sep t‖) ^ 2
+  /-- The transverse initial instant of Fig. 1b is a turning point
+  (velocities perpendicular to the separation, radial speed zero). -/
+  turning_point_initial : deriv (fun s => ‖sep s‖) 0 = 0
+
+namespace CoulombScatteringData
+
+variable {hR : ScalingRegime} (S : CoulombScatteringData hR)
+
+/-- Initial separation is positive (Fig. 1b readout `100 * a0`, `a0 > 0`). -/
+theorem initial_separation_pos : 0 < S.initial_separation := by
+  rw [S.initial_separation_value]
+  exact mul_pos (by norm_num) hR.bohrRadius_pos
+
+/-- The total angular momentum has the value `2 * mu * ℏ = 15 ℏ` for
+`mu = 15/2`. -/
+theorem total_angular_momentum_value :
+    S.total_angular_momentum = 2 * (unboundMu * hbar) := by
+  rw [S.total_angular_momentum_eq, S.angular_momentum_per_particle]
+
+/-- The turning-point quadratic of the effective radial dynamics,
+`Q(r) = E r^2 + k e^2 r - L^2/(2 m_red)`: the radial-energy identity
+multiplied by `r^2 > 0`; `Q(r) = (1/2) m_red r'^2 r^2` along the
+trajectory, so `Q(r) = 0` exactly at turning points. -/
+def turningQuadratic (r : ℝ) : ℝ :=
+  S.total_energy * r ^ 2 + coulombK * elementaryCharge ^ 2 * r -
+    S.total_angular_momentum ^ 2 / (2 * S.reduced_mass)
+
+/-- The initial separation is a turning point (the periapsis of the
+unbound orbit): `Q(r0) = 0`, from `radial_energy_law` at `t = 0` and
+`turning_point_initial`.  Pure rearrangement of governing-law fields. -/
+theorem turningQuadratic_periapsis : S.turningQuadratic S.initial_separation = 0 := by
+  have h1 := S.radial_energy_law 0
+  rw [S.initial_instant.1, S.turning_point_initial, S.initial_separation_is_norm,
+    zero_mul, zero_pow (two_ne_zero : (2 : ℕ) ≠ 0), mul_zero] at h1
+  rw [CoulombScatteringData.turningQuadratic]
+  exact h1
+
+/-- Semilatus rectum `p = L^2 / (m_red k e^2)` of the reduced one-body
+problem (m): the geometric scale of the conic in Hint 2. -/
+def semilatusRectum : ℝ :=
+  S.total_angular_momentum ^ 2 /
+    (S.reduced_mass * coulombK * elementaryCharge ^ 2)
+
+/-- Dimensionless squared eccentricity of Hint 1 for equal masses
+(`m_red = m/2` reconciles `2 m_red` in the denominator with the page's
+`m`): `eps^2 = 1 + 2 E L^2 / (m_red (k e^2)^2) = 1 + 4 E L^2 / (k^2 e^4 m)`. -/
+def eccentricitySq : ℝ :=
+  1 + 2 * S.total_energy * S.total_angular_momentum ^ 2 /
+    (S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2)
+
+end CoulombScatteringData
+
+/-! ### Unboundness at `mu = 15/2` -/
+
+/-- The total energy is the Figure-1b value `mu²/2500 - 1/200` in units of
+`ℏ²/(m a0²)`; for `mu = 15/2` this is `7/400 > 0`: the pair is unbound
+(hyperbolic scattering).  Derivable from `coulomb_law`,
+`angular_momentum_per_particle`, `initial_separation_value`,
+`bohr_radius_def` and `relative_kinetic_law`; the proof is pure algebra
+once those laws are granted, and contains no angle information. -/
+theorem total_energy_pos {hR : ScalingRegime} (S : CoulombScatteringData hR)
+    (_hμ : IsAngularMomentumFactor unboundMu) : 0 < S.total_energy := by
+  have hm : (0:ℝ) < particleMass := hR.particleMass_pos
+  have ha0 : (0:ℝ) < bohrRadius := hR.bohrRadius_pos
+  have hh : (0:ℝ) < hbar := hR.hbar_pos
+  have hk : (0:ℝ) < coulombK := hR.coulombK_pos
+  have he : (0:ℝ) < elementaryCharge := hR.elementaryCharge_pos
+  have hke : (0:ℝ) < coulombK * elementaryCharge ^ 2 := mul_pos hk (pow_pos he 2)
+  -- Initial speed from the angular-momentum datum `m v0 (r0/2) = mu hbar`
+  -- with `r0 = 100 a0`:  `v0 = 2 mu hbar / (m * (100 a0))`.
+  have hv0 : S.initial_speed = 2 * unboundMu * hbar / (particleMass * (100 * bohrRadius)) := by
+    have hperp := S.angular_momentum_per_particle
+    rw [S.initial_separation_value] at hperp
+    have hd : particleMass * (100 * bohrRadius) ≠ 0 :=
+      mul_ne_zero (ne_of_gt hm) (mul_ne_zero (by norm_num) (ne_of_gt ha0))
+    have h2 : particleMass * (100 * bohrRadius) * S.initial_speed =
+        2 * (unboundMu * hbar) := by
+      have e : particleMass * (100 * bohrRadius) * S.initial_speed =
+          2 * (particleMass * S.initial_speed * (100 * bohrRadius / 2)) := by ring
+      rw [e, hperp]
+    have h2'' : particleMass * (100 * bohrRadius) * S.initial_speed
+        = 2 * unboundMu * hbar := by
+      have e : (2:ℝ) * unboundMu * hbar = 2 * (unboundMu * hbar) := by ring
+      rw [e, h2]
+    rw [eq_div_iff hd, mul_comm S.initial_speed (particleMass * (100 * bohrRadius))]
+    exact h2''
+  rw [S.coulomb_law, S.initial_separation_value, hv0, hR.bohr_radius_def]
+  -- Everything over the common unit `hbar^2/(m a0^2)` is the rational
+  -- computation `4 mu^2/100^2 - 1/100 = 1/80 > 0` at `mu = 15/2`.
+  have hmu : unboundMu = 15 / 2 := rfl
+  rw [hmu]
+  have hkene : coulombK * elementaryCharge ^ 2 ≠ 0 := ne_of_gt hke
+  field_simp [ne_of_gt hm, ne_of_gt ha0, ne_of_gt hh, hkene]
+  have h125 : (0:ℝ) < 15 ^ 2 - 100 := by norm_num
+  nlinarith [mul_pos hm hke, hke, h125, sq_pos_of_pos hh]
+
+/-- At `mu = 15/2` the squared eccentricity strictly exceeds `1`
+(hyperbola, not ellipse): the added term
+`2 E L^2 / (m_red (k e²)²)` is strictly positive. -/
+theorem eccentricity_gt_one {hR : ScalingRegime} (S : CoulombScatteringData hR)
+    (hμ : IsAngularMomentumFactor unboundMu) : 1 < S.eccentricitySq := by
+  have hE : 0 < S.total_energy := total_energy_pos S hμ
+  have hm : 0 < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hL : S.total_angular_momentum ≠ 0 := by
+    rw [S.total_angular_momentum_value]
+    exact mul_ne_zero (by norm_num)
+      (mul_ne_zero (by norm_num [unboundMu]) (ne_of_gt hR.hbar_pos))
+  have hke : coulombK * elementaryCharge ^ 2 ≠ 0 :=
+    mul_ne_zero (ne_of_gt hR.coulombK_pos)
+      (pow_ne_zero 2 (ne_of_gt hR.elementaryCharge_pos))
+  have hpos :
+      0 < 2 * S.total_energy * S.total_angular_momentum ^ 2 /
+        (S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2) :=
+    div_pos (mul_pos (mul_pos (by norm_num) hE) (sq_pos_of_ne_zero hL))
+      (mul_pos hm (sq_pos_of_ne_zero hke))
+  have hdef : S.eccentricitySq =
+      1 + 2 * S.total_energy * S.total_angular_momentum ^ 2 /
+        (S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2) := rfl
+  rw [hdef]
+  linarith
+
+/-- Value of Hint 1 for this scenario: the squared eccentricity equals
+`49/4` (so `eps = 7/2 > 1`).  Derivable from the same laws as
+`total_energy_pos`; conclusion-free of angle data. -/
+theorem eccentricity_sq_eq {hR : ScalingRegime} (S : CoulombScatteringData hR)
+    (_hμ : IsAngularMomentumFactor unboundMu) : S.eccentricitySq = 49 / 4 := by
+  have hm : (0 : ℝ) < particleMass := hR.particleMass_pos
+  have ha0 : (0 : ℝ) < bohrRadius := hR.bohrRadius_pos
+  have hk : (0 : ℝ) < coulombK := hR.coulombK_pos
+  have hec : (0 : ℝ) < elementaryCharge := hR.elementaryCharge_pos
+  have h1 : particleMass ≠ 0 := ne_of_gt hm
+  have h3 : coulombK ≠ 0 := ne_of_gt hk
+  have h4 : elementaryCharge ≠ 0 := ne_of_gt hec
+  have h5 : bohrRadius ≠ 0 := ne_of_gt ha0
+  have hX : (coulombK * elementaryCharge ^ 2) ≠ 0 :=
+    mul_ne_zero h3 (pow_ne_zero 2 h4)
+  have hmred' : S.reduced_mass ≠ 0 := by
+    rw [S.reduced_mass_eq]; exact div_ne_zero h1 two_ne_zero
+  have hbohr2 :
+      particleMass * bohrRadius * (coulombK * elementaryCharge ^ 2) = hbar ^ 2 := by
+    have hb := hR.bohr_radius_def
+    field_simp at hb ⊢
+    linear_combination hb
+  have hv0 : S.initial_speed =
+      2 * unboundMu * hbar / (particleMass * (100 * bohrRadius)) := by
+    have hperp := S.angular_momentum_per_particle
+    rw [S.initial_separation_value] at hperp
+    have hd : particleMass * (100 * bohrRadius) ≠ 0 :=
+      mul_ne_zero h1 (mul_ne_zero (by norm_num) h5)
+    have e2 : particleMass * (100 * bohrRadius) * S.initial_speed =
+        2 * (unboundMu * hbar) := by
+      have e1 : particleMass * (100 * bohrRadius) * S.initial_speed =
+          2 * (particleMass * S.initial_speed * (100 * bohrRadius / 2)) := by ring
+      rw [e1, hperp]
+    rw [eq_div_iff hd,
+      show 2 * unboundMu * hbar = 2 * (unboundMu * hbar) from by ring,
+      mul_comm S.initial_speed _]
+    exact e2
+  have hmu : unboundMu = 15 / 2 := rfl
+  have hLe : S.total_angular_momentum = 15 * hbar := by
+    rw [S.total_angular_momentum_eq, S.angular_momentum_per_particle, hmu]
+    ring
+  have hEunit : S.total_energy * (80 * bohrRadius) =
+      coulombK * elementaryCharge ^ 2 := by
+    rw [S.coulomb_law, hv0, hmu, S.initial_separation_value]
+    field_simp
+    ring_nf
+    nlinarith [hbohr2]
+  have hden : S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2 ≠ 0 :=
+    mul_ne_zero hmred' (pow_ne_zero 2 hX)
+  have hA : S.total_angular_momentum ^ 2 = 225 * hbar ^ 2 := by
+    rw [hLe]; ring
+  have s1 : 2 * S.total_energy * S.total_angular_momentum ^ 2 =
+      450 * S.total_energy * hbar ^ 2 := by rw [hA]; ring
+  have s2 : 450 * S.total_energy * hbar ^ 2 = 450 * S.total_energy *
+      (particleMass * bohrRadius * (coulombK * elementaryCharge ^ 2)) := by
+    rw [← hbohr2]
+  have s4 : 900 * S.total_energy * S.reduced_mass * bohrRadius *
+        (coulombK * elementaryCharge ^ 2) =
+      (45 / 4) * S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2 := by
+    rw [← hEunit]; ring_nf
+  have hfrac : 2 * S.total_energy * S.total_angular_momentum ^ 2 /
+      (S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2) = 45 / 4 := by
+    rw [div_eq_iff hden]
+    calc 2 * S.total_energy * S.total_angular_momentum ^ 2 =
+        450 * S.total_energy *
+          (particleMass * bohrRadius * (coulombK * elementaryCharge ^ 2)) := by
+            linear_combination s1 + s2
+      _ = 900 * S.total_energy * S.reduced_mass * bohrRadius *
+            (coulombK * elementaryCharge ^ 2) := by
+          rw [S.reduced_mass_eq]; ring
+      _ = (45 / 4) * (S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2) := by
+          linear_combination s4
+  unfold CoulombScatteringData.eccentricitySq
+  rw [hfrac]
+  norm_num
+
+end
+
+/-! ### Initial line of motion of the positron -/
+
+/-- The initial line of motion of `e+`: the unit vector along the initial
+positron velocity `v0` (Fig. 1b).  The reference direction of the asked
+angle. -/
+noncomputable def initialDirection {hR : ScalingRegime} (S : CoulombScatteringData hR) : Plane :=
+  ‖S.v0‖⁻¹ • S.v0
+
+/-! ### The conic bridge (Hint 2) -/
+
+noncomputable section
+
+/-! #### Proved infrastructure for the Kepler/Binet bridge
+
+The following lemmas supply the calculus layer that the Review
+certificate (`redraft_kind: missing_foundational_bridge`) identified as
+missing between the raw `ContDiff`/`deriv` fields and the conic orbit:
+coordinate-wise differentiation on the Euclidean plane, the planar
+Lagrange identity, differentiability of the radial coordinate away from
+the origin, the Leibniz rule for the specific angular momentum, and —
+the physical core — its conservation under a central-force acceleration
+(`newton_relative_law`, upgraded this redraft to the faithful vector form
+of Newton's equation for the attractive Coulomb force).  Two
+consistency certificates connect the field set: the initial value of
+`perp (sep) (deriv sep)` (from `initial_instant` and
+`initial_transverse`) is exactly the stated conserved value of
+`angular_momentum_law`, and `newton_relative_law` implies the old
+norm-form magnitude equation.  None of these declarations mentions the
+deflection angle, the eccentricity value `49/4`, or the asymptotic
+velocity: they are reusable bridges, not the target. -/
+
+/-- Coordinate-wise derivative: differentiating a differentiable planar
+curve and reading off a coordinate equals differentiating the coordinate
+function. -/
+theorem hasDerivAt_apply_coord {f : ℝ → Plane} (hf : Differentiable ℝ f)
+    (t : ℝ) (i : Fin 2) :
+    HasDerivAt (fun s => f s i) (deriv f t i) t := by
+  haveI : Fact (1 ≤ (2 : ENNReal)) := ⟨by norm_num⟩
+  have hg : HasFDerivAt (fun g : Plane => g i)
+      (PiLp.proj (p := (2 : ENNReal)) (β := fun _ : Fin 2 => ℝ) i) (f t) :=
+    (PiLp.hasFDerivAt_apply (𝕜 := ℝ) (ι := Fin 2) (E := fun _ => ℝ)
+      (p := (2 : ENNReal)) (f t) i)
+  have h1 : HasDerivAt f (deriv f t) t := (hf t).hasDerivAt
+  have hcomp := hg.comp_hasDerivAt t h1
+  rw [show (PiLp.proj (p := (2 : ENNReal)) (β := fun _ : Fin 2 => ℝ) i) (deriv f t)
+      = deriv f t i from rfl] at hcomp
+  exact hcomp
+
+/-- A twice continuously differentiable trajectory has a differentiable
+velocity field. -/
+theorem differentiable_deriv_of_contDiff_two {f : ℝ → Plane}
+    (hf : ContDiff ℝ 2 f) : Differentiable ℝ (deriv f) := by
+  have h1 : ContDiff ℝ 1 (deriv f) := by
+    have h := hf
+    rw [show (2 : WithTop ℕ∞) = 1 + 1 from by norm_num] at h
+    exact (contDiff_succ_iff_deriv.mp h).2.2
+  exact h1.differentiable (by norm_num)
+
+/-- The planar bracket is homogeneous in the right argument. -/
+theorem perp_smul_right (c : ℝ) (a b : Plane) :
+    perp a (c • b) = c * perp a b := by
+  simp only [perp, PiLp.smul_apply, smul_eq_mul]; ring
+
+/-- The planar bracket is homogeneous in the left argument. -/
+theorem perp_smul_left (c : ℝ) (a b : Plane) :
+    perp (c • a) b = c * perp a b := by
+  simp only [perp, PiLp.smul_apply, smul_eq_mul]; ring
+
+/-- The planar bracket of a vector with itself vanishes. -/
+theorem perp_self (a : Plane) : perp a a = 0 := by
+  simp only [perp]; ring
+
+/-- Planar Lagrange identity in coordinates:
+`(v·w)² + (v×z w)² = |v|² |w|²`. -/
+theorem lagrange_coord (v w : Plane) :
+    dot v w ^ 2 + perp v w ^ 2 =
+      (v 0 ^ 2 + v 1 ^ 2) * (w 0 ^ 2 + w 1 ^ 2) := by
+  simp only [dot, perp]; ring
+
+/-- The squared norm of a planar vector is the sum of its squared
+coordinates. -/
+theorem norm_sq_coord (v : Plane) :
+    ‖v‖ ^ 2 = v 0 ^ 2 + v 1 ^ 2 := by
+  rw [EuclideanSpace.norm_sq_eq, Fin.sum_univ_two]
+  simp [sq_abs]
+
+/-- Planar Lagrange identity with norms:
+`(v·w)² + (v×z w)² = ‖v‖² ‖w‖²`. -/
+theorem lagrange_norm (v w : Plane) :
+    dot v w ^ 2 + perp v w ^ 2 = ‖v‖ ^ 2 * ‖w‖ ^ 2 := by
+  rw [norm_sq_coord, norm_sq_coord, lagrange_coord]
+
+/-- Squared norm is differentiable along a differentiable planar curve. -/
+theorem norm_sq_differentiable {f : ℝ → Plane} (hf : Differentiable ℝ f) :
+    Differentiable ℝ (fun s => ‖f s‖ ^ 2) := by
+  have key : (fun s => ‖f s‖ ^ 2) = fun s => (f s 0) ^ 2 + (f s 1) ^ 2 := by
+    funext s
+    exact norm_sq_coord (f s)
+  rw [key]
+  have h0 : Differentiable ℝ (fun s => f s 0) := fun s =>
+    (hasDerivAt_apply_coord hf s 0).differentiableAt
+  have h1 : Differentiable ℝ (fun s => f s 1) := fun s =>
+    (hasDerivAt_apply_coord hf s 1).differentiableAt
+  exact (h0.pow 2).add (h1.pow 2)
+
+/-- The radial coordinate `t ↦ ‖f t‖` of a differentiable planar curve
+that never hits the origin is differentiable. -/
+theorem norm_differentiable_of_ne_zero {f : ℝ → Plane} (hf : Differentiable ℝ f)
+    (hne : ∀ s, f s ≠ 0) :
+    Differentiable ℝ (fun s => ‖f s‖) := by
+  have hs : Differentiable ℝ (fun s => ‖f s‖ ^ 2) := norm_sq_differentiable hf
+  have key : (fun s => ‖f s‖) = fun s => Real.sqrt (‖f s‖ ^ 2) := by
+    funext s
+    rw [Real.sqrt_sq (norm_nonneg _)]
+  rw [key]
+  intro s
+  have hpos : ‖f s‖ ^ 2 ≠ 0 := pow_ne_zero 2 (norm_ne_zero_iff.mpr (hne s))
+  exact ((hasDerivAt_sqrt hpos).comp s ((hs s).hasDerivAt)).differentiableAt
+
+/-- Leibniz rule for the specific angular momentum:
+`(perp (f) (f'))' = perp (f) (f'')` — the `perp (f') (f')` term
+drops out by `perp_self`. -/
+theorem perp_sep_hasDerivAt {f : ℝ → Plane} (hf : ContDiff ℝ 2 f) (t : ℝ) :
+    HasDerivAt (fun s => perp (f s) (deriv f s))
+      (perp (f t) (deriv (deriv f) t)) t := by
+  have hf1 : Differentiable ℝ f := hf.differentiable (by norm_num)
+  have hf2 : Differentiable ℝ (deriv f) := differentiable_deriv_of_contDiff_two hf
+  have h0 : HasDerivAt (fun s => f s 0) (deriv f t 0) t :=
+    hasDerivAt_apply_coord hf1 t 0
+  have h1 : HasDerivAt (fun s => f s 1) (deriv f t 1) t :=
+    hasDerivAt_apply_coord hf1 t 1
+  have h0' : HasDerivAt (fun s => deriv f s 0) (deriv (deriv f) t 0) t :=
+    hasDerivAt_apply_coord hf2 t 0
+  have h1' : HasDerivAt (fun s => deriv f s 1) (deriv (deriv f) t 1) t :=
+    hasDerivAt_apply_coord hf2 t 1
+  have hA : HasDerivAt (fun s => (f s 0) * (deriv f s 1))
+      (deriv f t 0 * deriv f t 1 + f t 0 * deriv (deriv f) t 1) t :=
+    h0.mul h1'
+  have hB : HasDerivAt (fun s => (f s 1) * (deriv f s 0))
+      (deriv f t 1 * deriv f t 0 + f t 1 * deriv (deriv f) t 0) t :=
+    h1.mul h0'
+  have hC := hA.sub hB
+  rw [show deriv f t 0 * deriv f t 1 + f t 0 * deriv (deriv f) t 1 -
+        (deriv f t 1 * deriv f t 0 + f t 1 * deriv (deriv f) t 0)
+      = perp (f t) (deriv (deriv f) t) from by unfold perp; ring] at hC
+  exact hC
+
+/-- Conservation of the specific angular momentum under a central-force
+acceleration: the torque of a radial acceleration vanishes
+(`perp a (c • a) = c * perp a a = 0`), so
+`t ↦ perp (sep t) (deriv sep t)` is constant.  This theorem is the
+derivable root of the governing-law field
+`CoulombScatteringData.angular_momentum_law`; the field is kept as the
+primary contract because its multiplier form `perp = L / m_red` (not
+merely "constant") is what the conic integration consumes. -/
+theorem perp_sep_is_const_of_central_force
+    (sep : ℝ → Plane) (hsmooth : ContDiff ℝ 2 sep) (q : ℝ)
+    (hnewton : ∀ t : ℝ, deriv (deriv sep) t = q • ((‖sep t‖ ^ 2)⁻¹ • sep t))
+    (t s : ℝ) :
+    perp (sep t) (deriv sep t) = perp (sep s) (deriv sep s) := by
+  have hdiff : Differentiable ℝ (fun τ => perp (sep τ) (deriv sep τ)) := fun τ =>
+    (perp_sep_hasDerivAt hsmooth τ).differentiableAt
+  have hzero : ∀ τ : ℝ,
+      deriv (fun σ => perp (sep σ) (deriv sep σ)) τ = 0 := fun τ => by
+    rw [(perp_sep_hasDerivAt hsmooth τ).deriv, hnewton τ, smul_smul,
+      perp_smul_right, perp_self]
+    ring
+  exact is_const_of_deriv_eq_zero hdiff hzero t s
+
+/-! #### Field-level consistency certificates (proved)
+
+The next two certificates verify that the upgraded governing-law field
+set is internally consistent: the conserved value of
+`angular_momentum_law` is exactly the bracket value forced by
+`initial_instant` + `initial_transverse` at `t = 0`, and the vector
+`newton_relative_law` specializes to the former norm-form equation.
+Neither mentions the deflection angle or any answer value. -/
+
+namespace CoulombScatteringData
+
+/-- The central-force Newton equation of `newton_relative_law` has the
+stated magnitude: taking norms gives
+`‖(1/2) • sep''‖ = k e² / (m ‖sep‖²)`, i.e. `m_red * |sep''| = k e² / r²`
+with `m_red = m/2`.  Proved by direct simplification of the norm of the
+scaled separation vector (`|scalar • sep| = scalar * r`, the `r⁻³`
+times `r` leaving the `r⁻²` force law). -/
+theorem newton_relative_law_norm {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (t : ℝ) :
+    ‖(1 / 2 : ℝ) • (deriv (deriv S.sep)) t‖ =
+      coulombK * elementaryCharge ^ 2 / (particleMass * ‖S.sep t‖ ^ 2) := by
+  rw [S.newton_relative_law t]
+  have hr : ‖S.sep t‖ ≠ 0 := norm_ne_zero_iff.mpr (S.sep_ne_zero t)
+  have hc1 : (0 : ℝ) ≤ (1 : ℝ) / 2 := by norm_num
+  have hm1 : particleMass ≠ 0 := ne_of_gt hR.particleMass_pos
+  rw [show -(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) •
+        ((‖S.sep t‖ ^ 3)⁻¹ • S.sep t) =
+      (-(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) *
+        (‖S.sep t‖ ^ 3)⁻¹) • S.sep t from smul_smul _ _ _]
+  rw [norm_smul, Real.norm_of_nonneg hc1, norm_smul]
+  have hnorm : ‖-(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) *
+        (‖S.sep t‖ ^ 3)⁻¹‖ =
+      2 * (coulombK * elementaryCharge ^ 2 / particleMass) *
+        (‖S.sep t‖ ^ 3)⁻¹ := by
+    have hpos : 0 < coulombK * elementaryCharge ^ 2 :=
+      mul_pos hR.coulombK_pos (pow_pos hR.elementaryCharge_pos 2)
+    have h : -(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) *
+        (‖S.sep t‖ ^ 3)⁻¹ =
+        -(2 * (coulombK * elementaryCharge ^ 2 / particleMass) *
+          (‖S.sep t‖ ^ 3)⁻¹) := by ring
+    rw [h, norm_neg, Real.norm_of_nonneg (by
+      have : (0:ℝ) ≤ 2 * (coulombK * elementaryCharge ^ 2 / particleMass) *
+          (‖S.sep t‖ ^ 3)⁻¹ := by
+        apply mul_nonneg (mul_nonneg (by norm_num)
+          (div_nonneg (le_of_lt hpos) (le_of_lt hR.particleMass_pos)))
+        exact inv_nonneg.mpr (pow_nonneg (norm_nonneg _) 3)
+      exact this)]
+  rw [hnorm]
+  field_simp [hm1, hr]
+
+/-- The initial value of the specific angular momentum bracket, computed
+from the figure readouts: at `t = 0`,
+`perp (sep 0) (deriv sep 0) = -(2 * r0 * v0)` — negative, the clockwise
+orbit of Fig. 1b.  Consistency certificate for `angular_momentum_law`:
+the conserved signed value `-(L / m_red)` equals this initial value (see
+`perp_sep_initial_eq_signed_law`); the bracket identity itself is a
+direct rearrangement of `initial_instant` and `initial_transverse` via
+`perp_smul_right`. -/
+theorem perp_sep_initial {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) :
+    perp (S.sep 0) (deriv S.sep 0) =
+      -(2 * S.initial_separation * S.initial_speed) := by
+  rw [S.initial_instant.1, S.initial_instant.2, perp_smul_right,
+    S.initial_transverse]
+  ring
+
+/-- The stated conserved MAGNITUDE value `L / m_red` of the angular
+momentum law and the figure-forced initial bracket magnitude of
+`perp_sep_initial` coincide: both equal `2 * r0 * v0`.  This is the
+figure-side datum that fixes the magnitude of the constant in the
+`t ↦ perp (sep t) (deriv sep t)` constancy of
+`perp_sep_is_const_of_central_force`; the conservation itself is the
+content of the field, not of this certificate. -/
+theorem angular_momentum_conserved_value {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) :
+    S.total_angular_momentum / S.reduced_mass =
+      2 * S.initial_separation * S.initial_speed := by
+  rw [S.total_angular_momentum_eq, S.reduced_mass_eq]
+  rw [div_eq_iff (show (particleMass : ℝ) / 2 ≠ 0 from by
+    have := hR.particleMass_pos; positivity)]
+  linarith [S.angular_momentum_per_particle]
+
+/-- Sign consistency of the signed angular-momentum law with the figure
+data: the conserved signed bracket `-(L / m_red)` of
+`angular_momentum_law` equals the initial value `perp_sep_initial`
+forced by `initial_instant` and `initial_transverse` (both are
+`-(2 * r0 * v0)`).  Pure rearrangement of the two proved certificates. -/
+theorem perp_sep_initial_eq_signed_law {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) :
+    perp (S.sep 0) (deriv S.sep 0) =
+      -(S.total_angular_momentum / S.reduced_mass) := by
+  rw [perp_sep_initial, angular_momentum_conserved_value]
+
+end CoulombScatteringData
+
+/-! #### The unit-direction frame and the polar layer
+
+The Kepler/Binet bridge decomposes into (i) a unit-direction frame
+`dirVec` for turning polar-angle statements into vector statements,
+(ii) the polar form of angular-momentum conservation
+(`perp (sep) (sep') = r² θ'`), which forces the polar angle to be
+strictly DECREASING (the clockwise Fig.-1b orbit), and (iii) the Binet
+linear ODE for the inverse separation read as a function of the angle.
+Steps (i), (ii) and (iii) are all proved: (i) below, (ii) in
+`angular_momentum_polar`/`polar_angle_strictAnti`, and (iii) in
+`harmonic_solution_on_interval` (the ODE form, via the Wronskian-style
+uniqueness argument) and `binet_ode` (the conic ansatz satisfies
+`w'' + w = 1/p`). -/
+
+/-- The unit vector at polar angle `θ`: `(cos θ, sin θ)`.  The direction
+frame for the conic and asymptotic-velocity layers. -/
+noncomputable def dirVec (θ : ℝ) : Plane :=
+  WithLp.toLp 2 (fun i : Fin 2 => if i = 0 then Real.cos θ else Real.sin θ)
+
+/-- Zeroth coordinate of the unit-direction frame. -/
+theorem dirVec_zero (θ : ℝ) : dirVec θ 0 = Real.cos θ := by rfl
+
+/-- First coordinate of the unit-direction frame. -/
+theorem dirVec_one (θ : ℝ) : dirVec θ 1 = Real.sin θ := by rfl
+
+/-- `dirVec θ` is a unit vector. -/
+theorem norm_dirVec (θ : ℝ) : ‖dirVec θ‖ = 1 := by
+  have h : ‖dirVec θ‖ ^ 2 = 1 := by
+    rw [norm_sq_coord, dirVec_zero, dirVec_one, Real.cos_sq_add_sin_sq]
+  rcases sq_eq_one_iff.mp h with h1 | h1
+  · exact h1
+  · have := norm_nonneg (dirVec θ); linarith
+
+/-- Dot product of two unit-direction vectors is the cosine of the
+angle difference. -/
+theorem dot_dirVec (α β : ℝ) :
+    dot (dirVec α) (dirVec β) = Real.cos (β - α) := by
+  simp only [dot, dirVec_zero, dirVec_one]
+  rw [Real.cos_sub]; ring
+
+/-- Perpendicular bracket of two unit-direction vectors is the sine of
+the angle difference (signed, so orientation-aware). -/
+theorem perp_dirVec (α β : ℝ) :
+    perp (dirVec α) (dirVec β) = Real.sin (β - α) := by
+  simp only [perp, dirVec_zero, dirVec_one]
+  rw [Real.sin_sub]; ring
+
+/-- Dot product is homogeneous in the right argument. -/
+theorem dot_smul_right (c : ℝ) (a b : Plane) : dot a (c • b) = c * dot a b := by
+  simp only [dot, PiLp.smul_apply, smul_eq_mul]; ring
+
+/-- Dot product is homogeneous in the left argument. -/
+theorem dot_smul_left (c : ℝ) (a b : Plane) : dot (c • a) b = c * dot a b := by
+  simp only [dot, PiLp.smul_apply, smul_eq_mul]; ring
+
+namespace CoulombScatteringData
+
+variable {hR : ScalingRegime} (S : CoulombScatteringData hR)
+
+/-- LEAF (polar calculus, Kepler layer): the polar form of the specific
+angular momentum, `perp (sep) (sep') = r² θ'`.  Derivation it carries:
+differentiate the polar decomposition
+`sep = r (cos θ, sin θ)` (`polar_decomposition`) coordinatewise with
+`hasDerivAt_apply_coord`, `S.smooth_sep`, `S.smooth_polar_angle`:
+`sep' = r' (cos θ, sin θ) + r θ' (-sin θ, cos θ)`; the `perp` bracket
+annihilates the radial term (`perp_self` after factoring the radial
+vector) and evaluates the tangential term to
+`r² θ' (cos² θ + sin² θ) = r² θ'` (`Real.cos_sq_add_sin_sq`).  This is
+the calculus identity behind the `r² θ' = const` form of
+angular-momentum conservation; the `ContDiff` fields and
+`polar_decomposition` are exactly its inputs. -/
+theorem angular_momentum_polar (t : ℝ) :
+    perp (S.sep t) (deriv S.sep t) = ‖S.sep t‖ ^ 2 * deriv S.polar_angle t := by
+  have hdiff : Differentiable ℝ S.sep := S.smooth_sep.differentiable (by norm_num)
+  have hr_diff : Differentiable ℝ (fun s => ‖S.sep s‖) :=
+    norm_differentiable_of_ne_zero hdiff S.sep_ne_zero
+  have hθ_diff : Differentiable ℝ S.polar_angle :=
+    S.smooth_polar_angle.differentiable (by norm_num)
+  have hp0 : (fun s => S.sep s 0) = fun s => ‖S.sep s‖ * Real.cos (S.polar_angle s) := by
+    funext s
+    exact (S.polar_decomposition s).1
+  have hp1 : (fun s => S.sep s 1) = fun s => ‖S.sep s‖ * Real.sin (S.polar_angle s) := by
+    funext s
+    exact (S.polar_decomposition s).2
+  have h0 := hasDerivAt_apply_coord hdiff t 0
+  rw [hp0] at h0
+  have h1 := hasDerivAt_apply_coord hdiff t 1
+  rw [hp1] at h1
+  have hcos : HasDerivAt (fun s => Real.cos (S.polar_angle s))
+      (-Real.sin (S.polar_angle t) * deriv S.polar_angle t) t :=
+    (Real.hasDerivAt_cos (S.polar_angle t)).comp t (hθ_diff t).hasDerivAt
+  have hsin : HasDerivAt (fun s => Real.sin (S.polar_angle s))
+      (Real.cos (S.polar_angle t) * deriv S.polar_angle t) t :=
+    (Real.hasDerivAt_sin (S.polar_angle t)).comp t (hθ_diff t).hasDerivAt
+  have hd0 : deriv S.sep t 0 =
+      deriv (fun s => ‖S.sep s‖) t * Real.cos (S.polar_angle t) +
+        ‖S.sep t‖ * (-Real.sin (S.polar_angle t) * deriv S.polar_angle t) :=
+    h0.unique ((hr_diff t).hasDerivAt.mul hcos)
+  have hd1 : deriv S.sep t 1 =
+      deriv (fun s => ‖S.sep s‖) t * Real.sin (S.polar_angle t) +
+        ‖S.sep t‖ * (Real.cos (S.polar_angle t) * deriv S.polar_angle t) :=
+    h1.unique ((hr_diff t).hasDerivAt.mul hsin)
+  have hp := S.polar_decomposition t
+  have hcs := Real.cos_sq_add_sin_sq (S.polar_angle t)
+  simp only [perp]
+  rw [hp.1, hp.2, hd0, hd1]
+  linear_combination ‖S.sep t‖ ^ 2 * deriv S.polar_angle t * hcs
+
+/-- The polar angle has derivative `-((L / m_red) / r²)`: the signed
+angular-momentum law divided through by the nonzero squared radius.
+Pure rearrangement of `angular_momentum_law` and the polar-leaf
+`angular_momentum_polar`. -/
+theorem polar_angle_deriv (t : ℝ) :
+    deriv S.polar_angle t =
+      -(S.total_angular_momentum / S.reduced_mass) / ‖S.sep t‖ ^ 2 := by
+  have h1 := S.angular_momentum_law t
+  have h2 := S.angular_momentum_polar t
+  have hr : ‖S.sep t‖ ^ 2 ≠ 0 := pow_ne_zero 2 (norm_ne_zero_iff.mpr (S.sep_ne_zero t))
+  rw [h2] at h1
+  rw [eq_div_iff hr, mul_comm]
+  exact h1
+
+/-- The polar angle is strictly decreasing along the trajectory: its
+derivative is the negative of a positive quantity (`L > 0` from
+`total_angular_momentum_value`, `m_red > 0`, `r² > 0`).  This is the
+CLOCKWISE orientation of Fig. 1b (positron moving right) at the level
+of the angle itself. -/
+theorem polar_angle_deriv_neg (t : ℝ) : deriv S.polar_angle t < 0 := by
+  have hL : (0 : ℝ) < S.total_angular_momentum := by
+    rw [S.total_angular_momentum_value]
+    have hμ15 : (0 : ℝ) < unboundMu := by norm_num [unboundMu]
+    have hh := hR.hbar_pos
+    positivity
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hr : (0 : ℝ) < ‖S.sep t‖ ^ 2 := pow_pos (norm_pos_iff.mpr (S.sep_ne_zero t)) 2
+  rw [S.polar_angle_deriv, neg_div]
+  exact neg_lt_zero.mpr (div_pos (div_pos hL hm) hr)
+
+/-- The polar angle is a strictly antitone function of time (Fig. 1b
+clockwise orbit): the realized angle set is a nontrivial interval, which
+is what the Binet ODE (`binet_ode`) needs to see an open interval of
+angles. -/
+theorem polar_angle_strictAnti : StrictAnti S.polar_angle :=
+  strictAnti_of_deriv_neg S.polar_angle_deriv_neg
+
+end CoulombScatteringData
+
+/-- LEAF (ODE form theorem, Kepler layer): on any nonempty open
+interval, a `C²` solution of the linear equation `w'' + w = c` has the
+harmonic form `w = c + A cos (θ - θ0)`.  Derivation it carries: `w - c`
+solves `y'' + y = 0`, whose solution space is two-dimensional
+(`{B cos θ + C sin θ}` — the energy/Wronskian argument
+`(y'² + y²)' = 0` forces any solution to agree with the one matching its
+initial data), and `B cos θ + C sin θ = A cos (θ - θ0)` with
+`A = sqrt (B² + C²)`.  No Mathlib ODE API currently provides this
+uniqueness statement; stated as a reusable bridge lemma over
+`ContDiff`/`deriv`. -/
+theorem harmonic_solution_on_interval {α β : ℝ} (hαβ : α < β) {w : ℝ → ℝ} {c : ℝ}
+    (hw : ContDiff ℝ 2 w)
+    (hode : ∀ θ ∈ Set.Ioo α β, deriv (deriv w) θ + w θ = c) :
+    ∃ A θ0 : ℝ, ∀ θ ∈ Set.Ioo α β, w θ = c + A * Real.cos (θ - θ0) := by
+  -- The shifted function `y = w - c` solves `y'' + y = 0` on the interval.
+  set y := fun θ => w θ - c with hy_def
+  have hyC : ContDiff ℝ 2 y := hw.sub contDiff_const
+  have hy1 : Differentiable ℝ y := hyC.differentiable (by norm_num)
+  have hy2 : Differentiable ℝ (deriv y) := by
+    have h1 : ContDiff ℝ 1 (deriv y) := by
+      have h := hyC
+      rw [show (2 : WithTop ℕ∞) = 1 + 1 from by norm_num] at h
+      exact (contDiff_succ_iff_deriv.mp h).2.2
+    exact h1.differentiable (by norm_num)
+  have hodey : ∀ θ ∈ Set.Ioo α β, deriv (deriv y) θ + y θ = 0 := by
+    intro θ hθ
+    have h := hode θ hθ
+    have hyw : y θ = w θ - c := rfl
+    have hddy : deriv (deriv y) θ = deriv (deriv w) θ := by
+      have e : deriv y = deriv w := funext fun σ => deriv_sub_const c
+      rw [e]
+    rw [hddy, hyw]
+    linarith
+  -- Pick a base point and match the jet of `y` there with a shifted harmonic.
+  set θ₁ := (α + β) / 2 with hθ₁_def
+  have hθ₁ : θ₁ ∈ Set.Ioo α β := ⟨by linarith, by linarith⟩
+  set B := y θ₁ with hB_def
+  set D := deriv y θ₁ with hD_def
+  set g := fun θ => B * Real.cos (θ - θ₁) + D * Real.sin (θ - θ₁) with hg_def
+  have hgC : ContDiff ℝ 2 g := by
+    apply ContDiff.add
+    · exact contDiff_const.mul (Real.contDiff_cos.comp (contDiff_id.sub contDiff_const))
+    · exact contDiff_const.mul (Real.contDiff_sin.comp (contDiff_id.sub contDiff_const))
+  have hg1' : Differentiable ℝ g := hgC.differentiable (by norm_num)
+  have hg2' : Differentiable ℝ (deriv g) := by
+    have h1 : ContDiff ℝ 1 (deriv g) := by
+      have h := hgC
+      rw [show (2 : WithTop ℕ∞) = 1 + 1 from by norm_num] at h
+      exact (contDiff_succ_iff_deriv.mp h).2.2
+    exact h1.differentiable (by norm_num)
+  have hcc : ∀ θ, HasDerivAt (fun θ => Real.cos (θ - θ₁)) (-Real.sin (θ - θ₁)) θ :=
+    fun θ => (((hasDerivAt_id' θ).sub_const θ₁).cos).congr_deriv (by ring)
+  have hsinc : ∀ θ, HasDerivAt (fun θ => Real.sin (θ - θ₁)) (Real.cos (θ - θ₁)) θ :=
+    fun θ => (((hasDerivAt_id' θ).sub_const θ₁).sin).congr_deriv (by ring)
+  have hgderiv : ∀ θ, HasDerivAt g
+      (B * (-Real.sin (θ - θ₁)) + D * Real.cos (θ - θ₁)) θ :=
+    fun θ => ((hcc θ).const_mul B).add ((hsinc θ).const_mul D)
+  have hg1 : ∀ θ, deriv g θ = B * (-Real.sin (θ - θ₁)) + D * Real.cos (θ - θ₁) :=
+    fun θ => (hgderiv θ).deriv
+  have hge : deriv g = fun θ => B * (-Real.sin (θ - θ₁)) + D * Real.cos (θ - θ₁) :=
+    funext hg1
+  have hgg : ∀ θ, deriv (deriv g) θ = -(g θ) := by
+    intro θ
+    have h1 : HasDerivAt (fun θ => B * (-Real.sin (θ - θ₁)) + D * Real.cos (θ - θ₁))
+        (B * (-Real.cos (θ - θ₁)) + D * (-Real.sin (θ - θ₁))) θ :=
+      (((hsinc θ).neg).const_mul B).add ((hcc θ).const_mul D)
+    have h2 : deriv (deriv g) θ = B * (-Real.cos (θ - θ₁)) + D * (-Real.sin (θ - θ₁)) := by
+      rw [hge]
+      exact h1.deriv
+    rw [h2]
+    show B * (-Real.cos (θ - θ₁)) + D * (-Real.sin (θ - θ₁)) =
+      -(B * Real.cos (θ - θ₁) + D * Real.sin (θ - θ₁))
+    ring
+  -- The residual `z = y - g` solves the same homogeneous equation and has
+  -- zero jet at `θ₁`, so its energy `z² + z'²` is constant and zero.
+  set z := fun θ => y θ - g θ with hz_def
+  have hzC : ContDiff ℝ 2 z := hyC.sub hgC
+  have hz1 : Differentiable ℝ z := hzC.differentiable (by norm_num)
+  have hz2 : Differentiable ℝ (deriv z) := by
+    have h1 : ContDiff ℝ 1 (deriv z) := by
+      have h := hzC
+      rw [show (2 : WithTop ℕ∞) = 1 + 1 from by norm_num] at h
+      exact (contDiff_succ_iff_deriv.mp h).2.2
+    exact h1.differentiable (by norm_num)
+  have hdz : deriv z = deriv y - deriv g := by
+    funext θ
+    show deriv (y - g) θ = deriv y θ - deriv g θ
+    exact deriv_sub (hy1 θ) (hg1' θ)
+  have hddz : deriv (deriv z) = deriv (deriv y) - deriv (deriv g) := by
+    rw [hdz]
+    funext θ
+    show deriv (deriv y - deriv g) θ = deriv (deriv y) θ - deriv (deriv g) θ
+    exact deriv_sub (hy2 θ) (hg2' θ)
+  have hodez : ∀ θ ∈ Set.Ioo α β, deriv (deriv z) θ + z θ = 0 := by
+    intro θ hθ
+    have h1 := hodey θ hθ
+    have h2 := hgg θ
+    rw [hddz]
+    show deriv (deriv y) θ - deriv (deriv g) θ + (y θ - g θ) = 0
+    rw [h2]
+    linarith
+  set E := fun θ => z θ ^ 2 + (deriv z θ) ^ 2 with hE_def
+  have hEdiff : Differentiable ℝ E := (hz1.pow 2).add (hz2.pow 2)
+  have hE' : ∀ θ, deriv E θ = 2 * deriv z θ * (z θ + deriv (deriv z) θ) := by
+    intro θ
+    have h1 : HasDerivAt E
+        (2 * z θ * deriv z θ + 2 * deriv z θ * deriv (deriv z) θ) θ :=
+      (((hz1 θ).hasDerivAt.pow 2).add ((hz2 θ).hasDerivAt.pow 2)).congr_deriv (by ring)
+    rw [h1.deriv]
+    ring
+  have hE'zero : ∀ θ ∈ Set.Ioo α β, deriv E θ = 0 := by
+    intro θ hθ
+    rw [hE' θ]
+    have h := hodez θ hθ
+    have h0 : z θ + deriv (deriv z) θ = 0 := by linarith
+    rw [h0, mul_zero]
+  have hEconst : ∀ θ ∈ Set.Ioo α β, E θ = E θ₁ := by
+    intro θ hθ
+    by_cases hcase : θ = θ₁
+    · rw [hcase]
+    · have hlt : min θ θ₁ < max θ θ₁ := by
+        rcases lt_or_gt_of_ne hcase with h | h
+        · rw [min_eq_left (le_of_lt h), max_eq_right (le_of_lt h)]
+          exact h
+        · rw [min_eq_right (le_of_lt h), max_eq_left (le_of_lt h)]
+          exact h
+      obtain ⟨e, he, hde⟩ := exists_deriv_eq_slope E hlt
+        hEdiff.continuous.continuousOn hEdiff.differentiableOn
+      have hmem : e ∈ Set.Ioo α β := by
+        rcases lt_or_gt_of_ne hcase with h | h
+        · rw [min_eq_left (le_of_lt h), max_eq_right (le_of_lt h)] at he
+          exact ⟨lt_trans hθ.1 he.1, lt_trans he.2 hθ₁.2⟩
+        · rw [min_eq_right (le_of_lt h), max_eq_left (le_of_lt h)] at he
+          exact ⟨lt_trans hθ₁.1 he.1, lt_trans he.2 hθ.2⟩
+      have h0 : deriv E e = 0 := hE'zero e hmem
+      rw [hde] at h0
+      have hsub : max θ θ₁ - min θ θ₁ ≠ 0 := sub_ne_zero.mpr (ne_of_gt hlt)
+      have hval : E (max θ θ₁) - E (min θ θ₁) = 0 := by
+        rcases div_eq_zero_iff.mp h0 with h | h
+        · exact h
+        · exact absurd h hsub
+      have hval' : E (max θ θ₁) = E (min θ θ₁) := sub_eq_zero.mp hval
+      rcases lt_or_gt_of_ne hcase with h | h
+      · rw [min_eq_left (le_of_lt h), max_eq_right (le_of_lt h)] at hval'
+        exact hval'.symm
+      · rw [min_eq_right (le_of_lt h), max_eq_left (le_of_lt h)] at hval'
+        exact hval'
+  have hz1v : z θ₁ = 0 := by
+    have hgθ₁ : g θ₁ = B := by
+      have : g θ₁ = B * Real.cos (θ₁ - θ₁) + D * Real.sin (θ₁ - θ₁) := rfl
+      rw [this, sub_self, Real.cos_zero, Real.sin_zero, mul_one, mul_zero, add_zero]
+    have hze : z θ₁ = y θ₁ - g θ₁ := rfl
+    rw [hze, hgθ₁]
+    exact sub_self _
+  have hz2v : deriv z θ₁ = 0 := by
+    rw [hdz]
+    show deriv y θ₁ - deriv g θ₁ = 0
+    rw [hg1 θ₁, sub_self, Real.sin_zero, Real.cos_zero, show deriv y θ₁ = D from rfl]
+    ring
+  have hEz1 : E θ₁ = 0 := by
+    show z θ₁ ^ 2 + (deriv z θ₁) ^ 2 = 0
+    rw [hz1v, hz2v]
+    norm_num
+  have hyform : ∀ θ ∈ Set.Ioo α β,
+      y θ = B * Real.cos (θ - θ₁) + D * Real.sin (θ - θ₁) := by
+    intro θ hθ
+    have hEθ : E θ = 0 := by
+      rw [hEconst θ hθ]
+      exact hEz1
+    have hz0 : z θ = 0 := by
+      have h1 : z θ ^ 2 + (deriv z θ) ^ 2 = 0 := hEθ
+      have h2 : z θ ^ 2 = 0 := by
+        have h3 := sq_nonneg (deriv z θ)
+        have h4 := sq_nonneg (z θ)
+        linarith
+      exact sq_eq_zero_iff.mp h2
+    have hze : z θ = y θ - g θ := rfl
+    rw [hze] at hz0
+    exact sub_eq_zero.mp hz0
+  -- Amplitude/phase form of `B cos + D sin`.
+  set A' := Real.sqrt (B ^ 2 + D ^ 2) with hA'_def
+  by_cases hA : A' = 0
+  · refine ⟨0, 0, fun θ hθ => ?_⟩
+    have hsqrt0 : Real.sqrt (B ^ 2 + D ^ 2) = 0 := by
+      rw [← hA'_def]
+      exact hA
+    have hBD0 : B ^ 2 + D ^ 2 = 0 := (Real.sqrt_eq_zero (by positivity)).mp hsqrt0
+    have hB0 : B = 0 := by
+      have h1 : B ^ 2 = 0 := by
+        have h2 := sq_nonneg B
+        have h3 := sq_nonneg D
+        linarith
+      exact sq_eq_zero_iff.mp h1
+    have hD0 : D = 0 := by
+      have h1 : D ^ 2 = 0 := by
+        have h2 := sq_nonneg B
+        have h3 := sq_nonneg D
+        linarith
+      exact sq_eq_zero_iff.mp h1
+    have hyθ := hyform θ hθ
+    rw [hB0, hD0, zero_mul, zero_mul, add_zero] at hyθ
+    rw [zero_mul, add_zero]
+    have hyw : y θ = w θ - c := rfl
+    rw [hyw] at hyθ
+    linarith
+  · have hApos : 0 < A' := by
+      have h := Real.sqrt_nonneg (B ^ 2 + D ^ 2)
+      rw [← hA'_def] at h
+      exact lt_of_le_of_ne h (Ne.symm hA)
+    have hAne : A' ≠ 0 := ne_of_gt hApos
+    have hAsq : A' ^ 2 = B ^ 2 + D ^ 2 := by
+      rw [hA'_def]
+      exact Real.sq_sqrt (by positivity)
+    have hBDne : B ^ 2 + D ^ 2 ≠ 0 := by
+      intro h0
+      apply hA
+      rw [hA'_def, h0, Real.sqrt_zero]
+    have hBA : (B / A') ^ 2 + (D / A') ^ 2 = 1 := by
+      rw [div_pow, div_pow, ← add_div, hAsq, div_self hBDne]
+    have hbnd : -1 ≤ B / A' ∧ B / A' ≤ 1 := by
+      have h1 : (B / A') ^ 2 ≤ 1 := by
+        have h2 := sq_nonneg (D / A')
+        linarith [hBA]
+      have h3 : |B / A'| ≤ 1 := (sq_le_one_iff_abs_le_one _).mp h1
+      exact abs_le.mp h3
+    set φ := Real.arccos (B / A') with hφ_def
+    have hcosφ : Real.cos φ = B / A' := Real.cos_arccos hbnd.1 hbnd.2
+    have hsinφ : Real.sin φ = Real.sqrt (1 - (B / A') ^ 2) := Real.sin_arccos _
+    have hsq2 : 1 - (B / A') ^ 2 = (D / A') ^ 2 := by linarith [hBA]
+    by_cases hD : 0 ≤ D
+    · refine ⟨A', θ₁ + φ, fun θ hθ => ?_⟩
+      have hDA : 0 ≤ D / A' := div_nonneg hD (le_of_lt hApos)
+      have hsinφ' : Real.sin φ = D / A' := by
+        rw [hsinφ, hsq2, Real.sqrt_sq_eq_abs, abs_of_nonneg hDA]
+      have hyθ := hyform θ hθ
+      have hexp : Real.cos (θ - (θ₁ + φ)) =
+          Real.cos (θ - θ₁) * Real.cos φ + Real.sin (θ - θ₁) * Real.sin φ := by
+        rw [show θ - (θ₁ + φ) = (θ - θ₁) - φ by ring, Real.cos_sub]
+      rw [hexp, hcosφ, hsinφ']
+      have e : A' * (Real.cos (θ - θ₁) * (B / A') + Real.sin (θ - θ₁) * (D / A')) =
+          B * Real.cos (θ - θ₁) + D * Real.sin (θ - θ₁) := by
+        field_simp [hAne]
+      rw [e, ← hyθ]
+      have hyw : y θ = w θ - c := rfl
+      rw [hyw]
+      ring
+    · push_neg at hD
+      refine ⟨A', θ₁ - φ, fun θ hθ => ?_⟩
+      have hDA : D / A' < 0 := div_neg_of_neg_of_pos hD hApos
+      have hsinφ' : Real.sin φ = -(D / A') := by
+        rw [hsinφ, hsq2, Real.sqrt_sq_eq_abs, abs_of_neg hDA]
+      have hyθ := hyform θ hθ
+      have hexp : Real.cos (θ - (θ₁ - φ)) =
+          Real.cos (θ - θ₁) * Real.cos φ - Real.sin (θ - θ₁) * Real.sin φ := by
+        rw [show θ - (θ₁ - φ) = (θ - θ₁) + φ by ring, Real.cos_add]
+      rw [hexp, hcosφ, hsinφ']
+      have e : A' * (Real.cos (θ - θ₁) * (B / A') - Real.sin (θ - θ₁) * (-(D / A'))) =
+          B * Real.cos (θ - θ₁) + D * Real.sin (θ - θ₁) := by
+        field_simp [hAne]
+        ring
+      rw [e, ← hyθ]
+      have hyw : y θ = w θ - c := rfl
+      rw [hyw]
+      ring
+
+namespace CoulombScatteringData
+
+variable {hR : ScalingRegime} (S : CoulombScatteringData hR)
+
+/-- The squared radial speed as a function of the separation, in
+cleared-polynomial form:
+`m_red² p² r² r'² = L² (eps² r² - (p - r)²)` with `p = semilatusRectum`
+and `eps² = eccentricitySq`.  Pure rearrangement of the governing-law
+field `radial_energy_law` (energy × `r²`) multiplied through by
+`2 m_red³ p²`, with the defining equations of `semilatusRectum` and
+`eccentricitySq` substituted; dividing by `(m_red p r)² ≠ 0` recovers
+`r'² = ((L/m_red)/p)² (eps² - (p/r - 1)²)`.  This first-integral
+identity is the algebra core of `orbit_eq_conic`: it bounds
+`(p/r - 1)²` by `eps²` and, after the sign analysis, feeds the
+`arccos` quadrature. -/
+theorem radial_sq_identity (hμ : IsAngularMomentumFactor unboundMu) (t : ℝ) :
+    S.reduced_mass ^ 2 * S.semilatusRectum ^ 2 * ‖S.sep t‖ ^ 2 *
+        (deriv (fun s => ‖S.sep s‖) t) ^ 2 =
+      S.total_angular_momentum ^ 2 *
+        (S.eccentricitySq * ‖S.sep t‖ ^ 2 - (S.semilatusRectum - ‖S.sep t‖) ^ 2) := by
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hL : (0 : ℝ) < S.total_angular_momentum := by
+    rw [S.total_angular_momentum_value]
+    have hμ15 : (0 : ℝ) < unboundMu := by norm_num [unboundMu]
+    have hh := hR.hbar_pos
+    positivity
+  have hD : S.reduced_mass * coulombK * elementaryCharge ^ 2 ≠ 0 :=
+    mul_ne_zero (mul_ne_zero (ne_of_gt hm) (ne_of_gt hR.coulombK_pos))
+      (pow_ne_zero 2 (ne_of_gt hR.elementaryCharge_pos))
+  have hD2 : S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2 ≠ 0 :=
+    mul_ne_zero (ne_of_gt hm)
+      (pow_ne_zero 2 (mul_ne_zero (ne_of_gt hR.coulombK_pos)
+        (pow_ne_zero 2 (ne_of_gt hR.elementaryCharge_pos))))
+  -- cleared defining equations for `semilatusRectum` and `eccentricitySq`
+  have hp : S.semilatusRectum * (S.reduced_mass * coulombK * elementaryCharge ^ 2)
+      = S.total_angular_momentum ^ 2 := by
+    rw [CoulombScatteringData.semilatusRectum]
+    field_simp [hD]
+    exact div_self (mul_ne_zero (ne_of_gt hR.coulombK_pos)
+      (ne_of_gt hR.elementaryCharge_pos))
+  have he : (S.eccentricitySq - 1) * S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2
+      = 2 * S.total_energy * S.total_angular_momentum ^ 2 := by
+    rw [CoulombScatteringData.eccentricitySq, add_sub_cancel_left]
+    field_simp [hD2]
+    rw [div_eq_iff (mul_ne_zero (ne_of_gt hR.coulombK_pos)
+      (ne_of_gt hR.elementaryCharge_pos))]
+    ring
+  -- cleared energy law (`radial_energy_law` × `2 m_red`)
+  have hRE2 : 2 * S.reduced_mass * S.total_energy * ‖S.sep t‖ ^ 2 +
+        2 * S.reduced_mass * (coulombK * elementaryCharge ^ 2) * ‖S.sep t‖ -
+        S.total_angular_momentum ^ 2 =
+      S.reduced_mass ^ 2 * (deriv (fun s => ‖S.sep s‖) t * ‖S.sep t‖) ^ 2 := by
+    have h1 := S.radial_energy_law t
+    field_simp [ne_of_gt hm] at h1
+    linear_combination h1
+  have hkey : S.total_angular_momentum ^ 2 *
+        (S.reduced_mass ^ 2 * S.semilatusRectum ^ 2 * ‖S.sep t‖ ^ 2 *
+          (deriv (fun s => ‖S.sep s‖) t) ^ 2) =
+      S.total_angular_momentum ^ 2 *
+        (S.total_angular_momentum ^ 2 *
+          (S.eccentricitySq * ‖S.sep t‖ ^ 2 - (S.semilatusRectum - ‖S.sep t‖) ^ 2)) := by
+    linear_combination
+      (-(S.semilatusRectum ^ 2 * S.total_angular_momentum ^ 2)) * hRE2 +
+        (-(S.reduced_mass * S.semilatusRectum ^ 2 * ‖S.sep t‖ ^ 2)) * he +
+          ((S.eccentricitySq - 1) * ‖S.sep t‖ ^ 2 *
+              (S.total_angular_momentum ^ 2 +
+                S.semilatusRectum * S.reduced_mass * (coulombK * elementaryCharge ^ 2)) +
+            2 * S.semilatusRectum * ‖S.sep t‖ * S.total_angular_momentum ^ 2) * hp
+  exact mul_left_cancel₀ (pow_ne_zero 2 (ne_of_gt hL)) hkey
+
+/-- The reduced mass is positive (equal to `particleMass / 2`). -/
+theorem reduced_mass_pos : (0 : ℝ) < S.reduced_mass := by
+  rw [S.reduced_mass_eq]
+  exact div_pos hR.particleMass_pos (by norm_num)
+
+/-- The total angular momentum is positive (it is `unboundMu * ℏ`). -/
+theorem total_angular_momentum_pos : (0 : ℝ) < S.total_angular_momentum := by
+  rw [S.total_angular_momentum_value]
+  have hμ15 : (0 : ℝ) < unboundMu := by norm_num [unboundMu]
+  have hh := hR.hbar_pos
+  positivity
+
+/-- The semilatus rectum `p = L²/(m_red k e²)` is positive. -/
+theorem semilatusRectum_pos : (0 : ℝ) < S.semilatusRectum := by
+  have hm := S.reduced_mass_pos
+  have hL := S.total_angular_momentum_pos
+  rw [CoulombScatteringData.semilatusRectum]
+  exact div_pos (pow_pos hL 2)
+    (mul_pos (mul_pos hm hR.coulombK_pos) (pow_pos hR.elementaryCharge_pos 2))
+
+/-- Cleared defining equation of `semilatusRectum`:
+`p * (m_red * k * e²) = L²`. -/
+theorem semilatusRectum_mul :
+    S.semilatusRectum * (S.reduced_mass * coulombK * elementaryCharge ^ 2)
+      = S.total_angular_momentum ^ 2 := by
+  have hm := S.reduced_mass_pos
+  have hD : S.reduced_mass * coulombK * elementaryCharge ^ 2 ≠ 0 :=
+    mul_ne_zero (mul_ne_zero (ne_of_gt hm) (ne_of_gt hR.coulombK_pos))
+      (pow_ne_zero 2 (ne_of_gt hR.elementaryCharge_pos))
+  rw [CoulombScatteringData.semilatusRectum]
+  field_simp [hD]
+  rw [show (S.total_angular_momentum ^ 2 * coulombK * elementaryCharge : ℝ) =
+      S.total_angular_momentum ^ 2 * (coulombK * elementaryCharge) from by ring]
+  exact mul_div_cancel_right₀ _ (mul_ne_zero (ne_of_gt hR.coulombK_pos)
+    (ne_of_gt hR.elementaryCharge_pos))
+
+/-- Cleared defining equation of `eccentricitySq`:
+`(eps² - 1) * m_red * (k e²)² = 2 E L²`. -/
+theorem eccentricitySq_mul :
+    (S.eccentricitySq - 1) * S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2
+      = 2 * S.total_energy * S.total_angular_momentum ^ 2 := by
+  have hm := S.reduced_mass_pos
+  have hD2 : S.reduced_mass * (coulombK * elementaryCharge ^ 2) ^ 2 ≠ 0 :=
+    mul_ne_zero (ne_of_gt hm)
+      (pow_ne_zero 2 (mul_ne_zero (ne_of_gt hR.coulombK_pos)
+        (pow_ne_zero 2 (ne_of_gt hR.elementaryCharge_pos))))
+  rw [CoulombScatteringData.eccentricitySq, add_sub_cancel_left]
+  field_simp [hD2]
+  rw [div_eq_iff (mul_ne_zero (ne_of_gt hR.coulombK_pos)
+    (ne_of_gt hR.elementaryCharge_pos))]
+  ring
+
+/-- The energy law (`radial_energy_law`) at any turning point
+(`deriv ‖sep‖ = 0`), cleared of denominators:
+`2 m_red E r² + 2 m_red (k e²) r = L²`.  Used both at the recorded
+periapsis `t = 0` (`turning_point_initial`) and at any later stationary
+radius to force the Vieta uniqueness `turning_radius_eq`. -/
+theorem cleared_energy_of_turning {t : ℝ}
+    (ht : deriv (fun s => ‖S.sep s‖) t = 0) :
+    2 * S.reduced_mass * S.total_energy * ‖S.sep t‖ ^ 2 +
+        2 * S.reduced_mass * (coulombK * elementaryCharge ^ 2) * ‖S.sep t‖ =
+      S.total_angular_momentum ^ 2 := by
+  have hm := S.reduced_mass_pos
+  have h := S.radial_energy_law t
+  rw [ht, zero_mul, zero_pow two_ne_zero, mul_zero] at h
+  field_simp [ne_of_gt hm] at h
+  linear_combination h
+
+/-- Periapsis–eccentricity relation: `p / r0 - 1 = sqrt eccentricitySq`
+in squared form, together with the strict lower bound `1 < p/r0 - 1`
+(from `E > 0`, i.e. the unbound regime).  The algebra: the cleared
+turning-point energy law gives `m K (p - 2 r0) = 2 m E r0² > 0`
+(with `K = k e²`), hence `p > 2 r0`; and `(p - r0)² = eps² r0²`
+follows from the defining equations of `p` and `eps²` by the
+certificate `(c1, c2, c3)` against the three cleared equations. -/
+theorem periapsis_eps_relation (hμ : IsAngularMomentumFactor unboundMu) :
+    1 < S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1 ∧
+      (S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1) ^ 2 = S.eccentricitySq := by
+  have hm := S.reduced_mass_pos
+  have hL := S.total_angular_momentum_pos
+  have hp := S.semilatusRectum_pos
+  have hK : (0 : ℝ) < coulombK * elementaryCharge ^ 2 :=
+    mul_pos hR.coulombK_pos (pow_pos hR.elementaryCharge_pos 2)
+  have hpE := S.semilatusRectum_mul
+  have heE := S.eccentricitySq_mul
+  have hE : (0 : ℝ) < S.total_energy := total_energy_pos S hμ
+  have hr0 : ‖S.sep 0‖ = S.initial_separation := by
+    rw [S.initial_instant.1, S.initial_separation_is_norm]
+  have hr0pos : (0 : ℝ) < ‖S.sep 0‖ := by rw [hr0]; exact S.initial_separation_pos
+  have htp2 := S.cleared_energy_of_turning S.turning_point_initial
+  -- `p > 2 r0` from `E > 0`
+  have heq : S.reduced_mass * (coulombK * elementaryCharge ^ 2) *
+        (S.semilatusRectum - 2 * ‖S.sep 0‖) =
+      2 * S.reduced_mass * S.total_energy * ‖S.sep 0‖ ^ 2 := by
+    linear_combination hpE - htp2
+  have hrhs : (0 : ℝ) < 2 * S.reduced_mass * S.total_energy * ‖S.sep 0‖ ^ 2 := by
+    have h1 := pow_pos hr0pos 2
+    positivity
+  have hpos5 : (0 : ℝ) < S.reduced_mass * (coulombK * elementaryCharge ^ 2) *
+      (S.semilatusRectum - 2 * ‖S.sep 0‖) := by rw [heq]; exact hrhs
+  have hkey : 2 * ‖S.sep 0‖ < S.semilatusRectum := by
+    have hmK : (0 : ℝ) < S.reduced_mass * (coulombK * elementaryCharge ^ 2) :=
+      mul_pos hm hK
+    nlinarith [hpos5, hmK]
+  have hgt1 : (1 : ℝ) < S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1 := by
+    have h8 := mul_lt_mul_of_pos_right hkey (inv_pos.mpr hr0pos)
+    have h9 : (2 : ℝ) * ‖S.sep 0‖ * ‖S.sep 0‖⁻¹ = 2 := by
+      rw [mul_assoc, mul_inv_cancel₀ (ne_of_gt hr0pos), mul_one]
+    rw [h9] at h8
+    linarith
+  -- the squared relation, by scaling with `(m K)² ≠ 0`
+  have hscale : (S.reduced_mass * (coulombK * elementaryCharge ^ 2)) ^ 2 *
+        ((S.semilatusRectum - ‖S.sep 0‖) ^ 2 - S.eccentricitySq * ‖S.sep 0‖ ^ 2) = 0 := by
+    linear_combination
+      (-(S.reduced_mass * S.semilatusRectum * (coulombK * elementaryCharge ^ 2))) * htp2 +
+        (2 * S.reduced_mass * ‖S.sep 0‖ ^ 2 * S.total_energy +
+          S.reduced_mass * S.semilatusRectum * (coulombK * elementaryCharge ^ 2)) * hpE +
+        (-(S.reduced_mass * ‖S.sep 0‖ ^ 2)) * heE
+  have hsq : (S.semilatusRectum - ‖S.sep 0‖) ^ 2 = S.eccentricitySq * ‖S.sep 0‖ ^ 2 := by
+    have hne : (S.reduced_mass * (coulombK * elementaryCharge ^ 2)) ^ 2 ≠ 0 :=
+      pow_ne_zero 2 (mul_ne_zero (ne_of_gt hm) (ne_of_gt hK))
+    have h := (mul_eq_zero.mp hscale).resolve_left hne
+    linear_combination h
+  have hfin : (S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1) ^ 2 = S.eccentricitySq := by
+    have h10 : S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1 =
+        (S.semilatusRectum - ‖S.sep 0‖) / ‖S.sep 0‖ := by
+      field_simp [ne_of_gt hr0pos]
+    rw [h10, div_pow, hsq, mul_div_assoc,
+      div_self (pow_ne_zero 2 (ne_of_gt hr0pos)), mul_one]
+  exact ⟨hgt1, hfin⟩
+
+/-- Global periapsis: the recorded instant is the point of MINIMAL
+separation, `‖sep 0‖ ≤ ‖sep t‖` for all `t`.  From
+`radial_sq_identity`, `(p - r)² ≤ eps² r²`; with the periapsis relation
+`eps = p/r0 - 1 > 0` this gives `p/r ≤ p/r0`, i.e. `r0 ≤ r`. -/
+theorem r_ge_initial (hμ : IsAngularMomentumFactor unboundMu) (t : ℝ) :
+    ‖S.sep 0‖ ≤ ‖S.sep t‖ := by
+  have hm := S.reduced_mass_pos
+  have hL := S.total_angular_momentum_pos
+  have hp := S.semilatusRectum_pos
+  have hr0 : ‖S.sep 0‖ = S.initial_separation := by
+    rw [S.initial_instant.1, S.initial_separation_is_norm]
+  have hr0pos : (0 : ℝ) < ‖S.sep 0‖ := by rw [hr0]; exact S.initial_separation_pos
+  have hrt : (0 : ℝ) < ‖S.sep t‖ := norm_pos_iff.mpr (S.sep_ne_zero t)
+  have h1 := S.radial_sq_identity hμ t
+  have hL2 : (0 : ℝ) < S.total_angular_momentum ^ 2 := pow_pos hL 2
+  have h3 : (0 : ℝ) ≤ S.reduced_mass ^ 2 * S.semilatusRectum ^ 2 * ‖S.sep t‖ ^ 2 *
+      (deriv (fun s => ‖S.sep s‖) t) ^ 2 := by positivity
+  rw [h1] at h3
+  have hX : (0 : ℝ) ≤ S.eccentricitySq * ‖S.sep t‖ ^ 2 -
+      (S.semilatusRectum - ‖S.sep t‖) ^ 2 := by nlinarith [h3, hL2]
+  have h2 : (S.semilatusRectum - ‖S.sep t‖) ^ 2 ≤ S.eccentricitySq * ‖S.sep t‖ ^ 2 := by
+    linarith [hX]
+  have h5 := (S.periapsis_eps_relation hμ).2
+  have h6 := (S.periapsis_eps_relation hμ).1
+  have h8nn : (0 : ℝ) ≤ (S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1) * ‖S.sep t‖ :=
+    mul_nonneg (by linarith) (le_of_lt hrt)
+  have h7 : |S.semilatusRectum - ‖S.sep t‖| ≤
+      (S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1) * ‖S.sep t‖ := by
+    have h9 : (S.semilatusRectum - ‖S.sep t‖) ^ 2 ≤
+        ((S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1) * ‖S.sep t‖) ^ 2 := by
+      rw [mul_pow, h5]
+      exact h2
+    rw [sq_le_sq] at h9
+    rwa [abs_of_nonneg h8nn] at h9
+  have h10 : S.semilatusRectum - ‖S.sep t‖ ≤
+      (S.semilatusRectum * ‖S.sep 0‖⁻¹ - 1) * ‖S.sep t‖ := le_trans (le_abs_self _) h7
+  have h11 : S.semilatusRectum ≤ S.semilatusRectum * (‖S.sep 0‖⁻¹ * ‖S.sep t‖) := by
+    linarith [h10]
+  have h12 : (1 : ℝ) ≤ ‖S.sep 0‖⁻¹ * ‖S.sep t‖ := by
+    have h13 : S.semilatusRectum * 1 ≤ S.semilatusRectum * (‖S.sep 0‖⁻¹ * ‖S.sep t‖) := by
+      rwa [mul_one]
+    exact le_of_mul_le_mul_left h13 hp
+  have h14 := mul_le_mul_of_nonneg_left h12 (le_of_lt hr0pos)
+  rw [mul_one, ← mul_assoc, mul_inv_cancel₀ (ne_of_gt hr0pos), one_mul] at h14
+  exact h14
+
+/-- Turning-point uniqueness (Vieta): any stationary radius equals the
+initial one.  Both radii satisfy the same cleared quadratic
+`2 m E r² + 2 m K r = L²`; subtracting gives
+`(r t - r0)(2 m E (r t + r0) + 2 m K) = 0`, and the second factor is
+strictly positive. -/
+theorem turning_radius_eq (hμ : IsAngularMomentumFactor unboundMu) {t : ℝ}
+    (ht : deriv (fun s => ‖S.sep s‖) t = 0) : ‖S.sep t‖ = ‖S.sep 0‖ := by
+  have hE := total_energy_pos S hμ
+  have hK : (0 : ℝ) < coulombK * elementaryCharge ^ 2 :=
+    mul_pos hR.coulombK_pos (pow_pos hR.elementaryCharge_pos 2)
+  have hm := S.reduced_mass_pos
+  have hr0 : ‖S.sep 0‖ = S.initial_separation := by
+    rw [S.initial_instant.1, S.initial_separation_is_norm]
+  have hr0pos : (0 : ℝ) < ‖S.sep 0‖ := by rw [hr0]; exact S.initial_separation_pos
+  have hrt : (0 : ℝ) < ‖S.sep t‖ := norm_pos_iff.mpr (S.sep_ne_zero t)
+  have h1 := S.cleared_energy_of_turning ht
+  have h2 := S.cleared_energy_of_turning S.turning_point_initial
+  have hfact : (‖S.sep t‖ - ‖S.sep 0‖) *
+        (2 * S.reduced_mass * S.total_energy * (‖S.sep t‖ + ‖S.sep 0‖) +
+          2 * S.reduced_mass * (coulombK * elementaryCharge ^ 2)) = 0 := by
+    linear_combination h1 - h2
+  have hpos : (0 : ℝ) < 2 * S.reduced_mass * S.total_energy * (‖S.sep t‖ + ‖S.sep 0‖) +
+      2 * S.reduced_mass * (coulombK * elementaryCharge ^ 2) := by
+    have h4 : (0 : ℝ) < ‖S.sep t‖ + ‖S.sep 0‖ := add_pos hrt hr0pos
+    positivity
+  exact sub_eq_zero.mp ((mul_eq_zero.mp hfact).resolve_right (ne_of_gt hpos))
+
+/-- Radial monotonicity after the periapsis: `r' t ≥ 0` for `t > 0`.
+If `r' t0 < 0`, the maximum of `r` on `Icc 0 t0` either equals the
+global minimum `r 0` — forcing `r ≡ r 0` on the interval, whence
+`r' t0 = 0` by continuity of `r'` from the left — or exceeds it.  An
+excess maximum at an interior point is a turning point by Fermat's
+theorem, collapsed to `r 0` by the Vieta uniqueness
+`turning_radius_eq`, contradicting the excess; an excess maximum at
+`t0` itself contradicts the negative slope there. -/
+theorem rderiv_nonneg_of_pos (hμ : IsAngularMomentumFactor unboundMu) {t0 : ℝ}
+    (ht0 : 0 < t0) : 0 ≤ deriv (fun s => ‖S.sep s‖) t0 := by
+  by_contra hlt
+  push_neg at hlt
+  have hrcont : Continuous fun s => ‖S.sep s‖ := S.smooth_sep.continuous.norm
+  have hr'cont : Continuous (deriv fun s => ‖S.sep s‖) :=
+    (ContDiff.norm ℝ S.smooth_sep (fun s => S.sep_ne_zero s)).continuous_deriv (by norm_num)
+  obtain ⟨tM, htMmem, htMmax⟩ := isCompact_Icc.exists_isMaxOn
+    (Set.nonempty_Icc.mpr (le_of_lt ht0)) hrcont.continuousOn
+  have hr0M : ‖S.sep 0‖ ≤ ‖S.sep tM‖ := htMmax (Set.left_mem_Icc.mpr (le_of_lt ht0))
+  rcases eq_or_lt_of_le hr0M with hEq | hLt
+  · -- maximum = initial radius: `r ≡ r 0` on the interval, so `r' t0 = 0`
+    have hcon : ∀ s ∈ Set.Icc (0:ℝ) t0, ‖S.sep s‖ = ‖S.sep 0‖ := by
+      intro s hs
+      have h1 : ‖S.sep s‖ ≤ ‖S.sep tM‖ := htMmax hs
+      have h2 : ‖S.sep 0‖ ≤ ‖S.sep s‖ := S.r_ge_initial hμ s
+      linarith [hEq]
+    have hderiv0 : ∀ s ∈ Set.Ioo (0:ℝ) t0, deriv (fun x => ‖S.sep x‖) s = 0 := by
+      intro s hs
+      have heq : (fun x => ‖S.sep x‖) =ᶠ[nhds s] fun _ => ‖S.sep 0‖ :=
+        eventually_of_mem (Ioo_mem_nhds hs.1 hs.2)
+          fun x hx => hcon x ⟨le_of_lt hx.1, le_of_lt hx.2⟩
+      rw [Filter.EventuallyEq.deriv_eq heq]
+      exact deriv_const s ‖S.sep 0‖
+    have h1 : (fun _ : ℝ => (0:ℝ)) =ᶠ[nhdsWithin t0 (Set.Iio t0)] (deriv fun x => ‖S.sep x‖) := by
+      filter_upwards [Ioo_mem_nhdsLT_of_mem
+        (show t0 ∈ Set.Ioc (0:ℝ) t0 from ⟨ht0, le_rfl⟩)] with s hs
+      exact (hderiv0 s hs).symm
+    have h2 : ContinuousWithinAt (deriv fun x => ‖S.sep x‖) (Set.Iio t0) t0 :=
+      hr'cont.continuousWithinAt
+    have h0 : deriv (fun x => ‖S.sep x‖) t0 = 0 :=
+      tendsto_nhds_unique h2 (Filter.Tendsto.congr' h1 tendsto_const_nhds)
+    linarith [hlt]
+  · -- maximum exceeds initial radius: interior Fermat or endpoint slope
+    have htMne0 : tM ≠ 0 := by
+      rintro rfl
+      exact (ne_of_gt hLt) rfl
+    rcases eq_or_lt_of_le htMmem.2 with htMeq | htMlt
+    · -- maximum at `t0` with `r' t0 < 0`: negative slope lifts earlier values
+      have hd : HasDerivAt (fun s => ‖S.sep s‖) (deriv (fun s => ‖S.sep s‖) t0) t0 :=
+        (norm_differentiable_of_ne_zero (S.smooth_sep.differentiable (by norm_num))
+          S.sep_ne_zero t0).hasDerivAt
+      have htslope := hasDerivAt_iff_tendsto_slope.mp hd
+      rw [slope_fun_def_field] at htslope
+      have hneg : ∀ᶠ x in nhdsWithin t0 {t0}ᶜ,
+          (‖S.sep x‖ - ‖S.sep t0‖) / (x - t0) < 0 :=
+        htslope.eventually (Iio_mem_nhds hlt)
+      have hneg' : ∀ᶠ x in nhdsWithin t0 (Set.Iio t0),
+          (‖S.sep x‖ - ‖S.sep t0‖) / (x - t0) < 0 :=
+        hneg.filter_mono (nhdsWithin_mono t0 fun x hx => ne_of_lt hx)
+      obtain ⟨x, hxneg, hxI⟩ := (hneg'.and (Ioo_mem_nhdsLT_of_mem
+        (show t0 ∈ Set.Ioc (t0/2) t0 from ⟨by linarith, le_rfl⟩))).exists
+      have hxnum : (0:ℝ) < ‖S.sep x‖ - ‖S.sep t0‖ := by
+        have hden : x - t0 < 0 := by linarith [hxI.2]
+        rcases div_neg_iff.mp hxneg with h | h
+        · exact h.1
+        · linarith [h.1, hden]
+      have hxle : ‖S.sep x‖ ≤ ‖S.sep tM‖ := htMmax ⟨by linarith [hxI.1], le_of_lt hxI.2⟩
+      rw [htMeq] at hxle
+      linarith [hxnum]
+    · -- interior maximum: Fermat + Vieta
+      have htMpos : (0:ℝ) < tM := lt_of_le_of_ne htMmem.1 (Ne.symm htMne0)
+      have hderiv0 : deriv (fun s => ‖S.sep s‖) tM = 0 := by
+        apply IsLocalMax.deriv_eq_zero
+        exact IsMaxOn.isLocalMax htMmax (Filter.mem_of_superset (Ioo_mem_nhds htMpos htMlt) Set.Ioo_subset_Icc_self)
+      have hreq := S.turning_radius_eq hμ hderiv0
+      linarith [hLt]
+
+/-- Radial monotonicity before the periapsis: `r' t ≤ 0` for `t < 0`
+(the time-reversed mirror of `rderiv_nonneg_of_pos`, with the maximum
+on `Icc t0 0` and the slope argument on the right of `t0`). -/
+theorem rderiv_nonpos_of_neg (hμ : IsAngularMomentumFactor unboundMu) {t0 : ℝ}
+    (ht0 : t0 < 0) : deriv (fun s => ‖S.sep s‖) t0 ≤ 0 := by
+  by_contra hgt
+  push_neg at hgt
+  have hrcont : Continuous fun s => ‖S.sep s‖ := S.smooth_sep.continuous.norm
+  have hr'cont : Continuous (deriv fun s => ‖S.sep s‖) :=
+    (ContDiff.norm ℝ S.smooth_sep (fun s => S.sep_ne_zero s)).continuous_deriv (by norm_num)
+  obtain ⟨tM, htMmem, htMmax⟩ := isCompact_Icc.exists_isMaxOn
+    (Set.nonempty_Icc.mpr (le_of_lt ht0)) hrcont.continuousOn
+  have hr0M : ‖S.sep 0‖ ≤ ‖S.sep tM‖ := htMmax (Set.right_mem_Icc.mpr (le_of_lt ht0))
+  rcases eq_or_lt_of_le hr0M with hEq | hLt
+  · -- maximum = initial radius: `r ≡ r 0` on the interval, so `r' t0 = 0`
+    have hcon : ∀ s ∈ Set.Icc t0 (0:ℝ), ‖S.sep s‖ = ‖S.sep 0‖ := by
+      intro s hs
+      have h1 : ‖S.sep s‖ ≤ ‖S.sep tM‖ := htMmax hs
+      have h2 : ‖S.sep 0‖ ≤ ‖S.sep s‖ := S.r_ge_initial hμ s
+      linarith [hEq]
+    have hderiv0 : ∀ s ∈ Set.Ioo t0 (0:ℝ), deriv (fun x => ‖S.sep x‖) s = 0 := by
+      intro s hs
+      have heq : (fun x => ‖S.sep x‖) =ᶠ[nhds s] fun _ => ‖S.sep 0‖ :=
+        eventually_of_mem (Ioo_mem_nhds hs.1 hs.2)
+          fun x hx => hcon x ⟨le_of_lt hx.1, le_of_lt hx.2⟩
+      rw [Filter.EventuallyEq.deriv_eq heq]
+      exact deriv_const s ‖S.sep 0‖
+    have h1 : (fun _ : ℝ => (0:ℝ)) =ᶠ[nhdsWithin t0 (Set.Ioi t0)] (deriv fun x => ‖S.sep x‖) := by
+      filter_upwards [Ioo_mem_nhdsGT_of_mem
+        (show t0 ∈ Set.Ico t0 (0:ℝ) from ⟨le_rfl, ht0⟩)] with s hs
+      exact (hderiv0 s hs).symm
+    have h2 : ContinuousWithinAt (deriv fun x => ‖S.sep x‖) (Set.Ioi t0) t0 :=
+      hr'cont.continuousWithinAt
+    have h0 : deriv (fun x => ‖S.sep x‖) t0 = 0 :=
+      tendsto_nhds_unique h2 (Filter.Tendsto.congr' h1 tendsto_const_nhds)
+    linarith [hgt]
+  · -- maximum exceeds initial radius: interior Fermat or endpoint slope
+    have htMne0 : tM ≠ 0 := by
+      rintro rfl
+      exact (ne_of_gt hLt) rfl
+    rcases eq_or_lt_of_le htMmem.1 with htMeq | htMlt
+    · -- maximum at `t0` with `0 < r' t0`: positive slope lifts later values
+      have hd : HasDerivAt (fun s => ‖S.sep s‖) (deriv (fun s => ‖S.sep s‖) t0) t0 :=
+        (norm_differentiable_of_ne_zero (S.smooth_sep.differentiable (by norm_num))
+          S.sep_ne_zero t0).hasDerivAt
+      have htslope := hasDerivAt_iff_tendsto_slope.mp hd
+      rw [slope_fun_def_field] at htslope
+      have hpos : ∀ᶠ x in nhdsWithin t0 {t0}ᶜ,
+          0 < (‖S.sep x‖ - ‖S.sep t0‖) / (x - t0) :=
+        htslope.eventually (Ioi_mem_nhds hgt)
+      have hpos' : ∀ᶠ x in nhdsWithin t0 (Set.Ioi t0),
+          0 < (‖S.sep x‖ - ‖S.sep t0‖) / (x - t0) :=
+        hpos.filter_mono (nhdsWithin_mono t0 fun x hx => ne_of_gt hx)
+      obtain ⟨x, hxpos, hxI⟩ := (hpos'.and (Ioo_mem_nhdsGT_of_mem
+        (show t0 ∈ Set.Ico t0 (t0/2) from ⟨le_rfl, by linarith⟩))).exists
+      have hxnum : (0:ℝ) < ‖S.sep x‖ - ‖S.sep t0‖ := by
+        have hden : 0 < x - t0 := by linarith [hxI.1]
+        rcases div_pos_iff.mp hxpos with h | h
+        · exact h.1
+        · linarith [h.1, hden]
+      have hxle : ‖S.sep x‖ ≤ ‖S.sep tM‖ := htMmax ⟨le_of_lt hxI.1, by linarith [hxI.2]⟩
+      rw [← htMeq] at hxle
+      linarith [hxnum]
+    · -- interior maximum: Fermat + Vieta
+      have htMneg : tM < 0 := lt_of_le_of_ne htMmem.2 htMne0
+      have hderiv0 : deriv (fun s => ‖S.sep s‖) tM = 0 := by
+        apply IsLocalMax.deriv_eq_zero
+        exact IsMaxOn.isLocalMax htMmax (Filter.mem_of_superset (Ioo_mem_nhds htMlt htMneg) Set.Ioo_subset_Icc_self)
+      have hreq := S.turning_radius_eq hμ hderiv0
+      linarith [hLt]
+
+/-- Dot product of a planar vector with itself is its squared norm. -/
+theorem dot_self_sq (v : Plane) : dot v v = ‖v‖ ^ 2 := by
+  unfold dot
+  rw [norm_sq_coord]
+  ring
+
+/-- Leibniz rule for the squared norm along a differentiable planar
+curve: `(‖f‖²)' = 2 f·f'`. -/
+theorem norm_sq_hasDerivAt {f : ℝ → Plane} (hf : Differentiable ℝ f) (t : ℝ) :
+    HasDerivAt (fun s => ‖f s‖ ^ 2) (2 * dot (f t) (deriv f t)) t := by
+  have h0 : HasDerivAt (fun s => f s 0) (deriv f t 0) t :=
+    hasDerivAt_apply_coord hf t 0
+  have h1 : HasDerivAt (fun s => f s 1) (deriv f t 1) t :=
+    hasDerivAt_apply_coord hf t 1
+  have hC := (h0.mul h0).add (h1.mul h1)
+  rw [show deriv f t 0 * f t 0 + f t 0 * deriv f t 0 +
+        (deriv f t 1 * f t 1 + f t 1 * deriv f t 1) =
+      2 * dot (f t) (deriv f t) from by unfold dot; ring] at hC
+  have hsq : (fun s => ‖f s‖ ^ 2) = fun s => f s 0 * f s 0 + f s 1 * f s 1 := by
+    funext s
+    rw [norm_sq_coord, pow_two, pow_two]
+  rw [hsq]
+  exact hC
+
+/-- Leibniz rule for the radial dot product along a `C²` planar curve:
+`(f · f')' = ‖f'‖² + f · f''`. -/
+theorem dot_sep_hasDerivAt {f : ℝ → Plane} (hf : ContDiff ℝ 2 f) (t : ℝ) :
+    HasDerivAt (fun s => dot (f s) (deriv f s))
+      (‖deriv f t‖ ^ 2 + dot (f t) (deriv (deriv f) t)) t := by
+  have hf1 : Differentiable ℝ f := hf.differentiable (by norm_num)
+  have hf2 : Differentiable ℝ (deriv f) := differentiable_deriv_of_contDiff_two hf
+  have h0 : HasDerivAt (fun s => f s 0) (deriv f t 0) t :=
+    hasDerivAt_apply_coord hf1 t 0
+  have h1 : HasDerivAt (fun s => f s 1) (deriv f t 1) t :=
+    hasDerivAt_apply_coord hf1 t 1
+  have h0' : HasDerivAt (fun s => deriv f s 0) (deriv (deriv f) t 0) t :=
+    hasDerivAt_apply_coord hf2 t 0
+  have h1' : HasDerivAt (fun s => deriv f s 1) (deriv (deriv f) t 1) t :=
+    hasDerivAt_apply_coord hf2 t 1
+  have hC := (h0.mul h0').add (h1.mul h1')
+  rw [show deriv f t 0 * deriv f t 0 + f t 0 * deriv (deriv f) t 0 +
+        (deriv f t 1 * deriv f t 1 + f t 1 * deriv (deriv f) t 1) =
+      ‖deriv f t‖ ^ 2 + dot (f t) (deriv (deriv f) t) from by
+    rw [norm_sq_coord (deriv f t)]
+    unfold dot
+    ring] at hC
+  have hdot : (fun s => dot (f s) (deriv f s)) =
+      fun s => f s 0 * deriv f s 0 + f s 1 * deriv f s 1 := by
+    funext s
+    rfl
+  rw [hdot]
+  exact hC
+
+/-- The orbit is not circular on any open interval through the
+periapsis radius: if `r ≡ r 0` on `Ioo a b`, then on that interval the
+radial dot product `sep · sep'` vanishes together with its derivative,
+so `‖sep'‖² = -(sep · sep'')`; the vector Newton law
+(`newton_relative_law`) makes the right side `2 k e² / (m r0)`, while
+the planar Lagrange identity (`lagrange_norm`) with the conserved
+bracket (`angular_momentum_law`) makes the left side
+`(L / (m_red r0))²`.  Equating and clearing denominators yields
+`p = r0`, contradicting the periapsis inequality `2 r0 < p` of
+`periapsis_eps_relation`.  (This is where `newton_relative_law` enters
+the conic derivation: the circular orbit satisfies every other
+governing-law field.) -/
+theorem not_const_initial (hμ : IsAngularMomentumFactor unboundMu) {a b : ℝ}
+    (hab : a < b) (hcon : ∀ t ∈ Set.Ioo a b, ‖S.sep t‖ = ‖S.sep 0‖) : False := by
+  obtain ⟨t, ht⟩ : ∃ t, t ∈ Set.Ioo a b := ⟨(a + b) / 2, by constructor <;> linarith⟩
+  have hm := S.reduced_mass_pos
+  have hpm : (0 : ℝ) < particleMass := hR.particleMass_pos
+  have hK : (0 : ℝ) < coulombK * elementaryCharge ^ 2 :=
+    mul_pos hR.coulombK_pos (pow_pos hR.elementaryCharge_pos 2)
+  have hr0pos : (0 : ℝ) < ‖S.sep 0‖ := norm_pos_iff.mpr (S.sep_ne_zero 0)
+  have hdiff : Differentiable ℝ S.sep := S.smooth_sep.differentiable (by norm_num)
+  -- the squared norm is constant on the interval, so `sep · sep' = 0` there
+  have hgsq : ∀ s, HasDerivAt (fun x => ‖S.sep x‖ ^ 2)
+      (2 * dot (S.sep s) (deriv S.sep s)) s := fun s => norm_sq_hasDerivAt hdiff s
+  have hg0 : ∀ x ∈ Set.Ioo a b, deriv (fun y => ‖S.sep y‖ ^ 2) x = 0 := by
+    intro x hx
+    have heqx : (fun y => ‖S.sep y‖ ^ 2) =ᶠ[nhds x] fun _ => ‖S.sep 0‖ ^ 2 :=
+      eventually_of_mem (Ioo_mem_nhds hx.1 hx.2) fun y hy => by
+        show ‖S.sep y‖ ^ 2 = ‖S.sep 0‖ ^ 2
+        rw [hcon y hy]
+    rw [Filter.EventuallyEq.deriv_eq heqx]
+    exact deriv_const x _
+  have hdot0 : ∀ x ∈ Set.Ioo a b, dot (S.sep x) (deriv S.sep x) = 0 := by
+    intro x hx
+    have h := hg0 x hx
+    rw [(hgsq x).deriv] at h
+    linarith
+  -- its derivative vanishes too: `‖sep'‖² + sep · sep'' = 0` at `t`
+  have hdd : ∀ s, HasDerivAt (fun x => dot (S.sep x) (deriv S.sep x))
+      (‖deriv S.sep s‖ ^ 2 + dot (S.sep s) (deriv (deriv S.sep) s)) s :=
+    fun s => dot_sep_hasDerivAt S.smooth_sep s
+  have hsum0 : ‖deriv S.sep t‖ ^ 2 + dot (S.sep t) (deriv (deriv S.sep) t) = 0 := by
+    have h0 : deriv (fun x => dot (S.sep x) (deriv S.sep x)) t = 0 := by
+      have heq : (fun x => dot (S.sep x) (deriv S.sep x)) =ᶠ[nhds t] fun _ => 0 := by
+        filter_upwards [Ioo_mem_nhds ht.1 ht.2] with x hx
+        exact hdot0 x hx
+      rw [Filter.EventuallyEq.deriv_eq heq]
+      exact deriv_const t 0
+    rw [(hdd t).deriv] at h0
+    exact h0
+  -- Newton: `sep · sep'' = -(2 k e² / m) / r0`
+  have hnewton : dot (S.sep t) (deriv (deriv S.sep) t) =
+      -(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) / ‖S.sep t‖ := by
+    rw [S.newton_relative_law t, smul_smul, dot_smul_right, dot_self_sq]
+    have hr : ‖S.sep t‖ ≠ 0 := norm_ne_zero_iff.mpr (S.sep_ne_zero t)
+    field_simp [hr, ne_of_gt hpm]
+  -- the two evaluations of `‖sep'‖²`, cleared of denominators
+  have hrt : ‖S.sep t‖ = ‖S.sep 0‖ := hcon t ht
+  have hr0ne : ‖S.sep 0‖ ≠ 0 := ne_of_gt hr0pos
+  have h2 : ‖deriv S.sep t‖ ^ 2 * ‖S.sep 0‖ * particleMass =
+      2 * (coulombK * elementaryCharge ^ 2) := by
+    have hn := hnewton
+    rw [hrt] at hn
+    field_simp [hr0ne, ne_of_gt hpm] at hn
+    have hA : ‖deriv S.sep t‖ ^ 2 = -dot (S.sep t) (deriv (deriv S.sep) t) := by
+      linarith [hsum0]
+    rw [hA]
+    linear_combination -hn
+  have h3 : S.total_angular_momentum ^ 2 =
+      ‖S.sep 0‖ ^ 2 * ‖deriv S.sep t‖ ^ 2 * S.reduced_mass ^ 2 := by
+    have hlag := lagrange_norm (S.sep t) (deriv S.sep t)
+    rw [hdot0 t ht, S.angular_momentum_law t, hrt] at hlag
+    field_simp [ne_of_gt hm] at hlag
+    linear_combination hlag
+  -- combine: `2 L² = (k e²) r0 m`
+  have hkey : 2 * S.total_angular_momentum ^ 2 =
+      (coulombK * elementaryCharge ^ 2) * ‖S.sep 0‖ * particleMass := by
+    have hmred : S.reduced_mass = particleMass / 2 := S.reduced_mass_eq
+    rw [hmred] at h3
+    linear_combination 2 * h3 + (‖S.sep 0‖ * particleMass / 2) * h2
+  -- the conic scale collapses: `p = r0`
+  have hpeq := S.semilatusRectum_mul
+  have hmred : S.reduced_mass = particleMass / 2 := S.reduced_mass_eq
+  rw [hmred] at hpeq
+  have hKm : coulombK * elementaryCharge ^ 2 * particleMass ≠ 0 :=
+    mul_ne_zero (ne_of_gt hK) (ne_of_gt hpm)
+  have hscaled : S.semilatusRectum *
+        (coulombK * elementaryCharge ^ 2 * particleMass) =
+      ‖S.sep 0‖ * (coulombK * elementaryCharge ^ 2 * particleMass) := by
+    linear_combination 2 * hpeq + hkey
+  have hpr0 : S.semilatusRectum = ‖S.sep 0‖ := mul_right_cancel₀ hKm hscaled
+  -- contradicts the periapsis bound `2 r0 < p`
+  have hperi := (S.periapsis_eps_relation hμ).1
+  have hgt : 2 * ‖S.sep 0‖ < S.semilatusRectum := by
+    have h8 := mul_lt_mul_of_pos_right (show (2 : ℝ) < S.semilatusRectum * ‖S.sep 0‖⁻¹
+        by linarith [hperi]) hr0pos
+    rw [show (2 : ℝ) * ‖S.sep 0‖ = 2 * ‖S.sep 0‖ from rfl]
+    have h9 : S.semilatusRectum * ‖S.sep 0‖⁻¹ * ‖S.sep 0‖ = S.semilatusRectum := by
+      rw [mul_assoc, inv_mul_cancel₀ hr0ne, mul_one]
+    rwa [h9] at h8
+  linarith [hpr0, hgt, hr0pos]
+
+/-- The periapsis is strict away from `t = 0`: `r t > r 0` for `t ≠ 0`.
+Equality plus the one-sided monotonicity of `r`
+(`rderiv_nonneg_of_pos` / `rderiv_nonpos_of_neg`) would force
+`r ≡ r 0` on an open interval, excluded by `not_const_initial`. -/
+theorem r_gt_initial (hμ : IsAngularMomentumFactor unboundMu) {t : ℝ} (ht : t ≠ 0) :
+    ‖S.sep 0‖ < ‖S.sep t‖ := by
+  have hge := S.r_ge_initial hμ t
+  rcases eq_or_lt_of_le hge with hEq | hLt
+  · exfalso
+    have hrcont : Continuous fun s => ‖S.sep s‖ := S.smooth_sep.continuous.norm
+    have hrdiff : Differentiable ℝ fun s => ‖S.sep s‖ :=
+      norm_differentiable_of_ne_zero (S.smooth_sep.differentiable (by norm_num))
+        S.sep_ne_zero
+    rcases lt_or_gt_of_ne ht with hneg | hpos
+    · have hanti : AntitoneOn (fun s => ‖S.sep s‖) (Set.Icc t 0) :=
+        antitoneOn_of_deriv_nonpos (convex_Icc t 0) hrcont.continuousOn
+          (hrdiff.differentiableOn.mono (Set.subset_univ _))
+          (fun x hx => by
+            rw [interior_Icc] at hx
+            exact S.rderiv_nonpos_of_neg hμ hx.2)
+      have hcon : ∀ s ∈ Set.Ioo t 0, ‖S.sep s‖ = ‖S.sep 0‖ := by
+        intro s hs
+        have h1 : ‖S.sep s‖ ≤ ‖S.sep t‖ := hanti (Set.left_mem_Icc.mpr (le_of_lt hneg))
+          ⟨le_of_lt hs.1, le_of_lt hs.2⟩ (le_of_lt hs.1)
+        have h2 := S.r_ge_initial hμ s
+        rw [← hEq] at h1
+        exact le_antisymm h1 h2
+      exact S.not_const_initial hμ hneg hcon
+    · have hmono : MonotoneOn (fun s => ‖S.sep s‖) (Set.Icc 0 t) :=
+        monotoneOn_of_deriv_nonneg (convex_Icc 0 t) hrcont.continuousOn
+          (hrdiff.differentiableOn.mono (Set.subset_univ _))
+          (fun x hx => by
+            rw [interior_Icc] at hx
+            exact S.rderiv_nonneg_of_pos hμ hx.1)
+      have hcon : ∀ s ∈ Set.Ioo 0 t, ‖S.sep s‖ = ‖S.sep 0‖ := by
+        intro s hs
+        have h1 : ‖S.sep s‖ ≤ ‖S.sep t‖ := hmono ⟨le_of_lt hs.1, le_of_lt hs.2⟩
+          (Set.right_mem_Icc.mpr (le_of_lt hpos)) (le_of_lt hs.2)
+        have h2 := S.r_ge_initial hμ s
+        rw [← hEq] at h1
+        exact le_antisymm h1 h2
+      exact S.not_const_initial hμ hpos hcon
+  · exact hLt
+
+/-- The conic first integral: with `eps = sqrt eccentricitySq` (which
+equals `p/r0 - 1 > 1` by `periapsis_eps_relation`), the normalized
+inverse radius `Q = (p/r - 1)/eps` satisfies the squared first-order
+constraint `Q'² = θ'² (1 - Q²)` (a rescaling of
+`radial_sq_identity`), takes values in the OPEN interval `(-1, 1)` for
+`t ≠ 0` (strictness is `r_gt_initial` + `turning_radius_eq`), and has
+the sign of `-θ'` on each half-line (`rderiv_nonneg_of_pos` /
+`rderiv_nonpos_of_neg`).  The unique such branch through `Q 0 = 1` is
+`Q t = cos (θ t - θ 0)`: the derivative of
+`arccos ∘ Q + θ` (resp. `arccos ∘ Q - θ`) vanishes on `(0, ∞)`
+(resp. `(-∞, 0)`), so it is constant by the mean-value monotonicity
+criteria, and the constant is read off at `t = 0`.  Multiplying back
+gives the attractive conic `r = p / (1 + eps cos (θ - θ0))` with
+positive denominator. -/
+theorem conic_first_integral (hμ : IsAngularMomentumFactor unboundMu) :
+    ∃ eps : ℝ, eps = Real.sqrt S.eccentricitySq ∧ 1 < eps ∧
+      ∀ t : ℝ, 0 < 1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0) ∧
+        ‖S.sep t‖ = S.semilatusRectum /
+          (1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0)) := by
+  have hperi := S.periapsis_eps_relation hμ
+  set p := S.semilatusRectum with hp_def
+  set e := S.eccentricitySq with he_def
+  set L := S.total_angular_momentum with hL_def
+  set m := S.reduced_mass with hm_def
+  have hm : (0 : ℝ) < m := S.reduced_mass_pos
+  have hL : (0 : ℝ) < L := S.total_angular_momentum_pos
+  have hp : (0 : ℝ) < p := S.semilatusRectum_pos
+  have he_pos : (0 : ℝ) < e := by
+    rw [← hperi.2]
+    nlinarith [hperi.1]
+  have hsqe : (Real.sqrt e) ^ 2 = e := Real.sq_sqrt (le_of_lt he_pos)
+  have heps_val : Real.sqrt e = p * ‖S.sep 0‖⁻¹ - 1 := by
+    rw [← hperi.2, Real.sqrt_sq (by linarith [hperi.1] : (0 : ℝ) ≤ p * ‖S.sep 0‖⁻¹ - 1)]
+  have hε : 1 < Real.sqrt e := by rw [heps_val]; exact hperi.1
+  have hεpos : (0 : ℝ) < Real.sqrt e := by linarith [hε]
+  have hεne : Real.sqrt e ≠ 0 := ne_of_gt hεpos
+  refine ⟨Real.sqrt e, rfl, hε, fun t => ?_⟩
+  set Q : ℝ → ℝ := fun s => (p * ‖S.sep s‖⁻¹ - 1) / Real.sqrt e with hQ_def
+  -- basic per-point facts
+  have hrpos : ∀ s : ℝ, (0 : ℝ) < ‖S.sep s‖ := fun s => norm_pos_iff.mpr (S.sep_ne_zero s)
+  have hrne : ∀ s : ℝ, ‖S.sep s‖ ≠ 0 := fun s => ne_of_gt (hrpos s)
+  have hrDiff : Differentiable ℝ fun s => ‖S.sep s‖ :=
+    norm_differentiable_of_ne_zero (S.smooth_sep.differentiable (by norm_num)) S.sep_ne_zero
+  have hrD : ∀ s : ℝ, HasDerivAt (fun x => ‖S.sep x‖) (deriv (fun x => ‖S.sep x‖) s) s :=
+    fun s => (hrDiff s).hasDerivAt
+  have hQD : ∀ s : ℝ, HasDerivAt Q
+      (p * (-deriv (fun x => ‖S.sep x‖) s / ‖S.sep s‖ ^ 2) / Real.sqrt e) s :=
+    fun s => (((hrD s).inv (hrne s)).const_mul p).sub_const 1 |>.div_const (Real.sqrt e)
+  have hdq : ∀ s : ℝ, deriv Q s =
+      p * (-deriv (fun x => ‖S.sep x‖) s / ‖S.sep s‖ ^ 2) / Real.sqrt e :=
+    fun s => (hQD s).deriv
+  have hpd : ∀ s : ℝ, deriv S.polar_angle s = -(L / m) / ‖S.sep s‖ ^ 2 := by
+    intro s
+    have h := S.polar_angle_deriv s
+    rw [← hL_def, ← hm_def] at h
+    exact h
+  -- cleared component equations
+  have hq' : ∀ s : ℝ, deriv Q s * (Real.sqrt e * ‖S.sep s‖ ^ 2) =
+      -(p * deriv (fun x => ‖S.sep x‖) s) := by
+    intro s
+    rw [hdq s]
+    field_simp [hεne, hrne s]
+  have hB : ∀ s : ℝ, deriv S.polar_angle s * (m * ‖S.sep s‖ ^ 2) = -L := by
+    intro s
+    rw [hpd s]
+    field_simp [ne_of_gt hm, hrne s]
+  have hqt : ∀ s : ℝ, Q s * Real.sqrt e * ‖S.sep s‖ = p - ‖S.sep s‖ := by
+    intro s
+    show (p * ‖S.sep s‖⁻¹ - 1) / Real.sqrt e * Real.sqrt e * ‖S.sep s‖ = p - ‖S.sep s‖
+    field_simp [hεne, hrne s]
+  -- the squared first-order constraint
+  have hsquared : ∀ s : ℝ, (deriv Q s) ^ 2 =
+      (deriv S.polar_angle s) ^ 2 * (1 - (Q s) ^ 2) := by
+    intro s
+    have hRI := S.radial_sq_identity hμ s
+    rw [← hm_def, ← hp_def, ← hL_def, ← he_def] at hRI
+    have hq'2 : (deriv Q s * (Real.sqrt e * ‖S.sep s‖ ^ 2)) ^ 2 =
+        (p * deriv (fun x => ‖S.sep x‖) s) ^ 2 := by
+      rw [hq' s]; ring
+    have hB2 : (deriv S.polar_angle s * (m * ‖S.sep s‖ ^ 2)) ^ 2 = L ^ 2 := by
+      rw [hB s]; ring
+    have hq2 : (Q s * Real.sqrt e * ‖S.sep s‖) ^ 2 = (p - ‖S.sep s‖) ^ 2 := by
+      rw [hqt s]
+    have hsc1 : (Real.sqrt e) ^ 2 * m ^ 2 * ‖S.sep s‖ ^ 6 * (deriv Q s) ^ 2 =
+        L ^ 2 * (e * ‖S.sep s‖ ^ 2 - (p - ‖S.sep s‖) ^ 2) := by
+      linear_combination (m ^ 2 * ‖S.sep s‖ ^ 2) * hq'2 + hRI
+    have haux : (Real.sqrt e) ^ 2 * ‖S.sep s‖ ^ 2 * (1 - (Q s) ^ 2) =
+        e * ‖S.sep s‖ ^ 2 - (p - ‖S.sep s‖) ^ 2 := by
+      linear_combination (‖S.sep s‖ ^ 2) * hsqe - hq2
+    have hsc2 : (Real.sqrt e) ^ 2 * m ^ 2 * ‖S.sep s‖ ^ 6 *
+          ((deriv S.polar_angle s) ^ 2 * (1 - (Q s) ^ 2)) =
+        L ^ 2 * (e * ‖S.sep s‖ ^ 2 - (p - ‖S.sep s‖) ^ 2) := by
+      linear_combination
+        ((Real.sqrt e) ^ 2 * ‖S.sep s‖ ^ 2 * (1 - (Q s) ^ 2)) * hB2 + L ^ 2 * haux
+    have hscale : (Real.sqrt e) ^ 2 * m ^ 2 * ‖S.sep s‖ ^ 6 ≠ 0 :=
+      mul_ne_zero (mul_ne_zero (pow_ne_zero 2 hεne) (pow_ne_zero 2 (ne_of_gt hm)))
+        (pow_ne_zero 6 (hrne s))
+    have hsc : (Real.sqrt e) ^ 2 * m ^ 2 * ‖S.sep s‖ ^ 6 *
+        ((deriv Q s) ^ 2 - (deriv S.polar_angle s) ^ 2 * (1 - (Q s) ^ 2)) = 0 := by
+      linear_combination hsc1 - hsc2
+    have hfin := (mul_eq_zero.mp hsc).resolve_left hscale
+    linear_combination hfin
+  -- `|Q| < 1` away from the periapsis instant
+  have hQ_abs : ∀ s : ℝ, s ≠ 0 → |Q s| < 1 := by
+    intro s hs
+    have hRI := S.radial_sq_identity hμ s
+    rw [← hm_def, ← hp_def, ← hL_def, ← he_def] at hRI
+    have hq2 : (Q s * Real.sqrt e * ‖S.sep s‖) ^ 2 = (p - ‖S.sep s‖) ^ 2 := by
+      rw [hqt s]
+    have hQsq : (Q s) ^ 2 * ((Real.sqrt e) ^ 2 * L ^ 2 * ‖S.sep s‖ ^ 2) =
+        (Real.sqrt e) ^ 2 * L ^ 2 * ‖S.sep s‖ ^ 2 -
+          m ^ 2 * p ^ 2 * ‖S.sep s‖ ^ 2 * (deriv (fun x => ‖S.sep x‖) s) ^ 2 := by
+      linear_combination (L ^ 2) * hq2 + hRI - (L ^ 2 * ‖S.sep s‖ ^ 2) * hsqe
+    have hD : (0 : ℝ) < (Real.sqrt e) ^ 2 * L ^ 2 * ‖S.sep s‖ ^ 2 := by
+      have h1 := pow_pos hεpos 2
+      have h2 := pow_pos hL 2
+      have h3 := pow_pos (hrpos s) 2
+      positivity
+    have hnn : (0 : ℝ) ≤ m ^ 2 * p ^ 2 * ‖S.sep s‖ ^ 2 *
+        (deriv (fun x => ‖S.sep x‖) s) ^ 2 := by positivity
+    have hsq_le : (Q s) ^ 2 ≤ 1 := by
+      have h1 : (Q s) ^ 2 * ((Real.sqrt e) ^ 2 * L ^ 2 * ‖S.sep s‖ ^ 2) ≤
+          1 * ((Real.sqrt e) ^ 2 * L ^ 2 * ‖S.sep s‖ ^ 2) := by
+        rw [hQsq, one_mul]
+        exact sub_le_self _ hnn
+      exact le_of_mul_le_mul_right h1 hD
+    have hsq_ne : (Q s) ^ 2 ≠ 1 := by
+      intro hq1
+      have hz : m ^ 2 * p ^ 2 * ‖S.sep s‖ ^ 2 * (deriv (fun x => ‖S.sep x‖) s) ^ 2 = 0 := by
+        have h1 : (Q s) ^ 2 * ((Real.sqrt e) ^ 2 * L ^ 2 * ‖S.sep s‖ ^ 2) =
+            1 * ((Real.sqrt e) ^ 2 * L ^ 2 * ‖S.sep s‖ ^ 2) := by rw [hq1]
+        rw [hQsq, one_mul] at h1
+        exact sub_eq_self.mp h1
+      have hA : deriv (fun x => ‖S.sep x‖) s = 0 := by
+        have hne1 : m ^ 2 * p ^ 2 * ‖S.sep s‖ ^ 2 ≠ 0 :=
+          mul_ne_zero (mul_ne_zero (pow_ne_zero 2 (ne_of_gt hm))
+            (pow_ne_zero 2 (ne_of_gt hp))) (pow_ne_zero 2 (hrne s))
+        have h2 := (mul_eq_zero.mp hz).resolve_left hne1
+        rw [pow_two] at h2
+        exact mul_self_eq_zero.mp h2
+      have hrt := S.turning_radius_eq hμ hA
+      have hgt := S.r_gt_initial hμ hs
+      linarith [hrt, hgt]
+    have hsq_lt : (Q s) ^ 2 < 1 := lt_of_le_of_ne hsq_le hsq_ne
+    exact (sq_lt_one_iff_abs_lt_one (Q s)).mp hsq_lt
+  -- sign of `Q'` on each half-line
+  have hQ'sign_pos : ∀ s : ℝ, 0 < s → deriv Q s ≤ 0 := by
+    intro s hs
+    have hA : 0 ≤ deriv (fun x => ‖S.sep x‖) s := S.rderiv_nonneg_of_pos hμ hs
+    have h2 : (0 : ℝ) ≤ p * (deriv (fun x => ‖S.sep x‖) s / ‖S.sep s‖ ^ 2) :=
+      mul_nonneg (le_of_lt hp) (div_nonneg hA (pow_nonneg (norm_nonneg _) 2))
+    rw [hdq s, neg_div, mul_neg]
+    exact div_nonpos_of_nonpos_of_nonneg (neg_nonpos.mpr h2) (le_of_lt hεpos)
+  have hQ'sign_neg : ∀ s : ℝ, s < 0 → 0 ≤ deriv Q s := by
+    intro s hs
+    have hA : deriv (fun x => ‖S.sep x‖) s ≤ 0 := S.rderiv_nonpos_of_neg hμ hs
+    have h2 : p * (deriv (fun x => ‖S.sep x‖) s / ‖S.sep s‖ ^ 2) ≤ 0 :=
+      mul_nonpos_of_nonneg_of_nonpos (le_of_lt hp)
+        (div_nonpos_of_nonpos_of_nonneg hA (pow_nonneg (norm_nonneg _) 2))
+    rw [hdq s, neg_div, mul_neg]
+    exact div_nonneg (neg_nonneg.mpr h2) (le_of_lt hεpos)
+  -- `Q 0 = 1`
+  have hQ0 : Q 0 = 1 := by
+    show (p * ‖S.sep 0‖⁻¹ - 1) / Real.sqrt e = 1
+    rw [← heps_val]
+    exact div_self hεne
+  -- continuity pieces for the constancy arguments
+  have hQcont : Continuous Q := by
+    have hu : Continuous fun s => (‖S.sep s‖)⁻¹ :=
+      S.smooth_sep.continuous.norm.inv₀ fun s => norm_ne_zero_iff.mpr (S.sep_ne_zero s)
+    exact ((hu.const_mul p).sub continuous_const).div_const (Real.sqrt e)
+  have hθcont : Continuous S.polar_angle := S.smooth_polar_angle.continuous
+  have hθDiff : Differentiable ℝ S.polar_angle :=
+    S.smooth_polar_angle.differentiable (by norm_num)
+  -- the positive-time branch: `arccos ∘ Q + θ` is constant on `[0, ∞)`
+  have hFder : ∀ s : ℝ, 0 < s →
+      HasDerivAt (fun x => Real.arccos (Q x) + S.polar_angle x)
+        (-(1 / Real.sqrt (1 - (Q s) ^ 2)) * deriv Q s + deriv S.polar_angle s) s := by
+    intro s hs
+    have hq1 := abs_lt.mp (hQ_abs s (ne_of_gt hs))
+    have harccos := (Real.hasDerivAt_arccos (ne_of_gt hq1.1) (ne_of_lt hq1.2)).comp s (hQD s)
+    rw [← hdq s] at harccos
+    exact harccos.add (hθDiff s).hasDerivAt
+  have hFzero : ∀ s : ℝ, 0 < s →
+      deriv (fun x => Real.arccos (Q x) + S.polar_angle x) s = 0 := by
+    intro s hs
+    rw [(hFder s hs).deriv]
+    have hsq := hsquared s
+    have hsign := hQ'sign_pos s hs
+    have hBneg := S.polar_angle_deriv_neg s
+    have h1q : (0 : ℝ) < 1 - (Q s) ^ 2 := by
+      have h : (Q s) ^ 2 < 1 := (sq_lt_one_iff_abs_lt_one (Q s)).mpr (hQ_abs s (ne_of_gt hs))
+      linarith
+    have hsqrtpos : (0 : ℝ) < Real.sqrt (1 - (Q s) ^ 2) := Real.sqrt_pos.mpr h1q
+    have hsq' : (deriv Q s) ^ 2 =
+        (deriv S.polar_angle s * Real.sqrt (1 - (Q s) ^ 2)) ^ 2 := by
+      rw [mul_pow, Real.sq_sqrt (le_of_lt h1q)]
+      exact hsq
+    rcases sq_eq_sq_iff_eq_or_eq_neg.mp hsq' with h | h
+    · rw [h]
+      field_simp [ne_of_gt hsqrtpos]
+      ring
+    · have h1 : deriv S.polar_angle s * Real.sqrt (1 - (Q s) ^ 2) < 0 :=
+        mul_neg_of_neg_of_pos hBneg hsqrtpos
+      linarith [h, h1, hsign]
+  have hFconst : ∀ s : ℝ, 0 ≤ s →
+      Real.arccos (Q s) + S.polar_angle s = Real.arccos (Q 0) + S.polar_angle 0 := by
+    have hFcont : ContinuousOn (fun x => Real.arccos (Q x) + S.polar_angle x) (Set.Ici 0) :=
+      ((Real.continuous_arccos.comp hQcont).add hθcont).continuousOn
+    have hFdiff : DifferentiableOn ℝ (fun x => Real.arccos (Q x) + S.polar_angle x)
+        (interior (Set.Ici 0)) := by
+      rw [interior_Ici]
+      exact fun s hs => (hFder s hs).differentiableAt.differentiableWithinAt
+    have hFmono : MonotoneOn (fun x => Real.arccos (Q x) + S.polar_angle x) (Set.Ici 0) :=
+      monotoneOn_of_deriv_nonneg (convex_Ici 0) hFcont hFdiff fun x hx => by
+        rw [interior_Ici] at hx
+        exact le_of_eq (hFzero x hx).symm
+    have hFanti : AntitoneOn (fun x => Real.arccos (Q x) + S.polar_angle x) (Set.Ici 0) :=
+      antitoneOn_of_deriv_nonpos (convex_Ici 0) hFcont hFdiff fun x hx => by
+        rw [interior_Ici] at hx
+        exact le_of_eq (hFzero x hx)
+    intro s hs
+    have h1 := hFanti (Set.mem_Ici.mpr (le_refl 0)) (Set.mem_Ici.mpr hs) hs
+    have h2 := hFmono (Set.mem_Ici.mpr (le_refl 0)) (Set.mem_Ici.mpr hs) hs
+    exact le_antisymm h1 h2
+  have hQcos_pos : ∀ s : ℝ, 0 < s →
+      Q s = Real.cos (S.polar_angle s - S.polar_angle 0) := by
+    intro s hs
+    have hq1 := abs_lt.mp (hQ_abs s (ne_of_gt hs))
+    have hFc := hFconst s (le_of_lt hs)
+    rw [hQ0, Real.arccos_one, zero_add] at hFc
+    have h1 : Real.arccos (Q s) = S.polar_angle 0 - S.polar_angle s := by linarith [hFc]
+    have h2 := Real.cos_arccos (le_of_lt hq1.1) (le_of_lt hq1.2)
+    rw [h1, show S.polar_angle 0 - S.polar_angle s =
+        -(S.polar_angle s - S.polar_angle 0) from by ring, Real.cos_neg] at h2
+    exact h2.symm
+  -- the negative-time branch: `arccos ∘ Q - θ` is constant on `(-∞, 0]`
+  have hGder : ∀ s : ℝ, s < 0 →
+      HasDerivAt (fun x => Real.arccos (Q x) - S.polar_angle x)
+        (-(1 / Real.sqrt (1 - (Q s) ^ 2)) * deriv Q s - deriv S.polar_angle s) s := by
+    intro s hs
+    have hq1 := abs_lt.mp (hQ_abs s (ne_of_lt hs))
+    have harccos := (Real.hasDerivAt_arccos (ne_of_gt hq1.1) (ne_of_lt hq1.2)).comp s (hQD s)
+    rw [← hdq s] at harccos
+    exact harccos.sub (hθDiff s).hasDerivAt
+  have hGzero : ∀ s : ℝ, s < 0 →
+      deriv (fun x => Real.arccos (Q x) - S.polar_angle x) s = 0 := by
+    intro s hs
+    rw [(hGder s hs).deriv]
+    have hsq := hsquared s
+    have hsign := hQ'sign_neg s hs
+    have hBneg := S.polar_angle_deriv_neg s
+    have h1q : (0 : ℝ) < 1 - (Q s) ^ 2 := by
+      have h : (Q s) ^ 2 < 1 := (sq_lt_one_iff_abs_lt_one (Q s)).mpr (hQ_abs s (ne_of_lt hs))
+      linarith
+    have hsqrtpos : (0 : ℝ) < Real.sqrt (1 - (Q s) ^ 2) := Real.sqrt_pos.mpr h1q
+    have hsq' : (deriv Q s) ^ 2 =
+        (deriv S.polar_angle s * Real.sqrt (1 - (Q s) ^ 2)) ^ 2 := by
+      rw [mul_pow, Real.sq_sqrt (le_of_lt h1q)]
+      exact hsq
+    rcases sq_eq_sq_iff_eq_or_eq_neg.mp hsq' with h | h
+    · have h1 : deriv S.polar_angle s * Real.sqrt (1 - (Q s) ^ 2) < 0 :=
+        mul_neg_of_neg_of_pos hBneg hsqrtpos
+      linarith [h, h1, hsign]
+    · rw [h]
+      field_simp [ne_of_gt hsqrtpos]
+      ring
+  have hGconst : ∀ s : ℝ, s ≤ 0 →
+      Real.arccos (Q s) - S.polar_angle s = Real.arccos (Q 0) - S.polar_angle 0 := by
+    have hGcont : ContinuousOn (fun x => Real.arccos (Q x) - S.polar_angle x) (Set.Iic 0) :=
+      ((Real.continuous_arccos.comp hQcont).sub hθcont).continuousOn
+    have hGdiff : DifferentiableOn ℝ (fun x => Real.arccos (Q x) - S.polar_angle x)
+        (interior (Set.Iic 0)) := by
+      rw [interior_Iic]
+      exact fun s hs => (hGder s hs).differentiableAt.differentiableWithinAt
+    have hGmono : MonotoneOn (fun x => Real.arccos (Q x) - S.polar_angle x) (Set.Iic 0) :=
+      monotoneOn_of_deriv_nonneg (convex_Iic 0) hGcont hGdiff fun x hx => by
+        rw [interior_Iic] at hx
+        exact le_of_eq (hGzero x hx).symm
+    have hGanti : AntitoneOn (fun x => Real.arccos (Q x) - S.polar_angle x) (Set.Iic 0) :=
+      antitoneOn_of_deriv_nonpos (convex_Iic 0) hGcont hGdiff fun x hx => by
+        rw [interior_Iic] at hx
+        exact le_of_eq (hGzero x hx)
+    intro s hs
+    have h1 := hGanti (Set.mem_Iic.mpr hs) (Set.mem_Iic.mpr (le_refl 0)) hs
+    have h2 := hGmono (Set.mem_Iic.mpr hs) (Set.mem_Iic.mpr (le_refl 0)) hs
+    exact le_antisymm h2 h1
+  have hQcos_neg : ∀ s : ℝ, s < 0 →
+      Q s = Real.cos (S.polar_angle s - S.polar_angle 0) := by
+    intro s hs
+    have hq1 := abs_lt.mp (hQ_abs s (ne_of_lt hs))
+    have hGc := hGconst s (le_of_lt hs)
+    rw [hQ0, Real.arccos_one, zero_sub] at hGc
+    have h1 : Real.arccos (Q s) = S.polar_angle s - S.polar_angle 0 := by linarith [hGc]
+    have h2 := Real.cos_arccos (le_of_lt hq1.1) (le_of_lt hq1.2)
+    rw [h1] at h2
+    exact h2.symm
+  -- the branch evaluation, all times
+  have hQcos : ∀ s : ℝ, Q s = Real.cos (S.polar_angle s - S.polar_angle 0) := by
+    intro s
+    rcases lt_trichotomy s 0 with h | h | h
+    · exact hQcos_neg s h
+    · subst h
+      rw [sub_self, Real.cos_zero]
+      exact hQ0
+    · exact hQcos_pos s h
+  -- assembly: positivity of the denominator and the conic equation
+  have hfinal : p * ‖S.sep t‖⁻¹ - 1 =
+      Real.sqrt e * Real.cos (S.polar_angle t - S.polar_angle 0) := by
+    have e1 : (p * ‖S.sep t‖⁻¹ - 1) / Real.sqrt e =
+        Real.cos (S.polar_angle t - S.polar_angle 0) := hQcos t
+    rw [div_eq_iff hεne] at e1
+    linear_combination e1
+  have hden : 1 + Real.sqrt e * Real.cos (S.polar_angle t - S.polar_angle 0) =
+      p * ‖S.sep t‖⁻¹ := by
+    linear_combination -hfinal
+  have hpos : (0 : ℝ) < 1 + Real.sqrt e * Real.cos (S.polar_angle t - S.polar_angle 0) := by
+    rw [hden]
+    exact mul_pos hp (inv_pos.mpr (hrpos t))
+  refine ⟨hpos, ?_⟩
+  rw [eq_div_iff (ne_of_gt hpos), hden, mul_comm p (‖S.sep t‖⁻¹), ← mul_assoc,
+    mul_inv_cancel₀ (hrne t), one_mul]
+
+/-- LEAF (Binet core, Kepler layer): the inverse separation `w = 1/r`,
+read as a function of the polar angle, satisfies Binet's linear
+equation `w'' + w = 1/p` with `p = semilatusRectum = L²/(m_red k e²)`.
+Derivation it carries: with `ℓ := -(L / m_red)` the signed specific
+angular momentum (`angular_momentum_law`, so `θ' = ℓ / r²` by
+`angular_momentum_polar` + `polar_angle_deriv`), the chain rule gives
+`r' = -ℓ w_θ` and `r'' = -ℓ² w² w_θθ`; substituting into the radial
+component of `newton_relative_law` (`r'' - r θ'² = -(k e²/m_red) w²`,
+the attractive sign) and dividing by `-ℓ² w²` yields
+`w_θθ + w = (k e²/m_red) / ℓ² = 1/p`.  The profile `w : ℝ → ℝ` is the
+analytic inverse-distance function; both constraints are asserted at
+the realized angles `polar_angle t`, which sweep an interval with
+interior by `polar_angle_strictAnti`. -/
+theorem binet_ode :
+    ∃ w : ℝ → ℝ, ContDiff ℝ 2 w ∧
+      (∀ t : ℝ, w (S.polar_angle t) * ‖S.sep t‖ = 1) ∧
+        ∀ t : ℝ, deriv (deriv w) (S.polar_angle t) + w (S.polar_angle t) =
+          1 / S.semilatusRectum := by
+  -- PROVED via the conic profile of `conic_first_integral` (rather than
+  -- the chain-rule derivation sketched above, which is its historical
+  -- route): the analytic ansatz `w = 1/p + (eps/p) cos (θ - θ0)` is
+  -- the harmonic profile matching the orbit.
+  obtain ⟨eps, _heps, _heps1, hconic⟩ :=
+    S.conic_first_integral unboundMu_isAngularMomentumFactor
+  have hp : (0 : ℝ) < S.semilatusRectum := S.semilatusRectum_pos
+  set w : ℝ → ℝ := fun θ => 1 / S.semilatusRectum +
+    (eps / S.semilatusRectum) * Real.cos (θ - S.polar_angle 0) with hw_def
+  have hcos : ContDiff ℝ 2 (fun θ => Real.cos (θ - S.polar_angle 0)) :=
+    Real.contDiff_cos.comp (contDiff_id.sub contDiff_const)
+  have hw1 : ∀ θ : ℝ, HasDerivAt w
+      (0 + (eps / S.semilatusRectum) * (-Real.sin (θ - S.polar_angle 0) * 1)) θ := by
+    intro θ
+    show HasDerivAt (fun φ => 1 / S.semilatusRectum +
+        (eps / S.semilatusRectum) * Real.cos (φ - S.polar_angle 0)) _ θ
+    exact (hasDerivAt_const θ (1 / S.semilatusRectum)).add
+      (((Real.hasDerivAt_cos (θ - S.polar_angle 0)).comp θ
+        ((hasDerivAt_id θ).sub_const _)).const_mul (eps / S.semilatusRectum))
+  have hderw : deriv w = fun φ =>
+      -(eps / S.semilatusRectum) * Real.sin (φ - S.polar_angle 0) := by
+    funext φ
+    rw [(hw1 φ).deriv]
+    ring
+  have hw2 : ∀ θ : ℝ, HasDerivAt (fun φ =>
+        -(eps / S.semilatusRectum) * Real.sin (φ - S.polar_angle 0))
+      (-(eps / S.semilatusRectum) * (Real.cos (θ - S.polar_angle 0) * 1)) θ := by
+    intro θ
+    exact (((Real.hasDerivAt_sin (θ - S.polar_angle 0)).comp θ
+      ((hasDerivAt_id θ).sub_const _)).const_mul (-(eps / S.semilatusRectum)))
+  refine ⟨w, ?_, ?_, ?_⟩
+  · show ContDiff ℝ 2 (fun θ => 1 / S.semilatusRectum +
+      (eps / S.semilatusRectum) * Real.cos (θ - S.polar_angle 0))
+    exact ContDiff.add contDiff_const (ContDiff.mul contDiff_const hcos)
+  · intro t
+    have hpos := (hconic t).1
+    have hr_eq := (hconic t).2
+    show (1 / S.semilatusRectum +
+        (eps / S.semilatusRectum) * Real.cos (S.polar_angle t - S.polar_angle 0)) *
+        ‖S.sep t‖ = 1
+    rw [hr_eq]
+    field_simp [ne_of_gt hp, ne_of_gt hpos]
+  · intro t
+    have h1 : deriv (deriv w) (S.polar_angle t) =
+        -(eps / S.semilatusRectum) *
+          (Real.cos (S.polar_angle t - S.polar_angle 0) * 1) := by
+      rw [hderw]
+      exact (hw2 (S.polar_angle t)).deriv
+    rw [h1]
+    show -(eps / S.semilatusRectum) *
+        (Real.cos (S.polar_angle t - S.polar_angle 0) * 1) +
+      (1 / S.semilatusRectum +
+        (eps / S.semilatusRectum) * Real.cos (S.polar_angle t - S.polar_angle 0)) =
+      1 / S.semilatusRectum
+    ring
+
+end CoulombScatteringData
+
+/-- Hint 2 made derivable: the trajectory `|sep|` as a function of its
+own polar angle `polar_angle` is the ATTRACTIVE branch of the conic.
+For the unbound case `eps > 1` the realized branch near the periapsis
+has denominator `1 + eps cos (θ - θ0) > 0`.  The recorded instant is the
+periapsis (`turningQuadratic_periapsis`), which forces the
+symmetry-axis normalization `θ0 = polar_angle 0`: at `t = 0` the conic
+reads `r0 = p / (1 + eps cos (θ(0) - θ0))`, while the energy law gives
+`r0 = p / (1 + eps)` (with `p = 450 a0`, `r0 = 100 a0`, `eps = 7/2`:
+`100 = 450 / (9/2)` ✓), hence `cos (θ(0) - θ0) = 1`.  The page's
+printed form `r = a / (1 - eps cos θ)` (Hint 2) is this same branch with
+the polar axis reversed (`θ ↦ θ + π`).
+(ITER-017 REDRAFT: the previous statement used the repulsive/far branch
+`p / (eps cos (θ - θ0) - 1)`, which satisfies the repulsive Binet
+equation `w'' + w = -1/p`, not the attractive `+1/p` of
+`newton_relative_law`, and is even unsatisfiable at `t = 0` — it would
+force `cos (θ(0) - θ0) = 11/7 > 1`.)
+Derivation route: `binet_ode` (from `newton_relative_law`,
+`angular_momentum_law`, `angular_momentum_polar`) gives `w'' + w = 1/p`
+at the realized angles; `polar_angle_strictAnti` and the continuity of
+`polar_angle` make the realized angle set an interval with interior, on
+which `harmonic_solution_on_interval` yields
+`w = 1/p + A cos (θ - θ0)`; the periapsis condition
+(`turningQuadratic_periapsis`, `turning_point_initial`) fixes
+`θ0 = polar_angle 0` and `A > 0`; the energy law (`radial_energy_law`
+at the turning point) evaluates `A * p = eps = sqrt eccentricitySq`
+(`eccentricitySq` is exactly `1 + 2 E L² / (m_red (k e²)²)`);
+`eccentricity_gt_one` selects the positive-denominator branch and the
+formula `r = 1/w` gives the display. -/
+theorem orbit_eq_conic {hR : ScalingRegime} (S : CoulombScatteringData hR)
+    (hμ : IsAngularMomentumFactor unboundMu) :
+    ∃ eps : ℝ, eps = Real.sqrt S.eccentricitySq ∧ 1 < eps ∧
+      ∀ t : ℝ, 0 < 1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0) ∧
+        ‖S.sep t‖ =
+          S.semilatusRectum / (1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0)) := by
+  -- PROVED: `conic_first_integral` (the arccos quadrature over
+  -- `radial_sq_identity`, `periapsis_eps_relation`, the one-sided radial
+  -- monotonicity and the strict periapsis `r_gt_initial`) is exactly
+  -- this statement.
+  exact S.conic_first_integral hμ
+
+/-! ### Asymptotic relative velocity `u_inf` -/
+
+/-- A candidate asymptotic relative-velocity vector (m/s): plain data,
+to which the predicate `IsAsymptoticRelativeVelocity` then assigns the
+physical role of `u_inf`. -/
+structure RelativeVelocityVector where
+  /-- The planar vector (m/s). -/
+  vec : Plane
+
+/-- The asymptotic relative velocity `u_inf` of `e+` with respect to `e-`
+as the separation tends to infinity: `u.vec` is a nonzero planar vector
+that is the limit of the relative velocity `deriv sep` at `Filter.atTop`
+(energy conservation keeps the speed bounded, so future time infinity and
+infinite separation coincide for the unbound orbit).  The orientation
+field `direction_toward_pair` records the rolling branch: the deflection
+rotates the initial line of motion toward the line connecting the pair
+(clockwise in the Fig.-1b orientation), so the signed planar bracket of
+the initial direction with `u.vec` is nonpositive.  Constraining: the
+`tendsto` field is a genuine limit equation, so the predicate can hold of
+at most one vector; existence is a theorem to be proved
+(`exists_asymptoticRelativeVelocity`), not an assumption. -/
+structure IsAsymptoticRelativeVelocity {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (u : RelativeVelocityVector) : Prop where
+  /-- `u.vec` is the limit of the relative velocity as `t -> +∞`. -/
+  tendsto : Filter.Tendsto (deriv S.sep) Filter.atTop (nhds u.vec)
+  /-- The asymptotic motion is nontrivial (scattering, not capture). -/
+  u_inf_ne_zero : u.vec ≠ 0
+  /-- Rolling branch: the deflection bends the trajectory toward the line
+  connecting the pair, so `(initial direction) ×z u.vec ≤ 0`. -/
+  direction_toward_pair : perp (initialDirection (S := S)) u.vec ≤ 0
+
+namespace CoulombScatteringData
+
+variable {hR : ScalingRegime} (S : CoulombScatteringData hR)
+
+/-- LEAF (energy conservation along the trajectory, asymptotic layer):
+the reduced one-body total energy is conserved at every time,
+`(1/2) m_red ‖sep'‖² - k e²/r = E`.  Derivation it carries:
+differentiate the left side with `hasDerivAt_apply_coord`,
+`norm_sq_differentiable`, `norm_differentiable_of_ne_zero` (all proved
+above) and `S.smooth_sep`; the kinetic term contributes
+`m_red ⟨sep', sep''⟩` and the potential term
+`+(k e²/r²) ⟨sep', sep/r⟩`; substituting `newton_relative_law`
+(`sep'' = -(k e²/(m_red r³)) • sep`) makes the two contributions cancel,
+so the expression is constant, and `coulomb_law` +
+`relative_kinetic_law` + `initial_instant` evaluate the constant to
+`total_energy`. -/
+theorem energy_conservation (t : ℝ) :
+    (1 / 2) * S.reduced_mass * ‖deriv S.sep t‖ ^ 2 -
+      coulombK * elementaryCharge ^ 2 / ‖S.sep t‖ = S.total_energy := by
+  have hf : Differentiable ℝ S.sep := S.smooth_sep.differentiable (by norm_num)
+  have hv : Differentiable ℝ (deriv S.sep) := differentiable_deriv_of_contDiff_two S.smooth_sep
+  have hr_diff : Differentiable ℝ (fun s => ‖S.sep s‖) :=
+    norm_differentiable_of_ne_zero hf S.sep_ne_zero
+  have hm : (0 : ℝ) < particleMass := hR.particleMass_pos
+  have hmne : (particleMass : ℝ) ≠ 0 := ne_of_gt hm
+  -- The energy expression has zero derivative at every time.
+  have hzero : ∀ s : ℝ, deriv ((fun σ =>
+      (1 / 2) * S.reduced_mass * ‖deriv S.sep σ‖ ^ 2) -
+        fun σ => coulombK * elementaryCharge ^ 2 / ‖S.sep σ‖) s = 0 := by
+    intro s
+    have hv0 := hasDerivAt_apply_coord hv s 0
+    have hv1 := hasDerivAt_apply_coord hv s 1
+    have hs0 := hasDerivAt_apply_coord hf s 0
+    have hs1 := hasDerivAt_apply_coord hf s 1
+    have hr0 : (0 : ℝ) < ‖S.sep s‖ := norm_pos_iff.mpr (S.sep_ne_zero s)
+    have hrne : ‖S.sep s‖ ≠ 0 := ne_of_gt hr0
+    -- derivative of the squared speed
+    have hA : HasDerivAt (fun σ => ‖deriv S.sep σ‖ ^ 2)
+        (2 * (deriv S.sep s 0 * deriv (deriv S.sep) s 0 +
+              deriv S.sep s 1 * deriv (deriv S.sep) s 1)) s := by
+      have e : (fun σ => ‖deriv S.sep σ‖ ^ 2) =
+          fun σ => (deriv S.sep σ 0) ^ 2 + (deriv S.sep σ 1) ^ 2 := by
+        funext σ
+        exact norm_sq_coord (deriv S.sep σ)
+      rw [e]
+      exact ((hv0.pow 2).add (hv1.pow 2)).congr_deriv (by ring)
+    -- derivative of the radial coordinate
+    have hR : HasDerivAt (fun σ => ‖S.sep σ‖)
+        ((S.sep s 0 * deriv S.sep s 0 + S.sep s 1 * deriv S.sep s 1) / ‖S.sep s‖) s := by
+      have hsq : HasDerivAt (fun σ => ‖S.sep σ‖ ^ 2)
+          (2 * (S.sep s 0 * deriv S.sep s 0 + S.sep s 1 * deriv S.sep s 1)) s := by
+        have e : (fun σ => ‖S.sep σ‖ ^ 2) =
+            fun σ => (S.sep σ 0) ^ 2 + (S.sep σ 1) ^ 2 := by
+          funext σ
+          exact norm_sq_coord (S.sep σ)
+        rw [e]
+        exact ((hs0.pow 2).add (hs1.pow 2)).congr_deriv (by ring)
+      have hsqrt := (hasDerivAt_sqrt (pow_ne_zero 2 hrne)).comp s hsq
+      have e2 : (fun x : ℝ => Real.sqrt x) ∘ (fun σ => ‖S.sep σ‖ ^ 2) =
+          fun σ => ‖S.sep σ‖ := by
+        funext σ
+        simp only [Function.comp_apply]
+        rw [Real.sqrt_sq (norm_nonneg _)]
+      rw [e2] at hsqrt
+      refine hsqrt.congr_deriv ?_
+      rw [Real.sqrt_sq (norm_nonneg _)]
+      field_simp [hrne]
+    -- derivative of the Coulomb term
+    have hB : HasDerivAt (fun σ => coulombK * elementaryCharge ^ 2 / ‖S.sep σ‖)
+        (-(coulombK * elementaryCharge ^ 2 *
+          ((S.sep s 0 * deriv S.sep s 0 + S.sep s 1 * deriv S.sep s 1) / ‖S.sep s‖)) /
+            ‖S.sep s‖ ^ 2) s := by
+      exact ((hasDerivAt_const s _).div hR hrne).congr_deriv (by ring)
+    -- assemble and cancel with Newton's equation
+    have hF := (hA.const_mul ((1 / 2 : ℝ) * S.reduced_mass)).sub hB
+    rw [hF.deriv]
+    have hN := S.newton_relative_law s
+    have hN0 : deriv (deriv S.sep) s 0 =
+        -(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) *
+          ((‖S.sep s‖ ^ 3)⁻¹ * S.sep s 0) := by
+      rw [hN]
+      simp only [PiLp.smul_apply, smul_eq_mul]
+    have hN1 : deriv (deriv S.sep) s 1 =
+        -(2 * (coulombK * elementaryCharge ^ 2 / particleMass)) *
+          ((‖S.sep s‖ ^ 3)⁻¹ * S.sep s 1) := by
+      rw [hN]
+      simp only [PiLp.smul_apply, smul_eq_mul]
+    rw [hN0, hN1, S.reduced_mass_eq]
+    field_simp [hmne, hrne]
+    ring
+  have hdiffF : Differentiable ℝ ((fun σ =>
+      (1 / 2) * S.reduced_mass * ‖deriv S.sep σ‖ ^ 2) -
+        fun σ => coulombK * elementaryCharge ^ 2 / ‖S.sep σ‖) :=
+    ((norm_sq_differentiable hv).const_mul _).sub
+      ((differentiable_const _).div hr_diff
+        (fun s => norm_ne_zero_iff.mpr (S.sep_ne_zero s)))
+  have hconst : (1 / 2) * S.reduced_mass * ‖deriv S.sep t‖ ^ 2 -
+        coulombK * elementaryCharge ^ 2 / ‖S.sep t‖ =
+      (1 / 2) * S.reduced_mass * ‖deriv S.sep 0‖ ^ 2 -
+        coulombK * elementaryCharge ^ 2 / ‖S.sep 0‖ :=
+    is_const_of_deriv_eq_zero hdiffF hzero t 0
+  rw [hconst]
+  -- Evaluate at the transverse initial instant: kinetic plus Coulomb.
+  have h2v0 : ‖deriv S.sep 0‖ = 2 * S.initial_speed := by
+    rw [S.initial_instant.2, norm_smul,
+      Real.norm_of_nonneg (by norm_num : (0 : ℝ) ≤ 2), S.initial_speed_value.2]
+  rw [S.initial_instant.1, S.initial_separation_is_norm, h2v0]
+  have hkin := S.relative_kinetic_law
+  have hcoul := S.coulomb_law
+  linarith
+
+/-- LEAF (escape of the unbound orbit, asymptotic layer): the separation
+tends to infinity as `t → +∞`.  Derivation it carries:
+`radial_energy_law` bounds the radial motion below the energy escape
+speed, and the turning-point analysis (`turningQuadratic_periapsis`,
+`turningQuadratic` has exactly two roots for `E > 0`, the periapsis
+`r0` and a negative unphysical one) shows `t = 0` is the unique turning
+point on the outward branch, so `r` is strictly increasing for `t > 0`
+(`strictAnti_of_deriv_neg`-style monotonicity from
+`turning_point_initial` and the absence of later zeros of
+`turningQuadratic` along the trajectory); `energy_conservation` then
+excludes a finite limit (the kinetic term would have to vanish while
+the potential term tends to a nonzero constant). -/
+theorem separation_tendsto_atTop :
+    Filter.Tendsto (fun t => ‖S.sep t‖) Filter.atTop Filter.atTop := by
+  obtain ⟨eps, _heps, heps1, hconic⟩ := orbit_eq_conic S unboundMu_isAngularMomentumFactor
+  have hθcont : Continuous S.polar_angle := S.smooth_polar_angle.continuous
+  have hL : (0 : ℝ) < S.total_angular_momentum := by
+    rw [S.total_angular_momentum_value]
+    have hμ15 : (0 : ℝ) < unboundMu := by norm_num [unboundMu]
+    have hh := hR.hbar_pos
+    positivity
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hp : (0 : ℝ) < S.semilatusRectum := by
+    rw [CoulombScatteringData.semilatusRectum]
+    exact div_pos (pow_pos hL 2)
+      (mul_pos (mul_pos hm hR.coulombK_pos) (pow_pos hR.elementaryCharge_pos 2))
+  -- The angle can never reach `θ0 - π`: there the conic denominator would
+  -- be `1 - eps < 0`, contradicting the positive-branch conjunct of
+  -- `orbit_eq_conic`.
+  have hbound : ∀ t : ℝ, 0 ≤ t → S.polar_angle 0 - Real.pi < S.polar_angle t := by
+    intro t ht
+    by_contra hlt
+    push_neg at hlt
+    obtain ⟨s, -, hs⟩ : ∃ s : ℝ, 0 ≤ s ∧ S.polar_angle s = S.polar_angle 0 - Real.pi := by
+      rcases eq_or_lt_of_le hlt with heq | hlt'
+      · exact ⟨t, ht, heq⟩
+      · have htpos : (0 : ℝ) < t := by
+          rcases eq_or_lt_of_le ht with h0 | h0
+          · rw [← h0] at hlt'
+            linarith [Real.pi_pos]
+          · exact h0
+        have hmem : S.polar_angle 0 - Real.pi ∈
+            Set.Ioo (S.polar_angle t) (S.polar_angle 0) :=
+          ⟨hlt', by linarith [Real.pi_pos]⟩
+        have hivt := intermediate_value_Ioo' (le_of_lt htpos) hθcont.continuousOn hmem
+        obtain ⟨s, hs, hseq⟩ := hivt
+        exact ⟨s, le_of_lt hs.1, hseq⟩
+    have hc := (hconic s).1
+    rw [hs] at hc
+    have hcos : Real.cos (S.polar_angle 0 - Real.pi - S.polar_angle 0) = -1 := by
+      rw [show S.polar_angle 0 - Real.pi - S.polar_angle 0 = -Real.pi by ring,
+        Real.cos_neg, Real.cos_pi]
+    rw [hcos] at hc
+    linarith
+  -- The angle is antitone and bounded below on `[0, ∞)`, hence converges.
+  have hΘanti : Antitone (S.polar_angle ∘ fun t => max t 0) :=
+    S.polar_angle_strictAnti.antitone.comp_monotone (monotone_id.max monotone_const)
+  have hΘbdd : BddBelow (Set.range (S.polar_angle ∘ fun t => max t 0)) := by
+    refine ⟨S.polar_angle 0 - Real.pi, ?_⟩
+    intro x hx
+    obtain ⟨t, rfl⟩ := hx
+    exact le_of_lt (hbound _ (le_max_right t 0))
+  have hΘlim := tendsto_atTop_ciInf hΘanti hΘbdd
+  set θinf := ⨅ i, (S.polar_angle ∘ fun t => max t 0) i with hθinf_def
+  have hΘeq : (S.polar_angle ∘ fun t => max t 0) =ᶠ[Filter.atTop] S.polar_angle :=
+    Filter.eventually_atTop.mpr
+      ⟨0, fun t ht => by simp only [Function.comp_apply, max_eq_left ht]⟩
+  have hθlim : Filter.Tendsto S.polar_angle Filter.atTop (nhds θinf) :=
+    hΘlim.congr' hΘeq
+  -- The denominator tends to `1 + eps cos(θinf - θ0) ≥ 0`.
+  have hDlim : Filter.Tendsto
+      (fun t => 1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0))
+      Filter.atTop (nhds (1 + eps * Real.cos (θinf - S.polar_angle 0))) :=
+    tendsto_const_nhds.add (tendsto_const_nhds.mul
+      ((Real.continuous_cos.tendsto _).comp (hθlim.sub_const _)))
+  have hDnn : 0 ≤ 1 + eps * Real.cos (θinf - S.polar_angle 0) :=
+    ge_of_tendsto hDlim (Filter.Eventually.of_forall fun t => le_of_lt (hconic t).1)
+  -- If the limiting denominator were positive, the separation would be
+  -- bounded, forcing `θ' ≤ -c < 0` eventually and sending `θ` below every
+  -- bound — contradicting `hbound`.
+  have hDzero : 1 + eps * Real.cos (θinf - S.polar_angle 0) = 0 := by
+    rcases eq_or_lt_of_le hDnn with heq | hpos
+    · exact heq.symm
+    · exfalso
+      set Dinf := 1 + eps * Real.cos (θinf - S.polar_angle 0) with hDinf_def
+      have hrlim : Filter.Tendsto (fun t => ‖S.sep t‖) Filter.atTop
+          (nhds (S.semilatusRectum / Dinf)) := by
+        have h2 : Filter.Tendsto
+            (fun t => S.semilatusRectum /
+              (1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0)))
+            Filter.atTop (nhds (S.semilatusRectum / Dinf)) :=
+          tendsto_const_nhds.div hDlim (ne_of_gt hpos)
+        exact h2.congr (fun t => ((hconic t).2).symm)
+      set M := S.semilatusRectum / Dinf + 1 with hM_def
+      have hM : (0 : ℝ) < M := by
+        have h1 : 0 < S.semilatusRectum / Dinf := div_pos hp hpos
+        linarith
+      have hbound2 : ∀ᶠ t in Filter.atTop, ‖S.sep t‖ ≤ M :=
+        hrlim.eventually (Iic_mem_nhds (lt_add_one _))
+      obtain ⟨T, hT⟩ := Filter.eventually_atTop.mp hbound2
+      set T' := max T 0 with hT'_def
+      have hT' : ∀ t ≥ T', ‖S.sep t‖ ≤ M := fun t ht => hT t (le_trans (le_max_left _ _) ht)
+      have hT'nn : 0 ≤ T' := le_max_right _ _
+      have hX : (0 : ℝ) < S.total_angular_momentum / S.reduced_mass := div_pos hL hm
+      set c := (S.total_angular_momentum / S.reduced_mass) / M ^ 2 with hc_def
+      have hc : (0 : ℝ) < c := div_pos hX (pow_pos hM 2)
+      have hderiv : ∀ t ≥ T', deriv S.polar_angle t ≤ -c := by
+        intro t ht
+        rw [S.polar_angle_deriv t]
+        have hr2 : ‖S.sep t‖ ^ 2 ≤ M ^ 2 := pow_le_pow_left₀ (norm_nonneg _) (hT' t ht) 2
+        have hr2pos : (0 : ℝ) < ‖S.sep t‖ ^ 2 :=
+          pow_pos (norm_pos_iff.mpr (S.sep_ne_zero t)) 2
+        have hle : (S.total_angular_momentum / S.reduced_mass) / M ^ 2 ≤
+            (S.total_angular_momentum / S.reduced_mass) / ‖S.sep t‖ ^ 2 :=
+          div_le_div_of_nonneg_left (le_of_lt hX) hr2pos hr2
+        rw [neg_div]
+        exact neg_le_neg hle
+      have hdec : ∀ t ≥ T', S.polar_angle t ≤ S.polar_angle T' - c * (t - T') := by
+        intro t ht
+        rcases eq_or_lt_of_le ht with rfl | ht'
+        · simp
+        · obtain ⟨e, he, hde⟩ := exists_deriv_eq_slope S.polar_angle ht'
+            hθcont.continuousOn
+            ((S.smooth_polar_angle.differentiable (by norm_num)).differentiableOn)
+          have hb := hderiv e (le_of_lt he.1)
+          rw [hde] at hb
+          have hsub : (0 : ℝ) < t - T' := sub_pos.mpr ht'
+          have h3 := (div_le_iff₀ hsub).mp hb
+          linarith
+      have hθT' : S.polar_angle 0 - Real.pi < S.polar_angle T' := hbound T' hT'nn
+      set s := T' + (S.polar_angle T' - (S.polar_angle 0 - Real.pi)) / c + 1 with hs_def
+      have hge : T' ≤ s := by
+        rw [hs_def]
+        have h1 : 0 ≤ (S.polar_angle T' - (S.polar_angle 0 - Real.pi)) / c :=
+          div_nonneg (le_of_lt (sub_pos.mpr hθT')) (le_of_lt hc)
+        linarith
+      have hle := hdec s hge
+      have hsval : S.polar_angle T' - c * (s - T') = (S.polar_angle 0 - Real.pi) - c := by
+        have hcne : c ≠ 0 := ne_of_gt hc
+        have h1 : c * (s - T') =
+            (S.polar_angle T' - (S.polar_angle 0 - Real.pi)) + c := by
+          rw [hs_def, show T' + (S.polar_angle T' - (S.polar_angle 0 - Real.pi)) / c + 1 - T' =
+              (S.polar_angle T' - (S.polar_angle 0 - Real.pi)) / c + 1 by ring,
+            mul_add, mul_one, mul_comm c ((S.polar_angle T' - (S.polar_angle 0 - Real.pi)) / c),
+            div_mul_cancel₀ _ hcne]
+        linarith
+      have hbs := hbound s (le_trans hT'nn hge)
+      rw [hsval] at hle
+      linarith
+  -- Hence `r = p / D` with `D → 0` from above and `p > 0`, so `r → ∞`.
+  have hDpos : ∀ᶠ t in Filter.atTop,
+      (0 : ℝ) < 1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0) :=
+    Filter.Eventually.of_forall fun t => (hconic t).1
+  have hD0' : Filter.Tendsto (fun t => 1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0))
+      Filter.atTop (nhdsWithin 0 (Set.Ioi 0)) := by
+    rw [tendsto_nhdsWithin_iff]
+    rw [hDzero] at hDlim
+    exact ⟨hDlim, hDpos⟩
+  have hinv : Filter.Tendsto
+      (fun t => (1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0))⁻¹)
+      Filter.atTop Filter.atTop :=
+    tendsto_inv_nhdsGT_zero.comp hD0'
+  have hmul := Filter.Tendsto.const_mul_atTop hp hinv
+  exact hmul.congr (fun t => by rw [(hconic t).2, div_eq_mul_inv])
+
+/-- LEAF (asymptotic relative speed, asymptotic layer): the speed tends
+to the energy escape value `sqrt (2 E / m_red)`.  Derivation it
+carries: `energy_conservation` at time `t` gives
+`‖sep' t‖² = 2 (E + k e² / r(t)) / m_red`, and
+`separation_tendsto_atTop` sends the potential term to `0`; continuity
+of `sqrt` turns the limit of squares into the limit of speeds.  This is
+the magnitude half of `velocity_tendsto_atTop`. -/
+theorem speed_tendsto_atTop :
+    Filter.Tendsto (fun t => ‖deriv S.sep t‖) Filter.atTop
+      (nhds (Real.sqrt (2 * S.total_energy / S.reduced_mass))) := by
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hmne : S.reduced_mass ≠ 0 := ne_of_gt hm
+  -- The Coulomb term dies as `r → ∞`, so `‖sep'‖² → 2 E / m_red`.
+  have h1 : Filter.Tendsto (fun t => ‖S.sep t‖⁻¹) Filter.atTop (nhds 0) :=
+    tendsto_inv_atTop_zero.comp S.separation_tendsto_atTop
+  have h2 : Filter.Tendsto
+      (fun t => 2 * coulombK * elementaryCharge ^ 2 / S.reduced_mass * ‖S.sep t‖⁻¹)
+      Filter.atTop (nhds 0) := by
+    have h := h1.const_mul (2 * coulombK * elementaryCharge ^ 2 / S.reduced_mass)
+    rwa [mul_zero] at h
+  have hF : Filter.Tendsto
+      (fun t => 2 * S.total_energy / S.reduced_mass +
+        2 * coulombK * elementaryCharge ^ 2 / S.reduced_mass * ‖S.sep t‖⁻¹)
+      Filter.atTop (nhds (2 * S.total_energy / S.reduced_mass)) := by
+    have h : Filter.Tendsto
+        (fun t => 2 * S.total_energy / S.reduced_mass +
+          2 * coulombK * elementaryCharge ^ 2 / S.reduced_mass * ‖S.sep t‖⁻¹)
+        Filter.atTop (nhds (2 * S.total_energy / S.reduced_mass + 0)) :=
+      tendsto_const_nhds.add h2
+    rwa [add_zero] at h
+  have hsqrt := hF.sqrt
+  refine hsqrt.congr fun t => ?_
+  -- energy conservation solved for the squared speed
+  have he := S.energy_conservation t
+  have hrne : ‖S.sep t‖ ≠ 0 := norm_ne_zero_iff.mpr (S.sep_ne_zero t)
+  have h4 : (1 / 2) * S.reduced_mass * ‖deriv S.sep t‖ ^ 2 =
+      S.total_energy + coulombK * elementaryCharge ^ 2 / ‖S.sep t‖ := by linarith [he]
+  have h4' : (1 / 2) * S.reduced_mass * ‖deriv S.sep t‖ ^ 2 * ‖S.sep t‖ =
+      S.total_energy * ‖S.sep t‖ + coulombK * elementaryCharge ^ 2 := by
+    have h5 : (S.total_energy + coulombK * elementaryCharge ^ 2 / ‖S.sep t‖) * ‖S.sep t‖ =
+        S.total_energy * ‖S.sep t‖ + coulombK * elementaryCharge ^ 2 := by
+      rw [add_mul, div_mul_cancel₀ _ hrne]
+    rw [← h5, ← h4]
+  have hsq : ‖deriv S.sep t‖ ^ 2 = 2 * S.total_energy / S.reduced_mass +
+      2 * coulombK * elementaryCharge ^ 2 / S.reduced_mass * ‖S.sep t‖⁻¹ := by
+    rw [inv_eq_one_div]
+    field_simp [hmne, hrne]
+    linarith [h4']
+  rw [← Real.sqrt_sq (norm_nonneg (deriv S.sep t)), hsq]
+
+/-- LEAF (periapsis tangent direction, asymptotic layer): the initial
+line of motion is the unit vector at angle `θ0 - π/2` — the periapsis
+radius direction rotated a quarter turn CLOCKWISE.  Derivation it
+carries: `initial_instant` (`sep 0 = sep0`, `sep' 0 = 2 • v0`),
+`polar_decomposition` at `t = 0` (`sep0 = r0 (cos θ0, sin θ0)`),
+`initial_transverse` (`perp sep0 v0 = -(r0 v0)`, the figure's
+clockwise orientation) and `initial_speed_value` (`‖v0‖ = v0 > 0`)
+force `v0 / ‖v0‖` to be the clockwise unit perpendicular of
+`sep0 / ‖sep0‖`, i.e. `dirVec (θ0 - π/2)`; the `perp_dirVec` sine
+identity is the computation that selects the clockwise over the
+counterclockwise perpendicular. -/
+theorem initialDirection_eq :
+    initialDirection (S := S) = dirVec (S.polar_angle 0 - Real.pi / 2) := by
+  obtain ⟨hv0ne, hv0norm⟩ := S.initial_speed_value
+  have hsplit := S.polar_decomposition 0
+  rw [S.initial_instant.1, S.initial_separation_is_norm] at hsplit
+  have hr0pos : (0 : ℝ) < S.initial_separation := S.initial_separation_pos
+  have hr0ne : S.initial_separation ≠ 0 := ne_of_gt hr0pos
+  have hv0spos : (0 : ℝ) < S.initial_speed := by
+    rw [← hv0norm]
+    exact norm_pos_iff.mpr hv0ne
+  have hv0sne : S.initial_speed ≠ 0 := ne_of_gt hv0spos
+  have hnorm2 : S.sep0 0 ^ 2 + S.sep0 1 ^ 2 = S.initial_separation ^ 2 := by
+    rw [← norm_sq_coord, S.initial_separation_is_norm]
+  -- Transversality from the Lagrange identity: the bracket already saturates
+  -- the norm product, so the dot product vanishes.
+  have hdot0 : dot S.sep0 S.v0 = 0 := by
+    have hl := lagrange_norm S.sep0 S.v0
+    rw [S.initial_transverse, S.initial_separation_is_norm, hv0norm] at hl
+    have h0 : dot S.sep0 S.v0 ^ 2 = 0 := by
+      have hsq : dot S.sep0 S.v0 ^ 2 =
+          S.initial_separation ^ 2 * S.initial_speed ^ 2 -
+            (-(S.initial_separation * S.initial_speed)) ^ 2 := by
+        linarith
+      rw [hsq]
+      ring
+    exact sq_eq_zero_iff.mp h0
+  -- Solve the 2×2 linear system (orthogonality + signed bracket) for the
+  -- coordinates of `v0`: the clockwise unit perpendicular of `sep0 / r0`.
+  have hd' : S.sep0 0 * S.v0 0 + S.sep0 1 * S.v0 1 = 0 := by
+    have h := hdot0
+    simp only [dot] at h
+    exact h
+  have hp' : S.sep0 0 * S.v0 1 - S.sep0 1 * S.v0 0 =
+      -(S.initial_separation * S.initial_speed) := by
+    have h := S.initial_transverse
+    simp only [perp] at h
+    exact h
+  have key0 : S.sep0 1 * S.initial_speed =
+      S.initial_separation * S.v0 0 := by
+    have key : (S.sep0 0 ^ 2 + S.sep0 1 ^ 2) * S.v0 0 =
+        S.sep0 1 * (S.initial_separation * S.initial_speed) := by
+      linear_combination S.sep0 0 * hd' - S.sep0 1 * hp'
+    rw [hnorm2] at key
+    apply mul_left_cancel₀ hr0ne
+    linear_combination -key
+  have key1 : -(S.sep0 0 * S.initial_speed) =
+      S.initial_separation * S.v0 1 := by
+    have key : (S.sep0 0 ^ 2 + S.sep0 1 ^ 2) * S.v0 1 =
+        -(S.sep0 0 * (S.initial_separation * S.initial_speed)) := by
+      linear_combination S.sep0 1 * hd' + S.sep0 0 * hp'
+    rw [hnorm2] at key
+    apply mul_left_cancel₀ hr0ne
+    linear_combination -key
+  have hv0x : S.v0 0 = S.initial_speed * Real.sin (S.polar_angle 0) := by
+    have h : S.v0 0 = S.sep0 1 * S.initial_speed / S.initial_separation := by
+      rw [eq_div_iff hr0ne, mul_comm]
+      exact key0.symm
+    rw [h, hsplit.2]
+    field_simp [hr0ne]
+  have hv0y : S.v0 1 = -S.initial_speed * Real.cos (S.polar_angle 0) := by
+    have h : S.v0 1 = -(S.sep0 0 * S.initial_speed) / S.initial_separation := by
+      rw [eq_div_iff hr0ne, mul_comm]
+      exact key1.symm
+    rw [h, hsplit.1]
+    field_simp [hr0ne]
+  show ‖S.v0‖⁻¹ • S.v0 = dirVec (S.polar_angle 0 - Real.pi / 2)
+  apply PiLp.ext
+  rw [Fin.forall_fin_two]
+  refine ⟨?_, ?_⟩
+  · rw [dirVec_zero, Real.cos_sub_pi_div_two]
+    simp only [PiLp.smul_apply, smul_eq_mul]
+    rw [hv0norm, hv0x, ← mul_assoc, inv_mul_cancel₀ hv0sne, one_mul]
+  · rw [dirVec_one, Real.sin_sub_pi_div_two]
+    simp only [PiLp.smul_apply, smul_eq_mul]
+    rw [hv0norm, hv0y, neg_mul, mul_neg, ← mul_assoc, inv_mul_cancel₀ hv0sne, one_mul]
+
+/-- The direction frame is Lipschitz with constant `2`, hence
+continuous: both coordinate functions (`cos`, `sin`) are 1-Lipschitz,
+so `‖dirVec a - dirVec b‖² ≤ 2 |a - b|²`, and `√2 ≤ 2`.  This is the
+continuity input for the moving-frame limits in
+`velocity_tendsto_atTop`. -/
+theorem dirVec_lipschitz : LipschitzWith 2 dirVec := by
+  apply LipschitzWith.of_dist_le_mul
+  intro a b
+  have h1 : |Real.cos a - Real.cos b| ≤ |a - b| := by
+    have h := Real.lipschitzWith_cos.dist_le_mul a b
+    simp only [NNReal.coe_one, one_mul, Real.dist_eq] at h
+    exact h
+  have h2 : |Real.sin a - Real.sin b| ≤ |a - b| := by
+    have h := Real.lipschitzWith_sin.dist_le_mul a b
+    simp only [NNReal.coe_one, one_mul, Real.dist_eq] at h
+    exact h
+  have hsq : ‖dirVec a - dirVec b‖ ^ 2 ≤ 2 * |a - b| ^ 2 := by
+    have h3 : ‖dirVec a - dirVec b‖ ^ 2 =
+        (Real.cos a - Real.cos b) ^ 2 + (Real.sin a - Real.sin b) ^ 2 := by
+      rw [norm_sq_coord, PiLp.sub_apply, PiLp.sub_apply,
+        dirVec_zero, dirVec_zero, dirVec_one, dirVec_one]
+    rw [h3]
+    have hc : (Real.cos a - Real.cos b) ^ 2 ≤ |a - b| ^ 2 :=
+      sq_le_sq.mpr (by rwa [abs_abs])
+    have hs : (Real.sin a - Real.sin b) ^ 2 ≤ |a - b| ^ 2 :=
+      sq_le_sq.mpr (by rwa [abs_abs])
+    linarith
+  have h5 : (Real.sqrt 2 * |a - b|) ^ 2 = 2 * |a - b| ^ 2 := by
+    rw [mul_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
+  have h6 : ‖dirVec a - dirVec b‖ ^ 2 ≤ (Real.sqrt 2 * |a - b|) ^ 2 := by
+    rw [h5]
+    exact hsq
+  have h7 : ‖dirVec a - dirVec b‖ ≤ Real.sqrt 2 * |a - b| := by
+    have h7' : abs ‖dirVec a - dirVec b‖ ≤ abs (Real.sqrt 2 * abs (a - b)) :=
+      sq_le_sq.mp h6
+    rwa [abs_of_nonneg (norm_nonneg _),
+      abs_of_nonneg (mul_nonneg (Real.sqrt_nonneg _) (abs_nonneg _))] at h7'
+  have h8 : Real.sqrt 2 ≤ 2 := by
+    have h9 : (2 : ℝ) = Real.sqrt (2 ^ 2) := (Real.sqrt_sq (by norm_num)).symm
+    rw [h9]
+    exact Real.sqrt_le_sqrt (by norm_num)
+  have h10 : ‖dirVec a - dirVec b‖ ≤ (2 : ℝ) * |a - b| :=
+    h7.trans (mul_le_mul_of_nonneg_right h8 (abs_nonneg _))
+  rw [dist_eq_norm, dist_eq_norm, Real.norm_eq_abs]
+  exact h10
+
+/-- The polar angle converges to the outgoing-asymptote value
+`θ0 - arccos (-1/eps)` as `t → +∞`, and stays above `θ0 - π` for
+`t ≥ 0` (the CLOCKWISE outgoing branch of the attractive conic).
+Derivation it carries: the conic denominator `D = 1 + eps cos (θ - θ0)`
+is positive along the trajectory (`orbit_eq_conic`), which excludes
+`θ ≤ θ0 - π` (there `D = 1 - eps < 0`); strict antitonicity
+(`polar_angle_strictAnti`) plus this bound make `θ` converge to an iInf
+`θinf` (`tendsto_atTop_ciInf`); since `D = p / r` and `r → ∞`
+(`separation_tendsto_atTop`), `D → 0`, so `cos (θinf - θ0) = -1/eps`,
+and `Real.arccos_cos` on `θ0 - θinf ∈ [0, π]` pins the value. -/
+theorem polar_angle_tendsto_outgoing (hμ : IsAngularMomentumFactor unboundMu) :
+    (∀ t : ℝ, 0 ≤ t → S.polar_angle 0 - Real.pi < S.polar_angle t) ∧
+      Filter.Tendsto S.polar_angle Filter.atTop
+        (nhds (S.polar_angle 0 -
+          Real.arccos (-1 / Real.sqrt S.eccentricitySq))) := by
+  obtain ⟨eps, heps, heps1, hconic⟩ := orbit_eq_conic S hμ
+  have hθcont : Continuous S.polar_angle := S.smooth_polar_angle.continuous
+  have hL : (0 : ℝ) < S.total_angular_momentum := by
+    rw [S.total_angular_momentum_value]
+    have hμ15 : (0 : ℝ) < unboundMu := by norm_num [unboundMu]
+    have hh := hR.hbar_pos
+    positivity
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hp : (0 : ℝ) < S.semilatusRectum := by
+    rw [CoulombScatteringData.semilatusRectum]
+    exact div_pos (pow_pos hL 2)
+      (mul_pos (mul_pos hm hR.coulombK_pos) (pow_pos hR.elementaryCharge_pos 2))
+  -- The angle can never reach `θ0 - π`: there the conic denominator would
+  -- be `1 - eps < 0`, contradicting the positive-branch conjunct.
+  have hbound : ∀ t : ℝ, 0 ≤ t → S.polar_angle 0 - Real.pi < S.polar_angle t := by
+    intro t ht
+    by_contra hlt
+    push_neg at hlt
+    obtain ⟨s, -, hs⟩ : ∃ s : ℝ, 0 ≤ s ∧ S.polar_angle s = S.polar_angle 0 - Real.pi := by
+      rcases eq_or_lt_of_le hlt with heq | hlt'
+      · exact ⟨t, ht, heq⟩
+      · have htpos : (0 : ℝ) < t := by
+          rcases eq_or_lt_of_le ht with h0 | h0
+          · rw [← h0] at hlt'
+            linarith [Real.pi_pos]
+          · exact h0
+        have hmem : S.polar_angle 0 - Real.pi ∈
+            Set.Ioo (S.polar_angle t) (S.polar_angle 0) :=
+          ⟨hlt', by linarith [Real.pi_pos]⟩
+        have hivt := intermediate_value_Ioo' (le_of_lt htpos) hθcont.continuousOn hmem
+        obtain ⟨s, hs, hseq⟩ := hivt
+        exact ⟨s, le_of_lt hs.1, hseq⟩
+    have hc := (hconic s).1
+    rw [hs] at hc
+    have hcos : Real.cos (S.polar_angle 0 - Real.pi - S.polar_angle 0) = -1 := by
+      rw [show S.polar_angle 0 - Real.pi - S.polar_angle 0 = -Real.pi by ring,
+        Real.cos_neg, Real.cos_pi]
+    rw [hcos] at hc
+    linarith
+  -- The angle is antitone and bounded below on `[0, ∞)`, hence converges.
+  have hΘanti : Antitone (S.polar_angle ∘ fun t => max t 0) :=
+    S.polar_angle_strictAnti.antitone.comp_monotone (monotone_id.max monotone_const)
+  have hΘbdd : BddBelow (Set.range (S.polar_angle ∘ fun t => max t 0)) := by
+    refine ⟨S.polar_angle 0 - Real.pi, ?_⟩
+    intro x hx
+    obtain ⟨t, rfl⟩ := hx
+    exact le_of_lt (hbound _ (le_max_right t 0))
+  have hΘlim := tendsto_atTop_ciInf hΘanti hΘbdd
+  set θinf := ⨅ i, (S.polar_angle ∘ fun t => max t 0) i with hθinf_def
+  have hΘeq : (S.polar_angle ∘ fun t => max t 0) =ᶠ[Filter.atTop] S.polar_angle :=
+    Filter.eventually_atTop.mpr
+      ⟨0, fun t ht => by simp only [Function.comp_apply, max_eq_left ht]⟩
+  have hθlim : Filter.Tendsto S.polar_angle Filter.atTop (nhds θinf) :=
+    hΘlim.congr' hΘeq
+  have hDlim : Filter.Tendsto
+      (fun t => 1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0))
+      Filter.atTop (nhds (1 + eps * Real.cos (θinf - S.polar_angle 0))) :=
+    tendsto_const_nhds.add (tendsto_const_nhds.mul
+      ((Real.continuous_cos.tendsto _).comp (hθlim.sub_const _)))
+  -- `D = p / r` and `r → ∞`, so the limiting denominator vanishes.
+  have hDzero : 1 + eps * Real.cos (θinf - S.polar_angle 0) = 0 := by
+    have hD0 : Filter.Tendsto
+        (fun t => 1 + eps * Real.cos (S.polar_angle t - S.polar_angle 0))
+        Filter.atTop (nhds 0) := by
+      have h1 : Filter.Tendsto (fun t => S.semilatusRectum * ‖S.sep t‖⁻¹)
+          Filter.atTop (nhds 0) := by
+        have h := (tendsto_inv_atTop_zero.comp S.separation_tendsto_atTop).const_mul
+          S.semilatusRectum
+        rwa [mul_zero] at h
+      exact h1.congr fun t => by
+        rw [(hconic t).2]
+        field_simp [ne_of_gt hp]
+    exact tendsto_nhds_unique hDlim hD0
+  -- Pin the value with `Real.arccos_cos`.
+  have heps_pos : (0 : ℝ) < eps := by linarith
+  have hcosval : Real.cos (θinf - S.polar_angle 0) = -1 / eps := by
+    rw [eq_div_iff (ne_of_gt heps_pos)]
+    linarith [hDzero]
+  have hlt0 : θinf < S.polar_angle 0 := by
+    have h1 := ciInf_le hΘbdd (1 : ℝ)
+    have h2 : (S.polar_angle ∘ fun t => max t 0) (1 : ℝ) = S.polar_angle 1 := by
+      simp only [Function.comp_apply, max_eq_left zero_le_one]
+    have h3 : S.polar_angle 1 < S.polar_angle 0 := S.polar_angle_strictAnti (by norm_num)
+    rw [h2] at h1
+    linarith
+  have hge : S.polar_angle 0 - Real.pi ≤ θinf :=
+    le_ciInf fun i => le_of_lt (hbound _ (le_max_right _ _))
+  have hval : θinf = S.polar_angle 0 -
+      Real.arccos (-1 / Real.sqrt S.eccentricitySq) := by
+    have h1 : (0 : ℝ) ≤ -(θinf - S.polar_angle 0) := by linarith
+    have h2 : -(θinf - S.polar_angle 0) ≤ Real.pi := by linarith [Real.pi_pos]
+    have hpin := Real.arccos_cos h1 h2
+    rw [Real.cos_neg, hcosval] at hpin
+    rw [← heps]
+    linarith
+  refine ⟨hbound, ?_⟩
+  rw [← hval]
+  exact hθlim
+
+/-- The velocity in the moving polar frame:
+`sep' = r' • dirVec θ + (r θ') • dirVec (θ + π/2)`.  Derivation it
+carries: differentiate `polar_decomposition` coordinatewise with
+`hasDerivAt_apply_coord` (the same computation as
+`angular_momentum_polar`), then rotate the frame with
+`Real.cos_add_pi_div_two` / `Real.sin_add_pi_div_two`. -/
+theorem polar_velocity_decomp (t : ℝ) :
+    deriv S.sep t = (deriv (fun s => ‖S.sep s‖) t) • dirVec (S.polar_angle t) +
+      (‖S.sep t‖ * deriv S.polar_angle t) • dirVec (S.polar_angle t + Real.pi / 2) := by
+  have hdiff : Differentiable ℝ S.sep := S.smooth_sep.differentiable (by norm_num)
+  have hr_diff : Differentiable ℝ (fun s => ‖S.sep s‖) :=
+    norm_differentiable_of_ne_zero hdiff S.sep_ne_zero
+  have hθ_diff : Differentiable ℝ S.polar_angle :=
+    S.smooth_polar_angle.differentiable (by norm_num)
+  have hp0 : (fun s => S.sep s 0) = fun s => ‖S.sep s‖ * Real.cos (S.polar_angle s) := by
+    funext s
+    exact (S.polar_decomposition s).1
+  have hp1 : (fun s => S.sep s 1) = fun s => ‖S.sep s‖ * Real.sin (S.polar_angle s) := by
+    funext s
+    exact (S.polar_decomposition s).2
+  have h0 := hasDerivAt_apply_coord hdiff t 0
+  rw [hp0] at h0
+  have h1 := hasDerivAt_apply_coord hdiff t 1
+  rw [hp1] at h1
+  have hcos : HasDerivAt (fun s => Real.cos (S.polar_angle s))
+      (-Real.sin (S.polar_angle t) * deriv S.polar_angle t) t :=
+    (Real.hasDerivAt_cos (S.polar_angle t)).comp t (hθ_diff t).hasDerivAt
+  have hsin : HasDerivAt (fun s => Real.sin (S.polar_angle s))
+      (Real.cos (S.polar_angle t) * deriv S.polar_angle t) t :=
+    (Real.hasDerivAt_sin (S.polar_angle t)).comp t (hθ_diff t).hasDerivAt
+  have hd0 : deriv S.sep t 0 =
+      deriv (fun s => ‖S.sep s‖) t * Real.cos (S.polar_angle t) +
+        ‖S.sep t‖ * (-Real.sin (S.polar_angle t) * deriv S.polar_angle t) :=
+    h0.unique ((hr_diff t).hasDerivAt.mul hcos)
+  have hd1 : deriv S.sep t 1 =
+      deriv (fun s => ‖S.sep s‖) t * Real.sin (S.polar_angle t) +
+        ‖S.sep t‖ * (Real.cos (S.polar_angle t) * deriv S.polar_angle t) :=
+    h1.unique ((hr_diff t).hasDerivAt.mul hsin)
+  apply PiLp.ext
+  rw [Fin.forall_fin_two]
+  refine ⟨?_, ?_⟩
+  · rw [hd0]
+    simp only [PiLp.add_apply, PiLp.smul_apply, smul_eq_mul, dirVec_zero,
+      Real.cos_add_pi_div_two]
+    ring
+  · rw [hd1]
+    simp only [PiLp.add_apply, PiLp.smul_apply, smul_eq_mul, dirVec_one,
+      Real.sin_add_pi_div_two]
+    ring
+
+/-- LEAF (limiting velocity vector, asymptotic layer — the
+`Filter.Tendsto` bridge the Review certificate named): the relative
+velocity converges to the explicit vector
+`sqrt (2 E / m_red) • dirVec (θ0 - arccos (-1/eps))`, where the
+direction is the outgoing asymptote of the attractive conic of
+`orbit_eq_conic`: the denominator `1 + eps cos (θ - θ0)` vanishes at
+`θ - θ0 = ±arccos (-1/eps)`, the CLOCKWISE orientation
+(`polar_angle_deriv_neg`) selects the minus sign for the outgoing
+(`t → +∞`) branch, and the velocity direction aligns with the position
+direction along the asymptote.  Derivation it carries: write
+`sep' = r' dirVec θ + r θ' (dirVec (θ + π/2))` (polar differentiation,
+as in `angular_momentum_polar`); by `orbit_eq_conic`,
+`separation_tendsto_atTop` and `polar_angle_strictAnti`,
+`θ → θ0 - arccos (-1/eps)` along the outgoing branch while
+`r θ' = -(L/m_red)/r → 0` (`angular_momentum_law` +
+`polar_angle_deriv`), so the tangential component vanishes and the
+radial one converges, with the magnitude supplied by
+`speed_tendsto_atTop`; the combined vector limit follows by
+`Filter.Tendsto` algebra (`tendsto` of sums/products of convergent
+components via `hasDerivAt_apply_coord`). -/
+theorem velocity_tendsto_atTop (hμ : IsAngularMomentumFactor unboundMu) :
+    Filter.Tendsto (deriv S.sep) Filter.atTop
+      (nhds (Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+        dirVec (S.polar_angle 0 -
+          Real.arccos (-1 / Real.sqrt S.eccentricitySq)))) := by
+  obtain ⟨hbound, hθlim⟩ := S.polar_angle_tendsto_outgoing hμ
+  obtain ⟨eps, _heps, heps1, hconic⟩ := orbit_eq_conic S hμ
+  have hE : (0 : ℝ) < S.total_energy := total_energy_pos S hμ
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hL : (0 : ℝ) < S.total_angular_momentum := by
+    rw [S.total_angular_momentum_value]
+    have hμ15 : (0 : ℝ) < unboundMu := by norm_num [unboundMu]
+    have hh := hR.hbar_pos
+    positivity
+  have hp : (0 : ℝ) < S.semilatusRectum := by
+    rw [CoulombScatteringData.semilatusRectum]
+    exact div_pos (pow_pos hL 2)
+      (mul_pos (mul_pos hm hR.coulombK_pos) (pow_pos hR.elementaryCharge_pos 2))
+  have heps_pos : (0 : ℝ) < eps := by linarith
+  set θlim := S.polar_angle 0 -
+    Real.arccos (-1 / Real.sqrt S.eccentricitySq) with hθlim_def
+  -- The tangential component `r θ' = -(L / m_red) / r` tends to `0`.
+  have hrθ'_lim : Filter.Tendsto (fun t => ‖S.sep t‖ * deriv S.polar_angle t)
+      Filter.atTop (nhds 0) := by
+    have h1 : Filter.Tendsto (fun t => ‖S.sep t‖⁻¹) Filter.atTop (nhds 0) :=
+      tendsto_inv_atTop_zero.comp S.separation_tendsto_atTop
+    have h2 : Filter.Tendsto
+        (fun t => -(S.total_angular_momentum / S.reduced_mass) * ‖S.sep t‖⁻¹)
+        Filter.atTop (nhds (-(S.total_angular_momentum / S.reduced_mass) * 0)) :=
+      h1.const_mul _
+    rw [mul_zero] at h2
+    exact h2.congr fun t => by
+      have hrne : ‖S.sep t‖ ≠ 0 := norm_ne_zero_iff.mpr (S.sep_ne_zero t)
+      rw [S.polar_angle_deriv t]
+      field_simp [hrne]
+  -- The squared speed tends to `2 E / m_red` (from `speed_tendsto_atTop`).
+  have hc_nn : (0 : ℝ) ≤ 2 * S.total_energy / S.reduced_mass :=
+    div_nonneg (mul_nonneg (by norm_num) (le_of_lt hE)) (le_of_lt hm)
+  have hspeedsq : Filter.Tendsto (fun t => ‖deriv S.sep t‖ ^ 2)
+      Filter.atTop (nhds (2 * S.total_energy / S.reduced_mass)) := by
+    have h := S.speed_tendsto_atTop.mul S.speed_tendsto_atTop
+    rw [Real.mul_self_sqrt hc_nn] at h
+    exact h.congr fun t => (pow_two _).symm
+  have hrθ'sq : Filter.Tendsto (fun t => (‖S.sep t‖ * deriv S.polar_angle t) ^ 2)
+      Filter.atTop (nhds 0) := by
+    have h := hrθ'_lim.mul hrθ'_lim
+    rw [mul_zero] at h
+    exact h.congr fun t => (pow_two _).symm
+  -- The polar decomposition splits the squared speed into radial and
+  -- tangential parts (`‖sep'‖² = r'² + (r θ')²`).
+  have hnormsq : ∀ t : ℝ, ‖deriv S.sep t‖ ^ 2 =
+      (deriv (fun s => ‖S.sep s‖) t) ^ 2 +
+        (‖S.sep t‖ * deriv S.polar_angle t) ^ 2 := by
+    intro t
+    rw [S.polar_velocity_decomp t, norm_sq_coord]
+    simp only [PiLp.add_apply, PiLp.smul_apply, smul_eq_mul, dirVec_zero, dirVec_one,
+      Real.cos_add_pi_div_two, Real.sin_add_pi_div_two]
+    linear_combination ((deriv (fun s => ‖S.sep s‖) t) ^ 2 +
+      (‖S.sep t‖ * deriv S.polar_angle t) ^ 2) *
+      Real.cos_sq_add_sin_sq (S.polar_angle t)
+  have hr'sq : Filter.Tendsto (fun t => (deriv (fun s => ‖S.sep s‖) t) ^ 2)
+      Filter.atTop (nhds (2 * S.total_energy / S.reduced_mass)) := by
+    have hsub := hspeedsq.sub hrθ'sq
+    rw [sub_zero] at hsub
+    exact hsub.congr fun t => by rw [hnormsq t, add_sub_cancel_right]
+  -- `r` is strictly increasing on `[0, ∞)`: along the clockwise outgoing
+  -- branch the conic denominator strictly decreases.
+  have hcosmono : StrictMonoOn Real.cos (Set.Icc (-Real.pi) 0) := by
+    intro x hx y hy hxy
+    have h1 : Real.cos x = Real.cos (-x) := by rw [Real.cos_neg]
+    have h2 : Real.cos y = Real.cos (-y) := by rw [Real.cos_neg]
+    rw [h1, h2]
+    exact Real.strictAntiOn_cos ⟨by linarith [hy.2], by linarith [hy.1]⟩
+      ⟨by linarith [hx.2], by linarith [hx.1]⟩ (neg_lt_neg hxy)
+  have hmono : StrictMonoOn (fun t => ‖S.sep t‖) (Set.Ici 0) := by
+    intro a ha b hb hab
+    have hθab : S.polar_angle b < S.polar_angle a := S.polar_angle_strictAnti hab
+    have haθ : S.polar_angle a - S.polar_angle 0 ∈ Set.Icc (-Real.pi) 0 := by
+      refine ⟨by linarith [hbound a ha, Real.pi_pos], ?_⟩
+      have h := S.polar_angle_strictAnti.antitone (Set.mem_Ici.mp ha)
+      linarith
+    have hbθ : S.polar_angle b - S.polar_angle 0 ∈ Set.Icc (-Real.pi) 0 := by
+      refine ⟨by linarith [hbound b hb, Real.pi_pos], ?_⟩
+      have h := S.polar_angle_strictAnti.antitone (Set.mem_Ici.mp hb)
+      linarith
+    have hcos : Real.cos (S.polar_angle b - S.polar_angle 0) <
+        Real.cos (S.polar_angle a - S.polar_angle 0) :=
+      hcosmono hbθ haθ (by linarith)
+    have hDb : (0 : ℝ) < 1 + eps * Real.cos (S.polar_angle b - S.polar_angle 0) :=
+      (hconic b).1
+    have hD : 1 + eps * Real.cos (S.polar_angle b - S.polar_angle 0) <
+        1 + eps * Real.cos (S.polar_angle a - S.polar_angle 0) := by
+      have hmul := mul_lt_mul_of_pos_left hcos heps_pos
+      linarith
+    change ‖S.sep a‖ < ‖S.sep b‖
+    rw [(hconic a).2, (hconic b).2]
+    exact div_lt_div_of_pos_left hp hDb hD
+  -- Hence `r' ≥ 0` for `t > 0` (monotonicity of `r ∘ max · 0` on all of
+  -- `ℝ`, transferred to the derivative near `t` by eventual agreement).
+  have hrΘmono : Monotone ((fun s => ‖S.sep s‖) ∘ fun t => max t 0) := by
+    intro a b hab
+    by_cases he : max a 0 = max b 0
+    · rw [Function.comp_apply, Function.comp_apply, he]
+    · exact le_of_lt (hmono (Set.mem_Ici.mpr (le_max_right _ _))
+        (Set.mem_Ici.mpr (le_max_right _ _))
+        (lt_of_le_of_ne (max_le_max hab le_rfl) he))
+  have hr'_pos : ∀ t : ℝ, 0 < t → 0 ≤ deriv (fun s => ‖S.sep s‖) t := by
+    intro t ht
+    have heq : ((fun s => ‖S.sep s‖) ∘ fun t => max t 0) =ᶠ[nhds t]
+        (fun s => ‖S.sep s‖) :=
+      eventually_of_mem (Ioi_mem_nhds ht) fun s hs => by
+        rw [Function.comp_apply, max_eq_left (le_of_lt hs)]
+    rw [← Filter.EventuallyEq.deriv_eq heq]
+    exact hrΘmono.deriv_nonneg
+  have hr'_lim : Filter.Tendsto (deriv (fun s => ‖S.sep s‖)) Filter.atTop
+      (nhds (Real.sqrt (2 * S.total_energy / S.reduced_mass))) := by
+    have h := hr'sq.sqrt
+    exact h.congr' (Filter.eventually_atTop.mpr
+      ⟨1, fun t ht => Real.sqrt_sq (hr'_pos t (by linarith))⟩)
+  -- Assemble the two moving-frame components: the tangential part
+  -- vanishes, the radial part converges to the escape-speed vector.
+  have hdir1 : Filter.Tendsto (fun t => dirVec (S.polar_angle t)) Filter.atTop
+      (nhds (dirVec θlim)) :=
+    (dirVec_lipschitz.continuous.tendsto θlim).comp hθlim
+  have hdir2 : Filter.Tendsto (fun t => dirVec (S.polar_angle t + Real.pi / 2))
+      Filter.atTop (nhds (dirVec (θlim + Real.pi / 2))) :=
+    (dirVec_lipschitz.continuous.tendsto _).comp (hθlim.add_const _)
+  have hF := hr'_lim.smul hdir1
+  have hG := hrθ'_lim.smul hdir2
+  have hsum := hF.add hG
+  simp only [zero_smul, add_zero] at hsum
+  exact hsum.congr fun t => (S.polar_velocity_decomp t).symm
+
+/-- The explicit limiting-velocity vector lies strictly on the
+toward-the-pair side of the initial line of motion: its bracket with
+`initialDirection` is
+`c * sin (θinf - (θ0 - π/2)) = c * cos (arccos (-1/eps)) = -c/eps < 0`.
+Proved from the direction frame (`initialDirection_eq`, `perp_dirVec`),
+`Real.sin_pi_div_two_sub` and `Real.cos_arccos`; the sign uses only
+`c > 0` (energy) and `eps > 0`.  This is the strict sharpening of the
+`direction_toward_pair` branch field for the physical model. -/
+theorem asymptote_perp_neg (hμ : IsAngularMomentumFactor unboundMu) :
+    perp (initialDirection (S := S))
+        (Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+          dirVec (S.polar_angle 0 -
+            Real.arccos (-1 / Real.sqrt S.eccentricitySq))) < 0 := by
+  have hE : (0 : ℝ) < S.total_energy := total_energy_pos S hμ
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hc_pos : (0 : ℝ) < Real.sqrt (2 * S.total_energy / S.reduced_mass) :=
+    Real.sqrt_pos.mpr (div_pos (mul_pos (by norm_num) hE) hm)
+  have h1 : (1 : ℝ) < S.eccentricitySq := eccentricity_gt_one S hμ
+  have heps_pos : (0 : ℝ) < Real.sqrt S.eccentricitySq :=
+    Real.sqrt_pos.mpr (by linarith)
+  have hpos1 : (0 : ℝ) < 1 / Real.sqrt S.eccentricitySq := one_div_pos.mpr heps_pos
+  have hle1 : (1 : ℝ) / Real.sqrt S.eccentricitySq ≤ 1 := by
+    rw [div_le_one heps_pos, ← Real.sqrt_one]
+    exact Real.sqrt_le_sqrt (by linarith)
+  have harg : S.polar_angle 0 - Real.arccos (-1 / Real.sqrt S.eccentricitySq) -
+        (S.polar_angle 0 - Real.pi / 2) =
+      Real.pi / 2 - Real.arccos (-1 / Real.sqrt S.eccentricitySq) := by ring
+  have hneg1 : (-1 : ℝ) / Real.sqrt S.eccentricitySq =
+      -(1 / Real.sqrt S.eccentricitySq) := by ring
+  have hmem1 : (-1 : ℝ) ≤ -1 / Real.sqrt S.eccentricitySq := by
+    rw [hneg1]; linarith
+  have hmem2 : (-1 : ℝ) / Real.sqrt S.eccentricitySq ≤ 1 := by
+    rw [hneg1]; linarith
+  rw [perp_smul_right, initialDirection_eq, perp_dirVec, harg,
+    Real.sin_pi_div_two_sub, Real.cos_arccos hmem1 hmem2, hneg1]
+  exact mul_neg_of_pos_of_neg hc_pos (neg_lt_zero.mpr hpos1)
+
+end CoulombScatteringData
+
+/-- Existence of the asymptotic relative velocity for the unbound orbit
+(`mu = 15/2`, `E > 0`): the hyperbolic scattering trajectory has a
+well-defined limiting relative velocity on the outward (post-periapsis)
+branch.  This is the definitionally-grounded meaning of `u_inf` in the
+subquestion; the proof ASSEMBLES the documented Kepler-layer leaves:
+the candidate is the explicit limiting vector of
+`velocity_tendsto_atTop` (the `Filter.Tendsto` leaf), its nonzero check
+is the unit-norm of `dirVec` scaled by the positive escape speed, and
+the strict rolling-branch condition is `asymptote_perp_neg` (proved). -/
+theorem exists_asymptoticRelativeVelocity {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (hμ : IsAngularMomentumFactor unboundMu) :
+    ∃ u : RelativeVelocityVector, IsAsymptoticRelativeVelocity S u := by
+  have hE : (0 : ℝ) < S.total_energy := total_energy_pos S hμ
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hc_pos : (0 : ℝ) < Real.sqrt (2 * S.total_energy / S.reduced_mass) :=
+    Real.sqrt_pos.mpr (div_pos (mul_pos (by norm_num) hE) hm)
+  have hne : Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+        dirVec (S.polar_angle 0 -
+          Real.arccos (-1 / Real.sqrt S.eccentricitySq)) ≠ 0 := by
+    intro hzero
+    have h1 : ‖Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+          dirVec (S.polar_angle 0 -
+            Real.arccos (-1 / Real.sqrt S.eccentricitySq))‖ = 0 := by
+      rw [hzero, norm_zero]
+    rw [norm_smul, norm_dirVec, mul_one,
+      Real.norm_of_nonneg (le_of_lt hc_pos)] at h1
+    exact ne_of_gt hc_pos h1
+  exact ⟨⟨Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+      dirVec (S.polar_angle 0 -
+        Real.arccos (-1 / Real.sqrt S.eccentricitySq))⟩,
+    S.velocity_tendsto_atTop hμ, hne, le_of_lt (S.asymptote_perp_neg hμ)⟩
+
+/-- The angle (rad) between two nonzero planar vectors, via the standard
+`Real.arccos` characterization (values in `[0, pi]`). -/
+noncomputable def angleBetween (a b : Plane) : ℝ :=
+  Real.arccos (dot a b / (‖a‖ * ‖b‖))
+
+namespace CoulombScatteringData
+
+variable {hR : ScalingRegime} (S : CoulombScatteringData hR)
+
+/-- The asymptote angle off the initial line of motion, in arctangent
+form: `arccos (-1/eps) - π/2 = arctan (1 / sqrt (eps² - 1))`.  Pure
+trigonometry: `arccos (-x) = π - arccos x`,
+`arccos x = π/2 - arcsin x`, and `arcsin x = arctan (x / sqrt (1-x²))`
+for `x = 1/eps ∈ (0, 1)` (`eps > 1` from `eccentricity_gt_one`), with
+the square-root algebra `sqrt (1 - 1/eps²) = sqrt (eps²-1) / eps`.  No
+physics content; isolates the exact trigonometric core of the
+deflection formula from the geometric bridges. -/
+theorem asymptote_angle_eq_arctan (hμ : IsAngularMomentumFactor unboundMu) :
+    Real.arccos (-1 / Real.sqrt S.eccentricitySq) - Real.pi / 2 =
+      Real.arctan (1 / Real.sqrt (S.eccentricitySq - 1)) := by
+  have h1 : (1 : ℝ) < S.eccentricitySq := eccentricity_gt_one S hμ
+  have hpos : (0 : ℝ) < S.eccentricitySq := by linarith
+  have heps_pos : (0 : ℝ) < Real.sqrt S.eccentricitySq := Real.sqrt_pos.mpr hpos
+  have heps_gt : (1 : ℝ) < Real.sqrt S.eccentricitySq := by
+    rw [show (1 : ℝ) = Real.sqrt 1 from (Real.sqrt_one).symm]
+    exact Real.sqrt_lt_sqrt (by norm_num) h1
+  have hpos1 : (0 : ℝ) < 1 / Real.sqrt S.eccentricitySq := one_div_pos.mpr heps_pos
+  have hmem : (1 / Real.sqrt S.eccentricitySq) ∈ Set.Ioo (-1 : ℝ) 1 := by
+    refine ⟨by linarith, ?_⟩
+    rw [div_lt_one heps_pos]
+    exact heps_gt
+  have hpi : Real.arccos (-1 / Real.sqrt S.eccentricitySq) - Real.pi / 2 =
+      Real.arcsin (1 / Real.sqrt S.eccentricitySq) := by
+    have hneg1 : (-1 : ℝ) / Real.sqrt S.eccentricitySq =
+        -(1 / Real.sqrt S.eccentricitySq) := by ring
+    rw [hneg1, Real.arccos_neg, Real.arccos_eq_pi_div_two_sub_arcsin]
+    ring
+  rw [hpi, Real.arcsin_eq_arctan hmem]
+  congr 1
+  have he2 : (1 : ℝ) - (1 / Real.sqrt S.eccentricitySq) ^ 2 =
+      (S.eccentricitySq - 1) / (Real.sqrt S.eccentricitySq) ^ 2 := by
+    have hsq := Real.sq_sqrt (le_of_lt hpos)
+    field_simp [ne_of_gt heps_pos, hsq]
+    rw [hsq]
+  have hsqr : Real.sqrt (1 - (1 / Real.sqrt S.eccentricitySq) ^ 2) =
+      Real.sqrt (S.eccentricitySq - 1) / Real.sqrt S.eccentricitySq := by
+    rw [he2, Real.sqrt_div (by linarith), Real.sqrt_sq (le_of_lt heps_pos)]
+  rw [hsqr]
+  have hsqrt_ne : Real.sqrt (S.eccentricitySq - 1) ≠ 0 :=
+    ne_of_gt (Real.sqrt_pos.mpr (by linarith))
+  field_simp [ne_of_gt heps_pos, hsqrt_ne]
+
+/-- The angle between the initial line of motion and the explicit
+limiting-velocity vector equals the asymptote angle
+`arccos (-1/eps) - π/2`.  Proved from the direction frame:
+`initialDirection_eq` writes the reference direction as
+`dirVec (θ0 - π/2)`, `dot_dirVec`/`norm_dirVec` evaluate the `arccos`
+argument of `angleBetween` to `cos (π/2 - arccos (-1/eps))`, `cos` is
+even, and `arccos (cos x) = x` applies because the asymptote angle lies
+in `(0, π/2) ⊂ [0, π]` (bounds via the antitonicity of `arccos`,
+`Real.arccos_le_arccos`, and `Real.arccos_le_pi`).  Geometric content:
+the periapsis tangent is perpendicular to the conic's symmetry axis
+(`initialDirection_eq`), and the outgoing asymptote of the attractive
+branch `r = p / (1 + eps cos (θ - θ0))` sits at
+`θinf = θ0 - arccos (-1/eps)` on the clockwise orbit. -/
+theorem angleBetween_initialDirection_asymptote
+    (hμ : IsAngularMomentumFactor unboundMu) :
+    angleBetween (initialDirection (S := S))
+        (Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+          dirVec (S.polar_angle 0 -
+            Real.arccos (-1 / Real.sqrt S.eccentricitySq))) =
+      Real.arccos (-1 / Real.sqrt S.eccentricitySq) - Real.pi / 2 := by
+  have hE : (0 : ℝ) < S.total_energy := total_energy_pos S hμ
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hc_pos : (0 : ℝ) < Real.sqrt (2 * S.total_energy / S.reduced_mass) :=
+    Real.sqrt_pos.mpr (div_pos (mul_pos (by norm_num) hE) hm)
+  have h1 : (1 : ℝ) < S.eccentricitySq := eccentricity_gt_one S hμ
+  have heps_pos : (0 : ℝ) < Real.sqrt S.eccentricitySq :=
+    Real.sqrt_pos.mpr (by linarith)
+  have hpos1 : (0 : ℝ) < 1 / Real.sqrt S.eccentricitySq := one_div_pos.mpr heps_pos
+  have hle1 : (1 : ℝ) / Real.sqrt S.eccentricitySq ≤ 1 := by
+    rw [div_le_one heps_pos, ← Real.sqrt_one]
+    exact Real.sqrt_le_sqrt (by linarith)
+  have harg : S.polar_angle 0 - Real.arccos (-1 / Real.sqrt S.eccentricitySq) -
+        (S.polar_angle 0 - Real.pi / 2) =
+      Real.pi / 2 - Real.arccos (-1 / Real.sqrt S.eccentricitySq) := by ring
+  have hnum : dot (initialDirection (S := S))
+        (Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+          dirVec (S.polar_angle 0 -
+            Real.arccos (-1 / Real.sqrt S.eccentricitySq))) =
+      Real.sqrt (2 * S.total_energy / S.reduced_mass) *
+        Real.cos (Real.pi / 2 -
+          Real.arccos (-1 / Real.sqrt S.eccentricitySq)) := by
+    rw [initialDirection_eq, dot_smul_right, dot_dirVec, harg]
+  have hden : ‖initialDirection (S := S)‖ *
+        ‖Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+          dirVec (S.polar_angle 0 -
+            Real.arccos (-1 / Real.sqrt S.eccentricitySq))‖ =
+      Real.sqrt (2 * S.total_energy / S.reduced_mass) := by
+    rw [initialDirection_eq, norm_dirVec, one_mul, norm_smul, norm_dirVec, mul_one,
+      Real.norm_of_nonneg (le_of_lt hc_pos)]
+  rw [angleBetween, hnum, hden, mul_div_cancel_left₀ _ (ne_of_gt hc_pos),
+    ← Real.cos_neg (Real.pi / 2 - Real.arccos (-1 / Real.sqrt S.eccentricitySq)),
+    show -(Real.pi / 2 - Real.arccos (-1 / Real.sqrt S.eccentricitySq)) =
+      Real.arccos (-1 / Real.sqrt S.eccentricitySq) - Real.pi / 2 from by ring]
+  apply Real.arccos_cos
+  · -- `0 ≤ arccos (-1/eps) - π/2`: `arccos` is antitone and `-1/eps ≤ 0`,
+    -- so `arccos (-1/eps) ≥ arccos 0 = π/2`.
+    have hneg1 : (-1 : ℝ) / Real.sqrt S.eccentricitySq =
+        -(1 / Real.sqrt S.eccentricitySq) := by ring
+    have hle0 : (-1 : ℝ) / Real.sqrt S.eccentricitySq ≤ 0 := by
+      rw [hneg1]; linarith
+    have hmono := Real.arccos_le_arccos hle0
+    rw [Real.arccos_zero] at hmono
+    linarith
+  · -- `arccos (-1/eps) - π/2 ≤ π`: `arccos ≤ π` everywhere.
+    have hle := Real.arccos_le_pi (-1 / Real.sqrt S.eccentricitySq)
+    linarith [Real.pi_pos]
+
+end CoulombScatteringData
+
+/-- Unit speed of the asymptotic relative motion: `u_inf` has magnitude
+the asymptotic relative speed `sqrt(2 E / m_red)`, and its direction makes
+the ACUTE angle `delta = arctan(1 / sqrt(eps^2 - 1))` with the initial
+line of motion: the recorded instant is the PERIAPSIS of the hyperbolic
+orbit (`turningQuadratic_periapsis`), the tangent at periapsis is
+perpendicular to the symmetry axis (`initialDirection_eq`), and the
+outgoing asymptote of the attractive conic
+`r = p / (1 + eps cos (θ - θ0))` sits at
+`cos (θ_asym - θ0) = -1/eps`, i.e. `θinf = θ0 - arccos (-1/eps)` on the
+clockwise orbit, so `angleBetween = arccos (-1/eps) - pi/2
+= arctan (1/sqrt (eps^2-1))` (`angleBetween_initialDirection_asymptote`
++ `asymptote_angle_eq_arctan`).
+(ITER-011 REDRAFT: the previous conclusion
+`pi - 2 arctan(1/sqrt(eps^2-1))` was the apocenter-referenced
+Rutherford turning angle, physically wrong for this
+periapsis-referenced scenario and inconsistent with the official
+`16.60 deg` rounding band.  ITER-017 REDRAFT: statement unchanged;
+the sorry body is replaced by a PROVED assembly over the Kepler-layer
+lemmas (all now proved): uniqueness of the `Filter.atTop` limit
+(`tendsto_nhds_unique`) against the explicit limiting vector of
+`velocity_tendsto_atTop` identifies `u.vec`, then the norm component is
+`norm_smul`/`norm_dirVec` and the angle component is the two proved
+trigonometric certificates.)  Bridges Hint 1 (`eccentricity_sq_eq`),
+Hint 2 (`orbit_eq_conic`), and the definition of `u_inf`
+(`exists_asymptoticRelativeVelocity`) to the numeric answer; contains
+the sign/orientation input but NO numeric deflection value. -/
+theorem signed_deflection_eq_formula {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (u : RelativeVelocityVector)
+    (hu : IsAsymptoticRelativeVelocity S u)
+    (hμ : IsAngularMomentumFactor unboundMu) :
+    ‖u.vec‖ = Real.sqrt (2 * S.total_energy / S.reduced_mass) ∧
+      angleBetween (initialDirection (S := S)) u.vec =
+        Real.arctan (1 / Real.sqrt (S.eccentricitySq - 1)) := by
+  have hE : (0 : ℝ) < S.total_energy := total_energy_pos S hμ
+  have hm : (0 : ℝ) < S.reduced_mass := by
+    rw [S.reduced_mass_eq]
+    exact div_pos hR.particleMass_pos (by norm_num)
+  have hc_pos : (0 : ℝ) < Real.sqrt (2 * S.total_energy / S.reduced_mass) :=
+    Real.sqrt_pos.mpr (div_pos (mul_pos (by norm_num) hE) hm)
+  -- Uniqueness of the `atTop` limit identifies `u.vec` with the explicit
+  -- limiting vector supplied by the `velocity_tendsto_atTop` leaf.
+  have hlim : u.vec = Real.sqrt (2 * S.total_energy / S.reduced_mass) •
+      dirVec (S.polar_angle 0 -
+        Real.arccos (-1 / Real.sqrt S.eccentricitySq)) :=
+    tendsto_nhds_unique hu.tendsto (S.velocity_tendsto_atTop hμ)
+  refine ⟨?_, ?_⟩
+  · -- Norm component: `‖c • dirVec‖ = c` for `c > 0`.
+    rw [hlim, norm_smul, norm_dirVec, mul_one,
+      Real.norm_of_nonneg (le_of_lt hc_pos)]
+  · -- Angle component: the two proved trigonometric certificates.
+    rw [hlim, S.angleBetween_initialDirection_asymptote hμ,
+      S.asymptote_angle_eq_arctan hμ]
+
+/-- The oriented (signed) deflection angle of the scattering, in radians:
+`theta_sign * angleBetween (initialDirection) u_inf`, where `theta_sign`
+is `+1` when the deflection is counterclockwise from the initial line of
+motion of `e+` and `-1` when it is clockwise.  The Fig.-1b orientation
+(captured by `IsAsymptoticRelativeVelocity.direction_toward_pair`) selects
+the clockwise case. -/
+noncomputable def signedDeflection {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (u : RelativeVelocityVector) : ℝ :=
+  (if 0 ≤ perp (initialDirection (S := S)) u.vec then (1 : ℝ) else -1) *
+    angleBetween (initialDirection (S := S)) u.vec
+
+/-- Radians-to-degrees conversion. -/
+noncomputable def radiansToDegrees (θ : ℝ) : ℝ := θ * (180 / Real.pi)
+
+/-- Under the branch condition of Fig. 1b (`perp u0 u_inf ≤ 0`), the
+signed deflection is the negated unsigned angle.  Definitional bridge
+(`if_neg`); the degenerate zero-deflection case is discharged by the
+physics side (`direction_toward_pair` together with the nonzero
+deflection from `signed_deflection_eq_formula` excludes it, so the
+remaining branch is strict). -/
+theorem signedDeflection_eq_neg_angle {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (u : RelativeVelocityVector)
+    (_hu : IsAsymptoticRelativeVelocity S u)
+    (hnondeg : perp (initialDirection (S := S)) u.vec < 0) :
+    signedDeflection (S := S) u =
+      -angleBetween (initialDirection (S := S)) u.vec := by
+  unfold signedDeflection
+  rw [if_neg (not_le.mpr hnondeg)]
+  ring
+
+/-! ### Rounding band for the official value (proved) -/
+
+/-- The polynomial squeeze for `arctan` on `[0,1]`:
+`x - x³/3 + x⁵/5 - x⁷/7 ≤ arctan x ≤ x - x³/3 + x⁵/5`,
+from the alternating geometric-series bounds
+`1 - x² + x⁴ - x⁶ ≤ (1+x²)⁻¹ ≤ 1 - x² + x⁴` (valid for all `x`, since
+`(1 - x² + x⁴ - x⁶)(1+x²) = 1 - x⁸ ≤ 1` and
+`1 ≤ 1 + x⁶ = (1 - x² + x⁴)(1+x²)`) integrated against
+`arctan b = ∫₀ᵇ (1+x²)⁻¹ dx` (`integral_inv_one_add_sq`). -/
+theorem arctan_poly_squeeze (b : ℝ) (hb0 : 0 ≤ b) :
+    (b - b^3/3 + b^5/5 - b^7/7 ≤ Real.arctan b) ∧
+      (Real.arctan b ≤ b - b^3/3 + b^5/5) := by
+  have key3 : ∀ x : ℝ, (0:ℝ) < 1 + x ^ 2 := fun x => by positivity
+  have key1 : ∀ x : ℝ, 1 - x^2 + x^4 - x^6 ≤ (1 + x^2 : ℝ)⁻¹ := by
+    intro x
+    rw [inv_eq_one_div]
+    rcases le_total (0:ℝ) (1 - x^2 + x^4 - x^6) with hnn | hneg
+    · rw [le_div_iff₀ (key3 x)]
+      nlinarith [sq_nonneg (x^4), pow_nonneg (sq_nonneg x) 2, sq_nonneg (x*x)]
+    · exact le_trans hneg (by positivity)
+  have key2 : ∀ x : ℝ, (1 + x^2 : ℝ)⁻¹ ≤ 1 - x^2 + x^4 := by
+    intro x
+    rw [inv_eq_one_div, div_le_iff₀ (key3 x)]
+    nlinarith [sq_nonneg (x^3)]
+  have hIval : (∫ x : ℝ in (0:ℝ)..b, (1 + x ^ 2 : ℝ)⁻¹) = Real.arctan b := by
+    rw [integral_inv_one_add_sq, Real.arctan_zero, sub_zero]
+  have hI1 : (∫ x : ℝ in (0:ℝ)..b, (1 - x^2 + x^4 - x^6)) =
+      b - b^3/3 + b^5/5 - b^7/7 := by
+    have hI12 : (∫ x : ℝ in (0:ℝ)..b, (1 - x^2 + x^4)) = b - b^3/3 + b^5/5 := by
+      have e : (fun x : ℝ => 1 - x^2 + x^4) = fun x => (1 - x^2) + x^4 := by
+        ext x; ring
+      rw [e, intervalIntegral.integral_add
+        (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => 1 - x^2) _ _)
+        (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => x^4) _ _)]
+      have h1 : (∫ x : ℝ in (0:ℝ)..b, (1 - x^2)) = b - b^3/3 := by
+        simp_rw [sub_eq_add_neg]
+        rw [intervalIntegral.integral_add
+          (Continuous.intervalIntegrable (by fun_prop : Continuous fun _ : ℝ => (1:ℝ)) _ _)
+          (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => -(x^2)) _ _)]
+        rw [intervalIntegral.integral_const, intervalIntegral.integral_neg, integral_pow]
+        ring_nf
+      have h2 : (∫ x : ℝ in (0:ℝ)..b, x^4) = b^5/5 := by
+        rw [integral_pow]; ring_nf
+      rw [h1, h2]
+    have e1 : (fun x : ℝ => 1 - x^2 + x^4 - x^6) =
+        fun x => (1 - x^2 + x^4) - x^6 := by
+      ext x; ring
+    rw [e1, intervalIntegral.integral_sub
+      (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => 1 - x^2 + x^4) _ _)
+      (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => x^6) _ _)]
+    have h6 : (∫ x : ℝ in (0:ℝ)..b, x^6) = b^7/7 := by
+      rw [integral_pow]; ring_nf
+    rw [hI12, h6]
+  have hmnI : (∫ x : ℝ in (0:ℝ)..b, (1 - x^2 + x^4 - x^6)) ≤
+      ∫ x : ℝ in (0:ℝ)..b, (1 + x ^ 2 : ℝ)⁻¹ :=
+    intervalIntegral.integral_mono hb0
+      (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => 1 - x^2 + x^4 - x^6) _ _)
+      intervalIntegral.intervalIntegrable_inv_one_add_sq key1
+  rw [hI1, hIval] at hmnI
+  have hI2 : (∫ x : ℝ in (0:ℝ)..b, (1 - x^2 + x^4)) = b - b^3/3 + b^5/5 := by
+    have e : (fun x : ℝ => 1 - x^2 + x^4) = fun x => (1 - x^2) + x^4 := by
+      ext x; ring
+    rw [e, intervalIntegral.integral_add
+      (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => 1 - x^2) _ _)
+      (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => x^4) _ _)]
+    have h1 : (∫ x : ℝ in (0:ℝ)..b, (1 - x^2)) = b - b^3/3 := by
+      simp_rw [sub_eq_add_neg]
+      rw [intervalIntegral.integral_add
+        (Continuous.intervalIntegrable (by fun_prop : Continuous fun _ : ℝ => (1:ℝ)) _ _)
+        (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => -(x^2)) _ _)]
+      rw [intervalIntegral.integral_const, intervalIntegral.integral_neg, integral_pow]
+      ring_nf
+    have h2 : (∫ x : ℝ in (0:ℝ)..b, x^4) = b^5/5 := by
+      rw [integral_pow]; ring_nf
+    rw [h1, h2]
+  have hmnJ : (∫ x : ℝ in (0:ℝ)..b, (1 + x ^ 2 : ℝ)⁻¹) ≤
+      ∫ x : ℝ in (0:ℝ)..b, (1 - x^2 + x^4) :=
+    intervalIntegral.integral_mono hb0 intervalIntegral.intervalIntegrable_inv_one_add_sq
+      (Continuous.intervalIntegrable (by fun_prop : Continuous fun x : ℝ => 1 - x^2 + x^4) _ _)
+      key2
+  rw [hI2, hIval] at hmnJ
+  exact ⟨hmnI, hmnJ⟩
+
+/-- **Rounding-band lemma (proved).**  The degree reading of the exact
+deflection `arctan (2 / √45)` falls strictly inside both official rounding
+bands.  With `b = 2/√45 ∈ [15456/51841, 36385/122039] ⊂ [0,1]` the
+polynomial squeeze (`arctan_poly_squeeze`) gives rational bounds on the
+deflection; the rational bounds `244078/36385 ≤ √45 ≤ 51841/7728`
+(i.e. `b ∈ [15456/51841, 36385/122039]`), and `3.1415 < π < 3.1416`
+(`Real.pi_gt_d4`, `Real.pi_lt_d4`) close the arithmetic
+(`arctan (2/√45)·180/π ≈ 16.6015`). -/
+theorem arctan_deg_band :
+    (16595 : ℝ) / 1000 < Real.arctan (2 / Real.sqrt 45) * (180 / Real.pi) ∧
+      Real.arctan (2 / Real.sqrt 45) * (180 / Real.pi) < (16605 : ℝ) / 1000 := by
+  have hsqrt_lo : (244078 : ℝ) / 36385 ≤ Real.sqrt 45 :=
+    Real.le_sqrt_of_sq_le (by norm_num)
+  have hsqrt_hi : Real.sqrt 45 ≤ (51841 : ℝ) / 7728 := by
+    rw [Real.sqrt_le_iff]
+    norm_num
+  have hs_pos : (0 : ℝ) < Real.sqrt 45 := Real.sqrt_pos.2 (by norm_num)
+  have hb_lo : (15456 : ℝ) / 51841 ≤ 2 / Real.sqrt 45 := by
+    rw [div_le_div_iff₀ (by norm_num : (0:ℝ) < 51841) hs_pos]
+    nlinarith [mul_le_mul_of_nonneg_left hsqrt_hi (by norm_num : (0:ℝ) ≤ 2)]
+  have hb_hi : 2 / Real.sqrt 45 ≤ (36385 : ℝ) / 122039 := by
+    rw [div_le_div_iff₀ hs_pos (by norm_num : (0:ℝ) < 122039)]
+    nlinarith [mul_le_mul_of_nonneg_left hsqrt_lo (by norm_num : (0:ℝ) ≤ 2)]
+  have hb_nonneg : 0 ≤ 2 / Real.sqrt 45 := by positivity
+  obtain ⟨hAlo, hAhi⟩ := arctan_poly_squeeze (2 / Real.sqrt 45) hb_nonneg
+  have hp3d : (2 / Real.sqrt 45)^3 ≤ ((36385:ℝ)/122039)^3 :=
+    pow_le_pow_left₀ hb_nonneg hb_hi 3
+  have hUp : Real.arctan (2 / Real.sqrt 45) ≤
+      1092902077830836361941069151394447223982/3771493059023825276852101550664179561879 := by
+    refine le_trans hAhi ?_
+    have hp5u : (2 / Real.sqrt 45)^5 ≤ ((36385:ℝ)/122039)^5 :=
+      pow_le_pow_left₀ hb_nonneg hb_hi 5
+    have hm3 : -((2 / Real.sqrt 45)^3) ≤ -((15456:ℝ)/51841)^3 := by
+      have hq := pow_le_pow_left₀ (by norm_num : (0:ℝ) ≤ 15456/51841) hb_lo 3
+      linarith
+    have hle : 2 / Real.sqrt 45 - (2 / Real.sqrt 45)^3/3 + (2 / Real.sqrt 45)^5/5 ≤
+        (36385:ℝ)/122039 - ((15456:ℝ)/51841)^3/3 + ((36385:ℝ)/122039)^5/5 := by
+      linarith
+    refine le_trans hle ?_
+    norm_num
+  have hLo : 4592717556334867190359693743344173135138246790814426045285454/15850633827946446283524867136569677061732804006599780468555295
+      ≤ Real.arctan (2 / Real.sqrt 45) := by
+    refine le_trans ?_ hAlo
+    have hp5l : ((15456:ℝ)/51841)^5 ≤ (2 / Real.sqrt 45)^5 :=
+      pow_le_pow_left₀ (by norm_num) hb_lo 5
+    have hp7u : (2 / Real.sqrt 45)^7 ≤ ((36385:ℝ)/122039)^7 :=
+      pow_le_pow_left₀ hb_nonneg hb_hi 7
+    have hle : (15456:ℝ)/51841 - ((36385:ℝ)/122039)^3/3 + ((15456:ℝ)/51841)^5/5 -
+          ((36385:ℝ)/122039)^7/7 ≤
+        2 / Real.sqrt 45 - (2 / Real.sqrt 45)^3/3 + (2 / Real.sqrt 45)^5/5 -
+          (2 / Real.sqrt 45)^7/7 := by
+      linarith
+    refine le_trans ?_ hle
+    norm_num
+  have hpi_lo := Real.pi_gt_d4
+  have hpi_hi := Real.pi_lt_d4
+  have hpi_pos := Real.pi_pos
+  have hLo_deg : (3319:ℝ)/200 * Real.pi < Real.arctan (2 / Real.sqrt 45) * 180 := by
+    nlinarith [hLo, hpi_hi]
+  have hUp_deg : Real.arctan (2 / Real.sqrt 45) * 180 < (3321:ℝ)/200 * Real.pi := by
+    nlinarith [hUp, hpi_lo]
+  have hrew : Real.arctan (2 / Real.sqrt 45) * (180 / Real.pi) =
+      Real.arctan (2 / Real.sqrt 45) * 180 / Real.pi := by
+    rw [mul_div_assoc]
+  rw [hrew]
+  constructor
+  · rw [div_lt_div_iff₀ (by norm_num) hpi_pos]
+    nlinarith
+  · rw [div_lt_div_iff₀ hpi_pos (by norm_num)]
+    nlinarith
+
+/-! ### Main target (T1-B2, 2.5 pts) -/
+
+/-- A real `x` rounds to the official printed value `-16.60` degrees,
+i.e. to two decimal places in the sense of the official marking scheme:
+`-16.605 ≤ x < -16.595`. -/
+def roundsToOfficialDegrees (x : ℝ) : Prop :=
+  -(16605 : ℝ) / 1000 ≤ x ∧ x < -(16595 : ℝ) / 1000
+
+/-- Helper for the main assembly: once an asymptotic relative velocity
+`u∞` with the physical deflection formula and a strict branch exists,
+the signed target follows from proved certificates only.  The main
+theorem below is fully assembled: its only open dependencies are the
+documented Kepler-layer leaves upstream of
+`exists_asymptoticRelativeVelocity` + `signed_deflection_eq_formula`
+(both now proved assemblies over those leaves). -/
+theorem signed_deflection_certificate {hR : ScalingRegime}
+    {S : CoulombScatteringData hR} {u : RelativeVelocityVector}
+    (_hu : IsAsymptoticRelativeVelocity S u)
+    (_hbranch : perp (initialDirection (S := S)) u.vec < 0)
+    (hdelta : signedDeflection (S := S) u = -Real.arctan (2 / Real.sqrt 45)) :
+    roundsToOfficialDegrees
+      (radiansToDegrees (signedDeflection (S := S) u)) := by
+  obtain ⟨hb_lo, hb_hi⟩ := arctan_deg_band
+  have hpi_pos := Real.pi_pos
+  rw [hdelta]
+  unfold roundsToOfficialDegrees radiansToDegrees
+  rw [show (-Real.arctan (2 / Real.sqrt 45)) * (180 / Real.pi) =
+      -(Real.arctan (2 / Real.sqrt 45) * (180 / Real.pi)) by ring]
+  constructor
+  · have hb_hi' : Real.arctan (2 / Real.sqrt 45) * (180 / Real.pi) ≤ (16605:ℝ)/1000 := by
+      rw [mul_div_assoc', div_le_iff₀ hpi_pos]
+      rw [mul_div_assoc', div_lt_iff₀ hpi_pos] at hb_hi
+      linarith
+    linarith
+  · have hb_lo' : (16595:ℝ)/1000 < Real.arctan (2 / Real.sqrt 45) * (180 / Real.pi) := by
+      rw [mul_div_assoc', lt_div_iff₀ hpi_pos]
+      rw [mul_div_assoc', lt_div_iff₀ hpi_pos] at hb_lo
+      exact hb_lo
+    linarith
+
+/-- **Main target (T1-B2, 2.5 pts).**  Under the two-body Coulomb model
+of Fig. 1b with `mu = 15/2` (unbound case), there exists an asymptotic
+relative velocity `u_inf` of `e+` with respect to `e-`, and its signed
+deflection `delta` from the initial line of motion of `e+` equals
+the exact value `-arctan(2 / sqrt 45)` radians, whose degree reading
+rounds to the official `-16.60` degrees.  The negative sign
+("16.60 degrees BELOW the initial line of motion") is carried by the
+branch condition `perp u0 u_inf ≤ 0` inside
+`IsAsymptoticRelativeVelocity.direction_toward_pair` together with the
+sharp branch, `signedDeflection_eq_neg_angle`.  The recorded official
+value first appears here, conclusion-side; every hypothesis is a
+governing law, a figure readout, or a derivable bridge.
+(ITER-011 REDRAFT: the previous exact value
+`-(pi - 2 arctan(2/sqrt 63))` (≈ -151.71 deg) was false for the
+periapsis-referenced scenario and inconsistent with the band below;
+`-arctan(2/sqrt 45)` ≈ -16.6015 deg is the `eps^2 = 49/4` value.) -/
+theorem signed_deflection_angle_T1_B2 {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (hμ : IsAngularMomentumFactor unboundMu) :
+    ∃ u : RelativeVelocityVector, ∃ delta : ℝ,
+      IsAsymptoticRelativeVelocity S u ∧
+        delta = signedDeflection (S := S) u ∧
+        delta = -Real.arctan (2 / Real.sqrt 45) ∧
+        roundsToOfficialDegrees (radiansToDegrees delta) := by
+  -- Assembly: existence of `u∞` and the exact signed value are precisely
+  -- the Kepler-layer bridges (`exists_asymptoticRelativeVelocity` for the
+  -- limit, `signed_deflection_eq_formula` with `eccentricity_sq_eq`
+  -- (proved: `eps² = 49/4`) and the periapsis-referenced asymptote
+  -- identity `1/√(eps²-1) = 2/√45` (proved in
+  -- `asymptote_factor_certificate` below), the strict branch via the
+  -- positive arctangent, and `signedDeflection_eq_neg_angle` (proved) for
+  -- the sign).  The rounding band is `signed_deflection_certificate`,
+  -- proved above from `arctan_deg_band`.  ITER-017: both bridges are now
+  -- PROVED assemblies; the only open dependencies of this theorem are the
+  -- nine documented Kepler-layer leaves (see the file header).
+  obtain ⟨u, hu⟩ := exists_asymptoticRelativeVelocity S hμ
+  obtain ⟨_, hform⟩ := signed_deflection_eq_formula S u hu hμ
+  have hE : S.eccentricitySq = 49 / 4 := eccentricity_sq_eq S hμ
+  have hs45 : Real.sqrt (S.eccentricitySq - 1) = Real.sqrt 45 / 2 := by
+    rw [hE]
+    have h454 : (49 / 4 : ℝ) - 1 = (Real.sqrt 45 / 2) ^ 2 := by
+      rw [div_pow, Real.sq_sqrt (by norm_num)]
+      norm_num
+    rw [h454, Real.sqrt_sq (by positivity)]
+  have hangle : angleBetween (initialDirection (S := S)) u.vec =
+      Real.arctan (2 / Real.sqrt 45) := by
+    rw [hform, hs45]
+    congr 1
+    field_simp
+  have hA_pos : (0:ℝ) < Real.arctan (2 / Real.sqrt 45) :=
+    Real.arctan_pos.mpr (by positivity)
+  have hbranch : perp (initialDirection (S := S)) u.vec < 0 := by
+    have hne : perp (initialDirection (S := S)) u.vec ≠ 0 := by
+      intro hz
+      have ha_ne : initialDirection (S := S) ≠ 0 := by
+        dsimp [initialDirection]
+        obtain ⟨hv0, _⟩ := S.initial_speed_value
+        intro hzero
+        exact hv0 (by simpa using hzero)
+      have hu_ne : u.vec ≠ 0 := hu.u_inf_ne_zero
+      have ha_norm : (0:ℝ) < ‖initialDirection (S := S)‖ :=
+        norm_pos_iff.mpr ha_ne
+      have hu_norm : (0:ℝ) < ‖u.vec‖ := norm_pos_iff.mpr hu_ne
+      have hL : dot (initialDirection (S := S)) u.vec ^ 2 +
+          perp (initialDirection (S := S)) u.vec ^ 2 =
+          ‖initialDirection (S := S)‖ ^ 2 * ‖u.vec‖ ^ 2 := by
+        have hu0s : ‖initialDirection (S := S)‖ ^ 2 =
+            ((initialDirection (S := S)) 0) ^ 2 +
+              ((initialDirection (S := S)) 1) ^ 2 := by
+          rw [EuclideanSpace.norm_sq_eq, Fin.sum_univ_two]
+          simp [sq_abs]
+        have huvs : ‖u.vec‖ ^ 2 = (u.vec 0) ^ 2 + (u.vec 1) ^ 2 := by
+          rw [EuclideanSpace.norm_sq_eq, Fin.sum_univ_two]
+          simp [sq_abs]
+        have hring : dot (initialDirection (S := S)) u.vec ^ 2 +
+            perp (initialDirection (S := S)) u.vec ^ 2 =
+            (((initialDirection (S := S)) 0) ^ 2 +
+              ((initialDirection (S := S)) 1) ^ 2) *
+            ((u.vec 0) ^ 2 + (u.vec 1) ^ 2) := by
+          simp only [dot, perp]
+          ring
+        rw [hring, hu0s, huvs]
+      rw [hz] at hL
+      simp only [ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, zero_pow,
+        add_zero] at hL
+      have hratio_sq : (dot (initialDirection (S := S)) u.vec /
+          (‖initialDirection (S := S)‖ * ‖u.vec‖)) ^ 2 = 1 := by
+        rw [div_pow]
+        field_simp [ha_norm.ne', hu_norm.ne']
+        exact hL
+      have hratio : dot (initialDirection (S := S)) u.vec /
+          (‖initialDirection (S := S)‖ * ‖u.vec‖) = 1 ∨
+          dot (initialDirection (S := S)) u.vec /
+            (‖initialDirection (S := S)‖ * ‖u.vec‖) = -1 :=
+        sq_eq_one_iff.mp hratio_sq
+      have hlt : Real.arctan (2 / Real.sqrt 45) < Real.pi / 2 :=
+        Real.arctan_lt_pi_div_two _
+      have hform2 : Real.arccos (dot (initialDirection (S := S)) u.vec /
+          (‖initialDirection (S := S)‖ * ‖u.vec‖)) =
+          Real.arctan (2 / Real.sqrt 45) := by
+        have h3 := hangle
+        rw [angleBetween] at h3
+        exact h3
+      cases hratio with
+      | inl h1 =>
+        rw [h1, Real.arccos_one] at hform2
+        linarith
+      | inr h1 =>
+        rw [h1, Real.arccos_neg_one] at hform2
+        linarith [Real.pi_pos]
+    exact lt_of_le_of_ne hu.direction_toward_pair hne
+  refine ⟨u, signedDeflection (S := S) u, hu, rfl, ?_,
+    signed_deflection_certificate hu hbranch ?_⟩
+  · exact (signedDeflection_eq_neg_angle S u hu hbranch).trans (by rw [hangle])
+  · exact (signedDeflection_eq_neg_angle S u hu hbranch).trans (by rw [hangle])
+
+/-- Algebraic certificate for the equal-mass eccentricity value: the
+hyperbola `eps^2 = 49/4` makes the scattering asymptote factor
+`1/sqrt(eps^2-1) = 2/sqrt(45)`, so the exact signed deflection in
+`signed_deflection_angle_T1_B2` has the stated closed form.  Pure
+algebra up to the square-root identity `sqrt(45/4) = sqrt 45 / 2`.
+(ITER-011 REDRAFT: previously the false `67/4` / `2/sqrt 63` pair.) -/
+theorem asymptote_factor_certificate :
+    1 / Real.sqrt ((49 / 4 : ℝ) - 1) = 2 / Real.sqrt 45 := by
+  have h454 : (45 / 4 : ℝ) = (Real.sqrt 45 / 2) ^ 2 := by
+    rw [div_pow, Real.sq_sqrt (by norm_num)]
+    norm_num
+  have halg : (49 / 4 : ℝ) - 1 = 45 / 4 := by norm_num
+  rw [halg, h454, Real.sqrt_sq (by positivity)]
+  field_simp
+
+/-- A real `x` rounds to the official magnitude `16.60` degrees, i.e. to
+two decimal places in the sense of the official marking scheme:
+`16.595 ≤ x < 16.615`. -/
+def roundsToOfficialDegreesAbs (x : ℝ) : Prop :=
+  (16595 : ℝ) / 1000 ≤ x ∧ x < (16615 : ℝ) / 1000
+
+/-- Magnitude corollary: the unsigned deflection angle between `u_inf` and
+the initial line of motion of `e+` equals the exact value
+`arctan(2 / sqrt 45)` radians, whose degree reading rounds to the
+official `16.60` degrees below the initial line of motion.
+(ITER-011 REDRAFT: previously the false `pi - 2 arctan(2/sqrt 63)`
+value ≈ 151.71 deg, which its own band excluded.) -/
+theorem unsigned_deflection_angle_in_degrees_T1_B2 {hR : ScalingRegime}
+    (S : CoulombScatteringData hR) (hμ : IsAngularMomentumFactor unboundMu) :
+    ∃ u : RelativeVelocityVector,
+      IsAsymptoticRelativeVelocity S u ∧
+        angleBetween (initialDirection (S := S)) u.vec =
+          Real.arctan (2 / Real.sqrt 45) ∧
+        roundsToOfficialDegreesAbs
+          (radiansToDegrees (angleBetween (initialDirection (S := S)) u.vec)) := by
+  -- Same shape as the signed target: the rounding band is
+  -- `arctan_deg_band` (proved); existence plus deflection evaluation are
+  -- `exists_asymptoticRelativeVelocity` and `signed_deflection_eq_formula`
+  -- (both proved assemblies, ITER-017) with the proved certificates
+  -- `eccentricity_sq_eq` and `asymptote_factor_certificate`; only the
+  -- documented Kepler-layer leaves remain open upstream.
+  obtain ⟨u, hu⟩ := exists_asymptoticRelativeVelocity S hμ
+  obtain ⟨_, hform⟩ := signed_deflection_eq_formula S u hu hμ
+  have hE : S.eccentricitySq = 49 / 4 := eccentricity_sq_eq S hμ
+  have hs45 : Real.sqrt (S.eccentricitySq - 1) = Real.sqrt 45 / 2 := by
+    rw [hE]
+    have h454 : (49 / 4 : ℝ) - 1 = (Real.sqrt 45 / 2) ^ 2 := by
+      rw [div_pow, Real.sq_sqrt (by norm_num)]
+      norm_num
+    rw [h454, Real.sqrt_sq (by positivity)]
+  have hangle : angleBetween (initialDirection (S := S)) u.vec =
+      Real.arctan (2 / Real.sqrt 45) := by
+    rw [hform, hs45]
+    congr 1
+    field_simp
+  obtain ⟨hb_lo, hb_hi⟩ := arctan_deg_band
+  have hpi_pos := Real.pi_pos
+  refine ⟨u, hu, hangle, ?_⟩
+  rw [hangle]
+  unfold roundsToOfficialDegreesAbs radiansToDegrees
+  have hrew : Real.arctan (2 / Real.sqrt 45) * (180 / Real.pi) =
+      Real.arctan (2 / Real.sqrt 45) * 180 / Real.pi := by
+    rw [mul_div_assoc]
+  rw [hrew] at hb_lo hb_hi ⊢
+  constructor
+  · apply le_of_lt
+    rw [div_lt_div_iff₀ (by norm_num) hpi_pos] at hb_lo ⊢
+    nlinarith [hb_lo]
+  · rw [div_lt_div_iff₀ hpi_pos (by norm_num)] at hb_hi ⊢
+    nlinarith [hb_hi]
+
+end
+
+end IPhO2026.Problem1.B2

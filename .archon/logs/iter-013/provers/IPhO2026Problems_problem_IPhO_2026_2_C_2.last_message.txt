@@ -1,0 +1,11 @@
+Done. Honest outcome on `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean`:
+
+**Verdict:** 2 sorries remain — certified underivable from the frozen statement, not a tactic gap. File compiles fresh: 0 errors, only the 2 expected `declaration uses sorry` warnings (L304, L368).
+
+**What I did**
+- Followed the iter-013 plan lane 6: tried the intended `Filter.EventuallyEq.deriv_eq` route, then two more routes (subtraction with a `slope_forced_smul` forcing lemma; strict two-variable sandwich). All fail — traced the root cause to a 1-D fact: same base value + same derivative does not imply eventual equality (`g x = x²` at `t = 0`); pointwise defects leave the family's off-base behavior free.
+- Proved underivability with a compiled countermodel at `.archon/task_results/witness_2_C_2_affine_slope_countermodel.lean` (0 errors, 0 sorries): it satisfies **every** structure field (acute branch, all family-membership equations, both C.1 values, both `HasDerivAt` fields) while `deriv M θ = 1 ≠ -2 = deriv specularSlopeFamily θ`. Note even a `HasStrictDerivAt` upgrade would not suffice — only a pointwise family law or the contract fields would. Recording this saves the next retry from repeating the search.
+- Reverted my in-progress tactic attempt, keeping the pre-existing honest sorries and expanding the blocker comment in `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:320` (proof bodies only; no signature/statement contact).
+- Full report with redraft request (option 1: add the two `...Family_deriv` contract fields; option 2: add pointwise family-law fields — both make the file fully sorry-free) at `.archon/task_results/problem_IPhO_2026_2_C_2.md`.
+
+No axioms introduced; nothing weakened; the witness file is evidence only (outside `IPhO2026Problems/`).

@@ -1,0 +1,16 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: `blocked` / `needs_redraft`** for `IPhO2026_1_A_1.hydrostatic_gate_side_length_a_target`
+
+**Key Findings**
+- The file compiles with 10 honest `by sorry` bodies; no axiom laundering, no weakened signatures, and the answer `a = Δh/(2√2) = 0.50 m` with tolerance `|a − 0.50| < 1/200` appears conclusion-side only.
+- **Root cause is a contract defect, not tactics**: the formalized couple `(a√2/2)·(a/2)·(a√2/4)` expands to `ρ₀·g·Δh·a³/8`, while the official Figure-1a readout and `pressure_couple_eq` require `ρ₀·g·Δh·a³/4` — a factor-2 mismatch in the couple arm.
+- Consequently `hbal : restoringMoment = pressureCoupleMagnitude` is satisfiable (at `a = Δh/(4√2)`, all params positive) while the conclusion fails, so `pressure_couple_eq`, `critical_balance_eq`, and the main theorem are **refutable as stated**.
+- The iter-010 prover trace (session `019fa6d4`) independently derived this same countermodel; the newer matching task-result artifact is missing (empty list) — recorded as a process warning only.
+- 7 of 10 sorries (Steps 1–3, 6–7, `numerical_value`, `torque_balance_contract`) are provable once the readout is repaired.
+
+**Repair** (recorded in next_steps): redraft `PressureMomentReadout.pressure_couple`, `IsCriticalTorqueBalance`, and `pressureCoupleMagnitude` so the couple equals `ρ₀·g·Δh·a³/4` (e.g. couple arm `a√2/2`, counting both faces' arms), then discharge the sorries along the blueprint chain.
+
+Artifacts written:
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_1_A_1/attempt-1/milestones.jsonl` (one JSON line, validated)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_1_A_1/attempt-1/summary.md`

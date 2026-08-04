@@ -1,0 +1,139 @@
+Wait, I've made a mess with unfinished proof branches containing sorrys. Let me step back and think about the cleanest approach for the degenerate cases instead of writing partial proofs.
+
+Key insight: For the quadratic_characterization theorem, instead of casing on hbar (which creates unprovable degenerate branches), I should use a different pair of roots trick that doesn't need hbar ≠ 0 at all for the minimality part, and for 0 < E₀, I need to derive it differently.
+
+Actually — here's the clean escape for `0 < E₀` without knowing hbar > 0: E₀ = hbar·hbarOmegaMin... by definition E₀ = hbar·(3mc²(1-r)/(hbar·S)). If hbar ≠ 0 this is 3mc²(1-r)/S > 0. If hbar = 0 then E₀ = 0 and 0 < E₀ fails. So we NEED hbar ≠ 0. Since the signature is frozen, the case hbar = 0 must be exfalso'd from a contradiction derivable WITHIN the goal structure — impossible.
+
+Hmm wait, actually. Let me recheck: is the goal REALLY let-bound such that E₀ is fixed = hbar·hbarOmegaMin? The `let E₀ := hbar * hbarOmegaMin m c dU θ` — with hbar = 0, E₀ = 0, first conjunct 0 < 0 is False. The theorem would be unprovable. There's NO derivation that avoids needing hbar > 0 or hbar = 0 contradiction.
+
+UNLESS: constant `hbar` is opaque, but maybe there's a sneaky way... `opaque hbar : ℝ` — opaque constant with NO axioms. So hbar is effectively an arbitrary real, universally quantifiable. The theorem must hold for all values including 0. Fails at 0.
+
+Hmm, wait, opaque constants are just constants about which we know nothing. Proving 0 < hbar from nothing is impossible. BUT, wait — maybe I should reconsider. In practice, Lean's `opaque` creates an axiom-like constant. The theorem quadratic_characterization was autoformalized with hypotheses (hm hdU etc.) but NOT hb : 0 < hbar. The formalizer INTENDED for the threshold theorems which take `reg : ConstantRegime` to be the meaningful ones, while quadratic_characterization is used internally. Since we can't change the signature...
+
+Hmm, actually we CAN re-examine: is the signature REALLY frozen? The rules: "Do not rename declarations, change hypotheses, weaken conclusions." Adding a hypothesis `0 < hbar` would change hypotheses. Not allowed per the strict reading. But leaving `sorry` because the statement is mathematically FALSE (hbar = 0 countermodel) is a legitimate redraft case.
+
+Hold on, hold on. Is it REALLY false at hbar = 0? Let me recheck the FIRST conjunct with hbar = 0 more carefully. E₀ := hbar·hbarOmegaMin m c dU θ. hbar = 0 → E₀ = 0·X = 0. `0 < E₀` = `0 < 0` = False. Yes, the theorem is false at hbar = 0.
+
+Hmm, but wait wait wait. In Lean, is `0 < (0 : ℝ)` actually reducible to False? Yes, `not_lt_zero'`, `lt_irrefl`. So 0 < 0 is False. So goal's first conjunct False. Theorem unprovable at hbar = 0.
+
+Hmm. So, options:
+1. Redraft: add `(hb : 0 < hbar)` to quadratic_characterization. It's THE physically necessary hypothesis, arguably an omission in the formalization. But changing signature is against instructions; needs redraft request.
+2. Workaround: none possible for a false statement.
+
+Actually, WAIT. Let me re-examine. Maybe hbar's opacity... let me check: `opaque hbar : ℝ`. When defining an opaque constant with no body, Lean introduces `hbar : ℝ` as an opaque value — effectively `axiom hbar : ℝ`? Not exactly an axiom; `opaque` uses `Classical.choice` on `Nonempty`. So there EXISTS a value. No constraints. So theorem must hold ∀ possible values. False at 0.
+
+Hmm, but on the other hand maybe there are OTHER contradictory constraints... no. Just hbar.
+
+So the minimal, honest fix: request redraft to add `(hb : 0 < hbar)` to `quadratic_characterization_of_threshold`. BUT before requesting redraft, consider: does the frozen-signature rule allow proving with a `sorry` at exactly `hbar`-positivity? Instructions: "leave your best partial progress in place with a clearly-marked sorry at the remaining gap." A partial proof with sorry for the hbar=0 case is acceptable, with redraft noted.
+
+Alternatively, since this is an internal lemma (used only for the derivation route note — actually IS it used anywhere? grep minimum_angular_frequency uses hbarOmegaMin; quadratic_characterization uses two_sin_sq; nothing uses quadratic_characterization except blueprint `\uses` for the main theorem. In Lean code, minimum_angular_frequency_T1_C1 doesn't reference quadratic_characterization_of_threshold). So the cleanest: prove it with sorry ONLY in the degenerate hbar = 0 branch? No wait — if I structure the proof as: case 0 < hbar: [full proof]; case hbar = 0: sorry; case hbar < 0: [vacuous proof]. Then 2 of 3 branches are real proofs; 1 branch sorry (the false branch). That leaves a sorry but documents precisely the blocker. 
+
+Hmm, actually for hbar < 0: goal is False (0 < E₀ fails since E₀ < 0). Same problem! E₀ = hbar·Ω; Ω has sign of 1/hbar (Ω = 3mc²(1-r)/(hbar·S), numerator positive)... so hbar < 0 → Ω < 0 → E₀ = hbar·Ω > 0!! Wait: hbar·Ω = hbar·[3mc²(1-r)/(hbar·S)]. For hbar ≠ 0, E₀ = 3mc²(1-r)/S > 0 regardless of hbar's sign! And Ω < 0 for hbar < 0, hbar·Ω > 0. Nice.
+
+And E₀ computation for the quadratic: E₀ = 3mc²(1-r)/S independent of hbar (needs hbar ≠ 0). So for ALL hbar ≠ 0, the same proof works with hE0val : E₀ = 3mc²(1-r)/S derived via mul_div_cancel_left₀ _ (hbar ≠ 0). So just TWO cases: hbar = 0 → sorry (unprovable), hbar ≠ 0 → full proof.
+
+And in the hbar ≠ 0 case, everything else (positivity, quadratic, minimality) goes through — r < 1 etc. all hold.
+
+So: `rcases eq_or_ne hbar 0`... case hbar = 0: the goal is genuinely false → must leave `sorry` and file redraft. Case hbar ≠ 0: full proof possible.
+
+Alternatively, maybe better: leave the whole quadratic_characterization proved under case hbar ≠ 0 and ONE sorry in hbar = 0 branch, and write redraft request: add `(hb : 0 < hbar)` hypothesis. That's honest partial progress.
+
+Wait, actually — one more idea to avoid the redraft entirely! What if the goal `let E₀ := hbar * hbarOmegaMin ...; 0 < E₀ ∧ ...` when hbar = 0... Hmm no. It's false. No way around.
+
+Hmm, hmm. But actually — wait. Let me reconsider whether minimality ∀E ... → E₀ ≤ E together with the first two conjuncts... The WHOLE goal is a conjunction; with hbar = 0 the first conjunct is false. So whole false. Yeah.
+
+BUT hold on, actually, let me double-check the definition of the `let` in the goal and whether `simp`/elaboration could... no. It's LetE₀ = hbar·Ω. hbar=0 → 0.
+
+OK accept: hbar = 0 branch needs `sorry` + redraft note. Actually hmm, alternatively I can write the redraft-free option: prove `False` in hbar=0 branch FROM nothing — impossible. So sorry. Fine. That matches "Always leave your partial proof attempt in the code."
+
+Now the minimality proof. In case hbar ≠ 0 (E₀ = 3mc²(1-r)/S):
+
+Standard approach avoiding the tricky branch: show that E₀ ≤ E via the discriminant/vertex argument:
+- Quadratic f(x) = Sx² - 6mc²x + 6dUmc² with S > 0 opens upward, vertex at x = 3mc²/S.
+- E₀ = 3mc²/S·(1-r) ≤ 3mc²/S (vertex). 
+- The product of roots = 6dUmc²/S > 0, and both roots positive (sum 6mc²/S > 0). So 0 < E₀ ≤ 3mc²/S.
+- E is a positive root of f(E) = 0. The two roots are E₀ and E₁ with E₀·E₁ = 6dUmc²/S, E₀+E₁ = 6mc²/S.
+- From the factorization fact: S(E - E₀)(E - E₁) = 0, so E = E₀ or E = E₁.
+- E₀ ≤ E₁ since E₀ is the smaller root? E₁ = 3mc²/S(1+r) ≥ E₀. Need explicit.
+
+Instead of dividing the quadratic by S and solving, do the factored-form trick:
+S·E² - 6mc²E + 6dUmc² = S·(E - E₀)·(E - E₁) where E₁ = 6mc²/S - E₀? To establish the factorization as a functional identity I'd need E₁ also satisfies the same quadratic + Vieta. Messier.
+
+Alternative slicker: For E a root: consider (E - E₀)·[(E + E₀) - 6mc²/S] = 0 (from subtracting normalized equations) → E = E₀ ∨ E = 6mc²/S - E₀ (the other root). If E = E₀ done (≤). Else E = 6mc²/S - E₀; need E₀ ≤ 6mc²/S - E₀, i.e., 2E₀ ≤ 6mc²/S, i.e., E₀ ≤ 3mc²/S. And E₀ = (3mc²/S)(1-r) ≤ 3mc²/S since 0 ≤ r. 
+
+That's clean! The earlier hmain gives E = E₀ ∨ E+E₀ = 6mc²/S. Case 2: E₀ ≤ E ↔ E₀ + E₀ ≤ E+E₀ = 6mc²/S ↔ E₀ ≤ 3mc²/S. And E₀ ≤ 3mc²/S: E₀ = 3mc²(1-r)/S, 1-r ≤ 1, so E₀ ≤ 3mc²/S (nonneg). ✓✓
+
+So refine the hmin proof:
+```
+intro E hEpos hEqE
+have hmain : (E - E₀) * (E + E₀ - 6 * m * c^2 / S) = 0 := by
+  field_simp [hSne]
+  nlinarith's needed: derive from hE0quad, hEqE, hsq_r? Actually pure: (E-E₀)(E+E₀-B) with B = 6mc²/S. Expand: E² - BE + E₀²... wait it needs hE0quad and hEqE. Let's verify: hEqE gives S E² = 6mc²E - 6dUmc²; hE0quad gives S E₀² = 6mc²E₀ - 6dUmc². Subtract: S(E²-E₀²) = 6mc²(E-E₀) → (E-E₀)(E+E₀) = (6mc²/S)(E-E₀) [divide by S] → (E-E₀)(E+E₀-6mc²/S) = 0. The nlinarith form: field_simp then polyrith. Use:
+  have h1 := hE0quad; have h2 := hEqE
+  field_simp [hSne]
+  nlinarith [sq_nonneg (E - E₀)]? Hmm the cleanest is:
+  calc (E - E₀)*(E+E₀-6mc²/S) = E² - E₀² - (6mc²/S)(E - E₀) := by ring
+    _ = ... substitute E² = (6mc²E - 6dUmc²)/S etc. 
+```
+Simplest robust: 
+```
+have hA : S * E^2 - 6*m*c^2*E = -6*dU*m*c^2 := by linarith [hEqE]
+have hB : S * E₀^2 - 6*m*c^2*E₀ = -6*dU*m*c^2 := by linarith [hE0quad]
+have hfactor : (E - E₀) * (S * (E + E₀) - 6 * m * c^2) = 0 := by
+  have := ... S(E²-E₀²) = S(E-E₀)(E+E₀)
+  nlinarith? Again nonlinear Taylor. Use:
+  have hsub : S * (E ^ 2 - E₀ ^ 2) - 6 * m * c ^ 2 * (E - E₀) = 0 := by linarith [hA, hB]
+  have : S * (E ^ 2 - E₀ ^ 2) = S * (E - E₀) * (E + E₀) := by ring
+  ... combine by linarith/ring
+have : (E - E₀) * (S * (E + E₀) - 6 * m * c ^ 2) = S * (E - E₀) * (E + E₀) - 6*m*c^2*(E - E₀) := by ring
+```
+So: 
+```
+have hsub : S * (E ^ 2 - E₀ ^ 2) - 6 * m * c ^ 2 * (E - E₀) = 0 := by linarith [hA, hB]
+have hfactor : (E - E₀) * (S * (E + E₀) - 6 * m * c ^ 2) = 0 := by
+  have hr1 : (E - E₀) * (S * (E + E₀) - 6 * m * c ^ 2) = S * (E ^ 2 - E₀ ^ 2) - 6 * m * c ^ 2 * (E - E₀) := by ring
+  rw [hr1, hsub]
+rcases mul_eq_zero.mp hfactor with hd | hfac2
+· -- E = E₀
+  nlinarith
+· -- S(E+E₀) = 6mc²
+  have hEo_le : E₀ ≤ 3 * m * c ^ 2 / S := by
+    rw [hE0val, div_le_div_iff hSpos hSpos]... have: 3mc²(1-r) ≤ 3mc² since r ≥ 0.
+    have hr0 : 0 ≤ r := Real.sqrt_nonneg _
+    rw [hE0val]
+    have h1 : 3 * m * c ^ 2 * (1 - r) ≤ 3 * m * c ^ 2 * 1 := by nlinarith [hr0]
+    rw [div_le_div_iff hSpos hSpos] ... E₀ ≤ 3mc²/S ↔ 3mc²(1-r)/S ≤ 3mc²/S ↔ 3mc²(1-r) ≤ 3mc². 
+    Have: exact div_le_div_of_nonneg_right? simplest: apply (div_le_div_iff hSpos hSpos).mpr; nlinarith
+  -- S(E+E₀) = 6mc² → E + E₀ = 6mc²/S → E = 6mc²/S - E₀. E₀ ≤ E ↔ 2E₀ ≤ 6mc²/S ↔ E₀ ≤ 3mc²/S ✓
+  have hES : E + E₀ = 6 * m * c ^ 2 / S := by
+    field_simp [hSne]... from hfac2: S*(E+E₀) = 6mc² → divide.
+    have : S * (E + E₀) = 6 * m * c ^ 2 := by linarith [hfac2]
+    rw [← this]; field_simp [hSne]; ring -- E + E₀ = S*(E+E₀)/S
+  nlinarith
+```
+Hmm the last nlinarith: E₀ ≤ E where E = 6mc²/S - E₀, E₀ ≤ 3mc²/S: E - E₀ = 6mc²/S - 2E₀ ≥ 6mc²/S - 2·3mc²/S = 0. ✓
+
+Nice, this minimality proof avoids field shuffles almost entirely. 
+
+Also for the hbar ≠ 0 case structure, use:
+```
+rcases eq_or_ne hbar 0 with hb0 | hbne
+· -- unphysical degenerate case: statement is false here (E₀ = 0), needs `0 < hbar`; see redraft note
+  sorry
+· ... full proof with hbne ...
+```
+Hmm wait, but hold on. Per the instructions — is it acceptable to knowingly leave `sorry` in a FALSE branch? The alternative reading: perhaps the intended reading of the goal is that since the statement is only meaningful in the positive regime and the formalizer included positivity for m, c, dU but forgot hbar, inserting `(hb : 0 < hbar)` would be a minimal faithful repair ("smallest statement change that would make it faithful and provable"). The instructions DO describe redraft for this: "If the statement is not provable because the formalization is semantically wrong..., keep the signature unchanged, leave a focused sorry, and record a redraft request."
+
+Good — so: keep signature, prove everything except the hbar=0 branch (sorry), record redraft request: add `(hb : 0 < hbar)` to `quadratic_characterization_of_threshold`. With hb added, my full proof compiles without the case split. Also — actually, hmm, wait: should I double check there isn't already hb hidden in the theorem? Recheck statement: `(m c dU θ : ℝ) (hm : 0 < m) (hc : 0 < c) (hdU : 0 < dU) (hθ : IsForwardBranch θ) (hθpos : 0 < θ) (hfac : (2:ℝ) - Real.cos (2*θ) ≠ 0) (hdisc : ...)`. No hb. Confirmed.
+
+Also: hfac is now redundantly implied by nothing (S = 2-cos2θ never 0 actually; hfac is a vacuous true hypothesis, harmless).
+
+Now also reconsider the main theorems: `minimum_angular_frequency_T1_C1` takes `reg : ConstantRegime` which DOES supply hbar_pos. Are those statements provable? They require the reachability analysis. Decide after quadratic_char. Given budget, likely assess & report.
+
+Let me now rewrite the quadratic_characterization proof cleanly (removing my messy draft with embedded sorries/comments), with structure:
+- common facts
+- rcases eq_or_ne hbar 0 with hb0 | hbne
+  - hb0: sorry (redraft: add 0 < hbar)
+  - hbne: full proof.
+
+Let me rewrite the proof body between `:= by` and the end of that theorem.

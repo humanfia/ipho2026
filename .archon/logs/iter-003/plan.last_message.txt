@@ -1,0 +1,15 @@
+Iter-003 plan phase complete. The systematic import blocker is closed at its root, and exactly two surgical redraft lanes are dispatched.
+
+**Key Outcomes**
+- **Upstream fix**: Patched Archon doctor v0.3.1 (`science-mango/src/archon/commands/loop/blueprint_doctor.py:77`) to recognize the `% NOTE: PhysLean-coverage exemption` chapter convention via `_physics_exempt_targets` — it forgives ONLY the domain-import check; all other modeling checks still fire. Verified: `archon blueprint-doctor` now reports the project completely clean (19 findings → 0).
+- **6 missing NOTEs added**: exemptions for `1_B_1`, `1_B_2`, `3_A_1`, `3_C_3`; targeted-import + grounding reconciliations for `3_A_2`, `4_C_6`.
+- **Audit**: re-ran `lake env lean` on all 11 wave-3 files — 0 errors each; 28/28 compile by-sorry.
+
+**Dispatched This Iter (2 lanes, `physics-formalize`)**
+- `1_B_1` — redraft #3 (reviews 2/3): bound branch becomes a `CoulombPairData` field (`E < 0`); preserve certificates, bridges, answer placement.
+- `4_C_6` — redraft: quarantine the numerically false `official_sample_value` (`0.595` computed vs stated `1.17`; review's `s=1.9e-3` routing was itself inconsistent — planner verified). Keep the faithful inversion + propagation carrier + Physlib imports.
+
+**Deferred / Escalated**
+- 26 review-ready targets re-enter the next formalization-review gate with the doctor now clean (no lean churn needed).
+- Helper-debt transcription (468 `lean:` decls) starts next iter; decl sets are finally settled.
+- TO_USER posted: confirm pinning/upstreaming the doctor patch (currently lives in the project venv's editable source).

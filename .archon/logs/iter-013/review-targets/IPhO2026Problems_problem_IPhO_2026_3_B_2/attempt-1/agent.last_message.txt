@@ -1,0 +1,10 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict: blocked / needs_redraft** (`missing_foundational_bridge`), for `IPhO2026_3_B_2.adiabatic_temperature_change`.
+
+Key findings:
+- **Compilation**: fails — error at `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:363` (`rewrite`, pattern `Tf^2` absent) plus 1 sorry at `:163` (`adiabatic_invariant_along_path`). Matches preflight exactly.
+- **Root cause is semantic, not tactic-level**: `IsAdiabaticPath` encodes `Cm·Ṫ = −w`, the negation of the official T3-B2 first law `dU = dW` (verified first-hand in `T3_solution.txt`). Hence `T²(λ+μ₀KH²)` is not conserved (residual `deriv = 4μ₀KH²T·Ṫ`), the true invariant is `(λ+μ₀KH²)/T²`, and `endpoint_relation`'s brackets are swapped vs the official identity — precisely what the L363 error exposes.
+- **Bridge lemma 1 is false as stated**: iter-13 prover supplied a fully smooth premise-satisfying countermodel `p(t) = (−tanh t, −sinh t, sech t)` (sympy + in-Lean verified), so retry_proof is ruled out even though the iter-12 differentiability patch closed the iter-10 countermodel class.
+- **Contract audit otherwise clean**: target conclusion matches the official answer verbatim, conclusion-side only, no axioms/admits/weakening — the redraft preserves names and the final formula.
+- Iter-013 task result `.archon/task_results/problem_IPhO_2026_3_B_2.md` agrees with the trace; exact three-part repair (flip balance sign, quotient invariant, swap endpoint brackets) recorded in `next_steps`, with blueprint co-redraft flagged.

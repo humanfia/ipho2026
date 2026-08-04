@@ -1,0 +1,10 @@
+Lane complete. `4_A_1` is a planner-frozen gate-retry lane ("No statement changes pending anywhere" — iter-008), so the correct redraft was a sorry-preserving no-op plus full re-verification and audit.
+
+**Result**
+- `IPhO2026Problems/problem_IPhO_2026_4_A_1.lean` left **byte-identical** (17 declarations, 8 contracted sorries); fresh `lake env lean` re-run: **0 errors, exactly 8 `sorry` warnings** (L215–265), matching the PROGRESS contract.
+- Blueprint chapter has `% archon:physics` ✔ and a complete 16-block ledger from the iter-008 writer lane; no `\leanok` exists project-wide yet — all 12 chapter environments flagged as `\leanok`-ready in my task result (marker application belongs to `sync_leanok`/review).
+- Report written to `.archon/task_results/problem_IPhO_2026_4_A_1.md` with all required sections: assumption/target split, goal-faithfulness audit, 9-entry bridge inventory (all `covered`), countermodel audit, uncertainty `covered` / branch `not applicable`, declaration↔label map, grounding log, and no redraft requests.
+
+**Audit highlights**
+- The four mains (`mass_of_confined_air`, `number_of_molecules_of_confined_air`, `molar_mass_consistency`, `uncertainty_consistency`) are conclusion-side theorems restating the configuration's law fields — the same planner-accepted shape as the passed `4_A_5` lane; official answer values live only in `OfficialReadouts`/`CompatibleWithReadouts` (checkable data, never hypotheses).
+- Noted in the report (not a change): the `molarMassConsistency` docstring promises a residual-tolerance variant while the frozen statement keeps exact `m = n M_air` — recorded as a possible prover-stage evolution, outside this lane's authority to alter.

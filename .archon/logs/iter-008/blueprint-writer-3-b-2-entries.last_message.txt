@@ -1,0 +1,1 @@
+3-b-2-entries: COMPLETE — appended the full 11-block B.2 adiabatic-demagnetization ledger (pins 11/11, uses 0 unknown, umbrella wired to `adiabatic_temperature_change`); report at `.archon/task_results/blueprint-writer-3-b-2-entries.md`.

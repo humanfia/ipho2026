@@ -1,0 +1,13 @@
+Done. Both `sorry` targets in `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` turned out to be **provably false as stated** — not merely hard — so per the prover workflow I kept the signatures frozen, left honest partial proofs with focused `sorry`s at the exact disprovable steps, and filed redraft requests.
+
+**Findings**
+
+- `acrylicConductivity_formula` (`IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:172`) — internally inconsistent signs. With `T_IC < T_OC` the lumped law gives inward heat flow and `dT/dr < 0`, so Fourier's law `P = -λ·A·T'` forces `lam < 0`, while the claimed `log(r₂/r₁)/(2πhR_Th)` is positive. I built and compiled (exit 0) a full constructive countermodel: wall `[1,2]`, `T r = (2π)⁻¹·log r`, `P ≡ 1`, `lam = -1`, `R_Th = log 2/(2π)` — every hypothesis holds, RHS `= +1 ≠ -1`.
+- `acrylicConductivity_officialSample` (`IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:242`) — numerically false. At `R_Th = 1.17`, `lam = log(465/337)/(2π·0.10·1.17) ≈ 0.43795`, so `|lam − 0.25| ≈ 0.188 > 0.01`. Compiled a machine-checked refutation (exit 0) via `Real.lt_log_one_add_of_pos` (giving `128/401 < log(465/337)`) and `Real.pi_lt_d20`, yielding `lam > 0.434 > 0.26`. The official `0.25` only follows with different inputs (`R_Th ≈ 2.05` or `h ≈ 0.175 m`).
+
+**What I left in the file**
+
+- Honest partial bodies: constancy of the wall current via `hfourier.wall_current`, positivity prerequisites (`1 < r₂/r₁`, `0 < log(r₂/r₁)`, `0 < 2πh`), and a `rcases lt_or_gt_of_ne hR` split isolating the missing `0 < D.R_Th` for thm 1; `hR_central` substitution, `hformula` rewrite, and the `abs_le` split for thm 2.
+- Fresh `lake env lean` passes with 0 errors (only the two `sorry` warnings).
+
+Report with full refutation code, smallest faithful fixes, and blueprint bookkeeping notes: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_7.md`.

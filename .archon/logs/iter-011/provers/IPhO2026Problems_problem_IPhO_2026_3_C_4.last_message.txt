@@ -1,0 +1,9 @@
+The iter-010 proof-Review redraft for `3_C_4` is landed and fully verified.
+
+**Outcome**
+
+- **Finding fixed**: `heatDumpedDensity_eq` and `residenceDensity_eq` were underdetermined — their `T' = 0` and `P = 0` branches admitted countermodels that made the sorries unprovable in principle.
+- **Redraft**: added the file's own pre-existing `(regime : RegimeAssumptions)` argument to both lemmas (threaded through `workDensity_eq` and the `elapsedTime_eq_integral` call site), excluding both degenerate branches hypothesis-side. The blueprint pins these lemmas by name only, so no chapter sync breaks.
+- **Bonus result**: the previously sorried branches now close unconditionally — `IPhO2026Problems/problem_IPhO_2026_3_C_4.lean` compiles with **0 errors, 0 warnings, 0 sorries**, and `#print axioms` on all six value-carrying declarations shows only Lean core axioms (`propext`, `Classical.choice`, `Quot.sound`). The main target `c4_elapsed_time` (the official answer `t = (C_c·T_h/P)·(ln(T₀/T) − (T₀−T)/T_h)`) is fully machine-checked.
+- No statements weakened: every proved equality is exactly the previously contracted conclusion; only the assumption already carried by both downstream theorems was threaded up.
+- Result recorded in `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_4.md` with the full assumption/target split, faithfulness audit, bridge inventory (all `covered`/`proved`), countermodel audit, and grounding register. The file's environments are ready for `\leanok` at the next `sync_leanok` pass.

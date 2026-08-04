@@ -1,0 +1,14 @@
+Review complete. Both artifacts are durable on disk:
+
+- `/.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_5/attempt-1/milestones.jsonl` (single valid JSON line, verified parseable)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_5/attempt-1/summary.md` (9 lines, ≤12 as required)
+
+**Verdict: `blocked` / `needs_redraft` (`underdetermined_contract`)**
+
+Key findings:
+- `main` itself is honest and fully proved — the prover trace shows `#print axioms IPhO2026_4_A_5.main` = `[propext, Classical.choice, Quot.sound]`, no laundering.
+- The file's single sorry sits in the component theorem `beta0_close_to_ideal` (line 446 of `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean`), whose signature lacks the `hvar` temperature non-degeneracy premise that `main` carries. In the constant-temperature orbit the affine offset/slope pair is genuinely underdetermined — countermodel T≡1, P≡1, n=R=V=1, slope=offset=1/2 gives β₀=1/2 ≠ 1/T₀ — so this branch is false-as-stated, not a tactic gap.
+- Physical semantics are faithful: all answer values stay conclusion-side, the `hT12` readout guard reconciled in the blueprint (iter-007) is present, and the other components are proved.
+- Process warning (not a semantic failure): the recorded matching task-results list is empty and the iter-010 artifact the trace wrote is missing from `.archon/task_results/`; the prover trace was used as primary evidence per policy.
+
+Repair path recorded: add `hvar : ∃ t₁ t₂, absTemp (proc.T t₁) ≠ absTemp (proc.T t₂)` to `beta0_close_to_ideal`; the already-proved non-degenerate branch then closes the goal, the `sq_eq_sq` detour and sorry can be deleted, and the withheld blueprint `\leanok` restored.

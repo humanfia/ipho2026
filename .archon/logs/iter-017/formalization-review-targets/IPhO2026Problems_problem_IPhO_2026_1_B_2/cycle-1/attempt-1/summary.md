@@ -1,0 +1,9 @@
+# Formalization Review — IPhO2026Problems/problem_IPhO_2026_1_B_2.lean (iter-017, attempt 1)
+
+**Verdict: PASSED (status=solved).** All six checks pass; every bridge obligation covered.
+
+- **Source faithfulness ✓** — verified against `T1_page-2.png`: positron above electron moving RIGHT (clockwise orbit), so the iter-017 re-signed fields `perp sep0 v0 = -(r0*v0)` / `-(L/m_red)` are faithful; the old sign made `IsAsymptoticRelativeVelocity` uninhabited on every physical model. All figure readouts, governing laws, `mu = 15/2`, and the Bohr identity match; `-16.60` is conclusion-side only.
+- **Conic branch ✓** — `orbit_eq_conic` now states the attractive branch `r = p/(1 + eps cos(θ−θ0))`; independently recomputed `p = 450 a0`, `eps = 7/2`, `p/(1+eps) = 100 a0 = r0` (old repulsive branch demanded `cos = 11/7`, unsatisfiable).
+- **Derivability ✓** — `eccentricity_sq_eq` (eps² = 49/4) PROVED and independently reproduced (E = 1/80, L = 15ℏ, m_red = m/2); both review-named bridges (`exists_asymptoticRelativeVelocity`, `signed_deflection_eq_formula`) are now PROVED assemblies; the 9 sorries are exactly the documented true Kepler/Binet/limit leaves (allowed at this gate); main targets contain no sorry.
+- **Abstraction / uncertainty / branch / countermodel ✓** — genuine `Filter.Tendsto` u_inf predicate (uniqueness via `tendsto_nhds_unique`); rounding band via proved `arctan_deg_band` (16.6015° ∈ [16.595,16.605)); sign fixed hypothesis-side by figure-verified fields with a proved `if_neg` bridge; no refuted 67/4/√63/−151.71° residue.
+- **Non-blocking notes** — `total_energy_pos` docstring's "7/400" is stale arithmetic (statement `0 < E` unaffected; operative E = 1/80 confirmed by the proved eps² = 49/4); `roundsToOfficialDegreesAbs` upper endpoint 16.615 is loose but non-load-bearing beside the exact-value conjunct; blueprint ledger text still shows pre-redraft sign/conic branch — sync-lane re-key already flagged by the formalizer, not a Lean defect.

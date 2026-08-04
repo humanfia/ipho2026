@@ -1,0 +1,11 @@
+Review complete — **PASSED** (`status: solved`). Both artifacts are durable.
+
+**Verdict rationale**
+- The iter-012 redraft resolves the iter-011 reopen: `ParamagneticTorusLaws` now requires `temp_differentiable`/`mag_differentiable` (`DifferentiableAt` on both path components), so every `deriv` in the first-law balance is a genuine derivative — the junk-`0` countermodel class that made `adiabatic_invariant_along_path` false-as-stated is closed, and quasistatic smoothness is faithful regularity, not smuggled answer data.
+- No answer smuggling: EOS `T·M·V=n·K·H`, `C_M=n·λ/T²`, A.3 work rate `μ₀·V·H·dM/dt`, and the adiabatic balance `C_M·Ṫ=−ẇ` sit hypothesis-side; the √-form `ΔT` and even the integrated endpoint relation appear conclusion-side only.
+- Six checks audited independently with concrete evidence: source_faithfulness, derivability, abstraction_sufficiency, branch_orientation, countermodel_resistance all passed; uncertainty_propagation `not_applicable` (exact symbolic answer, no tolerances in B.2).
+- Five bridge obligations inventoried, all `covered`: first-law ODE, invariant constancy (`adiabatic_invariant_along_path`), `endpoint_relation`, proved `lam_add_mu0_K_sq_pos`, final root form (`adiabatic_temperature_change`). The 3 sorries are contracted statement-level gaps matching preflight.
+
+**Files written**
+- `.archon/logs/iter-012/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_3_B_2/attempt-1/milestones.jsonl` (single JSON line, validated parseable)
+- `.archon/logs/iter-012/formalization-review-targets/IPhO2026Problems_problem_IPhO_2026_3_B_2/attempt-1/summary.md` (9 lines)

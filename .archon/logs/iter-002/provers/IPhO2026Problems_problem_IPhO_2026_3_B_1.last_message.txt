@@ -1,0 +1,9 @@
+Repair complete. `IPhO2026Problems/problem_IPhO_2026_3_B_1.lean` now compiles cleanly by-sorry, and the task result is written.
+
+**What was fixed**
+- **Root cause (the iter-002 directive):** `ObeysFirstLawMagnetic` used `work` both as a scalar and as a function. Redesigned the quantification so A.3's work law is a pointwise density predicate `IsMagneticWorkDensity` and the first law speaks directly about the interval-integral leg balance `Q_in M₂ − Q_in M₁ = (U T − U T) − ∫ M₁..M₂, heatDensity` — no antiderivative-as-function anywhere.
+- **Deeper statement defects** also repaired: dropped the junk `h_work_law` (nonsense `M ^ ((2:ℝ)⁻¹ / 2)` instantiation), replaced the tautological target (`hQ : Q = answer ⊢ Q = answer`) with a real contract (physical heat readout `heatTransferredIntoTorus` equals the recorded closed form `heat_into_torus_value`), added `h_ref : Q_in 0 = 0` calibration, added the non-degeneracy `hV : p.V ≠ 0`, and recorded bridge lemmas `magnetization_eq_eos_solution` (proved in-file), `leg_mem_tracked_range`, `leg_work_integral_eval` (proof routes verified via `lean_run_code`).
+- Official answer stays conclusion-side only (`official_answer_value` by `rfl`).
+
+**Verification**
+`lake env lean` exit 0; exactly three `sorry` warnings (lines 201, 223, 263). No other files touched; chapter's `% NOTE:` PhysLean exemption honored (kept `import Mathlib` only). Task result at `.archon/task_results/problem_IPhO_2026_3_B_1.md`.

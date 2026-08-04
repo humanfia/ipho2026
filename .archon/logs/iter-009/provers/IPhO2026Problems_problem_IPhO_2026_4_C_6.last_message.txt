@@ -1,0 +1,12 @@
+Done. Summary of this iter-009 lane for `IPhO2026Problems/problem_IPhO_2026_4_C_6.lean`:
+
+**Status**
+- File compiles clean by-sorry: fresh `lake env lean` → exit 0, 0 errors, exactly the 4 contracted sorries (L369 `wall_thermal_resistance_from_C5`, L396 `uncertainty_propagates_to_resistance`, L424 `official_sample_value`, L439 `official_sample_uncertainty`).
+- Blueprint chapter (`% archon:physics` confirmed) and Lean file were already in faithful shape from prior iterations; all chapter `\lean{...}` pins resolve 1:1, and the leandag node is wired (`dep_count 4`).
+
+**Edit made (comment-only, statements frozen)**
+- `IPhO2026Problems/problem_IPhO_2026_4_C_6.lean:131`: the `DimC5Slope` docstring referenced a nonexistent declaration `ExperimentC.actionDim_is_watt_second` (stale name from an earlier redraft) — repointed to the existing `ExperimentC.slope_inversion_is_dimensionally_correct`. Sorry count, line positions, and signatures unchanged; reverified post-edit.
+
+**Reported**
+- Full audit written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_6.md`: assumption/target split (Eq. 4/5/6 laws + C.4/C.5 prerequisites and Figure-17 parameters on the assumption side; `R_Th = 1/(c₀·m·s)` and all uncertainty bands conclusion-side only), goal-faithfulness audit, 8-entry derivability/bridge table, countermodel audit of all local `Prop` interfaces, and uncertainty/branch coverage (both `covered`).
+- Standing TO_USER item preserved: the official sample microdata cite `raw/E1_solution.pdf`, which is absent from this checkout — the lane stays 2/3 provenance-blocked by design; no redraft requested.

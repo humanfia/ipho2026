@@ -1,0 +1,13 @@
+**Review complete: solved.**
+
+Both artifacts are durable on disk:
+- `…/cycle-1/attempt-1/milestones.jsonl` — one valid JSON line, `status: solved`, `route: solved`
+- `…/cycle-1/attempt-1/summary.md` — 8-line summary
+
+**Key findings**
+
+- **Compilation/sorries** — Preflight clean (`compiles=true, sorry_count=0`); grep confirms no `sorry`/`admit`/`axiom`/`native_decide` in the Lean source, only stale doc-comment mentions.
+- **Iter-10 defect repaired** — The old factor-2 hydrostatic-couple defect is genuinely fixed: `pressureCoupleMagnitude` now uses the force-then-arm readout `ρ₀gΔh·(a²/√2)·(a/(2√2)) = ρ₀gΔh·a³/4`, proved by `pressure_couple_eq` (`IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:344`). The old countermodel `a = Δh/(4√2)` no longer satisfies the balance hypothesis.
+- **Derivation sound** — Hand-verified: restoring moment `ρ₀ga⁴/√2`, cancellation of nonzero `ρ₀ga³` gives `a = Δh/(2√2)`; `numerical_value` honestly derives `|a−0.50| < 1/200` at `Δh = 1.41` via `1.414 < √2 < 1.415`.
+- **Contract faithful** — Answer appears conclusion-side only; opaque parameters block unfold-trivialization; the `hbal` hypothesis is an honest specialization of the bundled `IsCriticalTorqueBalance`, not answer-as-assumption.
+- **Trace support** — Prover trace (session `019fa8a9`) closes all 12 sorries with 0 errors, full `lake build` success, standard axioms only. Process warning (non-blocking): the managed task-results list is empty and the trace-created task report is absent from disk; per protocol, trace + preflight served as primary evidence.

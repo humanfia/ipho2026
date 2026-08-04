@@ -1,0 +1,15 @@
+Done. All four `sorry` placeholders in `IPhO2026Problems/problem_IPhO_2026_2_B_3.lean` are now fully proved, with the file compiling cleanly.
+
+**Proofs landed**
+- `thetaMaxRecorded_mem_Ioo` — strict antitonicity of `arccos` on `[-1,1]` (`Real.strictAntiOn_arccos`) places `arccos(4/5)` strictly between `arccos 1 = 0` and `arccos 0 = π/2`.
+- `sin_thetaMaxRecorded` — `Real.sin_arccos` + `Real.sqrt_sq`, giving `√(1-(4/5)²) = 3/5`.
+- `sin_two_mul_thetaMaxRecorded` — `Real.sin_two_mul` with the sine certificate and `Real.cos_arccos`: `2·(3/5)·(4/5) = 24/25`.
+- `container_diameter_for_quintuple_power` — inverts B.2 (`5 = 1/(1−cos θ_max)` ⇒ `cos θ_max = 4/5` via `eq_div_iff` + `linarith`), uses acuteness from `theta_range` with `Real.arccos_cos` to identify `θ_max = thetaMaxRecorded`, then substitutes into B.1 at `R = 1` for `a = 3/5 − 12/25 = 0.12 m` and `a·100 = 12`.
+
+**Verification**
+- Fresh `lake env lean` run: 0 errors, 0 sorries; only benign unused-variable linter warnings on the frozen hypotheses (`hR`, `ha`, `hphys`), which predate this change and must stay in the signature.
+- `#print axioms` on all four targets: only `[propext, Classical.choice, Quot.sound]` — no `sorryAx`, no new axioms, no `admit`/`native_decide`.
+
+**Notes**
+- Signatures and statements untouched; no redraft needed — the B.1/B.2 hypothesis interfaces make the goal provable as stated.
+- Results written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_3.md`; blueprint `\leanok` marking left to the deterministic sync/review agent (all four declarations are ready for it). I did not edit the chapter `.tex` per the prover write-domain (the pre-existing `.tex` modifications in git status are from other agents' lanes).

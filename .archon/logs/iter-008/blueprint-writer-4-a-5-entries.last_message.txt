@@ -1,0 +1,3 @@
+4-a-5-entries: COMPLETE — added the 22-block declaration ledger (4 subsections, dependency order) to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_4_A_5.tex:57`, covering all 23 named Lean declarations with exact `IPhO2026_4_A_5.*` pins (field projections folded into parent entries), real `\uses{}` edges (all resolve in-chapter, target block already points at `...:main`), answers (`1/T₀`, `0.0037`, `0.0034 ± 0.0007`) strictly conclusion-side, `R`-decalibration freedom and the `hT12` guard documented in their entries; skeleton and both NOTEs kept verbatim (diff is +323 lines, pure append).
+
+Report: `.archon/task_results/blueprint-writer-4-a-5-entries.md`

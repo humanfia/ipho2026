@@ -1,0 +1,13 @@
+Lane complete. Summary of what was done:
+
+**Assessment**
+- `PROGRESS.md` defines this lane as a sorry-preserving redraft retry (review-gate 1/3). The gate's iter-001 failure reason is the stale-snapshot `missing-physlib-import` finding; the chapter has carried the planner-recorded PhysLean exemption NOTE since iter-002, and a fresh LeanExplore query (`"optics ray reflection specular cylindrical mirror focal"`, Physlib-filtered) re-confirms no geometric-optics module exists there.
+- The frozen file already matches the iter-008 chapter ledger exactly: all declarations from the blueprint (`HalfCylindricalMirror` structure + 5 theorems) exist with the exact `\lean{}`-pinned names.
+
+**Verification**
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_2_A_1.lean`: exit 0, exactly the 5 contracted `sorry` warnings (lines 125/134/144/152/160), zero errors.
+- Blueprint chapter already complete (`% archon:physics` present); no `\leanok` markers added by me — owned by the deterministic sync, and no target theorem is proved.
+
+**Files**
+- `.lean` file unchanged (planner-frozen statements; answer formulas kept strictly conclusion-side, governing law kept as a counting equation).
+- Full audit written to `.archon/task_results/problem_IPhO_2026_2_A_1.md`: assumption/target split, goal-faithfulness audit, 4 bridge obligations (count law → limiting-ray count, staircase inversion, sin/cos agreement, conjunction) all `covered` as sorried statements, countermodel audit, branch coverage (rim-impact-included convention + mirror symmetry), uncertainty not applicable (exact closed form), and the recorded grounding gap (no circle-reflection optics API).

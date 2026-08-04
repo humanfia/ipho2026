@@ -1,0 +1,7 @@
+Done. Fresh `lake env lean` confirms the assigned file compiles exactly as contracted.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` — 0 errors, 3 expected `sorry` warnings (L164 `adiabatic_invariant_along_path`, L178 `endpoint_relation`, L212 `adiabatic_temperature_change`); the proved lemma `lam_add_mu0_K_sq_pos` needs no sorry.
+- No edits were required: the iter-012 mandatory redraft (path-differentiability fields on `ParamagneticTorusLaws`) had already landed and the file faithfully matches the chapter and the official T3-B2 source (verified first-hand at the sibling `hf-IPHO2026-upload` solution text — same first law `C_M dT = −μ₀VH dM`, EOS substitution, invariant `T²(λ+μ₀KH²)`, and the √-form `ΔT`).
+- `task_results/problem_IPhO_2026_3_B_2.md` written with the full audit: assumption/target split (target √-expression appears conclusion-side only), goal-faithfulness audit, 5 bridge obligations (all `covered`; 4 as contracted sorries per the prover-stage queue, 1 proved), countermodel/negativity-guard analysis, uncertainty `not applicable` (exact symbolic answer, no `±`), branch coverage `covered` (`H_i ≥ 0`, `T_i,T_f > 0`, positive brackets for either ramp direction), LeanExplore near-miss record, and grounding-gap note (PhysLean has no magnetization-work/heat-budget module — local law fields by design).
+- No `\leanok` markers to flip: the chapter contains none and `sync_leanok` owns them; sorries remain by contract. No `/- USER: -/` hints were present in the file.

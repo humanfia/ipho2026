@@ -1,0 +1,15 @@
+Done. Summary of the prover lane for `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean`:
+
+**Result**
+- File compiles with fresh `lake env lean`: 0 errors; exactly 1 `sorry` remaining (was 1, but the inherited body had 3 additional hard elaboration errors).
+- `#print axioms IPhO2026_4_A_5.main` = `[propext, Classical.choice, Quot.sound]` — main is sorry-free and no new axioms.
+
+**Work**
+- Repaired the broken `sq_eq_sq_iff_eq_or_eq_neg` case split in `beta0_close_to_ideal` (was `∧` instead of `∨`, plus two elaboration failures inherited in the working tree).
+- Proved the negative branch honestly via positivity contradiction.
+- Diagnosed the positive branch as genuinely unprovable as stated: in the constant-temperature orbit the offset is underdetermined — explicit countermodel `T≡1, P≡1, n=R=V=1, slope=offset=1/2` satisfies all hypotheses but gives `β₀=1/2≠1/T₀`. Kept the frozen signature, left one focused `sorry` at that exact algebraic gap (line 443) with a documenting comment.
+- All other declarations (`main`, `beta0_eq_ideal_of_linear`, `beta0_uncertainty_bound`, ratio bridge, slope lemma, …) remain fully proved.
+
+**Bookkeeping**
+- Blueprint chapter: `\leanok` added to all 22 proved declarations; the `beta0_close_to_ideal` block intentionally left without `\leanok` and annotated with a `% NOTE` (countermodel + repair).
+- `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_A_5.md` records the outcome and the redraft request: add the `hvar`-style premise `∃ t₁ t₂, absTemp (proc.T t₁) ≠ absTemp (proc.T t₂)` to `beta0_close_to_ideal` (same as `main` carries), which makes the existing proved non-degenerate branch close the goal.

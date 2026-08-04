@@ -1,0 +1,12 @@
+Both artifacts are durable on disk. Review complete.
+
+**Verdict: solved** (route `solved`) for `IPhO2026Problems/problem_IPhO_2026_3_A_1.lean` — `IPhO2026.Problem3.PartA1.paramagneticTorus_H_eq`.
+
+Findings:
+- **Compiles clean, zero sorry**: preflight `returncode=0`, `sorry_count=0`, empty diagnostics; independent grep over the full 672-line file finds no `sorry`/`admit`/`axiom`/`native_decide`.
+- **Iter-10 defect repaired at the root**: `ampere_sum` (problem_IPhO_2026_3_A_1.lean:274) is now the once-traversed circulation `(2πR)·HPerimeter = ∑_t I_t` — the prior summed field side that forced the invalid factor N (and the old sorried L579) is gone; the old countermodel no longer applies.
+- **Derivation honest and complete**: Bridge 1 `ampere_uniform_eq` (:584) proves `2πR·H = N·I`; Bridge 2 `fieldMagnitude_eq_meanRadius_form` (:608) divides exactly by `2πR ≠ 0`; Bridges 3–4 rewrite `2πR = V/A` and assemble `H = N·I·A/V` by `field_simp`; both target theorems are exact transitivity assemblies.
+- **Contract preserved**: `H = N·I·A/V` appears only in conclusions; units typed (A, A/m, `V = 2πR·A`); no answer-as-assumption (law fields are genuinely free data — e.g. negative uniform currents satisfy all hypotheses, so no false-premise vacuity); no weakening/tolerance issues.
+- **Trace supports the claim**: iter-013 prover jsonl documents restoring the redrafted baseline byte-identically, fresh `lake env lean` exit 0, `#print axioms` → only Mathlib-standard axioms. Process warning recorded: the flattened `task_results` artifact named in the trace is absent in this workspace; the prover trace was used as primary evidence per policy.
+
+Artifacts written: `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_A_1/attempt-1/milestones.jsonl` (valid single-line JSON, schema v1) and `summary.md` (11 lines).

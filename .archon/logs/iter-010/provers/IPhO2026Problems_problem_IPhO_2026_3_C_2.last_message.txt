@@ -1,0 +1,12 @@
+Done. The lane is complete — the file compiles clean and every gap is honestly documented.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean` compiles with **0 errors** under fresh `lake env lean` (9 `declaration uses sorry` warnings only; no axioms, no `native_decide`, no signature changes).
+- Repaired the carried-over compile breakage from the interrupted iter-010 session: a stranded `rw [e3]; ring` after `sorry`, the invalid `(m := m)` argument to `heat_isothermal_via_q`, and a misplaced rewrite trying to turn `Th` into `Tc`.
+- Each of the 9 sorries now sits behind maximal honest partial progress (proved EOS substitutions, figure-temperature rewrites, the Carnot ratio, nonzero prefactors, `0 ≤ M1`, etc.).
+
+**Key finding (redraft requested, written to `.archon/task_results/problem_IPhO_2026_3_C_2.lean.md`)** — the contract is not provable as formalized, for two independent reasons, verified against Figure 3b in `T3_page-3.png`:
+- **Legs/heats swapped**: the official cycle has 1→2 isothermal at `Th` (heat `−Qh` out) and 3→4 isothermal at `Tc` (heat `+Qc` in); the model's `heat_12`/`heat_34` assign them oppositely, contradicting its own `figure3b` (`T v1 = Th` vs `heat_12` at `Tc`) with `Tc < Th` — so `Qh_eq`/`Qc_eq` are unprovable outside the excluded `Th = Tc` regime.
+- **False "q-form" prefactor**: substituting the EOS into the B.1 law gives `Q = −(μ₀V²/(2nK))(qf−qi)`, not the contracted `Q = (μ₀V/2)(qf−qi)` (proved as `htrue` via `field_simp`; the two agree only when `V = −nK`, excluded by positivity, and even then with opposite sign).
+
+The task result includes the smallest faithful fix: correct the two heat fields and the q-form prefactor, restate `q_relation` as `Tc·q1 = (Th−Tc)·q2 + Tc·q3 − Th·q4`, and add the missing T3-B2 adiabatic law `T ∝ 1/H` field; then the whole chain closes by `field_simp`/`linear_combination` and `m1_sq`, `m1_eq_sqrt`, `m1_sq_arg_nonneg` follow unchanged. No blueprint environments were marked `\leanok`.

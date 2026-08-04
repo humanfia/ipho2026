@@ -1,0 +1,9 @@
+Done. The `2_B_3` lane is a review-gate retry (1/3) with planner-frozen statements, so per `PROGRESS.md` the file was **not edited** — this was a verify + hand-off pass.
+
+**Findings**
+
+- `IPhO2026Problems/problem_IPhO_2026_2_B_3.lean` compiles under fresh `lake env lean`: **0 errors**, exactly the 4 contracted sorries (`thetaMaxRecorded_mem_Ioo`, `sin_thetaMaxRecorded`, `sin_two_mul_thetaMaxRecorded`, `container_diameter_for_quintuple_power`).
+- The gate's blocking reason (*"does not import Physlib/PhysLean"*) is stale and now cleanly refutable: the iter-008 review text itself conceded PhysLean has no geometric/reflection-optics module here, and I verified by direct inspection of the checked-out pin (`1706ae68`) that `Physlib/Optics/Basic.lean` is an explicit placeholder with no reflection/mirror API — so the iter-002 exemption and the chapter's import-policy NOTEs stand. (The required LLM cross-check fell back to local package inspection: the Moonshot proxy at `127.0.0.1:8767` answered 404 on every endpoint.)
+- All 10 declarations carry `\lean{…}` pins (file contributes 0 to `unmatched`); no `\leanok` added since that's owned by the deterministic `sync_leanok` phase — the 4 sorry-bearing declarations are marked ready for it.
+
+**Artifact**: `.archon/task_results/problem_IPhO_2026_2_B_3.md` records the assumption/target split, goal-faithfulness audit (answers strictly conclusion-side), the 3 covered bridge obligations (B.2 inversion → `cos θ = 4/5`; 3-4-5 certificates; B.1 evaluation → `a = 0.12 m = 12 cm`), countermodel/uncertainty/branch coverage, and the grounding evidence clearing the stale import finding for the deterministic review re-pass.

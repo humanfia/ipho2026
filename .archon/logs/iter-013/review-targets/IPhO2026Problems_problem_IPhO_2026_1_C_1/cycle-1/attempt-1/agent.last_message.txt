@@ -1,0 +1,12 @@
+Review complete. Both deliverables are durable on disk.
+
+**Verdict: `partial` / `retry_proof`** for `IPhO2026.Problem1.C1.minimum_angular_frequency_T1_C1`
+
+- **Compile/sorry:** fails — `330:4` spurious `ring` after `field_simp` closed the goal; `337:17` mis-targeted `rw` chain (pattern `?m / S^2` not found); 2 active sorries at the primary contracts (file lines 378, 392).
+- **Signature/semantics/honesty:** pass — the iter-10 redraft defect is fixed (`hb : 0 < hbar` now on the quadratic lemma), the answer appears only conclusion-side, no axioms/admit/weakening, and the branch/discriminant hypotheses match the blueprint exactly.
+- **Trace support:** partial — session `019fa8a9` derived the exact witness-elimination square identity `Q = -(3·ps − 2·E·√ps·c_χ)²/2 ≤ 0` and verified helper A2 compiles, but ended mid-assembly before integrating into the file. No task-result artifact was supplied (process warning only).
+- **Repair path:** two-line tactic fixes in the aux lemma, then assemble the main theorem from the verified square identity + A2 + `momentum_q_sq_of_vector_balance`; backward branch via `hbarOmegaMin_pi_sub`. No redraft needed.
+
+Artifacts:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_1_C_1/cycle-1/attempt-1/milestones.jsonl:1`
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_1_C_1/cycle-1/attempt-1/summary.md:1`

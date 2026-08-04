@@ -1,0 +1,12 @@
+Repair complete. `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean` now compiles with exactly six `declaration uses sorry` warnings and zero errors.
+
+**What was fixed**
+- Deleted the `where`-in-structure-field parse bomb and the placeholder identifiers `ℏannotated`/bare `c`; rebuilt `IsTwoBodyDissociation` (`problem_IPhO_2026_1_C_1.lean:160`) with four constraining law fields: cosine-law momentum equation, vector momentum balance `q = (ℏω/c) • k̂ − p`, Figure-1c angle readout, and NR energy balance `ℏω = ΔU + ‖p‖²/4m + ‖q‖²/2m`.
+- Root-caused the trailing parse cascade: **U+2212 (minus sign) after whitespace is a parse error** in this Lean v4.31.0 setup — substituted ASCII `-` in term positions (doc-comments keep `−`), and removed a spurious bare `end` that collided with `noncomputable section`.
+
+**What was added (conclusion-side only contracts)**
+- `ReachableFrequency`/`IsDissociationThreshold` as pure minimality properties; `hbarOmegaMin` as the bare candidate formula at `problem_IPhO_2026_1_C_1.lean:236`.
+- Main target `minimum_angular_frequency_T1_C1` (`:279`, forward branch) + backward-branch freeze theorem (`:293`), with branch hypotheses (`IsForwardBranch`, `IsAngularRange`) carried assumption-side and the recorded answer strictly conclusion-side.
+- Bridge contracts: `momentum_q_sq_of_vector_balance`, `two_sin_sq_add_one_eq`, `quadratic_characterization_of_threshold` (official quadratic `(2−cos2θ)E² − 6mc²E + 6ΔUmc² = 0`), `hbarOmegaMin_pi_sub`. LeanExplore grounded `Real.cos_two_mul_eq_one_sub`, `Real.sin_pi_sub`, `norm_sub_sq_real` as their proof routes.
+
+Results written to `.archon/task_results/problem_IPhO_2026_1_C_1.md`. No markers touched (`\leanok` owned by sync; PhysLean exemption `% NOTE:` already in the chapter).

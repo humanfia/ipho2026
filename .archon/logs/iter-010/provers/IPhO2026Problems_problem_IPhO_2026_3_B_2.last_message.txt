@@ -1,0 +1,9 @@
+Final state: my assigned file `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` compiles clean-by-sorry (0 errors), no new axioms, and the task result is recorded at `.archon/task_results/problem_IPhO_2026_3_B_2.md`. Scratch/probe files were disposed of; I never touched any other `.lean` file.
+
+**Outcome**
+
+- The file's three sorries (`adiabatic_invariant_along_path` L148, `endpoint_relation` L159, `adiabatic_temperature_change` L190) remain `sorry` — honestly, not laundered. `lam_add_mu0_K_sq_pos` was already proved upstream (verified dependent only on `[propext, Classical.choice, Quot.sound]`).
+- Central finding: `adiabatic_invariant_along_path` is **false as stated**. Its hypotheses never require the path's state functions to be continuous/differentiable (only the law witnesses are integrable and `T > 0` pointwise), so the claimed conservation of `T²(λ+μ₀KH²)` between arbitrary `t₁, t₂` outruns what `ParamagneticTorusLaws + IsAdiabaticPath` can force. I drove this analysis far enough in a scratch lane (~700 lines of derivative/continuity lemmas around `tfun = T_i√(D_i·q(H))`) to be confident the gap is semantic, not tactic-level.
+- Recorded a precise redraft request in `task_results/problem_IPhO_2026_3_B_2.md`: adding `temp_bounded : ∃ c > 0, ∀ t, c ≤ (p t).temperature` (option 1), weakening the invariant lemma to endpoints-only (option 2), or switching to the integrated first law (option 3) each makes the chain provable exactly along the blueprint's algebra — at which point `endpoint_relation` and the official answer `ΔT = T_i(√((λ+μ₀KH_f²)/(λ+μ₀KH_i²)) − 1)` follow.
+
+No signatures, hypotheses, or statements were changed.

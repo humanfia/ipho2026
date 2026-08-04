@@ -1,0 +1,8 @@
+Done. The C.2 formalization is complete and verified.
+
+**What was created** — `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean`:
+- `NeighboringRayExpansion` structure: mirror radius `R > 0`, the smooth one-parameter reflected-ray family `(M, B)`, family-membership equations for rays A (`φ = θ`) and B (`φ = θ + Δθ`), the acute Figure-2g branch `θ ∈ (0, π/2)` (coverage for `cos θ`, `sin 2θ ≠ 0`), C.1's recorded answers as previous-part hypotheses, and smoothness exposed as genuine `o(Δθ)` first-order interfaces with existentially quantified coefficients (so the answer slopes are not smuggled in).
+- Target theorems (all `by sorry`): `ray_B_slope_first_order` (`m_B = cot 2θ − 2 csc²(2θ)·Δθ + o(Δθ)`), `ray_B_intercept_first_order` (`b_B = (R/2cos θ)(1 + tan θ·Δθ) + o(Δθ)`), and the conjunction `ray_B_first_order_expansion` carrying blueprint label `thm:physics:IPhO_2026_2_C_2:target`, plus a branch bridge lemma.
+- Notes: `csc` rendered as `(sin (2θ))⁻¹` (Mathlib idiom); official `O(Δθ²)` recorded as `o(Δθ)` — the exact first-order content; self-contained, `import Mathlib` only, C.1 not imported.
+
+**Verification** — `lake env lean` exits 0 with exactly the 3 expected `sorry` warnings (lines 127, 137, 150). Task result with the full assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit, and grounding log is at `.archon/task_results/problem_IPhO_2026_2_C_2.md`. The chapter already has `% archon:physics`; `\leanok` is left to the deterministic sync.

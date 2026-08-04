@@ -1,0 +1,1018 @@
+{
+  "version": 2,
+  "max_iterations": 6,
+  "last_review_iter": 17,
+  "updated_at": "2026-08-03T18:10:18.184023Z",
+  "targets": {
+    "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 13,
+      "reason": "All five checks pass: preflight compiles with returncode 0 and sorry_count 0 (no proof-sorry/admit/axiom in source; grep finds only prose mentions); trace lean_verify on the target theorem shows exactly [propext, Classical.choice, Quot.sound], no sorryAx. Signature preservation: hypotheses are only the setup bundle S : HydrostaticGateSetup, hDelta : DeltaH = 1.41, and the moment balance hbal; the official answer a = DeltaH/(2*sqrt2) and |a-0.50| < 1/200 stays conclusion-side only; rho0/a/DeltaH/g are opaque so nothing unfolds to trivialize. Faithful semantics: pressureCoupleMagnitude = rho0*g*DeltaH*(a^2/sqrt2)*(a/(2*sqrt2)) = rho0*g*DeltaH*a^3/4 (the iter-010 factor-2 defect was redrafted at iter 11: area a^2/sqrt2 replaces the old a^3/8 product readout) and restoringMoment = 2*rho0*a^3*g*(a/2*sin(pi/4)) = rho0*g*a^4/sqrt2, so hbal yields a = DeltaH/(2*sqrt2), matching the official answer. Hypotheses/units/tolerance used honestly: positivity projected from S; numerical bound proved via nlinarith with 1.414 < sqrt2 < 1.415; no answer-as-assumption. The iter-013 prover trace (session 019fa8a9, 107 turns) documents closing all 12 obligations with 0 errors and whole-project lake build success; the newest matching task-result artifact list is empty -> process warning only, trace treated as primary evidence.",
+      "evidence": "Preflight: compiles=true, returncode=0, sorry_count=0, duration 14.1s; diagnostics only unused-variable linter warnings (hp/ha/hDelta/hg/S). lean_verify structured result in trace: axioms=[propext, Classical.choice, Quot.sound], warnings only for the four intentional opaque constants (lines 92/96/100/105). Algebra audit: critical_balance_eq rewrites hbal to rho0*g*a^4/sqrt2 = rho0*g*DeltaH*a^3/4; side_length_eq_delta_h_over cancels the nonzero factor rho0*g*a^3 via mul_left_cancel0 giving a*4 = DeltaH*sqrt2, closing a = DeltaH/(2*sqrt2) with field_simp + nlinarith (sqrt2^2 = 2); numerical_value derives |a-0.50| < 1/200 from 1.414 < sqrt2 < 1.415 at DeltaH = 1.41; main theorem and torque_balance_contract assemble by rfl/rw with no signature edits.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Hydrostatic-couple readout is a factor-2 modeling defect: pressureCoupleMagnitude and IsCriticalTorqueBalance use the product (a*sqrt2/2)*(a/2)*(a*sqrt2/4) = rho0*g*DeltaH*a^3/8, while the official figure readout and lemma pressure_couple_eq require rho0*g*DeltaH*a^3/4. With positive parameters the raw torque-balance hypothesis hbal : restoringMoment = pressureCoupleMagnitude is satisfiable (at a = DeltaH/(4*sqrt2)) but the conclusion a = DeltaH/(2*sqrt2) then fails, so the main theorem, critical_balance_eq, and pressure_couple_eq are refutable as stated and remain sorry (10 sorries total).",
+          "evidence": "Preflight: compiles=true, sorry_count=10 (all bodies sorry, incl. main theorem at line 350). Algebra check: defs give restoringMoment = 2*rho0*a^3*g * (a/2*sin(pi/4)) = rho0*g*a^4/sqrt2 and couple = rho0*g*DeltaH*(a*sqrt2/2)*(a/2)*(a*sqrt2/4) = rho0*g*DeltaH*a^3/8; official readout (area a^2/sqrt2 times arm a*sqrt2/4) gives rho0*g*DeltaH*a^3/4. Prover trace (session 019fa6d4, 2026-07-28T03:46Z) reached the identical countermodel: hbal holds at a = DeltaH/(4*sqrt2) > 0 with DeltaH = 1.41 while the target conclusion is false, so the main theorem is unprovable without redrafting the couple readout. No matching task_results artifact exists (list empty) -> process warning only; trace is primary evidence. Statement itself is faithful and unweakened otherwise: answer a = DeltaH/(2*sqrt2), DeltaH = 1.41, tolerance |a-0.50| < 1/200 appear conclusion-side only; opaque parameters prevent unfold-based trivialization; no axioms/admit/native_decide tricks detected.",
+          "redraft_kind": "other_modeling_defect",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.427959Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936333Z"
+        },
+        {
+          "iter": 13,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five checks pass: preflight compiles with returncode 0 and sorry_count 0 (no proof-sorry/admit/axiom in source; grep finds only prose mentions); trace lean_verify on the target theorem shows exactly [propext, Classical.choice, Quot.sound], no sorryAx. Signature preservation: hypotheses are only the setup bundle S : HydrostaticGateSetup, hDelta : DeltaH = 1.41, and the moment balance hbal; the official answer a = DeltaH/(2*sqrt2) and |a-0.50| < 1/200 stays conclusion-side only; rho0/a/DeltaH/g are opaque so nothing unfolds to trivialize. Faithful semantics: pressureCoupleMagnitude = rho0*g*DeltaH*(a^2/sqrt2)*(a/(2*sqrt2)) = rho0*g*DeltaH*a^3/4 (the iter-010 factor-2 defect was redrafted at iter 11: area a^2/sqrt2 replaces the old a^3/8 product readout) and restoringMoment = 2*rho0*a^3*g*(a/2*sin(pi/4)) = rho0*g*a^4/sqrt2, so hbal yields a = DeltaH/(2*sqrt2), matching the official answer. Hypotheses/units/tolerance used honestly: positivity projected from S; numerical bound proved via nlinarith with 1.414 < sqrt2 < 1.415; no answer-as-assumption. The iter-013 prover trace (session 019fa8a9, 107 turns) documents closing all 12 obligations with 0 errors and whole-project lake build success; the newest matching task-result artifact list is empty -> process warning only, trace treated as primary evidence.",
+          "evidence": "Preflight: compiles=true, returncode=0, sorry_count=0, duration 14.1s; diagnostics only unused-variable linter warnings (hp/ha/hDelta/hg/S). lean_verify structured result in trace: axioms=[propext, Classical.choice, Quot.sound], warnings only for the four intentional opaque constants (lines 92/96/100/105). Algebra audit: critical_balance_eq rewrites hbal to rho0*g*a^4/sqrt2 = rho0*g*DeltaH*a^3/4; side_length_eq_delta_h_over cancels the nonzero factor rho0*g*a^3 via mul_left_cancel0 giving a*4 = DeltaH*sqrt2, closing a = DeltaH/(2*sqrt2) with field_simp + nlinarith (sqrt2^2 = 2); numerical_value derives |a-0.50| < 1/200 from 1.414 < sqrt2 < 1.415 at DeltaH = 1.41; main theorem and torque_balance_contract assemble by rfl/rw with no signature edits.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.098482Z"
+        }
+      ],
+      "updated_at": "2026-07-28T17:04:44.098521Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 17,
+      "reason": "All five review checks pass: the iter-017 prover closed the single remaining sorry (value-computation bridge turningQuadratic_normalized_eq); the file compiles with 0 sorries and clean axioms, and the main theorem proves the exact official answer conclusion-side from answer-free governing-law hypotheses.",
+      "evidence": "Deterministic preflight: compiles=true, sorry_count=0, returncode=0, no diagnostics. Trace: fresh `lake env lean` exit 0 (lines 34-36), grep -c sorry = 0 (line 50), lean_verify on maximum_separation_T1_B1 and turningQuadratic_normalized_eq -> axioms [propext, Classical.choice, Quot.sound] only, no sorryAx (lines 38-41). Contract: maximum_separation_T1_B1 proves Exists r_max, IsGreatest attainedSeparations r_max /\\ r_max = (1600/9)*bohrRadius, with attainability (apogee_attained_T1_B1) and support bound (orbitBound_T1_B1) both proved from the certified band turningQuadratic_nonneg_iff, itself proved from the now-closed bridge turningQuadratic_normalized_eq. Answer 1600/9 appears only in proved theorems; hypotheses (CoulombPairData fields, AnchoredValues, IsBoundMu) carry no target value. Independent numeric audit: with hbar^2 = k*m*e^2*a0, L = 8*hbar, mu_red = m/2, r0 = 100*a0, v0 = 2*hbar/(25*m*a0): E = (4/625 - 1/100)*k*e^2/a0 < 0 (consistent with bound_branch), coefficient matches E = -(9/16)L^2/(2*mu_red*r0^2) and k*e^2 = (25/16)L^2/(2*mu_red*r0) hold, and Q(r) = E*r^2 + k*e^2*r - L^2/(2*mu_red) has roots exactly 100 and 1600/9 = 177.78, matching the official r_max = (1600/9)*a0.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:proof:1",
+          "iter": 17,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five review checks pass: the iter-017 prover closed the single remaining sorry (value-computation bridge turningQuadratic_normalized_eq); the file compiles with 0 sorries and clean axioms, and the main theorem proves the exact official answer conclusion-side from answer-free governing-law hypotheses.",
+          "evidence": "Deterministic preflight: compiles=true, sorry_count=0, returncode=0, no diagnostics. Trace: fresh `lake env lean` exit 0 (lines 34-36), grep -c sorry = 0 (line 50), lean_verify on maximum_separation_T1_B1 and turningQuadratic_normalized_eq -> axioms [propext, Classical.choice, Quot.sound] only, no sorryAx (lines 38-41). Contract: maximum_separation_T1_B1 proves Exists r_max, IsGreatest attainedSeparations r_max /\\ r_max = (1600/9)*bohrRadius, with attainability (apogee_attained_T1_B1) and support bound (orbitBound_T1_B1) both proved from the certified band turningQuadratic_nonneg_iff, itself proved from the now-closed bridge turningQuadratic_normalized_eq. Answer 1600/9 appears only in proved theorems; hypotheses (CoulombPairData fields, AnchoredValues, IsBoundMu) carry no target value. Independent numeric audit: with hbar^2 = k*m*e^2*a0, L = 8*hbar, mu_red = m/2, r0 = 100*a0, v0 = 2*hbar/(25*m*a0): E = (4/625 - 1/100)*k*e^2/a0 < 0 (consistent with bound_branch), coefficient matches E = -(9/16)L^2/(2*mu_red*r0^2) and k*e^2 = (25/16)L^2/(2*mu_red*r0) hold, and Q(r) = E*r^2 + k*e^2*r - L^2/(2*mu_red) has roots exactly 100 and 1600/9 = 177.78, matching the official r_max = (1600/9)*a0.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-08-03T10:13:19.974242Z"
+        }
+      ],
+      "updated_at": "2026-08-03T10:13:19.974271Z",
+      "budget_grants": [
+        {
+          "granted_at": "2026-08-03T06:28:03Z",
+          "granted_by": "user",
+          "previous_attempts": 0,
+          "previous_max_iterations": 3,
+          "new_max_iterations": 6,
+          "reason": "Run the repaired target again with Kimi K3."
+        }
+      ]
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 17,
+      "reason": "All four iter-13 open points are now closed proofs: orbit_eq_conic (exact conic_first_integral, the arccos quadrature over radial_sq_identity/periapsis_eps_relation/r_gt_initial), exists_asymptoticRelativeVelocity (witness = explicit limiting vector of velocity_tendsto_atTop, strict branch via asymptote_perp_neg), signed_deflection_eq_formula (tendsto_nhds_unique against velocity_tendsto_atTop + angleBetween_initialDirection_asymptote + asymptote_angle_eq_arctan), and the former hratio_sq gap inside signed_deflection_angle_T1_B2 (div_pow + field_simp + sq_eq_one_iff, with the norm_sq certificates now discharged via EuclideanSpace.norm_sq_eq/Fin.sum_univ_two/sq_abs). Preflight rc=0, sorry_count=0; grep finds no sorry/admit/axiom/native_decide in code; lean_verify on both main targets returns [propext, Classical.choice, Quot.sound] only. Physics independently recomputed: mu=15/2, r0=100a0 give E=ke^2/(80a0)>0 (proved as hEunit inside eccentricity_sq_eq), eps^2=49/4, periapsis-referenced angle arccos(-2/7)-90deg=arctan(2/sqrt45)=16.6015deg, clockwise sign negative; bands [-16.605,-16.595)/[16.595,16.615) honestly stated and strictly satisfied (arctan_deg_band). Answer appears conclusion-side only; u_inf is a genuine Filter.Tendsto definition with existence proved.",
+      "evidence": "Preflight: compiles=true rc=0 sorry_count=0; warnings only (deprecated push_neg at L1225/1531/1602/2481/2833, unused hmu binder at L1259) and they match the current source line-for-line. lean_verify: signed_deflection_angle_T1_B2 and unsigned_deflection_angle_in_degrees_T1_B2 -> [propext, Classical.choice, Quot.sound], no sorryAx; the 5 opaque constants are the frozen physical-parameter layer with positivity via ScalingRegime. Signatures preserved from the iter-11 redraft (exact -arctan(2/sqrt45) and arctan(2/sqrt45) conclusions plus official rounding bands); the iter-017 field re-signing (initial_transverse=-(r0*v0), angular_momentum_law=-(L/m_red), vector newton_relative_law, attractive conic branch r=p/(1+eps*cos)) is the user-sanctioned redraft scope and moves the contract toward the figure's true clockwise orientation (perp sep0 v0 = -r0*v0 is exactly positron-above-moving-right). Prover trace session_end (iter-017, kimi-k3, 257 turns) reports exit 0 / 0 sorries / axioms trio; newest task result documents all nine former Kepler leaves proved with routes matching the source (incl. the ContDiff.const_mul and raw-HasDerivAt-chain fixes visible at L2219-2240). Blueprint .tex ledger is stale for the iter-017 layer (orbit_eq_conic entry still shows the repulsive p/(eps*cos-1) branch, CoulombScatteringData entry still shows the pre-iter-017 signs, total_energy_pos prose still claims E=7/400 units vs the proved ke^2/(80a0)=1/80) - ledger-sync note for the sync owner, not a Lean-side defect.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Main target and magnitude corollary are stated with the false closed form -(pi - 2*arctan(2/sqrt 63)) (~-151.71 deg), internally inconsistent with their own official-answer rounding bands [-16.605,-16.595) / [16.595,16.615): the bodies themselves contain machine-checked proofs of radiansToDegrees(...) <= -90 (resp. >= 90) and hence of not-roundsToOfficialDegrees(Abs), so the conjunction is unprovable in principle. Root cause upstream: eccentricity_sq_eq claims eps^2 = 67/4 while the faithful governing-law fields evaluate to 49/4 (E = 1/80 in hbar^2/(m a0^2) units from the same fields, matching official -16.60 deg).",
+          "evidence": "Preflight: compiles, rc=0, 6 sorries at Lean L385 (eccentricity_sq_eq), L416 (orbit_eq_conic), L467 (exists_asymptoticRelativeVelocity), L493 (signed_deflection_eq_formula), L563 (signed_deflection_angle_T1_B2), L633 (unsigned_deflection_angle_in_degrees_T1_B2). In-file witnesses: hout : radiansToDegrees (-(pi - 2*arctan (2/sqrt 63))) <= -90, hband_false : neg roundsToOfficialDegrees (...); symmetric >= 90 witness in the unsigned corollary. No axioms/admit/laundering; signature preserved; answer 16.60 is conclusion-side only.",
+          "redraft_kind": "wrong_or_weakened_target",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.428291Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936398Z"
+        },
+        {
+          "iter": 13,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "The iter-11 redraft made the target internally consistent (eps^2 = 49/4, signed value -arctan(2/sqrt 45) ~ -16.6015 deg) and the algebraic/numeric layer is genuinely proved, but the physical core of the contract - Hint 2's conic (orbit_eq_conic), existence of the asymptotic relative velocity as a Filter.Tendsto limit (exists_asymptoticRelativeVelocity), and the energy/asymptote-derived deflection formula (signed_deflection_eq_formula) - remains sorry-bodied, and the main theorem itself still contains a sorry at the parallelogram dot-perp-norm ratio step (Lean L902) inside hbranch. The missing piece is the foundational Kepler/Binet-ODE layer: integrating the raw ContDiff fields (angular_momentum_law, radial_energy_law, newton_relative_law) into the conic orbit and the asymptotic-velocity limit. No Mathlib Kepler API exists to cite, so this is a missing mathematical bridge, not a tactic gap. Preflight confirms: compiles=false rc=1, sorry_count=4 (L493, L544, L574, L902), plus 3 unsolved-goals/rewrite errors at L884/L886 (norm-of-real gives |x| not x in the 2D EuclideanSpace norm_sq certificate) and L901 (div_pow+sq_eq_one_iff rewrite finds no occurrence). Current prover trace ends with the same errors and a 429 abort; no iter-13 matching task result exists (process warning only).",
+          "evidence": "Preflight: compiles=false, rc=1, 4 sorries: Lean L493 orbit_eq_conic, L544 exists_asymptoticRelativeVelocity, L574 signed_deflection_eq_formula, L902 hratio_sq inside signed_deflection_angle_T1_B2. Errors: L884:53/L886:67 unsolved goals |- |(fun i => a i) 0|^2 + |(fun i => a i) 1|^2 = a 0^2 + a 1^2 (EuclideanSpace.norm_sq_eq expansion needs RCLike.norm_sq / norm_of_nonneg); L901:21 rewrite failed after rw [div_pow, sq_eq_one_iff] at * (no such pattern in dot^2 = |a|^2*|u|^2). Statement fidelity verified: hypotheses are opaque constants, ScalingRegime and governing-law fields only; official value 16.60/arctan(2/sqrt 45) appears conclusion-side only; rounding bands [-16.605,-16.595) and [16.595,16.615) honestly stated; no axiom/admit/native_decide/laundering found; signature unchanged from iter-11 redraft. Blueprint .tex prose is stale (still narrates the false 67/4 / pi - 2 arctan(2/sqrt 63) chain from the iter-10 review) - ledger sync needed, but the Lean contract itself is now the faithful one.",
+          "redraft_kind": "missing_foundational_bridge",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.098842Z"
+        },
+        {
+          "iter": 17,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-08-03T10:37:49.254681Z"
+        },
+        {
+          "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:proof:1",
+          "iter": 17,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All four iter-13 open points are now closed proofs: orbit_eq_conic (exact conic_first_integral, the arccos quadrature over radial_sq_identity/periapsis_eps_relation/r_gt_initial), exists_asymptoticRelativeVelocity (witness = explicit limiting vector of velocity_tendsto_atTop, strict branch via asymptote_perp_neg), signed_deflection_eq_formula (tendsto_nhds_unique against velocity_tendsto_atTop + angleBetween_initialDirection_asymptote + asymptote_angle_eq_arctan), and the former hratio_sq gap inside signed_deflection_angle_T1_B2 (div_pow + field_simp + sq_eq_one_iff, with the norm_sq certificates now discharged via EuclideanSpace.norm_sq_eq/Fin.sum_univ_two/sq_abs). Preflight rc=0, sorry_count=0; grep finds no sorry/admit/axiom/native_decide in code; lean_verify on both main targets returns [propext, Classical.choice, Quot.sound] only. Physics independently recomputed: mu=15/2, r0=100a0 give E=ke^2/(80a0)>0 (proved as hEunit inside eccentricity_sq_eq), eps^2=49/4, periapsis-referenced angle arccos(-2/7)-90deg=arctan(2/sqrt45)=16.6015deg, clockwise sign negative; bands [-16.605,-16.595)/[16.595,16.615) honestly stated and strictly satisfied (arctan_deg_band). Answer appears conclusion-side only; u_inf is a genuine Filter.Tendsto definition with existence proved.",
+          "evidence": "Preflight: compiles=true rc=0 sorry_count=0; warnings only (deprecated push_neg at L1225/1531/1602/2481/2833, unused hmu binder at L1259) and they match the current source line-for-line. lean_verify: signed_deflection_angle_T1_B2 and unsigned_deflection_angle_in_degrees_T1_B2 -> [propext, Classical.choice, Quot.sound], no sorryAx; the 5 opaque constants are the frozen physical-parameter layer with positivity via ScalingRegime. Signatures preserved from the iter-11 redraft (exact -arctan(2/sqrt45) and arctan(2/sqrt45) conclusions plus official rounding bands); the iter-017 field re-signing (initial_transverse=-(r0*v0), angular_momentum_law=-(L/m_red), vector newton_relative_law, attractive conic branch r=p/(1+eps*cos)) is the user-sanctioned redraft scope and moves the contract toward the figure's true clockwise orientation (perp sep0 v0 = -r0*v0 is exactly positron-above-moving-right). Prover trace session_end (iter-017, kimi-k3, 257 turns) reports exit 0 / 0 sorries / axioms trio; newest task result documents all nine former Kepler leaves proved with routes matching the source (incl. the ContDiff.const_mul and raw-HasDerivAt-chain fixes visible at L2219-2240). Blueprint .tex ledger is stale for the iter-017 layer (orbit_eq_conic entry still shows the repulsive p/(eps*cos-1) branch, CoulombScatteringData entry still shows the pre-iter-017 signs, total_energy_pos prose still claims E=7/400 units vs the proved ke^2/(80a0)=1/80) - ledger-sync note for the sync owner, not a Lean-side defect.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-08-03T18:10:18.183992Z"
+        }
+      ],
+      "updated_at": "2026-08-03T18:10:18.184014Z",
+      "redraft_resolved_iter": 17,
+      "budget_grants": [
+        {
+          "granted_at": "2026-08-03T06:28:03Z",
+          "granted_by": "user",
+          "previous_status": "needs_redraft",
+          "previous_attempts": 1,
+          "previous_max_iterations": 3,
+          "new_max_iterations": 6,
+          "reason": "After formalization redraft passes, reset proof attempts normally and permit up to six reviewed Kimi K3 proof attempts."
+        }
+      ]
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean": {
+      "status": "retry",
+      "attempts": 0,
+      "last_review_iter": 17,
+      "reason": "formalization redraft passed at iter 17; proof attempt budget reset",
+      "evidence": "",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Auxiliary lemma quadratic_characterization_of_threshold is false as stated when hbar = 0 (no hbar hypothesis): with hbar = 0 the let-bound E0 := hbar * hbarOmegaMin reduces to 0 * (_/0) = 0, so the first conjunct 0 < E0 is unprovable; e.g. m = c = 1, dU = 1/4, theta = pi/4 satisfies all hypotheses yet forces E0 = 0. The lemma needs (hb : 0 < hbar) or (hb : hbar ≠ 0). Independently the file does not compile: `le_or_lt` at line 302 is an unknown identifier in this Mathlib pin, cascading the `rcases` failure at 302:34, and both main threshold theorems remain `sorry`.",
+          "evidence": "Preflight: compiles=false, rc=1; error(lean.unknownIdentifier) Unknown identifier `le_or_lt` at 302:9; tactic `rcases` failed at 302:34; sorry-count=5 with sorry warnings at 401:8 and 415:8 (main forward theorem at lines ~401-415) plus inline sorries in the hbar=0/hbar<0 branches and in the minimality subproof of quadratic_characterization_of_threshold. Prover trace (session 019fa6d4) ends mid-rewrite, itself concluding the quadratic lemma needs redraft: add hypothesis 0 < hbar. No matching task-result artifacts were supplied (empty list) — process warning only; trace used as primary evidence and it agrees with the on-disk file.",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.428587Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936434Z"
+        },
+        {
+          "iter": 13,
+          "route": "retry_proof",
+          "resulting_status": "retry",
+          "top_level_status": "partial",
+          "attempt": 1,
+          "reason": "Contracts are faithful and unchanged from the iter-11 redraft (opaque constants, conclusion-side candidate value, hb : 0 < hbar present on quadratic_characterization_of_threshold), but the proof layer fails on two tactic-level issues inside quadratic_characterization_of_threshold and both main threshold theorems remain sorry. (1) line 330 `ring` errors 'No goals to be solved': after `field_simp` with hbne/hden in context the goal is closed by simp-lemmas, leaving `ring` with no goal. (2) line 337 the rw chain is shape-mismatched: after `rw [div_pow]` the goal is `S * (X^2 / S^2) - 6*m*c^2*(X/S) + 6*dU*m*c^2 = 0`, on which `div_eq_iff (pow_ne_zero 2 hS')` cannot fire, and the preflight state shows the intended intermediate `X^2/S^2 = (6*m*c^2*(X/S) - 6*dU*m*c^2)/S` never appeared, so the follow-up show-rw at lines 338-340 rewrites a non-existent pattern. A correct repair is to set the divided target explicitly (e.g. have hdiv : X^2/S^2 = (6*m*c^2*X*S - 6*dU*m*c^2*S^2)/S^3 ... then div_eq_iff), or simply field_simp + linear_combination on the multiplied-out goal. The sorries in minimum_angular_frequency_T1_C1 (line 371) and minimum_angular_frequency_backward_branch_T1_C1 (line 385) are genuine remaining proof work: the forward theorem requires exhibiting a lawful IsTwoBodyDissociation configuration at Omega (reachability) and deriving Q(E) <= 0 for every reachable E to apply the quadratic minimality; the prover trace shows a validated plan and compiled helper sublemmas for exactly this (A2-style stronger minimality, B1 bound t*Omega(t) <= 3mc^2, E0 >= dU floor) but the assembly was never committed to the target file.",
+          "evidence": "Preflight: compiles=false, rc=1, sorry_count=2 (warnings at 371:8 and 385:8 on the two main threshold theorems). Errors: problem_IPhO_2026_1_C_1.lean:330:4 'No goals to be solved' (`ring` after `field_simp` in hE proof) and 337:17 'Tactic rewrite failed: Did not find an occurrence of the pattern ?m/S^2 = ?m in the target S*(X^2/S^2) - 6*m*c^2*(X/S) + 6*dU*m*c^2 = 0' (div_eq_iff misfire in the root-equality branch of quadratic_characterization_of_threshold; goal shown in refine_2 case of the preflight). Statement audit: signatures and hypotheses of quadratic_characterization_of_threshold and both main theorems match the iter-11 redraft contract and the blueprint (thm:IPhO2026Problems_problem_IPhO_2026_1_C_1:minimum_angular_frequency_T1_C1); the recorded answer (ω_min = 3mc^2(1-sqrt(1-(2ΔU/(3mc^2))(2sin^2θ+1)))/(ℏ(2sin^2θ+1)), frozen at π/2 for θ≥π/2) appears only in hbarOmegaMin on the conclusion side; IsTwoBodyDissociation/EnergyConservation predicates answer-free. No axioms, no native_decide, no statement weakening. Prover trace (sessions 019fa8a9-b16d, first session aborted on 429; 019fa8f2-ea4e, 89 turns): final turns show the prover compiling /tmp/sA6.lean scratch lemmas to EXIT=0 and outlining the full assembly plan (reachability via quaHom + sin^2->cos^2 conversion, floor via A2 + B1), but it never edited the target file, consistent with the on-disk errors and sorries. No matching task-result artifacts supplied (empty list) - process warning only; trace used as primary evidence and it agrees with the on-disk file and preflight.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.099145Z"
+        },
+        {
+          "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:proof:1",
+          "iter": 17,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 2,
+          "reason": "Both main threshold theorems are FALSE as stated, not merely unproved: their first conjunct (ReachableFrequency at the candidate value) is refutable using only in-file proved lemmas. The geometry predicate IsScatteringAngle demands p ≠ 0, but at the claimed threshold energy the structure fields force ‖p‖ = 0: at θ = π/2 (forward theorem) config_quadratic reads 3‖p‖² = 4mE₀ − 4mΔU − 2E₀²/c² = 0 at E₀ = ℏΩ = mc²(1−√(1−2ΔU/(mc²))), and the hypotheses are consistent there (m=c=ℏ=1, ΔU=1/4 gives hdisc = 1/2 ≥ 0), so no proof can exist. For every backward θ ∈ [π/2, π] the quadratic factorizes as ‖p‖·(3‖p‖ − 4(E₀/c)cosθ) = 0 with cosθ ≤ 0, again forcing p = 0. This matches the official solution (T1_solution.txt): the tangent critical configuration at θ = 90° is the degenerate origin point (O₂ at rest), and for θ ≥ 90° the threshold circle passes through the origin — the official answer counts the threshold as attained at p = 0, which the p ≠ 0 readout excludes. Secondary defect: the backward theorem's hdisc : 0 ≤ 1 − 2ΔU/(3mc²) admits ΔU ∈ (mc²/2, 3mc²/2], where C(E) > 0 for all E and NOTHING is reachable at backward angles; the correct condition is the real square root at π/2, 0 ≤ 1 − 2ΔU/(mc²). The iter-13 review routed retry_proof believing reachability was genuine remaining work; this iteration's prover machine-checked the refutation instead (scratch refutation lemmas compiled at EXIT=0 alongside the file's definitions), and I independently re-verified the algebra against config_quadratic and the official solution.",
+          "evidence": "Preflight: compiles=true, rc=0, sorry_count=2 — warnings at 448:8 and 562:8 are exactly the two main theorems (sorries at lines 463 and 582, each on the reachability conjunct with an explanatory comment); the remaining warnings are pre-existing unused-binder linter notes in quadratic_characterization_of_threshold. git diff HEAD shows declaration-level changes are ADDITIONS ONLY (config_quadratic, reachable_C_nonpos_of_cos_nonpos, hbar_mul_hbarOmegaMin_pi_div_two — all fully proved, axiom-clean per the prover's #print axioms audit: [propext, Classical.choice, Quot.sound]); no theorem signature, hypothesis, or definition was altered, so the iter-11 redraft contract is preserved and the iter-13 tactic failures in quadratic_characterization_of_threshold are repaired. The minimality conjuncts of both main theorems are now fully proved; I checked the derivation: discriminant of the P-quadratic is the square (6‖p‖ − 4a cosθ)² ⇒ after clearing c², Q(E) := S·E² − 6mc²E + 6mc²ΔU ≤ 0 ⇒ root factorization S·Q(E) = (SE − A₋)(SE − A₊) with A± = 3mc²(1±s) ⇒ E ≥ ℏΩ — mathematically sound. The answer formula in hbarOmegaMin (factor 2 inside the sqrt, 2ΔU/(3mc²)·(2sin²θ+1)) matches the official solution; the BLUEPRINT has a transcription slip (missing factor 2 in both the recorded-answer paragraph and the thm statement, lines 26 and 254 of the .tex) — Lean side is correct, flagged for blueprint doctor. Refutation cross-check: at θ=π/2, m=c=ℏ=1, ΔU=1/4, E₀=1−1/√2 gives 2E₀² + 1 − 4E₀ = 0, so config_quadratic forces 3‖p‖² = 0, contradicting p ≠ 0 — the forward theorem is unprovable as stated. Prover trace (session 13457b1a, 54 turns) agrees with the newest task result (.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md, this iteration): scratch refutation compiled, minimality assembly verified in scratch2 before copying into the target, final compile 0 errors, axiom audit run, honest redraft request filed.",
+          "redraft_kind": "other_modeling_defect",
+          "explicit_route": true,
+          "reviewed_at": "2026-08-03T10:06:24.142751Z"
+        },
+        {
+          "iter": 17,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 2,
+          "reviewed_at": "2026-08-03T10:57:36.037110Z"
+        }
+      ],
+      "updated_at": "2026-08-03T10:57:36.037134Z",
+      "redraft_resolved_iter": 17
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_A_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "All five contract declarations proved; preflight compiles with 0 sorry; axiom audit clean; statement faithful to the A.1 blueprint contract.",
+      "evidence": "Preflight: compiles=true, rc=0, sorry_count=0, only 5 push_neg deprecation warnings (style). Trace: lean_verify axioms = [propext, Classical.choice, Quot.sound] (no sorryAx); final lake env lean exit 0 with 0 errors/0 sorries; final goal-state check on threshold_x_N_sin shows goals_after=[]. Contract: HalfCylindricalMirror structure carries only assumption-side fields (R_pos, N_refl symmetry/axial-ray, threshold defining property, edge count, geometric reflection-count law); closed-form answer x_N = R cos(pi/(2N+1)) = R sin((2N-1)pi/(4N+2)) appears conclusion-side only via threshold_x_N_cos / threshold_x_N_sin / threshold_x_N, through limiting_ray_reflection_count + threshold_forms_agree + squeeze by_contra argument.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five contract declarations proved; preflight compiles with 0 sorry; axiom audit clean; statement faithful to the A.1 blueprint contract.",
+          "evidence": "Preflight: compiles=true, rc=0, sorry_count=0, only 5 push_neg deprecation warnings (style). Trace: lean_verify axioms = [propext, Classical.choice, Quot.sound] (no sorryAx); final lake env lean exit 0 with 0 errors/0 sorries; final goal-state check on threshold_x_N_sin shows goals_after=[]. Contract: HalfCylindricalMirror structure carries only assumption-side fields (R_pos, N_refl symmetry/axial-ray, threshold defining property, edge count, geometric reflection-count law); closed-form answer x_N = R cos(pi/(2N+1)) = R sin((2N-1)pi/(4N+2)) appears conclusion-side only via threshold_x_N_cos / threshold_x_N_sin / threshold_x_N, through limiting_ray_reflection_count + threshold_forms_agree + squeeze by_contra argument.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.428895Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.428907Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_B_2.lean": {
+      "status": "solved",
+      "attempts": 2,
+      "last_review_iter": 15,
+      "reason": "All five review checks pass: the iter-013 residual (5 sorries plus 4 broken tactic steps in abs_hitOffset_eq) is fully repaired. The file compiles with 0 errors and 0 sorries (deterministic preflight: compiles=true, sorry_count=0, rc=0), and the trace-verified '#print axioms' audit of all six proved declarations yields only [propext, Classical.choice, Quot.sound] - no sorryAx, no extra axioms. The contract is the faithful iter-011 two-sided-band redraft whose conclusion P/P0 = 1/(1-cos theta_max) is a proved goal, not an assumption, and the proof derives it honestly from the B.1 calibration, the two-sided hit-band bookkeeping, and uniform-intensity width accounting.",
+      "evidence": "Preflight iter-015: file=IPhO2026Problems/problem_IPhO_2026_2_B_2.lean, compiles=true, returncode=0, sorry_count=0, diagnostics empty, 26.1s. grep of the current source finds 'sorry' only in the historical header comment (lines 45-46); no axiom/admit/native_decide anywhere. Prover trace iter-015 (365 events, session biui-0724) ends 04:03:18Z with a successful session_end: fresh 'lake env lean' EXIT=0 at 04:02:22Z after removal of the scratch AxiomCheck section, and the appended-section '#print axioms' run at 04:01:42Z reports each of abs_hitOffset_eq, collectedWidth_eq_two_mul_yOff, yOff_eq_R_sin_thetaMax, two_r_sin_over_diameter_eq, power_ratio_eq_width_ratio, power_ratio_in_terms_of_theta_max depends only on [propext, Classical.choice, Quot.sound]; the committed file contains no leftover '#print'/AxiomCheck artifacts (verified by grep). The newest and only matching task-result artifact .archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_2.md (written by this trace at 04:02:58Z) agrees with the trace: 0 errors/0 warnings/0 sorries, signatures byte-identical, and details the six proofs. Source audit: theorem power_ratio_in_terms_of_theta_max (p : CookerParams)(g : CookerGeometry p)(r : AbsorbedRays p g)(budget : PowerBudget p g r){theta}(h : ThetaMaxSpec p g r theta)(hcal : B1Calibration p theta) : budget.P / budget.P0 = 1 / (1 - Real.cos theta) preserves the blueprint target (recorded official answer as the equality goal; theta_max spec in (0, pi/2); no weakening, no existential generalization, no dropped hypotheses). All structure signatures (CookerParams, CookerGeometry, AbsorbedRays, PowerBudget, B1Calibration, ThetaMaxSpec, collectedWidth, incidenceAngle, hitOffset) match the blueprint environments with their lean bindings. Physics semantics: specular reflection law on the circle, container offset A - C = (R/2) e, two-sided hit band (-yOff, yOff) with full coverage hit_offsets_fill, P = I*collectedWidth, P0 = I*(2a), B.1 calibration a = R sin t - (R/2) sin 2t - all kept as hypotheses; units are consistent power-per-unit-axis-length ratios with the common positive intensity cancelled via explicit positivity (hI, p.ha, p.hR); no numerical tolerance involved (symbolic exact answer for the whole theta_max family; B.3 spot check cos=4/5 gives 5 documented in the header). The chain is the blueprint route: power_ratio_eq_width_ratio (intensity cancellation) to yOff_eq_R_sin_thetaMax (two-sided squeeze using ThetaMaxSpec attainment plus strictMonoOn_sin on Icc (-(pi/2)) (pi/2)) to two_r_sin_over_diameter_eq (B.1 plus sin_two_mul via linear_combination, mul_div_mul_right cancellation) to the target rewrite chain ending in exact hbridge. Prior suspicious-schema note (free yOff binder in hit_offsets_fill) is unchanged from the iter-013 review: autoImplicit binds it universally, which is the intended reading, and it is used honestly for whole-band coverage; signature hygiene remark only, not a soundness hole.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Conclusion p.R / (2 * p.R * sin θ * (1 - Real.cos θ)) = 1 / (1 - Real.cos θ) is mathematically false from the stated hypotheses: cancelling the nonzero factors reduces it to 2 sin θ = 1, which does not follow from θ ∈ (0, π/2) and B1Calibration. Countermodel within the formal hypotheses: R=1, a = sin(π/4) - (1/2)sin(π/2) ≈ 0.207 > 0, θ = π/4 satisfies B1Calibration, yet R/(2a) ≈ 2.414 ≠ 1/(1-cos(π/4)) ≈ 3.414. The algebraically correct identity is p.R/(2*p.a) = 1/(2*Real.sin θ*(1-Real.cos θ)); the recorded answer 1/(1-cos θ_max) cannot be derived without an additional (absent) geometric constraint on θ_max, so the contract is underdetermined between the B.1 calibration and the recorded official answer.",
+          "evidence": "Preflight: compiles=false, sorry_count=0, error at line 262:40 unsolved goals ⊢ p.R - p.R * cos θ = -(p.R * cos θ * sin θ * 2) + p.R * sin θ * 2 after (div_eq_div_iff h2Rs' h10).mpr (by ring) in lemma radius_over_diameter_eq (problem_IPhO_2026_2_B_2.lean:257). The residual goal is exactly the claim 1 = 2 sin θ in disguise, not a ring-provable identity. Prover trace iter-010 (218 events) ends with the prover itself deriving the same falsehood and hunting for references; the transition analysis P = I·R, P₀ = I·(2a), 2a = 2R sinθ(1-cosθ) is correct and forces P/P₀ = 1/(2 sinθ_max(1-cosθ_max)) ≠ 1/(1-cosθ_max) generically. No matching task-results artifact exists; the current prover trace is the primary evidence.",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.429185Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936503Z"
+        },
+        {
+          "iter": 13,
+          "route": "retry_proof",
+          "resulting_status": "retry",
+          "top_level_status": "partial",
+          "attempt": 1,
+          "reason": "The iter-011 redrafted contract is faithful and derivable (two-sided hit band (-yOff, yOff), collectedWidth = 2*yOff = 2*R*sin theta_max, B.1 calibration 2a = 2R sinθ(1-cosθ) forcing P/P0 = 1/(1-cosθ_max), the recorded answer), so no contract defect remains from the iter-010 underdetermined_contract review; the residual is purely mechanistic: the final target theorem and three chain lemmas still carry 5 active sorries after the prover session hit a 429 rate-limit abort mid-repair at 13:48:16Z, and the one attempted lemma abs_hitOffset_eq fails because its Parseval step hands a quadratic identity ((v.e)^2+(v.n)^2 = v0^2+v1^2) to linarith/nlinarith without a ring-normal-form hypothesis, plus downstream abs/sqrt rewrite misses (pattern |wn|^2 in sqrt(wn^2) goal) and an unproven field-normalization step p.R^2*(1-(|ue|/p.R)^2) = p.R^2-|ue|^2. Root cause = tactic/algebra-certificate repair left incomplete by a budget/infrastructure abort, not a contract or hypothesis defect.",
+          "evidence": "Deterministic preflight: compiles=false, sorry_count=5, first error 279:4 'linarith failed to find a contradiction' with residual goal (v.ofLp 0*g.e.ofLp 0 + v.ofLp 1*g.e.ofLp 1)^2 + (v.ofLp 0*g.n.ofLp 0 + v.ofLp 1*g.n.ofLp 1)^2 < v.ofLp 0^2 + v.ofLp 1^2 |- False (the negated Parseval identity, implied by h0e, h0n, hpen by expansion/ring_nf), then 295:8 rewrite miss and 299:69 unsolved goals ⊢ p.R^2 - p.R^2*|ue|^2*p.R^-2 = p.R^2 - |ue|^2, and 309:8 rewrite failure of pattern |wn|^2 in target sqrt(wn^2) = p.R*sqrt(1-(|ue|/p.R)^2). Prover trace iter-013 (294 events, session biui-0724) ends 13:48:16Z with 'exceeded retry limit, last status: 429 Too Many Requests' immediately after patching the Parseval lemma, before any recompile or work on the five sorried lemmas. Contract audit: signatures preserve the blueprint (Plane, CookerParams{R,a}, CookerGeometry A-C=(R/2)e with |e|=|n|=1, n perp e; AbsorbedRays with specular reflection law and two-sided band coverage hitSet_Ioo/hit_offsets_fill; PowerBudget P = I*collectedWidth, P0 = I*2a; B1Calibration a = R sinθ - (R/2) sin 2θ; ThetaMaxSpec in (0, pi/2)); the conclusion 1/(1-cosθ) is a goal, not an assumption; units are consistent power-per-unit-length ratios. The target file does contain a malformed-looking schema (free variable yOff in AbsorbedRays.hit_offsets_fill and in the sorry lemmas' docstrings) but relaxedAutoImplicit=false in lakefile.toml and the preflight shows the elaborated statements, so autoImplicit fields those binders — flag for signature hygiene review but not a soundness hole. No matching task-results artifact exists ([]), so the current prover trace is primary evidence; its absence is reported as a process warning, not a semantic failure.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.099443Z"
+        },
+        {
+          "event_id": "pipeline:15:IPhO2026Problems/problem_IPhO_2026_2_B_2.lean:proof:1",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 2,
+          "reason": "All five review checks pass: the iter-013 residual (5 sorries plus 4 broken tactic steps in abs_hitOffset_eq) is fully repaired. The file compiles with 0 errors and 0 sorries (deterministic preflight: compiles=true, sorry_count=0, rc=0), and the trace-verified '#print axioms' audit of all six proved declarations yields only [propext, Classical.choice, Quot.sound] - no sorryAx, no extra axioms. The contract is the faithful iter-011 two-sided-band redraft whose conclusion P/P0 = 1/(1-cos theta_max) is a proved goal, not an assumption, and the proof derives it honestly from the B.1 calibration, the two-sided hit-band bookkeeping, and uniform-intensity width accounting.",
+          "evidence": "Preflight iter-015: file=IPhO2026Problems/problem_IPhO_2026_2_B_2.lean, compiles=true, returncode=0, sorry_count=0, diagnostics empty, 26.1s. grep of the current source finds 'sorry' only in the historical header comment (lines 45-46); no axiom/admit/native_decide anywhere. Prover trace iter-015 (365 events, session biui-0724) ends 04:03:18Z with a successful session_end: fresh 'lake env lean' EXIT=0 at 04:02:22Z after removal of the scratch AxiomCheck section, and the appended-section '#print axioms' run at 04:01:42Z reports each of abs_hitOffset_eq, collectedWidth_eq_two_mul_yOff, yOff_eq_R_sin_thetaMax, two_r_sin_over_diameter_eq, power_ratio_eq_width_ratio, power_ratio_in_terms_of_theta_max depends only on [propext, Classical.choice, Quot.sound]; the committed file contains no leftover '#print'/AxiomCheck artifacts (verified by grep). The newest and only matching task-result artifact .archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_2.md (written by this trace at 04:02:58Z) agrees with the trace: 0 errors/0 warnings/0 sorries, signatures byte-identical, and details the six proofs. Source audit: theorem power_ratio_in_terms_of_theta_max (p : CookerParams)(g : CookerGeometry p)(r : AbsorbedRays p g)(budget : PowerBudget p g r){theta}(h : ThetaMaxSpec p g r theta)(hcal : B1Calibration p theta) : budget.P / budget.P0 = 1 / (1 - Real.cos theta) preserves the blueprint target (recorded official answer as the equality goal; theta_max spec in (0, pi/2); no weakening, no existential generalization, no dropped hypotheses). All structure signatures (CookerParams, CookerGeometry, AbsorbedRays, PowerBudget, B1Calibration, ThetaMaxSpec, collectedWidth, incidenceAngle, hitOffset) match the blueprint environments with their lean bindings. Physics semantics: specular reflection law on the circle, container offset A - C = (R/2) e, two-sided hit band (-yOff, yOff) with full coverage hit_offsets_fill, P = I*collectedWidth, P0 = I*(2a), B.1 calibration a = R sin t - (R/2) sin 2t - all kept as hypotheses; units are consistent power-per-unit-axis-length ratios with the common positive intensity cancelled via explicit positivity (hI, p.ha, p.hR); no numerical tolerance involved (symbolic exact answer for the whole theta_max family; B.3 spot check cos=4/5 gives 5 documented in the header). The chain is the blueprint route: power_ratio_eq_width_ratio (intensity cancellation) to yOff_eq_R_sin_thetaMax (two-sided squeeze using ThetaMaxSpec attainment plus strictMonoOn_sin on Icc (-(pi/2)) (pi/2)) to two_r_sin_over_diameter_eq (B.1 plus sin_two_mul via linear_combination, mul_div_mul_right cancellation) to the target rewrite chain ending in exact hbridge. Prior suspicious-schema note (free yOff binder in hit_offsets_fill) is unchanged from the iter-013 review: autoImplicit binds it universally, which is the intended reading, and it is used honestly for whole-band coverage; signature hygiene remark only, not a soundness hole.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T04:06:23.616399Z"
+        }
+      ],
+      "updated_at": "2026-07-29T04:06:23.616442Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_B_3.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "All four declarations (thetaMaxRecorded_mem_Ioo, sin_thetaMaxRecorded, sin_two_mul_thetaMaxRecorded, container_diameter_for_quintuple_power) are fully proved; deterministic preflight passed with 0 sorries and compiles=true; no axiom/sorry/admit/native_decide tokens present in the source.",
+      "evidence": "Main theorem (line 211) keeps the full original signature with geometry structure, mirror-physics predicate, previous-part B.1/B.2 interface hypotheses, R=1 and P=5*P0, and concludes thetaMax = arccos(4/5) AND a = 0.12 AND a*100 = 12 - matching the recorded official answer conclusion-side only. Proof inverts B.2 (5 = 1/(1-cos)) via eq_div_iff+linarith to cos=4/5, uses acuteness theta in (0,pi/2) with Real.arccos_cos for theta identification, then substitutes the 3-4-5 certificates sin=3/5, sin(2t)=24/25 into B.1 at R=1 to get a = 3/5 - 12/25 = 0.12 m = 12 cm. Arithmetic verified: 3/5 - (1/2)(24/25) = 3/25 = 0.12. Hypotheses hR, ha, hphys are ambient model hypotheses not needed for the value computation; their unused-variable linter warnings are benign and their retention preserves the physical contract. No matching prover task-result artifact exists in .archon/task_results (process warning only); the iter-010 prover trace (session 019fa6d4) agrees with the on-disk proof and claims #print axioms = [propext, Classical.choice, Quot.sound].",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All four declarations (thetaMaxRecorded_mem_Ioo, sin_thetaMaxRecorded, sin_two_mul_thetaMaxRecorded, container_diameter_for_quintuple_power) are fully proved; deterministic preflight passed with 0 sorries and compiles=true; no axiom/sorry/admit/native_decide tokens present in the source.",
+          "evidence": "Main theorem (line 211) keeps the full original signature with geometry structure, mirror-physics predicate, previous-part B.1/B.2 interface hypotheses, R=1 and P=5*P0, and concludes thetaMax = arccos(4/5) AND a = 0.12 AND a*100 = 12 - matching the recorded official answer conclusion-side only. Proof inverts B.2 (5 = 1/(1-cos)) via eq_div_iff+linarith to cos=4/5, uses acuteness theta in (0,pi/2) with Real.arccos_cos for theta identification, then substitutes the 3-4-5 certificates sin=3/5, sin(2t)=24/25 into B.1 at R=1 to get a = 3/5 - 12/25 = 0.12 m = 12 cm. Arithmetic verified: 3/5 - (1/2)(24/25) = 3/25 = 0.12. Hypotheses hR, ha, hphys are ambient model hypotheses not needed for the value computation; their unused-variable linter warnings are benign and their retention preserves the physical contract. No matching prover task-result artifact exists in .archon/task_results (process warning only); the iter-010 prover trace (session 019fa6d4) agrees with the on-disk proof and claims #print axioms = [propext, Classical.choice, Quot.sound].",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.429481Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.429492Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "All five review checks pass: preflight compiles with rc=0 and sorry_count=0; statements match the blueprint contract exactly; the specular-law hypotheses are honest geometric constraints and the answers appear conclusion-side only; proof derives m_A=cot(2θ) from the angle-equality clause and b_A=R/(2cosθ) from the point-on-line clause via sound algebra.",
+      "evidence": "Lean main target: s.m_A θ = cot (2*θ) ∧ s.b_A θ = s.R / (2*cos θ), proved as ⟨s.reflected_ray_A_slope θ, s.reflected_ray_A_intercept θ⟩. slope_reflection_key derives 2*(m_A θ)*sin θ*cos θ = cos θ^2 - sin θ^2 from reflection_law clause 3 by clearing R*sqrt(m^2+1), squaring with Real.sq_sqrt, cancelling R^2>0 via mul_left_cancel₀; branch θ∈Ioo 0 (π/2) gives sin θ, cos θ > 0 closing eq_div_iff side goals. Intercept uses clause 1 (P on line), the proved slope, sin_sq_add_cos_sq, field_simp + linear_combination. Preflight: compiles=true, returncode=0, sorry_count=0, no diagnostics. No axiom/sorry/native_decide laundering; no signature or hypothesis weakening.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five review checks pass: preflight compiles with rc=0 and sorry_count=0; statements match the blueprint contract exactly; the specular-law hypotheses are honest geometric constraints and the answers appear conclusion-side only; proof derives m_A=cot(2θ) from the angle-equality clause and b_A=R/(2cosθ) from the point-on-line clause via sound algebra.",
+          "evidence": "Lean main target: s.m_A θ = cot (2*θ) ∧ s.b_A θ = s.R / (2*cos θ), proved as ⟨s.reflected_ray_A_slope θ, s.reflected_ray_A_intercept θ⟩. slope_reflection_key derives 2*(m_A θ)*sin θ*cos θ = cos θ^2 - sin θ^2 from reflection_law clause 3 by clearing R*sqrt(m^2+1), squaring with Real.sq_sqrt, cancelling R^2>0 via mul_left_cancel₀; branch θ∈Ioo 0 (π/2) gives sin θ, cos θ > 0 closing eq_div_iff side goals. Intercept uses clause 1 (P on line), the proved slope, sin_sq_add_cos_sq, field_simp + linear_combination. Preflight: compiles=true, returncode=0, sorry_count=0, no diagnostics. No axiom/sorry/native_decide laundering; no signature or hypothesis weakening.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.429794Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.429807Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_2.lean": {
+      "status": "solved",
+      "attempts": 2,
+      "last_review_iter": 15,
+      "reason": "All five review checks pass. (1) Deterministic iter-015 preflight: compiles=true, returncode 0, sorry_count 0, no diagnostics; source grep confirms no sorry/admit/axiom/native_decide (only two narrative comments saying no sorry remains). (2) Statement preservation: the target ray_B_first_order_expansion is the conjunction of the two IsLittleO defects (fun dth => m_B th dth - (cot(2th) - 2*(sin(2th))^{-1}^2*dth)) =o[nhds 0] id and the intercept analog with (R/(2 cos th))*(1 + tan th*dth); the linear coefficients are conclusion-side, the C.1 values (m_A_eq/b_A_eq/m_A_formula/b_A_formula) enter only through the zeroth-order identifications, and the m_B_eq/b_B_eq family-membership fields tie ray B to the shared specular family at th+dth - no weakening (equality kept, not <=, no existential generalization). (3) Physical semantics faithful to blueprint thm:physics:IPhO_2026_2_C_2:target and recorded answer m_B = cot(2th) - 2 csc(2th)^2 dth, b_B = [R/(2 cos th)](1 + tan th dth) up to O(dth^2): csc written as (sin)^{-1}, the o(dth) remainder documented as the faithful first-order content of the official O(dth^2) phrasing; acute branch th in Ioo 0 (pi/2) keeps cos th, sin 2th nonzero; R>0 carries length dimension, slopes/angles dimensionless per the NeighboringRayExpansion doc. (4) Honest hypothesis use: the iter-013 redraft fields M_specular_deriv/B_specular_deriv (deriv M th = -2*(sin(2th))^{-1}^2, deriv B th = (R/(2 cos th))*tan th) are assumption-side law-of-reflection contracts that exactly exclude the certified iter-010 affine countermodel; proofs expose the hidden little-o coefficient via hasDerivAt_iff_isLittleO_nhds_zero (with mul_comm congruence), pin it by HasDerivAt.deriv uniqueness, rewrite by the contract, and close by congr'/calc/ring - no answer-as-assumption (contract fixes deriv-values, not the o(dth) conclusions). No multiple-choice answer or tolerance applies. (5) The iter-015 prover trace (ends 02:59:37Z, session_end 32 turns) and newest task result .archon/task_results/problem_IPhO_2026_2_C_2.md (mtime 1785293956712595054) agree: the sole defect was the iter-013 dangling doc comment at old line 182, repaired by deleting only that orphaned 6-line block, verified by fresh lake env lean exit 0; this matches both the supplied preflight and the current source (branch_denominators_ne_zero intact at line 218, no duplicate doc at 178-182).",
+      "evidence": "Preflight: passed, compiles=true, returncode=0, sorry_count=0, 9.443s, diagnostics empty. Lean source audit: ray_B_first_order_expansion proved by exact <s.ray_B_slope_first_order, s.ray_B_intercept_first_order>; slope half obtains <dm, hdm> := s.M_first_order, builds HasDerivAt s.M dm s.th via hasDerivAt_iff_isLittleO_nhds_zero + mul_comm congruence, derives dm = -2*(sin(2*th))^{-1}^2 from hMhd.deriv + s.M_specular_deriv, then congr'/EventuallyEq + rw [s.m_B_eq, hM, hdmval] + ring closes the defect; intercept half symmetric via s.B_first_order/s.B_specular_deriv. Bridge lemmas deriv_specularSlopeFamily (HasDerivAt.div chain rule + sin_sq_add_cos_sq) and deriv_specularInterceptFamily (reciprocal rule + tan_eq_sin_div_cos) are sorry-free; branch_denominators_ne_zero proves sin(2th) != 0 and cos th != 0 from the acute branch. Trace tail: 02:59:20Z lake env lean -> EXIT:0; 02:59:37Z session_end confirms completion. Task result matches trace (newest, unique candidate). Blueprint labels def:NeighboringRayExpansion, lem:branch_denominators_ne_zero, lem:deriv_specularSlopeFamily, lem:deriv_specularInterceptFamily, def:specularSlopeFamily/specularInterceptFamily and thm target all correspond to compiled declarations; three stale blueprint \\lean pointers (slope_deriv_value/intercept_deriv_value/slope_deriv_of_contract/intercept_deriv_of_contract) reference pre-redraft helper names folded inline - writer-side blueprint sync only, not a Lean defect and not a marker I may edit.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Underdetermined contract: the frozen regularity fields M_first_order/B_first_order only assert the existence of SOME little-o slope dm/db about theta for an arbitrary family M,B : R -> R, and nothing ties the family to the specular law beyond its value at the single point theta. The model M phi = cot(2*theta) + c*(phi - theta), B phi = R/(2 cos theta) + d*(phi - theta) satisfies every hypothesis for any c,d, while the target fixes c = -2 csc(2theta)^2 and d = (R/(2 cos theta)) tan theta; hence the goals at lines 155 and 194 are not derivable (indeed false for generic c) and the two active sorrys cannot be closed by tactics alone. The unit-extractability observation (the IsLittleO interface forces dm = fderiv M theta since dm*DeltaTheta is linear) makes the goal a well-posed deriv-value identity only after M is identified with the specular family on a neighborhood, which the contract omits.",
+          "evidence": "Preflight: compiles, returncode 0, sorry_count 2, warnings at problem_IPhO_2026_2_C_2.lean:155:8 and :194:8 ('declaration uses sorry') inside ray_B_slope_first_order (hdmval : dm = -2*(sin (2*s.theta))^{-1}^2) and ray_B_intercept_first_order (hdbval : db = (R/(2 cos theta))*tan theta). Structure, signatures, acute branch (theta in Ioo 0 (pi/2)), C.1 prerequisites and o(DeltaTheta) IsLittleO formulation all match the blueprint target thm:physics:IPhO_2026_2_C_2:target; all other proofs (branch_denominators_ne_zero, congr'/calc scaffolding, final conjunction) compile cleanly. Iter-010 prover trace (76 turns, biui-0724) reached the same verdict and requests redraft with a minimal fix: add family-law fields (preferred: forall phi in nhds theta, M phi = cot (2*phi) and B phi = R/(2 cos phi)), then close via hasDerivAt_iff_isLittleO_nhds_zero + HasDerivAt.unique with signatures otherwise untouched. Newest matching task-result list is empty and the trace-referenced .archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_2.md is absent (process warning only; trace is primary evidence).",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.430085Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936556Z"
+        },
+        {
+          "iter": 13,
+          "route": "retry_proof",
+          "resulting_status": "retry",
+          "top_level_status": "partial",
+          "attempt": 1,
+          "reason": "Compile-blocking parse error, not a contract defect: the deterministic iter-013 preflight reports compiles=false, returncode=1, sorry_count=0, sole diagnostic '182:40: error: unexpected token /--; expected lemma'. A stray doc comment (lines 178-182, the branch_denominators_ne_zero doc block) is left dangling immediately before the next /-- at line 184, killing the file at parse time. The contract itself is faithful and now derivable: the iter-013 redraft (13:37Z) added the M_specular_deriv/B_specular_deriv deriv-value fields that exactly exclude the compiled affine countermodel, and both little-o target proofs are fully written via hasDerivAt_iff_isLittleO_nhds_zero + HasDerivAt.deriv with zero sorries and no axioms. The only damage is the dangling-doc parse error (plus possible residual end-scope fallout flagged by the redraft agent's own LSP diagnostics).",
+          "evidence": "Preflight: failed, 0 sorries, 10.919s, 'problem_IPhO_2026_2_C_2.lean:182:40: error: unexpected token /--; expected lemma'. Source view confirms a complete doc comment (lines 178-182, ends -/ at 182) followed by blank line 183 and a new /-- at 184 with no declaration between; grep of declarations shows the real branch_denominators_ne_zero intact at line 225 (undocumented but valid) and deriv_specularSlopeFamily at 188, so the 178-182 block is an orphaned duplicate. The prover trace supplied for review ends 13:17Z on the pre-redraft baseline (2 honest sorries, then L304/368) and predates the 13:37Z post-trace formalizer redraft; its underivability verdict is stale and its redraft request was honored structurally (the two deriv-contract fields are present), but the redraft never reached a clean compile - its final LSP state shows the same parse error at 182:41 plus a transient duplicate 'end NeighboringRayExpansion'. The trace-referenced .archon/task_results/problem_IPhO_2026_2_C_2.md is absent (process warning; trace is primary evidence).",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.099755Z"
+        },
+        {
+          "event_id": "pipeline:15:IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:proof:1",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 2,
+          "reason": "All five review checks pass. (1) Deterministic iter-015 preflight: compiles=true, returncode 0, sorry_count 0, no diagnostics; source grep confirms no sorry/admit/axiom/native_decide (only two narrative comments saying no sorry remains). (2) Statement preservation: the target ray_B_first_order_expansion is the conjunction of the two IsLittleO defects (fun dth => m_B th dth - (cot(2th) - 2*(sin(2th))^{-1}^2*dth)) =o[nhds 0] id and the intercept analog with (R/(2 cos th))*(1 + tan th*dth); the linear coefficients are conclusion-side, the C.1 values (m_A_eq/b_A_eq/m_A_formula/b_A_formula) enter only through the zeroth-order identifications, and the m_B_eq/b_B_eq family-membership fields tie ray B to the shared specular family at th+dth - no weakening (equality kept, not <=, no existential generalization). (3) Physical semantics faithful to blueprint thm:physics:IPhO_2026_2_C_2:target and recorded answer m_B = cot(2th) - 2 csc(2th)^2 dth, b_B = [R/(2 cos th)](1 + tan th dth) up to O(dth^2): csc written as (sin)^{-1}, the o(dth) remainder documented as the faithful first-order content of the official O(dth^2) phrasing; acute branch th in Ioo 0 (pi/2) keeps cos th, sin 2th nonzero; R>0 carries length dimension, slopes/angles dimensionless per the NeighboringRayExpansion doc. (4) Honest hypothesis use: the iter-013 redraft fields M_specular_deriv/B_specular_deriv (deriv M th = -2*(sin(2th))^{-1}^2, deriv B th = (R/(2 cos th))*tan th) are assumption-side law-of-reflection contracts that exactly exclude the certified iter-010 affine countermodel; proofs expose the hidden little-o coefficient via hasDerivAt_iff_isLittleO_nhds_zero (with mul_comm congruence), pin it by HasDerivAt.deriv uniqueness, rewrite by the contract, and close by congr'/calc/ring - no answer-as-assumption (contract fixes deriv-values, not the o(dth) conclusions). No multiple-choice answer or tolerance applies. (5) The iter-015 prover trace (ends 02:59:37Z, session_end 32 turns) and newest task result .archon/task_results/problem_IPhO_2026_2_C_2.md (mtime 1785293956712595054) agree: the sole defect was the iter-013 dangling doc comment at old line 182, repaired by deleting only that orphaned 6-line block, verified by fresh lake env lean exit 0; this matches both the supplied preflight and the current source (branch_denominators_ne_zero intact at line 218, no duplicate doc at 178-182).",
+          "evidence": "Preflight: passed, compiles=true, returncode=0, sorry_count=0, 9.443s, diagnostics empty. Lean source audit: ray_B_first_order_expansion proved by exact <s.ray_B_slope_first_order, s.ray_B_intercept_first_order>; slope half obtains <dm, hdm> := s.M_first_order, builds HasDerivAt s.M dm s.th via hasDerivAt_iff_isLittleO_nhds_zero + mul_comm congruence, derives dm = -2*(sin(2*th))^{-1}^2 from hMhd.deriv + s.M_specular_deriv, then congr'/EventuallyEq + rw [s.m_B_eq, hM, hdmval] + ring closes the defect; intercept half symmetric via s.B_first_order/s.B_specular_deriv. Bridge lemmas deriv_specularSlopeFamily (HasDerivAt.div chain rule + sin_sq_add_cos_sq) and deriv_specularInterceptFamily (reciprocal rule + tan_eq_sin_div_cos) are sorry-free; branch_denominators_ne_zero proves sin(2th) != 0 and cos th != 0 from the acute branch. Trace tail: 02:59:20Z lake env lean -> EXIT:0; 02:59:37Z session_end confirms completion. Task result matches trace (newest, unique candidate). Blueprint labels def:NeighboringRayExpansion, lem:branch_denominators_ne_zero, lem:deriv_specularSlopeFamily, lem:deriv_specularInterceptFamily, def:specularSlopeFamily/specularInterceptFamily and thm target all correspond to compiled declarations; three stale blueprint \\lean pointers (slope_deriv_value/intercept_deriv_value/slope_deriv_of_contract/intercept_deriv_of_contract) reference pre-redraft helper names folded inline - writer-side blueprint sync only, not a Lean defect and not a marker I may edit.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T03:01:34.677740Z"
+        }
+      ],
+      "updated_at": "2026-07-29T03:01:34.677784Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_3.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "All five review checks pass: file compiles with zero sorries, frozen signature preserved, statement matches blueprint caustic limit X_c=R sin^3 theta and Y_c=(R/2)cos theta(2-cos 2theta), hypothesis/answer split is honest, and iter-010 prover trace supports the closed proof.",
+      "evidence": "Deterministic preflight: compiles=true, sorry_count=0, returncode=0, no diagnostics. lean_verify on IPhO2026Problems.IPhO2026_2_C_3.limitingIntersectionCoordinates: axioms only {propext, Classical.choice, Quot.sound}; source scan clean. Conclusion is a genuine two-coordinate Tendsto on nhdsWithin-ne-0 with the limit values only on the conclusion side; C.1 exact line values and C.2 O(DeltaTheta^2) expansions and eventual intersection existence enter strictly as hypotheses. Proof degrades O(d^2) remainders to o(d) (IsBigO.trans_isLittleO, IsLittleO.tendsto_div_nhds_zero), derives slope-difference nonvanishing via Tendsto.eventually_ne, solves the intersection x-coordinate as an explicit quotient eventually, applies Tendsto.div, and closes X_c via tan/sin-two-mul + field_simp/ring to radiusval*sin^3 theta and Y_c through the exact ray-A line to (radiusval/2)cos theta(2-cos 2theta). Prover trace session_end confirms identical content, exit 0, and reports no redraft needed; matching task-results set is empty -> process warning only.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five review checks pass: file compiles with zero sorries, frozen signature preserved, statement matches blueprint caustic limit X_c=R sin^3 theta and Y_c=(R/2)cos theta(2-cos 2theta), hypothesis/answer split is honest, and iter-010 prover trace supports the closed proof.",
+          "evidence": "Deterministic preflight: compiles=true, sorry_count=0, returncode=0, no diagnostics. lean_verify on IPhO2026Problems.IPhO2026_2_C_3.limitingIntersectionCoordinates: axioms only {propext, Classical.choice, Quot.sound}; source scan clean. Conclusion is a genuine two-coordinate Tendsto on nhdsWithin-ne-0 with the limit values only on the conclusion side; C.1 exact line values and C.2 O(DeltaTheta^2) expansions and eventual intersection existence enter strictly as hypotheses. Proof degrades O(d^2) remainders to o(d) (IsBigO.trans_isLittleO, IsLittleO.tendsto_div_nhds_zero), derives slope-difference nonvanishing via Tendsto.eventually_ne, solves the intersection x-coordinate as an explicit quotient eventually, applies Tendsto.div, and closes X_c via tan/sin-two-mul + field_simp/ring to radiusval*sin^3 theta and Y_c through the exact ray-A line to (radiusval/2)cos theta(2-cos 2theta). Prover trace session_end confirms identical content, exit 0, and reports no redraft needed; matching task-results set is empty -> process warning only.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.430386Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.430397Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean": {
+      "status": "solved",
+      "attempts": 3,
+      "last_review_iter": 15,
+      "reason": "The iter-013 sorries and build breakers are fully repaired: the file compiles with zero sorries and the main theorem is proved honestly (FTC/squeeze asymptotics assembled into the IsEquivalent pair at the recorded C.4 constants).",
+      "evidence": "Deterministic preflight: compiles=true, returncode=0, sorry_count=0; only warnings are a benign unusedVariables lint (h0̄1, line 305) and an unused simp arg (line 761). Grep finds no sorry/admit/axiom/native_decide/unsafe. Statement `SatisfiesCausticPowerLaw c.X_c c.Y_c c.R (c.R/2) ((3/4)*c.R^(1/3))` kept byte-frozen from the accepted iter-010 contract: C.3 formulas enter only as structure hypotheses (X_c_formula/Y_c_formula); recorded constants u=R/2, v=(3/4)R^(1/3), p=2, q=3, and the rational exponent 2/3 appear conclusion-side only (proved by refine <rfl, rfl, norm_num, norm_num, ...>); the theta<<1 reading via smallAngleFilter = nhdsWithin 0 (Set.Ioi 0) and Asymptotics.IsEquivalent matches the blueprint's leading-order reading (an exact identity is documented as false). Proof content: C4Dev FTC chain (int_pow/int_id, abs_sin_le_abs, one_sub_cos_le_quad, abs_t_sub_sin_le, cos_quad_isLittleO, rpow_cube_two_thirds/rpow_X_split, sin_isEquivalent, cos_cos2_quad_isLittleO, Y_full_isEquivalent) assembled via IsEquivalent.trans with eventually rpow split (R^(1/3)*R^(2/3)=R) and w=R>0 for X_c ~ R*theta^3. Iter-015 prover trace (1407 events, 352 turns, session_end 2026-07-29T06:33:58Z, exit 0) and newest task result .archon/task_results/problem_IPhO_2026_2_C_4.md agree: clean build, 0 sorries, axioms [propext, Classical.choice, Quot.sound] only. No leak of the answer through opens/narrowing; topology notations now correctly opened (open Filter, open scoped Topology).",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "retry_proof",
+          "resulting_status": "retry",
+          "top_level_status": "partial",
+          "attempt": 1,
+          "reason": "Main theorem body is still `by sorry` (line 145); contract is faithful and derivable, the gap is an unfinished hard asymptotic-analysis proof (tactics/assembly/budget), not a modeling defect.",
+          "evidence": "Preflight: compiles=true, returncode=0, sorry_count=1, diagnostic `145:8: warning: declaration uses sorry`. Goal at sorry: `SatisfiesCausticPowerLaw c.X_c c.Y_c c.R (c.R/2) ((3/4)*c.R^(1/3))`, unfolding to an `Asymptotics.IsEquivalent` pair on `nhdsWithin 0 (Set.Ioi 0)` with constants answer-side only; C.3 formulas enter as structure hypotheses `X_c_formula`/`Y_c_formula`. Iter-010 prover trace (180 turns, model biui-0724) ends with session_end admitting the sorry remains after building verified scratch ingredients (sinc limits, theta^6*sin^2 theta absorber decomposition, Tendsto.rpow positivity patterns) and reports assembly too large for budget. The task-result file .archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_4.md the trace recorded is absent on disk: process warning only, trace agrees with preflight.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.430698Z"
+        },
+        {
+          "iter": 13,
+          "route": "retry_proof",
+          "resulting_status": "retry",
+          "top_level_status": "partial",
+          "attempt": 2,
+          "reason": "File regressed relative to iter-010: it no longer compiles. Line 150 uses the notation `Nhds` glyph `ñ` (Unknown identifier, no `open Topology`/`open Filter` after the iter-013 edit narrowed opens to `open Real`/`open Asymptotics` only) and line 151 writes `ñ[≥] 0` as the raw token `≥` without the required `[]` bracket/term quoting support, giving a parse error `unexpected token ≥; expected ':' or term`. Below that, the asymptotic proof attempt still contains two genuine sorries (lines 223, 238): the key remainder step `hstep` (`Y_c θ - ((3/2) R θ^2 + R/2) = o(θ^2)` along `nhdsWithin 0 (Set.Ioi 0)`) and the final assembly of the `IsEquivalent` pair. The contract itself remains faithful and derivable (unchanged from the iter-010 ruling): C.3 formulas enter only as structure hypotheses, recorded constants u=R/2, v=(3/4)R^(1/3), p=2, q=3 are conclusion-side only; the defect is tactics/assembly/namespace hygiene plus a truncated prover session, not a modeling defect.",
+          "evidence": "Preflight (deterministic): compiles=false, returncode=1, sorry_count=2, diagnostics: `151:22: error: unexpected token ≥; expected ':' or term` and `150:17: error(lean.unknownIdentifier): Unknown identifier ñ`. File head confirms `open Real`/`open Asymptotics` only, while lines 150-151 and 231 use the topology notations `ñ`/`ñ[≥]`. Sorries at 223 (inside `hstep`, after a false algebra identity `hdecomp` whose RHS is trivially equal to its numerator) and 238 (final goal `SatisfiesCausticPowerLaw c.X_c c.Y_c c.R (c.R/2) ((3/4)*c.R^(1/3))`). Iter-013 prover trace: 1090 events, 338 turns, 2 session_starts (12:18Z, 13:38Z), ends 15:24Z with session_end summary `[turn.failed] exceeded retry limit, last status: 429 Too Many Requests` after ~84 algebra probe files (/tmp/probeNN.lean) and 130 lean_run_code calls; last probes show ring/ring_nf failing on `R*(-1/4)θ^4 = R*(-1/2)θ^4` style mismatches, i.e. the taylor-remainder decomposition was still being corrected when the session died. No matching task-results artifact (list empty) -- trace is primary evidence; missing artifact is a process warning, not a semantic failure. No axiom/native_decide/checker-gaming found; statement, signature and hypotheses are preserved verbatim from the previously accepted contract.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.100049Z"
+        },
+        {
+          "event_id": "pipeline:15:IPhO2026Problems/problem_IPhO_2026_2_C_4.lean:proof:1",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 3,
+          "reason": "The iter-013 sorries and build breakers are fully repaired: the file compiles with zero sorries and the main theorem is proved honestly (FTC/squeeze asymptotics assembled into the IsEquivalent pair at the recorded C.4 constants).",
+          "evidence": "Deterministic preflight: compiles=true, returncode=0, sorry_count=0; only warnings are a benign unusedVariables lint (h0̄1, line 305) and an unused simp arg (line 761). Grep finds no sorry/admit/axiom/native_decide/unsafe. Statement `SatisfiesCausticPowerLaw c.X_c c.Y_c c.R (c.R/2) ((3/4)*c.R^(1/3))` kept byte-frozen from the accepted iter-010 contract: C.3 formulas enter only as structure hypotheses (X_c_formula/Y_c_formula); recorded constants u=R/2, v=(3/4)R^(1/3), p=2, q=3, and the rational exponent 2/3 appear conclusion-side only (proved by refine <rfl, rfl, norm_num, norm_num, ...>); the theta<<1 reading via smallAngleFilter = nhdsWithin 0 (Set.Ioi 0) and Asymptotics.IsEquivalent matches the blueprint's leading-order reading (an exact identity is documented as false). Proof content: C4Dev FTC chain (int_pow/int_id, abs_sin_le_abs, one_sub_cos_le_quad, abs_t_sub_sin_le, cos_quad_isLittleO, rpow_cube_two_thirds/rpow_X_split, sin_isEquivalent, cos_cos2_quad_isLittleO, Y_full_isEquivalent) assembled via IsEquivalent.trans with eventually rpow split (R^(1/3)*R^(2/3)=R) and w=R>0 for X_c ~ R*theta^3. Iter-015 prover trace (1407 events, 352 turns, session_end 2026-07-29T06:33:58Z, exit 0) and newest task result .archon/task_results/problem_IPhO_2026_2_C_4.md agree: clean build, 0 sorries, axioms [propext, Classical.choice, Quot.sound] only. No leak of the answer through opens/narrowing; topology notations now correctly opened (open Filter, open scoped Topology).",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T06:35:52.821075Z"
+        }
+      ],
+      "updated_at": "2026-07-29T06:35:52.821107Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_A_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 13,
+      "reason": "All five checks pass. The iter-011 mandatory redraft of AmpereLawThinMeanPath.ampere_sum (circulation of the once-traversed mean path (2 pi R)*HPerimeter = sum over N enclosed filament currents, no factor N on the field side) makes the contract derivable: ParamagneticTorusA1.ampere_uniform_eq (L584) proves 2*pi*R*H = N*I from ampere.circulation by rewriting ampere_R, ampere_HPerimeter, perimeter_eq_interior and summing constant per-turn currents over winding.card; fieldMagnitude_eq_meanRadius_form (L608) divides by 2*pi*R != 0 (exact key, no sorry); bridges 3-4 give 2*pi*R = V/A and N*I/(2*pi*R) = N*I*A/V by field_simp; both target theorems (L655, L664) are exact transitivity assemblies. No answer-as-assumption (ampere/HOf are unconstrained data for negative-current instances, so no vacuity/false premises), no signature weakening (target relation H = N*I*A/V preserved verbatim), units typed (InstantaneousCurrent.readout in A, H in A/m, V = 2*pi*R*A geometry law).",
+      "evidence": "Deterministic preflight: compiles=true, returncode=0, sorry_count=0, diagnostics empty. Independent grep for sorry/admit/axiom/native_decide in the 672-line file returns 0 hits. Iter-013 prover trace (session 019fa8a9) documents: working tree held the stale pre-redraft snapshot with the sorried summed ampere_sum, the prover restored the iter-013 baseline byte-identically, fresh lake env lean exited 0 with empty log, and #print axioms on all 34 declarations returned only Mathlib-standard [propext, Classical.choice, Quot.sound]. Blueprint ledger bridges 1-4 match the Lean chain; official answer H = N*I*A/V stated only in conclusions.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "The bundled governing law `AmpereLawThinMeanPath.ampere_sum` sums the loop circulation over all N turns, so its consequence (Bridge 1, proved) is 2*pi*R*(N*H) = N*I, which by cancellation of N >= 1 forces 2*pi*R*H = I and NOT H = N*I/(2*pi*R); the target bridge theorem `fieldMagnitude_eq_meanRadius_form` (and hence `paramagneticTorus_H_eq`) is semantically false as a consequence of the stated laws, cf. countermodel 2*pi*R=2, N=2, H=1, I=2 satisfying ampere_sum but falsifying the goal. The remaining gap is closed only by a `sorry` at IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:579 inside `fieldMagnitude_eq_meanRadius_form`, which sits on the transitive dependency path of both main target theorems. The contract defect is on the law/hypothesis side (an unsound extra factor N attributable to the field side of Ampere's circulation law), not on the answer side: the official answer H = N*I*A/V is faithfully stated, so the defect class is underdetermined_contract (law model cannot entail the contracted conclusion) rather than answer_as_assumption.",
+          "evidence": "Preflight: compiles=true, sorry_count=1, warning IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:548:8 'declaration uses sorry' (sorry body itself at line 579). Goal at the gap (after rw [eq_div_iff hD] and two calc steps): T.fieldMagnitude * (2*Real.pi*T.meanRadius) = (T.numTurns : R) * T.wireCurrent.readout with only hF : 2*Real.pi*T.meanRadius*T.fieldMagnitude = T.wireCurrent.readout available; the step hF -> goal is exactly multiplication by N and is invalid for N > 1. Prover proved this non-derivability with machine-checked norm_num countermodels in the trace (iter-010 prover jsonl, ~04:44Z) and reported the redraft request in its session summary; matching flattened/legacy task-result artifact (.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_1.md) is absent in this workspace, recorded as a process warning only. All other components check out honestly: Bridge 1 (ampere_uniform_eq) is fully proved with linear_combination, Bridges 3-4 (mean_circumference_eq, meanRadius_form_eq_volume_form) are fully proved with field_simp, and the two target theorems are exact transitivity assemblies depending on the sorried bridge; no axioms, no native_decide, no signature or statement weakening, no answer-as-assumption, units typed (InstantaneousCurrent.readout in A, H in A/m, V=2*pi*R*A geometry law), no numerical-tolerance issues.",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.430991Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936609Z"
+        },
+        {
+          "iter": 13,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five checks pass. The iter-011 mandatory redraft of AmpereLawThinMeanPath.ampere_sum (circulation of the once-traversed mean path (2 pi R)*HPerimeter = sum over N enclosed filament currents, no factor N on the field side) makes the contract derivable: ParamagneticTorusA1.ampere_uniform_eq (L584) proves 2*pi*R*H = N*I from ampere.circulation by rewriting ampere_R, ampere_HPerimeter, perimeter_eq_interior and summing constant per-turn currents over winding.card; fieldMagnitude_eq_meanRadius_form (L608) divides by 2*pi*R != 0 (exact key, no sorry); bridges 3-4 give 2*pi*R = V/A and N*I/(2*pi*R) = N*I*A/V by field_simp; both target theorems (L655, L664) are exact transitivity assemblies. No answer-as-assumption (ampere/HOf are unconstrained data for negative-current instances, so no vacuity/false premises), no signature weakening (target relation H = N*I*A/V preserved verbatim), units typed (InstantaneousCurrent.readout in A, H in A/m, V = 2*pi*R*A geometry law).",
+          "evidence": "Deterministic preflight: compiles=true, returncode=0, sorry_count=0, diagnostics empty. Independent grep for sorry/admit/axiom/native_decide in the 672-line file returns 0 hits. Iter-013 prover trace (session 019fa8a9) documents: working tree held the stale pre-redraft snapshot with the sorried summed ampere_sum, the prover restored the iter-013 baseline byte-identically, fresh lake env lean exited 0 with empty log, and #print axioms on all 34 declarations returned only Mathlib-standard [propext, Classical.choice, Quot.sound]. Blueprint ledger bridges 1-4 match the Lean chain; official answer H = N*I*A/V stated only in conclusions.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.100343Z"
+        }
+      ],
+      "updated_at": "2026-07-28T17:04:44.100354Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_A_2.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "All five checks pass: deterministic preflight compiles with 0 sorries; theorem signature hypotheses and conclusion unchanged; conclusion `sourceWork fs t op e = ⟨t.V * op.H * e.dB⟩` is exactly the recorded official answer dW_emf = V*H*dB as a defined scalar readout, not an assumption; derivation honestly combines the bundled governing laws (Faraday emf*dt = N*A*dB, Ampere H = N*I/(2*pi*R), ring-volume V = 2*pi*R*A, source power emf*I*dt) via the A.1 bridge and `linear_combination key * e.dB + e.faraday * op.I`, matching the blueprint informal proof; units are scalar-real with positivity constraints carried by IsPositive fields; no answer choice or numerical tolerance applies; iter-010 prover trace terminates with fresh `lake env lean` 0 errors, `lake build` success, and #print axioms limited to [propext, Classical.choice, Quot.sound].",
+      "evidence": "Goal `emf*I*dt = V*H*dB` closed by `linear_combination key * e.dB + e.faraday * op.I` with key : N*I*A = V*H from bridge lemma `fieldStrength_eq_N_mul_I_mul_A_div_V` (itself proved from volume_eq + ampere, no sorry); grep shows no sorry/admit/axiom/native_decide; preflight {compiles: true, sorry_count: 0, returncode 0}; blueprint \\leanok markers present on both proved environments; prover session end summary agrees with file contents. Process warning: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_2.md` reported by the prover is absent on disk (only physics-grounding reports remain), so the prover trace serves as primary evidence per review policy.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five checks pass: deterministic preflight compiles with 0 sorries; theorem signature hypotheses and conclusion unchanged; conclusion `sourceWork fs t op e = ⟨t.V * op.H * e.dB⟩` is exactly the recorded official answer dW_emf = V*H*dB as a defined scalar readout, not an assumption; derivation honestly combines the bundled governing laws (Faraday emf*dt = N*A*dB, Ampere H = N*I/(2*pi*R), ring-volume V = 2*pi*R*A, source power emf*I*dt) via the A.1 bridge and `linear_combination key * e.dB + e.faraday * op.I`, matching the blueprint informal proof; units are scalar-real with positivity constraints carried by IsPositive fields; no answer choice or numerical tolerance applies; iter-010 prover trace terminates with fresh `lake env lean` 0 errors, `lake build` success, and #print axioms limited to [propext, Classical.choice, Quot.sound].",
+          "evidence": "Goal `emf*I*dt = V*H*dB` closed by `linear_combination key * e.dB + e.faraday * op.I` with key : N*I*A = V*H from bridge lemma `fieldStrength_eq_N_mul_I_mul_A_div_V` (itself proved from volume_eq + ampere, no sorry); grep shows no sorry/admit/axiom/native_decide; preflight {compiles: true, sorry_count: 0, returncode 0}; blueprint \\leanok markers present on both proved environments; prover session end summary agrees with file contents. Process warning: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_2.md` reported by the prover is absent on disk (only physics-grounding reports remain), so the prover trace serves as primary evidence per review policy.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.431282Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.431293Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_A_3.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "All five review checks pass: compile clean, no sorry/admit/axioms, signature preserved, physics faithful, prover trace supports the result.",
+      "evidence": "Preflight: compiles=true, sorry_count=0, returncode=0, duration=14.383s. Theorem statement and hypotheses unchanged; proof closes goal b.dW = F.mu0 * t.V * v.s.H * v.dM by rw [dW_eq_VH_dB_sub_mu0_dH, v.dBH]; ring. Physics semantics match blueprint (thin torus, Ampere law, constitutive relation, work split, vacuum subtraction).",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five review checks pass: compile clean, no sorry/admit/axioms, signature preserved, physics faithful, prover trace supports the result.",
+          "evidence": "Preflight: compiles=true, sorry_count=0, returncode=0, duration=14.383s. Theorem statement and hypotheses unchanged; proof closes goal b.dW = F.mu0 * t.V * v.s.H * v.dM by rw [dW_eq_VH_dB_sub_mu0_dH, v.dBH]; ring. Physics semantics match blueprint (thin torus, Ampere law, constitutive relation, work split, vacuum subtraction).",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.431571Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.431582Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_B_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 13,
+      "reason": "All five review checks pass. The iter-011 field-parametrized redrafted contract (workOnDensity H = mu0*V*H*deriv M_of_H H keeping the dM/dH Jacobian, EOS enforced at every applied field with hV/hT, per-leg first-law balances quantified over all endpoint pairs) faithfully repairs the iter-010 underdetermined_contract defect, and the target plus all bridge lemmas are fully proved with no sorry/admit/axiom/native_decide escape hatches and no statement weakening; the official answer is carried conclusion-side by official_answer_value (rfl) and never assumed.",
+      "evidence": "Deterministic preflight: compiles, rc=0, sorry_count=0, no diagnostics. Source audit of the shipped file finds no sorry/admit/axiom/native_decide/macro anywhere (only a stale doc-comment mentioning 'by sorry'). Target proof: rewrite hQ/heatTransferredIntoTorus/heat_into_torus_value; q_in_eq_neg_integral (first-law leg 0->H plus h_ref calibration) at H_f and H_i; leg_work_integral_eval (integrand linearized via workOnDensity_eq_linear over magnetization_deriv of the global EOS solution M(H)=nKH/(TV); intervalIntegral.integral_const_mul + integral_id; field_simp+ring with proc.hV/proc.hT) at both endpoints; close by ring, deriving Q = -(mu0*n*K/(2*T))*(H_f^2 - H_i^2). Hypotheses are honestly constraining: h_eos pins M_of_H globally, IsMagneticWorkDensity pins the pointwise A.3 law with the deriv Jacobian, ObeysFirstLawMagnetic supplies universally quantified leg balances and no hypothesis states the closed form, so the iter-010 countermodel linProc (M(H)=-2H, K=-2, Q=-12 vs -3) is excluded. Iter-013 prover trace (session biui-0724, 70 turns) documents closing all 7 sorries, #print axioms on all 8 declarations = [propext, Classical.choice, Quot.sound], and a final fresh 'lake env lean' re-check exit=0. Prover task-results list is empty -> process warning only; the current trace is used as primary evidence per instructions.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "All three sorried declarations are false as stated: the work density dW = mu0*V*H*dM is parametrized as workDensity(M) = mu0*V*M_of_H(M), substituting the magnetization function M_of_H for the true field-as-a-function-of-magnetization H_of_M and sampling it at magnetization values off the EOS-constrained field range, which loses the dM/dH Jacobian; compiling countermodel linProc satisfies every hypothesis (global-linear EOS M(H) = -2H with K = -2, honest first-law heat Q_in(M) = -int_0..M wd) yet yields Q = -12 versus the recorded closed form -3, and leg_mem_tracked_range independently fails by conflating the field range Icc(min 0 (min H_i H_f)).. with the magnetization locus uIcc 0 (M_of_H H).",
+          "evidence": "Preflight: compiles, rc=0, 3 sorry warnings (L201 leg_mem_tracked_range, L223 leg_work_integral_eval, L263 isothermal_heat_into_torus); only official_answer_value is proved (rfl). Prover witnesses (compiled iter-010): witness_target_IS_FALSE.lean proves negation of the target via linProc (Q = -12 vs value -3); witness_leg_integral_eval_IS_FALSE.lean gives integral = 0 vs required -16 via weirdProc (M_of_H vanishing off the field range); witness_leg_mem_IS_FALSE.lean gives leg point -1.5 outside Icc (-1)..0 via badProc. Blueprint thm:...:IsothermalHeatIntoTorus intends H_of_M parametrization or explicit Jacobian; the Lean contract underdetermines M_of_H off the tracked field range.",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.431880Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936683Z"
+        },
+        {
+          "iter": 13,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five review checks pass. The iter-011 field-parametrized redrafted contract (workOnDensity H = mu0*V*H*deriv M_of_H H keeping the dM/dH Jacobian, EOS enforced at every applied field with hV/hT, per-leg first-law balances quantified over all endpoint pairs) faithfully repairs the iter-010 underdetermined_contract defect, and the target plus all bridge lemmas are fully proved with no sorry/admit/axiom/native_decide escape hatches and no statement weakening; the official answer is carried conclusion-side by official_answer_value (rfl) and never assumed.",
+          "evidence": "Deterministic preflight: compiles, rc=0, sorry_count=0, no diagnostics. Source audit of the shipped file finds no sorry/admit/axiom/native_decide/macro anywhere (only a stale doc-comment mentioning 'by sorry'). Target proof: rewrite hQ/heatTransferredIntoTorus/heat_into_torus_value; q_in_eq_neg_integral (first-law leg 0->H plus h_ref calibration) at H_f and H_i; leg_work_integral_eval (integrand linearized via workOnDensity_eq_linear over magnetization_deriv of the global EOS solution M(H)=nKH/(TV); intervalIntegral.integral_const_mul + integral_id; field_simp+ring with proc.hV/proc.hT) at both endpoints; close by ring, deriving Q = -(mu0*n*K/(2*T))*(H_f^2 - H_i^2). Hypotheses are honestly constraining: h_eos pins M_of_H globally, IsMagneticWorkDensity pins the pointwise A.3 law with the deriv Jacobian, ObeysFirstLawMagnetic supplies universally quantified leg balances and no hypothesis states the closed form, so the iter-010 countermodel linProc (M(H)=-2H, K=-2, Q=-12 vs -3) is excluded. Iter-013 prover trace (session biui-0724, 70 turns) documents closing all 7 sorries, #print axioms on all 8 declarations = [propext, Classical.choice, Quot.sound], and a final fresh 'lake env lean' re-check exit=0. Prover task-results list is empty -> process warning only; the current trace is used as primary evidence per instructions.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.100652Z"
+        }
+      ],
+      "updated_at": "2026-07-28T17:04:44.100663Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_B_2.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 15,
+      "reason": "Fresh targeted proof certification passed: the corrected T3-B.2 contract is fully proved and source-faithful.",
+      "evidence": "At 2026-07-29T05:34:54Z, `lake env lean IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` returned 0 with no diagnostics. A source scan found no sorry, admit, axiom, native_decide, or macro escape hatch. Lean SHA-256 ce5689df9ca9c0966b181f524653dd39925d65ff9d2d11943708888c3c7a2675; blueprint SHA-256 26049a6ef75cc3156e6d96ecd9fe8b594857a6edd2b0de4ba20912a368f28aca. First-hand contract audit confirms the official +dW sign, quotient invariant, corrected endpoint brackets, positive square-root branch, and conclusion-side answer.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Missing foundational bridge: ParamagneticTorusLaws never requires path differentiability/continuity (deriv is 0 where functions are not differentiable; the integrable Cm/w witnesses do not constrain the path p itself), so bridge lemma adiabatic_invariant_along_path is false as stated and the derivation chain to the official answer cannot close; the sorries at L148/L159/L190 are logical, not tactic-level.",
+          "evidence": "Preflight: compiles, returncode 0, exactly 3 sorry warnings at lines 148 (adiabatic_invariant_along_path), 159 (endpoint_relation), 190 (adiabatic_temperature_change); no errors. Contract audit: statement matches blueprint target Tf - Ti = Ti*(sqrt((lam+mu0*K*Hf^2)/(lam+mu0*K*Hi^2)) - 1), conclusion-side answer, honest hypotheses (Hi>=0, Ti>0, Tf>0, endpoint data), no axioms/admit/native_decide, lam_add_mu0_K_sq_pos proved by positivity. Countermodel sketch: a state path obeying the laws intra-interval but with arbitrary jumps between t1, t2 satisfies every hypothesis (deriv vanishes at non-differentiable points, so IsAdiabaticPath holds pointwise) while the invariant differs, falsifying the quantified invariant claim. No matching task-result artifact; iter-010 prover trace (session biui-0724, ~700 lines of scratch attempts) reports the same semantic gap and records redraft options (add a positive lower bound/regularity field on temperature, or weaken the invariant lemma to endpoints-only, or reformulate as an integrated first law). Missing task result is a process warning only.",
+          "redraft_kind": "missing_foundational_bridge",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.432171Z"
+        },
+        {
+          "iter": 12,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T12:12:53.277301Z"
+        },
+        {
+          "iter": 13,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Contract physically false: IsAdiabaticPath encodes Cm*T' = -w while the official T3-B2 first law is dU=dW (Cm*T' = +w); adiabaticInvariant uses T^2*(lam+mu0*K*H^2) while the true conserved quantity is (lam+mu0*K*H^2)/T^2; endpoint_relation has swapped brackets. Bridge lemma 1 is refuted by a smooth premise-satisfying countermodel, and the main closing algebra (compile error at L363) is underivable from the frozen endpoint_relation even with bridge 1 sorried through.",
+          "evidence": "Preflight: compiles=false, returncode=1, sorry_count=1. Error IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:363:28: rewrite failed, pattern Tf^2 not found in goal Ti^2*(lam+mu0*K*Hi^2)/(lam+mu0*K*Hf^2)/Ti^2 = (lam+mu0*K*Hf^2)/(lam+mu0*K*Hi^2). Sorry warning at 163:8 (adiabatic_invariant_along_path). Frozen hrel : Tf^2*B = Ti^2*A entails (Tf/Ti)^2 = A/B, the reciprocal of the hratio_sq = B/A the script needs. Iter-013 prover trace (two sessions, 173 turns, newest session_end 2026-07-28T14:22:37Z) independently derives residual deriv[T^2*(lam+mu0*K*H^2)] = 4*mu0*K*H^2*T*T', gives smooth countermodel n=K=V=lam=mu0=1, p(t)=(-tanh t, -sinh t, sech t), t1=0, t2=1 satisfying EOS, balance-as-stated and both IntervalIntegrable clauses yet F(0)=1 != (1+tanh^2 1)/cosh^2 1 = F(1); in-Lean replays of the residual ring step fail. Matching iter-013 task result .archon/task_results/problem_IPhO_2026_3_B_2.md agrees with the trace and records the smallest repair checked first-hand against hf-IPHO2026-upload T3_solution.txt T3-B2 (n*lam/T^2 dT = +mu0*V*H dM; invariant (lam+mu0*K*H^2)/T^2; swapped endpoint brackets). Blueprint lemma blocks mirror the same wrong balance sign, wrong invariant, and unswapped brackets, so the redraft must touch both artifacts; the official answer formula in the target conclusion is correct and must stay verbatim.",
+          "redraft_kind": "missing_foundational_bridge",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.100951Z"
+        },
+        {
+          "iter": 15,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-29T05:38:56.861892Z"
+        },
+        {
+          "event_id": "manual-cert:15:IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:proof:ce5689df",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "Fresh targeted proof certification passed: the corrected T3-B.2 contract is fully proved and source-faithful.",
+          "evidence": "At 2026-07-29T05:34:54Z, `lake env lean IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` returned 0 with no diagnostics. A source scan found no sorry, admit, axiom, native_decide, or macro escape hatch. Lean SHA-256 ce5689df9ca9c0966b181f524653dd39925d65ff9d2d11943708888c3c7a2675; blueprint SHA-256 26049a6ef75cc3156e6d96ecd9fe8b594857a6edd2b0de4ba20912a368f28aca. First-hand contract audit confirms the official +dW sign, quotient invariant, corrected endpoint brackets, positive square-root branch, and conclusion-side answer.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T05:38:58.309907Z"
+        }
+      ],
+      "updated_at": "2026-07-29T05:38:58.309930Z",
+      "redraft_resolved_iter": 15
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 13,
+      "reason": "Reviewed target m1_eq_sqrt is fully and honestly proved with an exact, unweakened signature; target chain (q4_eq_adiabatic_41, q3_eq -> m1_sq -> m1_eq_sqrt, m1_sq_arg_nonneg) contains no sorry/admit/axiom and never references the one remaining sorry, which is confined to the assumption-side auxiliary bridge lemma q_relation that no target-chain declaration cites.",
+      "evidence": "Preflight: compiles rc=0, sorry_count=1, sole warning '370:6 declaration uses sorry' — declaration q_relation (statement line 370, sorry token line 423). Sorry-token scan confirms exactly one sorry (line 423); no axiom/admit/native_decide anywhere. m1_sq proves by rw [leg41, leg23]; ring from the two adiabatic-leg laws (log terms collapse via div_self + Real.log_one at the Figure-3b equal endpoint temperatures); m1_eq_sqrt closes by rw [← m.m1_sq, Real.sqrt_sq (m.M_nonneg .v1)]; m1_sq_arg_nonneg by m1_sq + sq_nonneg. Signature preserved exactly: m.M1 = Real.sqrt (m.M2^2 - m.M3^2 + m.M4^2) — the recorded official C.2 answer, no '='-to-'<=' weakening, no existential, no dropped hypotheses, answer appears only on the conclusion side (model fields carry only laws/figure data). Semantics faithful to the source comments and blueprint: EOS-substituted B.1 q-form prefactor -mu0*V^2/(2*n*K) (iter-10 defect B fixed, independently verified by the heat_isothermal_via_q field_simp derivation), isothermal legs at the Figure-3b temperatures Th (3->4, -Qh) / Tc (1->2, +Qc) (iter-10 defect A fixed), adiabatic legs carry AdiabaticLegStateLaw, Carnot ratio on unsigned magnitudes; no units/tolerance apply to this symbolic answer. The q_relation gap is itself genuinely underdetermined (with Figure-3b temperatures the leg laws give only M1^2=M4^2 and M3^2=M2^2, the Carnot ratio collapses to their shadow, and q_relation reduces to the independent amplitude constraint Th*M4^2=Tc*M2^2; concrete countermodel recorded), so that auxiliary lemma merits its own needs_redraft ruling — but it is eliminable and off the target chain, so the reviewed C.2 target stands solved.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Contract unfaithful/unprovable as formalized: (A) heat_12/heat_34 attach the B.1 isothermal law to the wrong temperatures/heats (leg 1->2 at Tc with +Qc, leg 3->4 at Th with -Qh), contradicting the model's own figure3b (T v1 = Th, T v3 = Tc) under Tc_lt_Th, so Qh_eq/Qc_eq are unprovable outside the excluded Th=Tc regime; (B) the q-form prefactor in IsothermalHeatQForm/heat_isothermal_via_q is false: EOS substitution gives Q = -(mu0 V^2/(2nK))(qf-qi), not +(mu0 V/2)(qf-qi), the two agreeing only when V = -nK (excluded by positivity) and even then with opposite sign. Also no adiabatic (B.2 T~1/H) law is a model field, blocking q3_eq.",
+          "evidence": "Preflight: compiles rc=0 with 9 sorry warnings (lines 244,293,334,372,395,413,432,457,471); no axioms/native_decide; main signature m1_eq_sqrt : m.M1 = Real.sqrt (m.M2^2 - m.M3^2 + m.M4^2) preserved. Inside heat_isothermal_via_q the prover proved by field_simp the identity htrue showing the true prefactor is -(mu0 V^2/(2nK)), witnessing falsity of the stated +(mu0 V/2) form. In Qh_eq, heat_34 at Th conflicts with figure3b's T v3 = Tc (isothermal law needs equal endpoint temperatures) while Qc_eq needs T v1 = Tc, contradicting figure3b's T v1 = Th with Tc < Th. Prover trace (session_end, newest task result .archon/task_results/problem_IPhO_2026_3_C_2.lean.md) records the same two defects, verified against Figure 3b in T3_page-3.png.",
+          "redraft_kind": "wrong_or_weakened_target",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.432460Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936714Z"
+        },
+        {
+          "iter": 13,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "Reviewed target m1_eq_sqrt is fully and honestly proved with an exact, unweakened signature; target chain (q4_eq_adiabatic_41, q3_eq -> m1_sq -> m1_eq_sqrt, m1_sq_arg_nonneg) contains no sorry/admit/axiom and never references the one remaining sorry, which is confined to the assumption-side auxiliary bridge lemma q_relation that no target-chain declaration cites.",
+          "evidence": "Preflight: compiles rc=0, sorry_count=1, sole warning '370:6 declaration uses sorry' — declaration q_relation (statement line 370, sorry token line 423). Sorry-token scan confirms exactly one sorry (line 423); no axiom/admit/native_decide anywhere. m1_sq proves by rw [leg41, leg23]; ring from the two adiabatic-leg laws (log terms collapse via div_self + Real.log_one at the Figure-3b equal endpoint temperatures); m1_eq_sqrt closes by rw [← m.m1_sq, Real.sqrt_sq (m.M_nonneg .v1)]; m1_sq_arg_nonneg by m1_sq + sq_nonneg. Signature preserved exactly: m.M1 = Real.sqrt (m.M2^2 - m.M3^2 + m.M4^2) — the recorded official C.2 answer, no '='-to-'<=' weakening, no existential, no dropped hypotheses, answer appears only on the conclusion side (model fields carry only laws/figure data). Semantics faithful to the source comments and blueprint: EOS-substituted B.1 q-form prefactor -mu0*V^2/(2*n*K) (iter-10 defect B fixed, independently verified by the heat_isothermal_via_q field_simp derivation), isothermal legs at the Figure-3b temperatures Th (3->4, -Qh) / Tc (1->2, +Qc) (iter-10 defect A fixed), adiabatic legs carry AdiabaticLegStateLaw, Carnot ratio on unsigned magnitudes; no units/tolerance apply to this symbolic answer. The q_relation gap is itself genuinely underdetermined (with Figure-3b temperatures the leg laws give only M1^2=M4^2 and M3^2=M2^2, the Carnot ratio collapses to their shadow, and q_relation reduces to the independent amplitude constraint Th*M4^2=Tc*M2^2; concrete countermodel recorded), so that auxiliary lemma merits its own needs_redraft ruling — but it is eliminable and off the target chain, so the reviewed C.2 target stands solved.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.101243Z"
+        }
+      ],
+      "updated_at": "2026-07-28T17:04:44.101255Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_4.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 13,
+      "reason": "All five checks pass. Preflight: compiles rc=0, sorry_count=0, no diagnostics. Statement preserved: c4_elapsed_time concludes elapsedTime = (heatCapacityBody * tempHot / inputPower) * (Real.log (tempInitial / tempFinal) - (tempInitial - tempFinal) / tempHot), exactly the recorded official answer t = (C_c*T_h/P)*(ln(T_0/T) - (T_0-T)/T_h), which appears only conclusion-side; hypotheses bundle only RegimeAssumptions, IsCoolingRun (Carnot ratio product form + first law + constant-power density law + calorimetric law + positive residence density on the Ioo window) and the operational accumulation hypothesis haccum. The iter-10 underdetermination blocker is resolved: heatDumpedDensity_eq:329 and residenceDensity_eq:358 now take RegimeAssumptions and quantify only over T' in Set.Ioo tempFinal tempInitial, so T' > tempFinal > 0 and P > 0 exclude the prior countermodels; both are fully proved (field_simp + linear_combination off hT'ne / hP). Proof chain is honest: elapsedTime_eq_integral via set-integral a.e. congruence off the two-element endpoint set (countable, measure zero), cooling_time_integral_eval via FTC (intervalIntegral.integral_of_le, integral_inv, integral_one) with 0 not in the interval from tempFinal_pos, then field_simp with tempHot_ne of the exact answer form. Prover trace session_end (iter-013, runner codex) confirms 0 sorries/0 errors under fresh lean and #print axioms = [propext, Classical.choice, Quot.sound] for all 8 declarations; task result written to .archon/task_results/problem_IPhO_2026_3_C_4.md (agrees with trace).",
+      "evidence": "Preflight {compiles: true, rc: 0, sorry_count: 0, 10.789s}. rg confirms no code-level sorry/admit/axiom; only two stale doc-comment sentences (lean:58, lean:319) mention sorry — cosmetic only. Signatures match blueprint labels thm:...:c4_elapsed_time, elapsedTime_eq_integral, cooling_time_integral_eval and lem:...:heatDumpedDensity_eq/workDensity_eq/residenceDensity_eq with the recorded uses-edges. Units/roles faithful: densities per unit temperature drop (s/K, J/K, W/K), cooling branch dT'<0 encoded via densities per unit drop; regime enforces 0<T<T_0<T_h, C_c>0, P>0, t>0. No task_result artifact was supplied in the prompt payload ([]), but .archon/task_results/problem_IPhO_2026_3_C_4.md exists on disk from the iter-013 prover lane and agrees with the session_end trace — treated as corroborating evidence, no process warning needed beyond noting the empty prompt list.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Underdetermined bridge-lemma contracts: heatDumpedDensity_eq and residenceDensity_eq quantify over arbitrary opaque scalars with no RegimeAssumptions, so their T'=0 and P=0 branches admit countermodels (e.g. tempFinal=0/-1, tempHot=0 satisfies the per-cycle law bundle with heatDumpedDensity 0 arbitrary; inputPower=0 with tempHot=T' satisfies the power law with residenceDensity arbitrary). The sorries sit on genuinely unprovable branches, not on tactic gaps.",
+          "evidence": "Preflight: compiles rc=0, 2 active sorries at problem_IPhO_2026_3_C_4.lean:344 (heatDumpedDensity_eq, T'=0 by_cases branch) and :379 (residenceDensity_eq, P=0 branch). Main target c4_elapsed_time and 5 other declarations are fully proved; semantic audit: statement matches recorded answer t=(C_c*T_h/P)*(ln(T_0/T)-(T_0-T)/T_h) with answer purely conclusion-side, hypotheses (Carnot ratio product form, first law, constant power, calorimetry, accumulation as Icc integral) honestly used, units/roles faithful to blueprint. Prover trace (session_end summary, iter-010) agrees: 6/8 proved, redraft flagged, no axioms beyond propext/Classical.choice/Quot.sound. No matching task_results artifact supplied -> process warning only.",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.432770Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936754Z"
+        },
+        {
+          "iter": 13,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five checks pass. Preflight: compiles rc=0, sorry_count=0, no diagnostics. Statement preserved: c4_elapsed_time concludes elapsedTime = (heatCapacityBody * tempHot / inputPower) * (Real.log (tempInitial / tempFinal) - (tempInitial - tempFinal) / tempHot), exactly the recorded official answer t = (C_c*T_h/P)*(ln(T_0/T) - (T_0-T)/T_h), which appears only conclusion-side; hypotheses bundle only RegimeAssumptions, IsCoolingRun (Carnot ratio product form + first law + constant-power density law + calorimetric law + positive residence density on the Ioo window) and the operational accumulation hypothesis haccum. The iter-10 underdetermination blocker is resolved: heatDumpedDensity_eq:329 and residenceDensity_eq:358 now take RegimeAssumptions and quantify only over T' in Set.Ioo tempFinal tempInitial, so T' > tempFinal > 0 and P > 0 exclude the prior countermodels; both are fully proved (field_simp + linear_combination off hT'ne / hP). Proof chain is honest: elapsedTime_eq_integral via set-integral a.e. congruence off the two-element endpoint set (countable, measure zero), cooling_time_integral_eval via FTC (intervalIntegral.integral_of_le, integral_inv, integral_one) with 0 not in the interval from tempFinal_pos, then field_simp with tempHot_ne of the exact answer form. Prover trace session_end (iter-013, runner codex) confirms 0 sorries/0 errors under fresh lean and #print axioms = [propext, Classical.choice, Quot.sound] for all 8 declarations; task result written to .archon/task_results/problem_IPhO_2026_3_C_4.md (agrees with trace).",
+          "evidence": "Preflight {compiles: true, rc: 0, sorry_count: 0, 10.789s}. rg confirms no code-level sorry/admit/axiom; only two stale doc-comment sentences (lean:58, lean:319) mention sorry — cosmetic only. Signatures match blueprint labels thm:...:c4_elapsed_time, elapsedTime_eq_integral, cooling_time_integral_eval and lem:...:heatDumpedDensity_eq/workDensity_eq/residenceDensity_eq with the recorded uses-edges. Units/roles faithful: densities per unit temperature drop (s/K, J/K, W/K), cooling branch dT'<0 encoded via densities per unit drop; regime enforces 0<T<T_0<T_h, C_c>0, P>0, t>0. No task_result artifact was supplied in the prompt payload ([]), but .archon/task_results/problem_IPhO_2026_3_C_4.md exists on disk from the iter-013 prover lane and agrees with the session_end trace — treated as corroborating evidence, no process warning needed beyond noting the empty prompt list.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.101534Z"
+        }
+      ],
+      "updated_at": "2026-07-28T17:04:44.101545Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_5.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "Both C.5 theorems are proved sorry-free against unweakened faithful contracts; deterministic preflight reports compiles=true, sorry_count=0, rc=0.",
+      "evidence": "overall_coefficient_of_performance derives W = Qc*(Th*ln(T0/T)/(T0-T) - 1) from OperatingHistory's AccumulatedCarnotHeatRelation + RefrigeratorEnergyBalance via .symm.trans and linarith, establishes Qc != 0 from heatCapacity_pos and final_lt_initial, then closes by div_mul_eq_div_div/div_self hQc_ne/one_div after ring normalization; conclusion matches the official answer COP = [Th/(T0-T)*ln(T0/T) - 1]^{-1} in terms of T0, Th, T only. Target equation appears only conclusion-side (hypotheses carry W=Pt, Qc=Cc(T0-T), Qh-relation, Qh=Qc+W, C.4 time law; the C.4/P/t bridges are present but unused, which is harmless). Manual audit found no sorry/admit/axiom/native_decide or statement edits; prover reports #print axioms = [propext, Classical.choice, Quot.sound].",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "Both C.5 theorems are proved sorry-free against unweakened faithful contracts; deterministic preflight reports compiles=true, sorry_count=0, rc=0.",
+          "evidence": "overall_coefficient_of_performance derives W = Qc*(Th*ln(T0/T)/(T0-T) - 1) from OperatingHistory's AccumulatedCarnotHeatRelation + RefrigeratorEnergyBalance via .symm.trans and linarith, establishes Qc != 0 from heatCapacity_pos and final_lt_initial, then closes by div_mul_eq_div_div/div_self hQc_ne/one_div after ring normalization; conclusion matches the official answer COP = [Th/(T0-T)*ln(T0/T) - 1]^{-1} in terms of T0, Th, T only. Target equation appears only conclusion-side (hypotheses carry W=Pt, Qc=Cc(T0-T), Qh-relation, Qh=Qc+W, C.4 time law; the C.4/P/t bridges are present but unused, which is harmless). Manual audit found no sorry/admit/axiom/native_decide or statement edits; prover reports #print axioms = [propext, Classical.choice, Quot.sound].",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.433060Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.433072Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 13,
+      "reason": "Contract faithful and fully proved: preflight compiles rc=0 with sorry_count=0 and only benign unusedVariables linter warnings on frozen binders; main closes the A.5 three-conjunct target (beta0 = 1/T0, finite-difference bridge slope*dT = beta0*P0*dT, uncertainty bound |beta0 - 1/T0| <= sigma) via beta0_close_to_ideal now carrying the iter-010-required hvar non-degeneracy premise plus beta0_eq_ideal_of_linear and beta0_uncertainty_bound under the iter-007-reconciled IsochoricReadout.hT12 guard.",
+      "evidence": "rg 'sorry|admit|native_decide|axiom' over the Lean file: no matches (exit 1). Deterministic preflight: status passed, compiles true, returncode 0, sorry_count 0, 11.19s; diagnostics are 8 unused-variable warnings only (ht2 L158; law/hT0/hT0pos around L479-484; law/hT0/hβ0/hσ around L502-511) -- no sorryAx or new-axiom warning. Signatures match the frozen blueprint ledger (IsIdealGasLaw, IsIsochoricLinear, IsReferenceState, IsochoricReadout with hT12, main with hvar); answer values (1/T0, idealThermalPressureCoefficient_value = 1/273.15, 0.0034+/-0.0007 band content) remain conclusion-side. Iter-010 blocker repaired: beta0_close_to_ideal (L407) takes hvar, extracts a witness t with absTemp differing from the reference instant by_cases, derives slope*V = nR via slope_eq_div and state_eq, then offset = 0, so beta0 = slope/P0 = 1/T0; the old constant-temperature countermodel (T==1, slope=offset=1/2) is excluded by hvar. Uncertainty conjunct factors the readout deviation as P0*|T2-T1|*|beta0-1/T0| via measured_hP1/measured_hP2 and cancels the strictly positive factor using hP0 and hT12 (le_of_mul_le_mul_left). iter-013 prover trace (session 019fa8a9, biui-0724) independently records fresh `lake env lean` with 0 errors and 0 sorries on the byte-identical file; no matching task-result artifact was supplied in the review bundle, so the trace is primary evidence -- process warning only, not a semantic failure.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Standalone component theorem beta0_close_to_ideal is missing the temperature non-degeneracy premise (hvar) that main carries: in the constant-temperature orbit the affine offset/slope pair is not unique, so beta0 = 1/T0 is underivable as stated; explicit countermodel T==1, P==1, n=R=V=1, slope=offset=1/2 satisfies every hypothesis but yields beta0=1/2 != 1/T0. One focused sorry remains at IPhO2026_4_A_5.lean:446 in exactly this branch.",
+          "evidence": "Preflight: compiles (rc=0), sorry_count=1, warning 'declaration uses sorry' at line 399 (beta0_close_to_ideal); active sorry at line 446 inside `by_cases h12 : absTemp (proc.T t2) = absTemp (proc.T ref.t0)` positive branch. main, beta0_eq_ideal_of_linear, beta0_uncertainty_bound, ratio bridge and slope lemma are fully proved; iter-010 prover trace records #print axioms IPhO2026_4_A_5.main = [propext, Classical.choice, Quot.sound] (no sorryAx, no new axioms). Signatures preserved; all answer values (1/T0, 0.0037, 0.0034+/-0.0007 K^-1) remain conclusion-side; IsochoricReadout carries the hT12 non-degeneracy guard reconciled in blueprint iter-007.",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.433353Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936806Z"
+        },
+        {
+          "iter": 13,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "Contract faithful and fully proved: preflight compiles rc=0 with sorry_count=0 and only benign unusedVariables linter warnings on frozen binders; main closes the A.5 three-conjunct target (beta0 = 1/T0, finite-difference bridge slope*dT = beta0*P0*dT, uncertainty bound |beta0 - 1/T0| <= sigma) via beta0_close_to_ideal now carrying the iter-010-required hvar non-degeneracy premise plus beta0_eq_ideal_of_linear and beta0_uncertainty_bound under the iter-007-reconciled IsochoricReadout.hT12 guard.",
+          "evidence": "rg 'sorry|admit|native_decide|axiom' over the Lean file: no matches (exit 1). Deterministic preflight: status passed, compiles true, returncode 0, sorry_count 0, 11.19s; diagnostics are 8 unused-variable warnings only (ht2 L158; law/hT0/hT0pos around L479-484; law/hT0/hβ0/hσ around L502-511) -- no sorryAx or new-axiom warning. Signatures match the frozen blueprint ledger (IsIdealGasLaw, IsIsochoricLinear, IsReferenceState, IsochoricReadout with hT12, main with hvar); answer values (1/T0, idealThermalPressureCoefficient_value = 1/273.15, 0.0034+/-0.0007 band content) remain conclusion-side. Iter-010 blocker repaired: beta0_close_to_ideal (L407) takes hvar, extracts a witness t with absTemp differing from the reference instant by_cases, derives slope*V = nR via slope_eq_div and state_eq, then offset = 0, so beta0 = slope/P0 = 1/T0; the old constant-temperature countermodel (T==1, slope=offset=1/2) is excluded by hvar. Uncertainty conjunct factors the readout deviation as P0*|T2-T1|*|beta0-1/T0| via measured_hP1/measured_hP2 and cancels the strictly positive factor using hP0 and hT12 (le_of_mul_le_mul_left). iter-013 prover trace (session 019fa8a9, biui-0724) independently records fresh `lake env lean` with 0 errors and 0 sorries on the byte-identical file; no matching task-result artifact was supplied in the review bundle, so the trace is primary evidence -- process warning only, not a semantic failure.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.101842Z"
+        }
+      ],
+      "updated_at": "2026-07-28T17:04:44.101854Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "Contract is faithful and fully proved: target matches the recorded official answer P_v = P_atm*(1 - (H_0*T)/(H*T_0)) at an arbitrary admissible MeasuredState, derived honestly from Dalton's law at constant P_atm, componentwise ideal-gas law with fixed dry-air content, and P_v(T_0,H_0)=0; no sorry/admit/axiom launcy remains.",
+      "evidence": "Preflight rc=0, sorry_count=0, 14.0s, no diagnostics. Proof of vaporPressure_eq: reference balance P_atm*(A*H_0)=n_air*R*T_0 (dryAirPartialPressure_at_T₀ + idealGas), state balance p_air*(A*H)=n_air*R*T, cross-multiplication, cancellation of A>0 via mul_left_cancel₀, Dalton step P_v=P_atm-p_air by linarith, then field_simp (H≠0, T₀≠0 from T₀_val=273.15) and linarith closing. target := exact D.vaporPressure_eq s. ClausiusClapeyron is context-only (separate predicate + eq_zero_of_clausiusClapeyron_zero, unused by B.4 target), matching the blueprint split. On-disk grep: 'admit' occurs only inside the English word 'admitted state' in comments; no sorry/native_decide/axiom tokens. Prover #print axioms on scratch copy: [propext, Classical.choice, Quot.sound] only.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "Contract is faithful and fully proved: target matches the recorded official answer P_v = P_atm*(1 - (H_0*T)/(H*T_0)) at an arbitrary admissible MeasuredState, derived honestly from Dalton's law at constant P_atm, componentwise ideal-gas law with fixed dry-air content, and P_v(T_0,H_0)=0; no sorry/admit/axiom launcy remains.",
+          "evidence": "Preflight rc=0, sorry_count=0, 14.0s, no diagnostics. Proof of vaporPressure_eq: reference balance P_atm*(A*H_0)=n_air*R*T_0 (dryAirPartialPressure_at_T₀ + idealGas), state balance p_air*(A*H)=n_air*R*T, cross-multiplication, cancellation of A>0 via mul_left_cancel₀, Dalton step P_v=P_atm-p_air by linarith, then field_simp (H≠0, T₀≠0 from T₀_val=273.15) and linarith closing. target := exact D.vaporPressure_eq s. ClausiusClapeyron is context-only (separate predicate + eq_zero_of_clausiusClapeyron_zero, unused by B.4 target), matching the blueprint split. On-disk grep: 'admit' occurs only inside the English word 'admitted state' in comments; no sorry/native_decide/axiom tokens. Prover #print axioms on scratch copy: [propext, Classical.choice, Quot.sound] only.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.433660Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.433672Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 13,
+      "reason": "All five review checks pass. The iter-010 underdetermined_contract defect is repaired in the on-disk statement (labeled 'Iter-014 redraft', mtime 12:33, after the iter-013 prover session ended 12:23): the theorem now binds the reported scalar by the measured-readout hypothesis Lv_reported_central_eq : Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue, eliminating the countermodel central = 10000, while the conversion relation (IsSpecificLatentHeatOf), both catalog-matching conjuncts, and the official band membership 2190 +/- 110 kJ/kg remain genuine conclusions proved in the body. This hypothesis-side fix is exactly the repair the iter-013 prover trace prescribed in its redraft request.",
+      "evidence": "Deterministic preflight: compiles true, returncode 0, sorry_count 0, only an unused-variable linter warning at 322:5. LSP audit: zero errors; no sorry/admit/native_decide/axiom anywhere in the file (verbatim scan); lean_verify #print axioms of latent_heat_per_unit_mass_target = [propext, Classical.choice, Quot.sound] only; source scan flags only the five intentional opaque catalog constants of the domain model (not axioms). Goal trace: after refine the remaining goal Lv_reported.withinUncertainty officialSpecificLatentHeatValue is rewritten via the hypothesis and withinUncertainty to |(39/18.0e-3) - 2190| <= 110, and constructor <;> norm_num closes the conjunction -110 <= 39/180e-4 - 2190 /\\ 39/180e-4 - 2190 <= 110 with no goals remaining. Statement, units (kJ/mol, kg/mol, kJ/kg), typed PhysLean habitats (Temperature, DimPressure, WithDim L-length), and the official answer 2190 +/- 110 kJ/kg are preserved and match the blueprint chapter and its proof sketch, which computes the reported value as Qv/M0 = 39/(18.0e-3) and then checks band membership — precisely what the new hypothesis records as data readout. The four auxiliary declarations (latent_heat_per_unit_mass_formula, computed_value_within_official_uncertainty, qv_from_clausius_clapeyron_slope, reference_temperature_calibration) close honestly and match the blueprint ledger. No conclusion-side weakening: the answer is never assumed; the band bound |2166.67 - 2190| = 23.33 <= 110 is discharged by norm_num, matching the blueprint proof sketch.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Main theorem binds the reported specific latent heat Lv_reported by unrestricted universal quantification, so the concluding conjunct Lv_reported.withinUncertainty officialSpecificLatentHeatValue (|Lv_reported.central - 2190| <= 110) is underdetermined: no hypothesis ties Lv_reported to Qv/M0, giving an explicit countermodel (central_kJ_per_kg = 10000). The obligation is discharged by sorry at line 296.",
+          "evidence": "Preflight: compiles true, returncode 0, sorry_count 1, warning at 296:8 declaration uses sorry. Lean goal after refine in latent_heat_per_unit_mass_target: Lv_reported.withinUncertainty officialSpecificLatentHeatValue with Lv_reported unconstrained, hence unprovable; the honest value 39/18.0e-3 = 2166.7 satisfies |2166.7-2190| = 23.3 <= 110 and is proved in computed_value_within_official_uncertainty. The conversion witness and both catalog-matching conjuncts are proved; the other four declarations (latent_heat_per_unit_mass_formula, computed_value_within_official_uncertainty, qv_from_clausius_clapeyron_slope, reference_temperature_calibration) close honestly by norm_num/field equations; no axioms, admits, or laundering observed. Statement, units (kJ/mol, kg/mol, kJ/kg), PhysLean typed habitats, and the Lv = Qv/M0 formula in the conclusion faithfully match the blueprint and official answer 2190 +/- 110 kJ/kg; the blueprint proof sketch even assumes the band membership follows from 39/(18.0e-3), confirming the contract intended Lv_reported to be the computed value but never stated it.",
+          "redraft_kind": "underdetermined_contract",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.433952Z"
+        },
+        {
+          "iter": 11,
+          "event": "formalization_redraft_passed",
+          "prior_attempts": 1,
+          "reviewed_at": "2026-07-28T11:05:58.936847Z"
+        },
+        {
+          "iter": 13,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All five review checks pass. The iter-010 underdetermined_contract defect is repaired in the on-disk statement (labeled 'Iter-014 redraft', mtime 12:33, after the iter-013 prover session ended 12:23): the theorem now binds the reported scalar by the measured-readout hypothesis Lv_reported_central_eq : Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue, eliminating the countermodel central = 10000, while the conversion relation (IsSpecificLatentHeatOf), both catalog-matching conjuncts, and the official band membership 2190 +/- 110 kJ/kg remain genuine conclusions proved in the body. This hypothesis-side fix is exactly the repair the iter-013 prover trace prescribed in its redraft request.",
+          "evidence": "Deterministic preflight: compiles true, returncode 0, sorry_count 0, only an unused-variable linter warning at 322:5. LSP audit: zero errors; no sorry/admit/native_decide/axiom anywhere in the file (verbatim scan); lean_verify #print axioms of latent_heat_per_unit_mass_target = [propext, Classical.choice, Quot.sound] only; source scan flags only the five intentional opaque catalog constants of the domain model (not axioms). Goal trace: after refine the remaining goal Lv_reported.withinUncertainty officialSpecificLatentHeatValue is rewritten via the hypothesis and withinUncertainty to |(39/18.0e-3) - 2190| <= 110, and constructor <;> norm_num closes the conjunction -110 <= 39/180e-4 - 2190 /\\ 39/180e-4 - 2190 <= 110 with no goals remaining. Statement, units (kJ/mol, kg/mol, kJ/kg), typed PhysLean habitats (Temperature, DimPressure, WithDim L-length), and the official answer 2190 +/- 110 kJ/kg are preserved and match the blueprint chapter and its proof sketch, which computes the reported value as Qv/M0 = 39/(18.0e-3) and then checks band membership — precisely what the new hypothesis records as data readout. The four auxiliary declarations (latent_heat_per_unit_mass_formula, computed_value_within_official_uncertainty, qv_from_clausius_clapeyron_slope, reference_temperature_calibration) close honestly and match the blueprint ledger. No conclusion-side weakening: the answer is never assumed; the band bound |2166.67 - 2190| = 23.33 <= 110 is discharged by norm_num, matching the blueprint proof sketch.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T17:04:44.102136Z"
+        }
+      ],
+      "updated_at": "2026-07-28T17:04:44.102148Z",
+      "redraft_resolved_iter": 11
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean": {
+      "status": "needs_redraft",
+      "attempts": 1,
+      "last_review_iter": 10,
+      "reason": "Both theorem contracts are wrong (provably false), not merely unproved: (1) acrylicConductivity_officialSample is numerically false at its frozen inputs -- substituting hR_central R_Th=1.17 into hformula gives lam = log(465/337)/(2*pi*0.10*1.17) ~= 0.43795, so |lam - 0.25| ~= 0.188 > 0.01; independent recomputation confirms lambda ~= 0.427-0.450 over the whole R_Th in [1.14,1.20] window, so the band cannot reach 0.25 under any sign convention; (2) acrylicConductivity_formula is sign-inconsistent -- hDeltaT : T_IC < T_OC forces inward heat flow (dT/dr < 0), hence lam < 0 by Fourier's law, while the claimed RHS log(r2/r1)/(2*pi*h*R_Th) is positive for R_Th > 0; a constructive countermodel (lam = -1, T r = (2pi)^{-1} log r on wall [1,2]) satisfies every hypothesis yet violates the conclusion. The 4 sorries sit at exactly the unprovable goals.",
+      "evidence": "Preflight: compiles=true, rc=0, sorry_count=4, only sorry warnings at lines 172 and 242. Open goals: after rcases lt_or_gt_of_ne hR both branches of lam = log(G.r2/G.r1)/(2*pi*G.h*D.R_Th) are sorry'd; after rw [hR_central] at hformula; rw [hformula]; rw [abs_le] both halves of the |.-0.25| <= 0.01 split are sorry'd, the upper half machine-checkably disprovable (Real.lt_log_one_add_of_pos: 128/401 < log(465/337); Real.pi_lt_d20: lam > 0.43 > 0.26). Prover trace session_end (2026-07-28T05:00:57Z, biui-0724, 205 turns) agrees word-for-word with these goals and refutations; newest matching task-result list is empty -> process warning only, trace used as primary evidence.",
+      "redraft_kind": "wrong_or_weakened_target",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "iter": 10,
+          "route": "needs_redraft",
+          "resulting_status": "needs_redraft",
+          "top_level_status": "blocked",
+          "attempt": 1,
+          "reason": "Both theorem contracts are wrong (provably false), not merely unproved: (1) acrylicConductivity_officialSample is numerically false at its frozen inputs -- substituting hR_central R_Th=1.17 into hformula gives lam = log(465/337)/(2*pi*0.10*1.17) ~= 0.43795, so |lam - 0.25| ~= 0.188 > 0.01; independent recomputation confirms lambda ~= 0.427-0.450 over the whole R_Th in [1.14,1.20] window, so the band cannot reach 0.25 under any sign convention; (2) acrylicConductivity_formula is sign-inconsistent -- hDeltaT : T_IC < T_OC forces inward heat flow (dT/dr < 0), hence lam < 0 by Fourier's law, while the claimed RHS log(r2/r1)/(2*pi*h*R_Th) is positive for R_Th > 0; a constructive countermodel (lam = -1, T r = (2pi)^{-1} log r on wall [1,2]) satisfies every hypothesis yet violates the conclusion. The 4 sorries sit at exactly the unprovable goals.",
+          "evidence": "Preflight: compiles=true, rc=0, sorry_count=4, only sorry warnings at lines 172 and 242. Open goals: after rcases lt_or_gt_of_ne hR both branches of lam = log(G.r2/G.r1)/(2*pi*G.h*D.R_Th) are sorry'd; after rw [hR_central] at hformula; rw [hformula]; rw [abs_le] both halves of the |.-0.25| <= 0.01 split are sorry'd, the upper half machine-checkably disprovable (Real.lt_log_one_add_of_pos: 128/401 < log(465/337); Real.pi_lt_d20: lam > 0.43 > 0.26). Prover trace session_end (2026-07-28T05:00:57Z, biui-0724, 205 turns) agrees word-for-word with these goals and refutations; newest matching task-result list is empty -> process warning only, trace used as primary evidence.",
+          "redraft_kind": "wrong_or_weakened_target",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-28T09:11:09.434243Z"
+        }
+      ],
+      "updated_at": "2026-07-28T09:11:09.434254Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_2_B_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 15,
+      "reason": "All four proof obligations (impactParam_eq_sin, sin_two_pos, container_radius_at_extremal_angle, alpha_beta_in_terms_of_R) carry full proofs; preflight passed with sorry_count=0, rc=0, and no extraneous axioms.",
+      "evidence": "Preflight compiles=true, sorry_count=0, 29.9s; all declarations depend only on [propext, Classical.choice, Quot.sound]. Target theorem concludes alpha = p.R and beta = -p.R/2 (the official answer) from an unchanged signature; the answer appears conclusion-side only, never in any hypothesis or structure field. Proof matches blueprint: tangency identity container_radius_at_extremal_angle applied at two distinct extremal angles plus the CoeffSpec ansatz yields an invertible 2x2 linear system, determinant 2*sin(th)*sin(th')*(cos th' - cos th) nonzero via cos injectivity on (0,pi/2); the |distToLine| sign branch is resolved by the proved strict inequality b < -R/2. Hypotheses (reflection_law, hit_branch, ExtremalRaySpec.tangent_dist, SecondExtremalConfig) are used honestly; no native_decide, no axiom laundering. Process warning: iter-015 prover trace .archon/logs/iter-015/provers/IPhO2026Problems_problem_IPhO_2026_2_B_1.jsonl and matching task results are absent; review relies on the Lean source plus the deterministic preflight.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "event_id": "pipeline:15:IPhO2026Problems/problem_IPhO_2026_2_B_1.lean:proof:1",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "All four proof obligations (impactParam_eq_sin, sin_two_pos, container_radius_at_extremal_angle, alpha_beta_in_terms_of_R) carry full proofs; preflight passed with sorry_count=0, rc=0, and no extraneous axioms.",
+          "evidence": "Preflight compiles=true, sorry_count=0, 29.9s; all declarations depend only on [propext, Classical.choice, Quot.sound]. Target theorem concludes alpha = p.R and beta = -p.R/2 (the official answer) from an unchanged signature; the answer appears conclusion-side only, never in any hypothesis or structure field. Proof matches blueprint: tangency identity container_radius_at_extremal_angle applied at two distinct extremal angles plus the CoeffSpec ansatz yields an invertible 2x2 linear system, determinant 2*sin(th)*sin(th')*(cos th' - cos th) nonzero via cos injectivity on (0,pi/2); the |distToLine| sign branch is resolved by the proved strict inequality b < -R/2. Hypotheses (reflection_law, hit_branch, ExtremalRaySpec.tangent_dist, SecondExtremalConfig) are used honestly; no native_decide, no axiom laundering. Process warning: iter-015 prover trace .archon/logs/iter-015/provers/IPhO2026Problems_problem_IPhO_2026_2_B_1.jsonl and matching task results are absent; review relies on the Lean source plus the deterministic preflight.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T04:36:27.931269Z"
+        }
+      ],
+      "updated_at": "2026-07-29T04:36:27.931304Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_1_C_2.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 15,
+      "reason": "Proof is complete and faithful: zero sorry/admit/axiom (grep-confirmed), deterministic preflight compiles true with sorry_count=0, statement preserves the C.2 contract (trusted constants, calibrated data, ThresholdRealizable of the C.1 threshold on the lower root; 2.03e-11 eV appears conclusion-side only), and the exact rational enclosure certifies the official answer within 5e-14.",
+      "evidence": "Preflight: compiles=true, returncode=0, sorry_count=0 (92.7s; only unused-variable linter warnings at L151/L409). Source audit: no sorry/admit/axiom/native_decide; ThresholdRealizable hypothesis carries governing laws (conservation laws via IsOzonePhotodissociation + ThresholdBalance/LowerRootBranch), so the answer is not assumed; numeric check b=2.029669318e-11 < gap < b(1+3B*2dU)=2.029669319e-11 straddles 2.03e-11 with |.-2.03e-11|<3.31e-15 < 5e-14; mc2eV=16*8302695333*299792458^2/(801088317*10^9)=1.49039e10 eV is the exact rational for 16*amu*cSI^2/eV.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "event_id": "pipeline:15:IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:proof:1",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "Proof is complete and faithful: zero sorry/admit/axiom (grep-confirmed), deterministic preflight compiles true with sorry_count=0, statement preserves the C.2 contract (trusted constants, calibrated data, ThresholdRealizable of the C.1 threshold on the lower root; 2.03e-11 eV appears conclusion-side only), and the exact rational enclosure certifies the official answer within 5e-14.",
+          "evidence": "Preflight: compiles=true, returncode=0, sorry_count=0 (92.7s; only unused-variable linter warnings at L151/L409). Source audit: no sorry/admit/axiom/native_decide; ThresholdRealizable hypothesis carries governing laws (conservation laws via IsOzonePhotodissociation + ThresholdBalance/LowerRootBranch), so the answer is not assumed; numeric check b=2.029669318e-11 < gap < b(1+3B*2dU)=2.029669319e-11 straddles 2.03e-11 with |.-2.03e-11|<3.31e-15 < 5e-14; mc2eV=16*8302695333*299792458^2/(801088317*10^9)=1.49039e10 eV is the exact rational for 16*amu*cSI^2/eV.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T04:37:19.338892Z"
+        }
+      ],
+      "updated_at": "2026-07-29T04:37:19.338923Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 15,
+      "reason": "Preflight compiles with 0 sorries and no escape hatches; the A.1 target theorems are exact re-uses of the structure's governing-law fields (mass_eq, number_eq, molarMassConsistency, number_eq + nonnegativity certificates) with no hypotheses added, dropped, or altered, and statements match the blueprint contract verbatim; uncertainty target realized as the faithful |N - N_A*n| <= u_N + u_n*N_A propagation bound consistent with the declared measurement model.",
+      "evidence": "Deterministic preflight: status=passed, compiles=true, returncode=0, sorry_count=0, diagnostics='' (9.763 s); rg finds no sorry/admit/axiom/native_decide; theorem mass_of_confined_air : c.massCA = c.rhoAmbient * c.volumeCA := c.mass_eq (identical statement and proof to blueprint 'the mass--density--volume law states m = rho_a V verbatim'); number_of_molecules_of_confined_air := c.number_eq; molar_mass_consistency := c.molarMassConsistency; uncertainty_consistency closes via refine <uMassCA_nonneg, uNumberOfMoles_nonneg, ?_> then number_eq + sub_self/abs_zero + add_nonneg/mul_nonneg. Review-only target this iteration: no matching iter-015 prover trace or task result (process warning only, assigned as review_only_target_files in pipelined-review.json).",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "event_id": "pipeline:15:IPhO2026Problems/problem_IPhO_2026_4_A_1.lean:proof:1",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "Preflight compiles with 0 sorries and no escape hatches; the A.1 target theorems are exact re-uses of the structure's governing-law fields (mass_eq, number_eq, molarMassConsistency, number_eq + nonnegativity certificates) with no hypotheses added, dropped, or altered, and statements match the blueprint contract verbatim; uncertainty target realized as the faithful |N - N_A*n| <= u_N + u_n*N_A propagation bound consistent with the declared measurement model.",
+          "evidence": "Deterministic preflight: status=passed, compiles=true, returncode=0, sorry_count=0, diagnostics='' (9.763 s); rg finds no sorry/admit/axiom/native_decide; theorem mass_of_confined_air : c.massCA = c.rhoAmbient * c.volumeCA := c.mass_eq (identical statement and proof to blueprint 'the mass--density--volume law states m = rho_a V verbatim'); number_of_molecules_of_confined_air := c.number_eq; molar_mass_consistency := c.molarMassConsistency; uncertainty_consistency closes via refine <uMassCA_nonneg, uNumberOfMoles_nonneg, ?_> then number_eq + sub_self/abs_zero + add_nonneg/mul_nonneg. Review-only target this iteration: no matching iter-015 prover trace or task result (process warning only, assigned as review_only_target_files in pipelined-review.json).",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T04:40:00.854822Z"
+        }
+      ],
+      "updated_at": "2026-07-29T04:40:00.854853Z"
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_3.lean": {
+      "status": "solved",
+      "attempts": 1,
+      "last_review_iter": 15,
+      "reason": "File compiles (preflight passed, 0 sorry, 20.2s); contract faithful: official answer stays conclusion-side, hypotheses are governing laws (EOS, B.1 isothermal heat, Carnot ratio, calorimetry) with signed heat convention preserved and drop branch certified by helium_cools.",
+      "evidence": "Preflight status=passed, compiles=true, sorry_count=0, diagnostics empty. Proof structure: model lemmas Qc_cold_leg/Qh_hot_leg/reservoir_temperature_consistency/TFinal_from_calorimetry/helium_cools proved from structure fields; targets absorbed_heat_value |Qc-1.29e-1|<5e-4, temperature_drop_value |drop-9.92e-3|<5e-5, final_temperature_value |TFinal-0.99008|<5e-5 closed by rewriting r.Qc via Qc_cold_leg at supplied vertex fields (H2=311306, H3=204618, Tc=1) then nlinarith with Real.pi_gt_d4/pi_lt_d4 pi-bounds (no native_decide, no axioms, sorry/admit absent). Independent numeric check (python): Qc=0.12934593, drop=9.9497e-3, TFinal=0.9900503 at mu0=4pi*1e-7, all strictly inside bands.",
+      "redraft_kind": "not_applicable",
+      "proof_review_schema_version": 1,
+      "history": [
+        {
+          "event_id": "pipeline:15:IPhO2026Problems/problem_IPhO_2026_3_C_3.lean:proof:1",
+          "iter": 15,
+          "route": "solved",
+          "resulting_status": "solved",
+          "top_level_status": "solved",
+          "attempt": 1,
+          "reason": "File compiles (preflight passed, 0 sorry, 20.2s); contract faithful: official answer stays conclusion-side, hypotheses are governing laws (EOS, B.1 isothermal heat, Carnot ratio, calorimetry) with signed heat convention preserved and drop branch certified by helium_cools.",
+          "evidence": "Preflight status=passed, compiles=true, sorry_count=0, diagnostics empty. Proof structure: model lemmas Qc_cold_leg/Qh_hot_leg/reservoir_temperature_consistency/TFinal_from_calorimetry/helium_cools proved from structure fields; targets absorbed_heat_value |Qc-1.29e-1|<5e-4, temperature_drop_value |drop-9.92e-3|<5e-5, final_temperature_value |TFinal-0.99008|<5e-5 closed by rewriting r.Qc via Qc_cold_leg at supplied vertex fields (H2=311306, H3=204618, Tc=1) then nlinarith with Real.pi_gt_d4/pi_lt_d4 pi-bounds (no native_decide, no axioms, sorry/admit absent). Independent numeric check (python): Qc=0.12934593, drop=9.9497e-3, TFinal=0.9900503 at mu0=4pi*1e-7, all strictly inside bands.",
+          "redraft_kind": "not_applicable",
+          "explicit_route": true,
+          "reviewed_at": "2026-07-29T04:40:42.925998Z"
+        }
+      ],
+      "updated_at": "2026-07-29T04:40:42.926023Z"
+    }
+  }
+}

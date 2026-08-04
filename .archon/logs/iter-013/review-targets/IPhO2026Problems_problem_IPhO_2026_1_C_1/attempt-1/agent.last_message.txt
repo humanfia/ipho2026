@@ -1,0 +1,13 @@
+Both artifact files are durable and validated (milestones.jsonl is a single parseable JSON line; summary.md is 11 lines, within the ≤12-line limit).
+
+**Review verdict — iter 13, `problem_IPhO_2026_1_C_1.lean`**
+
+**Status:** partial | **Route:** `retry_proof` (redraft_kind: not_applicable)
+
+**Findings**
+- Compile check fails (preflight rc=1): two tactic errors inside `quadratic_characterization_of_threshold` — line 330 `ring` runs after `field_simp` already closed the goal ("No goals to be solved"), and line 337 the `div_eq_iff` rewrite misfires because the goal `S*(X^2/S^2) - 6mc²(X/S) + 6dUmc² = 0` contains no `?/S² = ?` pattern; the intended divided intermediate never appears.
+- Two active sorries remain in the main targets: `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:371` (forward threshold) and `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:385` (backward branch).
+- Contract audit passes: signatures identical to the iter-11 redraft and blueprint (`thm:IPhO_2026_1_C_1:target`), opaque constants intact, `hb : 0 < hbar` retained where the `1/ℏ` factor requires it, recorded answer strictly conclusion-side, no axioms/weakening/laundering.
+- Prover trace (sessions `019fa8a9-b16d` — first aborted via 429 — and `019fa8f2-ea4e`, 89 turns) ends with scratch helper lemmas compiling to EXIT=0 and a sound assembly plan (reachability via the quadratic reduction; floor via stronger A2 minimality + B1 bound + E₀ ≥ dU), but the prover never edited the target file — consistent with the on-disk errors. No task-result artifacts were supplied (process warning only).
+
+**Prescribed repair:** drop the stray `ring`; replace the div_eq_iff/show-rw chain with `field_simp [hS']` + `linear_combination (S*(3*m*c^2))*hsq3`; then assemble both threshold theorems per the trace's validated plan.

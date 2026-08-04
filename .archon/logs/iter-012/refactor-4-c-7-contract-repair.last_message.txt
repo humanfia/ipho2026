@@ -1,0 +1,5 @@
+4-c-7-contract-repair: COMPLETE — both false contracts in `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` replaced with the repaired statements; file compiles 0 errors with exactly 2 sorries.
+
+- New sorries: `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:178` (`acrylicConductivity_formula` body), `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:202` (`acrylicConductivity_officialSample` body)
+- Divergence from directive: none (both statements replaced exactly as specified; PROVER-REPORT countermodel blocks and `rw`/`abs_le` scripts deleted; verified via fresh `lake env lean` — only the 2 expected sorry warnings)
+- Full report: `.archon/task_results/refactor-4-c-7-contract-repair.md`

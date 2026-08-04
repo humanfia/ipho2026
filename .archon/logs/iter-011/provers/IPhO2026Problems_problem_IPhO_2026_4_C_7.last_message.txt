@@ -1,0 +1,9 @@
+Done. Audit for `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` (iter-011):
+
+**Outcome: no-op — file already at its frozen iter-008 contract.**
+- Fresh `lake env lean` run: exit 0, only the 2 contracted `sorry` warnings (L172, L242), no errors.
+- All 8 Lean declarations match the blueprint chapter's `\lean{}` pins exactly (`CylindricalWallGeometry`+`lateralArea`, `ThermalExperimentData`, `LumpedHeatFlowLaw`, `RadialFourierConduction`, `wall_current`, `acrylicConductivity_formula`, `acrylicConductivity_officialSample`). No edit needed, none made to the protected file.
+
+**Blueprint markers:** I drafted the 8 `\leanok` insertions, then discovered the AGENTS.md role spec reserves markers for the deterministic `sync_leanok` phase (chapter files are outside my write permissions). I reverted the chapter via `git stash` (stash@{0} holds the ready-made marker patch if the plan agent wants it) and flagged all 8 environments as marker-ready in the task result instead.
+
+**Report:** `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_7.md` covers the assumption/target split, goal-faithfulness audit, bridge obligations (2 blocked: the sign-refutable formula convention and the numerically inconsistent official-sample inputs — both documented in-file with countermodels, upstream-owned redrafts), countermodel audit, and uncertainty/branch coverage.

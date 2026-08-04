@@ -1,0 +1,11 @@
+Done. Redraft lane for `2_B_2` resolved as a **verify-only pass** — no statement change warranted.
+
+**Findings:**
+- The only gate blocker on record is the retired stale `missing-physlib-import` finding (iter-003 snapshot; chapter carries the recognized iter-002 PhysLean-exemption NOTE). No semantic redraft items exist; the planner-frozen file already matches the chapter's iter-008 ledger (17 `\lean{}` pins, 1:1).
+- Fidelity audit came out clean: the current answer `P/P₀ = 1/(1−cos θ_max)` lives conclusion-side only; laws (specular reflection, uniform-intensity width accounting), B.1 calibration, and Figure-2f branch data (`no_gap`, `full_side_coverage`, `ThetaMaxSpec` on `(0,π/2)`) all sit on the assumption side.
+- One genuine adequacy flag recorded for prover stage: `collectedWidth_eq_radius`'s lower bound needs the B.1 calibration (`a ≤ R`) threaded in or an explicit aperture-coverage field — from the current fields alone only `≥ a` is derivable. Umbrella target theorem unaffected.
+
+**Actions:**
+- `IPhO2026Problems/problem_IPhO_2026_2_B_2.lean` — unchanged by design (sorry-preserving lane; `\leanok` left to deterministic sync, nothing is proven yet).
+- Fresh `lake env lean`: 0 errors, exactly the 5 contracted `sorry` warnings.
+- Wrote `.archon/task_results/problem_IPhO_2026_2_B_2.md` with the full assumption/target split, faithfulness audit, bridge inventory, countermodel audit, and the prover-stage redraft-quality flag.

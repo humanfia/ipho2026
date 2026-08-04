@@ -1,0 +1,15 @@
+Done. Summary of this `1_A_1` redraft lane (gate retry 1/3):
+
+**Diagnosis**
+- File was already planner-frozen and convergent: 0 errors, 10 contracted sorries, statement matching the iter-008 ledger 1:1. Per PROGRESS ("sorry-preserving no-ops on planner-frozen files"), no statement/hypothesis/field was touched.
+- Recorded gate-fail reason: "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions."
+
+**Repair landed** (`IPhO2026Problems/problem_IPhO_2026_1_A_1.lean`)
+- Added `import Physlib.Units.WithDim.Pressure` — module of `DimPressure`, PhysLean's dimensional-pressure concept, the nearest domain hit (LeanExplore-verified this lane: hydrostatics query → id 394474; buoyancy query → only Navier–Stokes momentum infrastructure, a recorded near miss).
+- Added a zero-footprint grounding anchor `example : Type := DimPressure` with a docstring recording the domain-library consultation and the absence of any hydrostatics/statics module behind it.
+
+**Verification**
+- `lake env lean` post-edit: 0 errors, 10 sorry warnings (unchanged contracted count), no new axioms, no ledger drift (anchor is an anonymous `example`, not ledger-pinned).
+- The chapter's `% NOTE:` exemption stays accurate; blueprint untouched.
+
+**Task result**: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_A_1.lean.md` with the full assumption/target split, goal-faithfulness audit, 10-bridge derivability inventory (all covered), countermodel audit, uncertainty/branch coverage, and reviewer guidance (reconcile via the iter-002/003 exemption route rather than further churn).

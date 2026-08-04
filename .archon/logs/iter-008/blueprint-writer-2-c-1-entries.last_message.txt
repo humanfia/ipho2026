@@ -1,0 +1,6 @@
+Ledger landed and verified; report written.
+
+2-c-1-entries: COMPLETE — appended the C.1 coverage ledger (5 blocks, one per unmatched decl) to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_2_C_1.tex` and wired the umbrella; pins 5/5, `\uses` 7/7 in-chapter (0 unknown), begin/end 12/12, official values conclusion-side only; full report at `.archon/task_results/blueprint-writer-2-c-1-entries.md`.
+- Blocks: `def:...:HalfCylindricalMirrorReflection`, `lem:...:intercept_is_length`, `thm:...:reflected_ray_A_slope`, `thm:...:reflected_ray_A_intercept`, `thm:...:reflected_ray_A_slope_and_intercept` (+ `\uses` on `thm:physics:IPhO_2026_2_C_1:target`).
+- Lean audit: `lake env lean` on the covered file — 0 errors, 4 contracted sorries, matching the frozen contract; no `.lean` file touched.
+- Deviation: `leandag` not on PATH here, so `\uses` were grep-verified instead (0 unknown), same as the sibling 2-c-2 ledger.

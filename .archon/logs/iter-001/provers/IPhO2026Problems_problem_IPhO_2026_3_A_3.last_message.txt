@@ -1,0 +1,20 @@
+Done. The autoformalization is complete and verified.
+
+**Result**
+
+- Created `IPhO2026Problems/problem_IPhO_2026_3_A_3.lean:1` — a compiling by-sorry formalization of IPhO 2026 T3 part A.3 (work done on the paramagnetic material, `dW = μ₀·V·H·dM`).
+- Checker run: `lake env lean` exits 0 with exactly five expected `declaration uses 'sorry'` warnings, no errors. `lake build` also passes.
+
+**What's in the file** (namespace `IPhO2026.T3A3`)
+
+- Parameters/setup: `PmTTorus` (R, r≪R, A, V, thin-torus identity `V = 2πR·A`), `PmTWinding` (N turns, signed current I), `PmTFieldState` (uniform H, B, M).
+- Governing laws as equation-exposing relations: `AmpereLawTorus` (`H = N·I·A/V`, from the T3-A hint), `ConstitutiveBH` (`B = μ₀H + μ₀M`), and the increment law `dB = μ₀·dH + μ₀·dM` inside `PmTVariation`. `μ₀` is grounded in PhysLean's `Electromagnetism.FreeSpace` (verified via LeanExplore + hover), not redefined.
+- Licensed inputs in `PmTWorkBudget`: A.2 previous-part result `dW_emf = V·H·dB`, the problem statement's split `dW_emf = dW_vac + dW`, and the vacuum-core part `dW_vac = μ₀·V·H·dH`.
+- Proof-route lemmas (sorried): `meanCircumference_eq`, `dB_of_vacuum_core`, `dW_eq_sub_vac`, `dW_eq_VH_dB_sub_mu0_dH`.
+- Main target `dW_eq_mu0_V_H_dM` states `dW = μ₀·V·H·dM` (conclusion only — audited that it never appears as a hypothesis/field/def).
+
+**Notes**
+
+- Grounding gap (documented): PhysLean has no magnetization/H-field/magnetic-work API, so faithful local abstractions carry the physics, as the mode permits.
+- Infrastructure observation: `lakefile.toml`/`IPhO2026Run.lean` don't enumerate `IPhO2026Problems/*.lean`, so `lake build` skips these files; verified with `lake env lean` instead and flagged in the task result.
+- Full audit (assumption/target split, bridge inventory, countermodel check, branch/uncertainty coverage, `\leanok` readiness) is in `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_3.md`.

@@ -1,0 +1,13 @@
+4-a-5-iso-readout-hT12: COMPLETE — added the `hT12 : T₁ ≠ T₂` non-degeneracy guard to `IsochoricReadout`; file compiles EXIT 0 with 0 errors and exactly the 10 contracted sorry warnings.
+
+**Inserted text** (in `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean`):
+- Doc-comment extension above `structure IsochoricReadout` (`IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:220`): "The readouts are recorded at two distinct temperatures, `T1 != T2`, so the finite-difference slope carrier is non-degenerate." (ASCII-safe, no `+/-` substring)
+- New field at `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean:225`: `hT12 : T₁ ≠ T₂`, placed immediately after `T₂` and before `measuredPressure`.
+
+**New sorries introduced**
+- None.
+
+**Divergence from directive**
+- None. No construction sites existed to update (all consumers take `readouts` as a hypothesis). Diff is exactly +2/−1 lines: one field + one doc sentence; statements, signatures, governing-law structures, imports, answer placement, and all 10 `by sorry` bodies are bit-identical. Sorry sites drifted only in line number (L262/292/309/329 etc., +2/+3), count invariant holds at 10.
+
+**Report**: `.archon/task_results/refactor-4-a-5-iso-readout-hT12.md`

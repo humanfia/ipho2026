@@ -1,0 +1,14 @@
+Both review artifacts are durable on disk. Verdict: **blocked / needs_redraft (underdetermined_contract)**.
+
+**Key findings**
+- Preflight compiles rc=0 with exactly one active `sorry` (line 423, body of the blueprint‑pinned bridge lemma `q_relation` at `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean:370`); no axiom/admit/native_decide anywhere.
+- The main target `m1_eq_sqrt : m.M1 = Real.sqrt (m.M2^2 - m.M3^2 + m.M4^2)` (official C.2 answer, signature preserved) is fully proved via `m1_sq` from the two adiabatic-leg laws alone — its chain carries no sorry, so the defect is isolated.
+- The iter‑11 redraft fixed the iter‑10 defects (legs now at correct Figure‑3b temperatures; EOS‑substituted prefactor `-μ₀V²/(2nK)` verified).
+- Root cause: with Figure‑3b temperatures, the adiabatic log‑law collapses to `0=0` (yielding only `M1²=M4²`, `M3²=M2²`), the Carnot ratio degenerates to a tautology, and `q_relation` reduces to the amplitude constraint `Th·M4² = Tc·M2²` (isentropy of legs 1→2/3→4) that no model field entails. The iter‑13 prover gave a concrete countermodel satisfying every field yet violating it — so no proof search can close that sorry.
+- Repair recorded: add one model field (e.g. `q_leg12 : T v1 * Mmag v1² = T v2 * Mmag v2²`), then `q_relation` closes by `linear_combination`; the blueprint's `q_relation` proof sketch must be amended accordingly.
+
+Artifacts written:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_2/cycle-1/attempt-1/milestones.jsonl` (1 valid JSON line)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_2/cycle-1/attempt-1/summary.md` (9 lines)
+
+Process note: the review packet's newest-matching task-result list was empty; the iter‑13 prover trace (used as primary evidence) references `.archon/task_results/problem_IPhO_2026_3_C_2.md` with a "## Redraft needed" section consistent with this verdict.

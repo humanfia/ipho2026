@@ -1,0 +1,12 @@
+Review complete — both artifacts are durable on disk and the JSON validates.
+
+**Verdict: solved** (route=solved) for `IPhO2026Problems/problem_IPhO_2026_4_A_5.lean`, theorem `IPhO2026_4_A_5.main`.
+
+- **Compile/sorry**: preflight rc=0, `sorry_count=0`; my own grep confirms no `sorry`/`admit`/`native_decide`/`axiom`. Only 8 benign `unusedVariables` linter warnings on frozen binders.
+- **Prior blocker resolved**: the iter-010 `needs_redraft` (standalone `beta0_close_to_ideal` missing the `hvar` non-degeneracy premise, sorry at L446) is fixed — the premise is present at L413–415 and genuinely used at L427–434 to extract a distinct-temperature witness for the `offset = 0` derivation.
+- **Contract/semantics**: signatures preserved against the frozen iter-011 contract; Eq. (1), the A.3 affine isochore, Eq. (2) `β₀ = slope/P₀`, and the `hT12`-guarded uncertainty cancellation all match the blueprint ledger; answer values (`1/T₀ = 0.0037`, `0.0034 ± 0.0007 K⁻¹`) stay strictly conclusion-side.
+- **Process warning only**: no matching task-results artifact was supplied, and the trace-referenced `.archon/task_results/problem_IPhO_2026_4_A_5.md` is absent on disk; per instructions I used the iter-013 prover trace (fresh `lake env lean`, 0 errors, 0 sorries) as primary evidence — not a semantic failure.
+
+Files written:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_5/cycle-1/attempt-1/milestones.jsonl` (1 JSON line, valid)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_5/cycle-1/attempt-1/summary.md` (9 lines)

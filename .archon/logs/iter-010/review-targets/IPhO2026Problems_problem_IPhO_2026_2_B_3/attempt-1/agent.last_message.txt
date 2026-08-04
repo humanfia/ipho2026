@@ -1,0 +1,11 @@
+Both artifacts are durable on disk. Review complete.
+
+**Verdict: solved** — `IPhO2026Problems/problem_IPhO_2026_2_B_3.lean` passes all five checks.
+
+- **Compilation/honesty**: preflight passed (rc=0, 0 sorries); source scan confirms no `sorry`/`admit`/`axiom`/`native_decide`/elaboration tricks.
+- **Statement integrity**: `container_diameter_for_quintuple_power` (IPhO2026Problems/problem_IPhO_2026_2_B_3.lean:211) keeps its full signature; the official answers (`cos θ_max = 4/5`, `a = 0.12 m = 12 cm`) appear strictly conclusion-side, with B.1/B.2 carried as hypothesis interfaces that fix neither `θ` nor `a`.
+- **Proof soundness**: inverts B.2 (`5 = 1/(1−cos θ)`) with honest `P0 ≠ 0` and denominator guards; acuteness + `Real.arccos_cos` identifies `θ_max`; 3-4-5 certificates (`sin = 3/5`, `sin 2θ = 24/25`) in B.1 at `R = 1` yield `a = 3/25 = 0.12`; cm conversion via `metreInCentimetres = 100` verified.
+- **Semantics**: geometry, mirror-physics predicate, units, and answer choice are faithful to Figure 2f / IPhO 2026 T2-B3 blueprint. The unused-variable warnings on `hR`, `ha`, `hphys` are benign — those ambient model hypotheses are intentionally retained.
+- **Process warning**: no matching prover task-result artifact exists in `.archon/task_results/`; the iter-010 prover trace (session 019fa6d4) agrees with the on-disk proof and served as primary evidence.
+
+Artifacts written: `milestones.jsonl` (single JSON line, validated, route=solved) and `summary.md` (8 lines).

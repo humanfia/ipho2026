@@ -1,0 +1,13 @@
+Review complete. Both required artifacts are durable on disk and the milestones JSONL validates as a single-line JSON object.
+
+**Verdict: `solved`** (route=`solved`, redraft_kind=`not_applicable`) for `IPhO2026Problems/problem_IPhO_2026_4_A_1.lean`, reviewed declaration `IPhO2026_4_A_1.ConfinedAirColumn.mass_of_confined_air` (with the sibling A.1 targets under the same contract).
+
+**Findings**
+- **Compilation/no escape hatches**: deterministic preflight passed — `compiles=true`, `returncode=0`, `sorry_count=0`, empty diagnostics; my `rg` scan found no `sorry`/`admit`/`axiom`/`native_decide`.
+- **Signature preservation**: the four target theorems (`mass_of_confined_air`, `number_of_molecules_of_confined_air`, `molar_mass_consistency`, `uncertainty_consistency`) are unweakened restatements of the structure's governing-law fields (`mass_eq`, `number_eq`, `molarMassConsistency`, nonnegativity certificates); no hypothesis added/dropped, no `=` weakened to `≤` except the uncertainty band, which is the faithful propagation inequality of the declared measurement model.
+- **Physical fidelity**: Figure-17/18 geometry `V = π(d/2)²H`, sealed-CA isochore, stipulated `ρ_a = 1.12 kg/m³` density route, Eq. (1) ideal-gas law over arbitrary positive readouts, and the Avogadro/molar-mass routes all match the blueprint; official answers appear only in `OfficialReadouts`/comments — no answer-as-assumption.
+- **Process warning only**: this is a review-only target in iter-015; no matching prover trace or task-result artifact exists (confirmed against `pipelined-review.json`), so preflight + first-hand source audit serve as primary evidence, per the review instructions.
+
+Artifacts:
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_1/cycle-1/attempt-1/milestones.jsonl:1`
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_4_A_1/cycle-1/attempt-1/summary.md:1`

@@ -1,0 +1,13 @@
+Both review artifacts are durable on disk and verified.
+
+**Review verdict: `blocked` / `needs_redraft` (`wrong_or_weakened_target`)**
+
+- **Verifiable setup passes**: file compiles (preflight rc=0, sorry_count=4), statements match the blueprint verbatim, no axiom/admit/native_decide laundering, supporting structures and `wall_current` are honestly proved, and the iter-010 prover trace agrees exactly with the on-disk state (empty task-result list recorded as a process warning only).
+- **Both value theorems are provably false, not merely hard**:
+  - `acrylicConductivity_formula` (line 172): sign-inconsistent — `hΔT : T_IC < T_OC` forces `lam < 0` via Fourier's law while the claimed RHS is positive; a constructive countermodel satisfies all hypotheses.
+  - `acrylicConductivity_officialSample` (line 242): numerically false — at the frozen inputs `λ ≈ 0.438`, so `|λ − 0.25| ≈ 0.188 > 0.01`; my independent recomputation gives λ ∈ [0.427, 0.450] over the whole `R_Th ∈ [1.14, 1.20]` window, so the official band is unreachable under any hypothesis branch.
+- **Required repair** (blueprint-writer redraft, not prover): fix frozen inputs (h ≈ 0.175 m or R_Th ≈ 2.05 K/W) and drop redundant `hR_central`; flip the drive to `T_OC < T_IC` (or add positivity hypotheses) for the formula theorem.
+
+Artifacts written:
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_4_C_7/attempt-1/milestones.jsonl:1` (single valid JSON line)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_4_C_7/attempt-1/summary.md:1` (10 lines)

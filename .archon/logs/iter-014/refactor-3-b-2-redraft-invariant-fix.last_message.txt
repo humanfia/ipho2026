@@ -1,0 +1,13 @@
+3-b-2-redraft-invariant-fix: COMPLETE — the false adiabatic contract is repaired to match the official T3-B.2 solution, and the whole file now compiles with **0 errors, 0 warnings, 0 sorries** (the directive allowed ≤ 1).
+
+**What changed** (only `IPhO2026Problems/problem_IPhO_2026_3_B_2.lean`):
+- `IsAdiabaticPath`: first-law balance flipped to `Cm(t)·T′ = +w(t)` (`dU = dW`, official quote in the docstring).
+- `adiabaticInvariant`: body is now `(λ + μ₀·K·H²)/T²`; docstring and the top-of-file derivation sketch re-keyed to the official route.
+- `adiabatic_invariant_along_path`: same conclusion, now fully proved — quotient-rule numerator of `d/dt[(λ+μ₀KH²)/T²]` shown to equal `−(2T/n)(first law cleared) − (2μ₀HT²/n)(differentiated EOS) − (2μ₀HT·Ṫ/n)(EOS value)`, then MVT-constancy. Found en route that the EOS *value* (not just its derivative) is essential, exactly matching the iter-013 countermodel analysis.
+- `endpoint_relation`: brackets swapped (`Tf²·(lam+μ₀K·Hi²) = Ti²·(lam+μ₀K·Hf²)`), proved via `div_eq_div_iff` + `linear_combination -h`, with `Tf ≠ 0` obtained from `laws.temp_pos` as the directive noted.
+- `adiabatic_temperature_change`: statement byte-identical; only the old wrong-shaped `linear_combination e` block replaced with `field_simp [ha, hb, …]; linear_combination hrel`.
+- Added `Mathlib.Analysis.Calculus.Deriv.Inv` import (needed for the quotient rule).
+
+**New sorries introduced**: none. **Divergence from directive**: none, except the outcome is better than required (0 sorries instead of ≤ 1).
+
+Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` → no output, exit 0; `grep -c sorry` → 0. Full report: `.archon/task_results/refactor-3-b-2-redraft-invariant-fix.md`

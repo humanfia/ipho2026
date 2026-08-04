@@ -1,0 +1,14 @@
+Plan sidecar written to `.archon/iter/iter-013/plan.md` (281 lines). Summary of the bounded pass:
+
+**What was done**
+- Read the plan-input-pack and the full 1580-line deterministic candidate pack; no corpus scans, no re-derivation of objectives, order preserved exactly (1–13).
+- Spot-verified only the excerpted Lean files to ground each per-target strategy (sorry locations, structure fields, existing bridge lemmas).
+- Wrote a per-target proof strategy for all 13 mandatory proof-Review retries, each with concrete lemma names, tactic routes, and honest-residual guidance.
+
+**Key plan decisions**
+- `2_C_4` scheduled first (attempt 1/3): full asymptotic-equivalence route (`IsEquivalent` on `nhdsWithin 0 (Ioi 0)`, sin~θ cube, rpow leading-term of the C.3 formulas).
+- Twelve fresh 0/3 lanes: pure-algebra chains for `1_A_1`, `2_B_2`, `3_C_2`; quadratic-root/discriminant work for `1_C_1`; FTC/integrals for `3_B_1`, `3_C_4`; derivative-constancy invariant for `3_B_2`; real-analysis certificates for `1_B_2` with its two Kepler bridges kept as marked honest `sorry`s; zero-sorry verification compiles for `3_A_1`, `3_C_4` (as a prover lane), `4_A_5`; honest tie-out analysis for `4_B_6`.
+- `4_B_6`'s first conjunct flagged as the known honesty-discount point (universally quantified input `Lv_reported` — tie-out must come from `PartB6Input` fields or stay an honest residual; conjunct must not be deleted).
+- Cross-cutting rules restated: no statement/signature/hypothesis edits, no axioms/`native_decide`, `lake env lean` verification per file.
+
+**No chapter edits:** no concrete strategy defects found in any listed blueprint excerpt, and no Lean sources were modified in Plan. `4_C_7` remains quarantined in autoformalize; `1_B_1`/`4_C_6` remain excluded per their gate status.

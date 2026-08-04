@@ -1,0 +1,8 @@
+**1-b-2-tactical-residue: INCOMPLETE** — the iter-011 elaborated working tree that contained the broken `hu0s`/`huvs`/`hratio_sq` cluster was lost from this lane's view (it existed only as uncommitted changes and got reverted to HEAD `031fd35` mid-lane), so the directive's target text no longer exists on disk to edit.
+
+- New sorries introduced: none
+- Divergence from directive: the three requested fixes were **validated standalone** against this exact toolchain (`simp [sq_abs]` closes the coordinate-square residual; `rw [div_pow]; field_simp [ha_norm.ne', hu_norm.ne']; exact hL` closes `hratio_sq`), but could not be landed — the elaborated file variant (with `signed_deflection_certificate`, the L884–L902 cluster) is not present anywhere visible to this lane (single commit, no stash/no copies). The workspace file now matches HEAD and compiles with 0 errors / 6 sorry warnings, which is a *different* sorry landscape than the directive's model (it also lacks the L505/L551/L591-only census — HEAD has sorries in `eccentricity_sq_eq` and both main theorems instead).
+- Additional finding for wherever the elaborated tree still lives (planner gate copy): after clearing the three directive errors, one more tactic residue surfaces at old-L929 — `exact (…).trans ?_` followed by `rw [hangle]` needs to be `exact (…).trans (by rw [hangle])`.
+- Full report: `.archon/task_results/refactor-1-b-2-tactical-residue.md`
+
+Recommend the planner re-materialize the intended iter-014 gate candidate (commit or copy it into the workspace) and re-dispatch; the four verified fixes are ready to apply verbatim.

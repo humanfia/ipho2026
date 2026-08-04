@@ -1,0 +1,9 @@
+Review complete. **Verdict: solved.**
+
+**Findings**
+- **Compile/hygiene:** supplied preflight reports `compiles: true`, `rc=0`, `sorry_count=0`; `sorry` survives only in a stale header docstring, and no `admit`/`axiom`/`native_decide` anywhere. Nothing to re-run.
+- **Contract faithful:** the iter-011 redraft (field-parametrized work density `μ₀ V H dM/dH`, EOS enforced at every field, per-leg first-law balances, calibrated readout `Q_in 0 = 0`) genuinely derives `Q = -(μ₀nK/(2T))(H_f²-H_i²)`; `official_answer_value` pins the carrier by `rfl`. The iter-010 countermodel is excluded since the work density now uses `deriv M_of_H`.
+- **Proof honest:** `leg_work_integral_eval` evaluates each leg via `workOnDensity_eq_linear` + `integral_const_mul` + `integral_id` + `field_simp` (`hV`/`hT`), `q_in_eq_neg_integral` uses only the first-law leg `(0,H)`, and the target closes by endpoint rewrites + `ring` — no hypothesis presupposes the closed form.
+- **Evidence:** iter-013 prover trace (70 turns) proves all 7 sorries with signature discipline and clean `#print axioms`; blueprint `\leanok` markers already match. No iter-013 `task_results` artifact exists — recorded as a process warning, not a semantic failure.
+
+Both artifacts are durable: `milestones.jsonl` (1 valid JSON line, route=`solved`) and `summary.md` (9 lines) under `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_B_1/cycle-1/attempt-1/`.

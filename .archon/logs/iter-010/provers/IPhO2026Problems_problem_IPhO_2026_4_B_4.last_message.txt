@@ -1,0 +1,13 @@
+Both sorries in `IPhO2026Problems/problem_IPhO_2026_4_B_4.lean` are now proved, and the file compiles clean (0 errors, 0 sorries) under a fresh `lake env lean`.
+
+**Proof approach** (faithful to the frozen contract — no signature changes):
+- `vaporPressure_eq`: real physics derivation. Reference balance `P_atm·(A·H₀) = n_air·R·T₀` from `idealGas` at `(T₀,H₀)` plus `dryAirPartialPressure_at_T₀`; state balance from `idealGas` at `(s.T,s.H)`. Cross-multiplying gives `A * (p_air·(H·T₀)) = A * (P_atm·(H₀·T))`; cancel `A ≠ 0` via `mul_left_cancel₀`, then Dalton (`P_v = P_atm − p_air` via `linarith`), `field_simp` with `H ≠ 0`, `T₀ ≠ 0` (from the frozen `T₀_val = 273.15`), and `linarith` to close. Matches the official answer `P_v = P_atm·(1 − (H₀·T)/(H·T₀))`.
+- `target`: `exact D.vaporPressure_eq s`.
+
+**Verification**
+- `#print axioms` on a `/tmp` scratch copy: both theorems depend only on `[propext, Classical.choice, Quot.sound]` — no `sorryAx`, no new axioms.
+- Grep confirms no `sorry`/`admit`/`native_decide`/`axiom` in the file.
+
+**Bookkeeping**
+- `\leanok` applied to the two proved blueprint environments (`thm:...:vaporPressure_eq`, `thm:...:target`) per the iteration instructions; flagged in the task result in case the review agent prefers the deterministic sync to own those markers.
+- Full report written to `.archon/task_results/problem_IPhO_2026_4_B_4.md`.

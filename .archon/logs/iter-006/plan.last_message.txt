@@ -1,0 +1,16 @@
+Plan phase for iter-006 is complete. Summary of what I found and dispatched:
+
+**Fresh audit (didn't trust prior state)**
+- Re-ran `lake env lean` on all 27 non-`1_B_1` files individually: **26/28 compile by-sorry, not 27/28** — `problem_IPhO_2026_4_A_5.lean` fails with `351:0: unterminated comment`. The iter-002-era "benign tail" note was wrong: the unclosed doc comment at L320 swallows the `beta0_uncertainty_bound` theorem (the official-band content `β₀ = 3.4e-3 ± 7e-4 K⁻¹`) plus both `end` lines.
+- `1_B_1` unchanged-broken (3 `linarith` errors); iter-005 lane was gate-dropped as expected.
+- Live `archon blueprint-doctor`: **clean, 0 findings** — the 19 injected `missing-physlib-import` findings are the iter-003 stale snapshot (4th iter), formally retired, no action.
+
+**Dispatched (2 objectives in `PROGRESS.md`)**
+- O1 `4_A_5` — restore the comment terminator + swallowed theorem, re-anchored against source; reviews 0/3, dispatchable.
+- O2 `1_B_1` — verbatim repair spec, expected gate-drop (`review_exhausted`). I corrected a real error in the iter-005 spec: the consumer lemma does *not* close under the corrected `q < 0` form (its contradiction needs `0 < q`), so O2 now specifies restate/weaken/delete with the audit trail; grep confirms the pair is self-referenced only, so deletion is safe.
+
+**Bookkeeping**
+- Wrote `.archon/iter/iter-006/plan.md` + `objectives.md`; rewrote `PROGRESS.md` (2 objectives, review-queue section updated) and `task_pending.md` (iter-006 ground truth, stale note corrected).
+- Re-quantified coverage debt via `archon dag-query unmatched --json`: 472 decls with per-problem buckets (largest: P3_C3=42, P1_B1/B2=32 each, P4_C6=31); transcription stays planner-side, starts once the two moving files settle.
+- `ARCHON_MEMORY.md` pruned to 5 bullets/599 chars (dropped the resolved `4_C_6` item; added the "trust only fresh `lake env lean`" lesson).
+- No `.lean` files edited (planner boundary); STRATEGY.md untouched (no strategy change).

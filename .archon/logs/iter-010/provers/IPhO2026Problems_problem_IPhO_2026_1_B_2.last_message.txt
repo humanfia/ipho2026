@@ -1,0 +1,12 @@
+**Work summary — `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean`**
+
+**Result:** file compiles with **0 errors**, sorry count reduced **7 → 6** (fresh `lake env lean` verified).
+
+- **Proved `total_energy_pos`** — full field-arithmetic proof: the governing-law fields give `E = (4·mu²/100² − 1/100)·U = 1/80·U > 0`, via `v0 = 2·mu·ℏ/(m·100·a0)` and `ke2 = ℏ²/(m a0)`.
+- **`eccentricity_sq_eq` is false as stated (67/4).** The same fields yield `eps² = 49/4`, which reproduces the official answer `arctan(2/√45) = 16.6015°`. The correct-value proof is banked (reduces to a `ring_nf`-closed rational identity).
+- **Both main targets are internally impossible as stated.** Their claimed closed form `−(π − 2·arctan(2/√63))` evaluates to ≈ −151.71°, contradicting their own rounding bands. I inserted machine-checked witnesses inside the proof bodies (`radiansToDegrees … ≤ −90` / `≥ 90`, hence `¬ roundsToOfficialDegrees(…)`) proving the obstruction inside Lean.
+- **`signed_deflection_eq_formula`'s angle formula is the apocenter-referenced Rutherford angle** (≈146.8°); the problem's periapsis-referenced answer is the acute `arctan(1/√(eps²−1))`.
+- `orbit_eq_conic` / `exists_asymptoticRelativeVelocity` remain honestly blocked on the missing Kepler-ODE layer (documented in-code).
+- **Banked for the redraft:** verified `arcsin` integral machinery (`arcsin_lower`, `(1−u)^(−1/2)` lower bound, `arctan(2/√45) = arcsin(2/7)`, pi-bounded degree certificates) that closes the rounding band for the correct answer.
+
+Full analysis + minimal redraft (49/4, 2/√45 closed form, corrected factor certificate) is in `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md`.

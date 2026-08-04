@@ -1,0 +1,73 @@
+{
+  "iteration": 4,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-07-27T19:10:56Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa4fc-d057-7350-87e0-a9b58fb53f27",
+    "durationSecs": 857
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 2
+  },
+  "prover": {
+    "status": "done",
+    "formalizationReviewGateDropped": [
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+        "reason": "review_exhausted"
+      }
+    ],
+    "formalizationReviewGateEligible": 1,
+    "durationSecs": 538
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_4_C_6": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean",
+      "status": "done",
+      "mode": "physics-formalize",
+      "sessionId": "019fa509-f05c-7ee1-8a20-f4ef00a00d7b"
+    }
+  },
+  "review": {
+    "status": "done",
+    "deterministic": true,
+    "preflightJobs": 1,
+    "preflightDurationSecs": 12.895,
+    "preflightPassed": 1,
+    "preflightFailed": 0,
+    "preflightPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-004/review-preflight.md",
+    "candidatePackPath": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-004/deterministic-review-candidates.md",
+    "promptOriginalChars": 39462,
+    "promptCompressedChars": 39462,
+    "promptCompressionOmittedChars": 0,
+    "promptCompressionChanged": false,
+    "sessionId": "019fa517-e972-72f3-9cb2-625fd7ec1e9a",
+    "durationSecs": 327,
+    "physicsBlockers": 19,
+    "physicsDoctorBlockers": 19,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "retry",
+    "formalizationGatePassed": 0,
+    "formalizationGateRetry": 26,
+    "formalizationGateExhausted": 1,
+    "formalizationGateReviewed": 1
+  },
+  "sorry_count": 125,
+  "finalize": {
+    "innerGit": {
+      "sha": "9e1b367"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-27T19:45:52Z",
+  "wallTimeSecs": 2095
+}

@@ -1,0 +1,14 @@
+Done. This was the planner-described sorry-preserving no-op lane for the review-gate queue (retry 1/3) — the frozen deployment was already correct, and I verified rather than rewrote it.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_3_A_1.lean` — untouched, byte-identical to the frozen spec; fresh `lake env lean` in this lane: **0 errors, exactly the 6 contracted sorries** (L529/536/544/550/570/583 = 4 bridge lemmas + 2 target theorems), matching the planner-audited count.
+- All 35 unique `\lean{}` pins in the chapter ledger verified present in the file.
+- Recorded gate failure reason (`does not import Physlib/PhysLean`) is stale: the planner-recorded PhysLean-coverage exemption NOTE (chapter line 44) plus the grounding log cover the `import Mathlib`-only baseline. I ran one fresh LeanExplore confirmation query (Ampère-circulation/toroid H-field API) — only variational `ElectromagneticPotential` formulations exist in PhysLean, so the local `AmpereLaw`/`AmpereLawThinMeanPath` law-structures remain the faithful grounding.
+
+**Invariants re-checked**
+- Target `H = N·I·A/V` appears only on the conclusion side of `paramagneticTorus_H_eq` / `paramagneticTorus_H_eq_meanRadius`; no structure field states the closed form.
+- Countermodel audit: field assignments with `fieldMagnitude ≠ N·I/(2πR)` falsify the embedded `ampere_sum` equation, so laws constrain the model without smuggling the answer; uncertainty is genuinely N/A (exact symbolic answer), and branch info is covered (`wireCurrent_nonneg`, paramagnetic `0 ≤ χ`).
+
+**Artifacts**
+- Task result written to `.archon/task_results/problem_IPhO_2026_3_A_1.md` (assumption/target split, goal-faithfulness audit, 6 covered bridge obligations, countermodel audits, grounding gaps).
+- No `\leanok` changes made by me — markers belong to the deterministic sync/review per AGENTS.md.

@@ -1,0 +1,12 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict:** `status=partial`, `route=retry_proof`, `redraft_kind=not_applicable` for `IPhO2026_2_C_2.NeighboringRayExpansion.ray_B_first_order_expansion`.
+
+**Findings**
+- **Failure is a parse defect, not a contract defect.** Preflight: `compiles=false`, `sorry_count=0`, sole error `182:40: unexpected token '/--'; expected 'lemma'`. A stray duplicate of the `branch_denominators_ne_zero` doc comment (L178-182) dangles before the `deriv_specularSlopeFamily` doc at L184; the real declaration survives at L225.
+- **Contract is now derivable and faithful.** The post-trace iter-013 redraft (13:37Z, working-tree diff vs HEAD) added the assumption-side `M_specular_deriv`/`B_specular_deriv` fields that exactly exclude the certified affine countermodel, and both little-o proofs are fully written (`hasDerivAt_iff_isLittleO_nhds_zero` + `HasDerivAt.deriv`), 0 sorries, no axioms, signatures matching the blueprint target with coefficients strictly conclusion-side.
+- **Evidence caveat recorded:** the supplied prover trace ends 13:17Z on the pre-redraft baseline (2 honest sorries), so its verdict is stale-but-honored; its referenced task-result md is absent (process warning only).
+
+**Repair path (in records):** delete the orphaned L177-183 doc block, keep the L184 doc attached to `deriv_specularSlopeFamily`, re-run `lake env lean`, and confirm `end NeighboringRayExpansion` balance — no redraft needed.
+
+Files written: `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_2/attempt-1/milestones.jsonl:1` (single validated JSON line) and `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_2/attempt-1/summary.md:1` (11 lines).

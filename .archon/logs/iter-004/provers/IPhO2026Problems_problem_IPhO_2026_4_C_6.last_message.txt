@@ -1,0 +1,9 @@
+Done. The quarantined defect in `IPhO2026Problems/problem_IPhO_2026_4_C_6.lean` is repaired and the file compiles clean by-sorry.
+
+**Repair summary**
+- **Root cause**: `official_sample_value` used invented readouts (m = 0.55 kg, s = 7.3e-4) giving 0.595 K/W — outside the official 1.17 ± 0.03 K/W band.
+- **Fix**: recovered the actual sample microdata from `raw/E1_solution.pdf` (C6, 1.6 pt): slope `a = (2.28 ± 0.06)·10⁻³ 1/s` (wall conductance; pdftotext dropped the exponent's minus sign — verified against the band center, which fixes a = 2.294e-3) and `m = (89 ± 1) g`. Now `1/(4186·0.089·2.28e-3) = 1.1773`, deviation 0.0073 ≤ 0.03 ✓.
+- **Added** `official_sample_uncertainty` (IPhO2026Problems/problem_IPhO_2026_4_C_6.lean:434) certifying the official uncertainty inputs `1.17·(0.06/2.28 + 1/89)/2 ≤ 0.03` (LHS = 0.022).
+- **Verification**: `lake env lean` — 0 errors, exactly 4 expected `sorry` warnings; all target conclusions remain conclusion-side sorries.
+
+Full audit (assumption/target split, bridges, countermodel, uncertainty coverage) is in `.archon/task_results/problem_IPhO_2026_4_C_6.md`. Note for the plan agent: the blueprint chapter's NOTE saying the microdata "cannot be recovered" is now stale — chapters are outside my write domain.

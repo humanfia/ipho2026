@@ -1,0 +1,10 @@
+Review complete. **Verdict: solved** for `IPhO2026_4_B_4.VaporPressureB4Data.target`.
+
+**Checks**
+- **Compilation/purity**: preflight rc=0, sorry_count=0, no diagnostics; no `sorry`/`admit`/`native_decide`/`axiom` in the Lean source (the 11 "admit" grep hits are just the word "admitted" in comments).
+- **Signature/contract**: conclusion-side formula `P_v = P_atm * (1 - (H₀*T)/(H*T₀))` at an arbitrary admissible `MeasuredState` — exactly the recorded official B.4 answer, no weakening, no answer-as-assumption.
+- **Physics**: derivation uses Dalton at constant `P_atm`, componentwise ideal-gas law with fixed dry-air content, and `P_v(T₀,H₀)=0`; Clausius–Clapeyron is correctly context-only (separate predicate for B.5/B.6).
+- **Hypotheses/units**: positivity side conditions threaded honestly (`A>0`, `H>0`, `T₀=273.15≠0`); algebraic subquestion, so no tolerance/answer-choice gaming.
+- **Trace support**: iter-010 prover trace shows Edit-based proof replacement, fresh `lake env lean` rc=0, and `#print axioms` = `[propext, Classical.choice, Quot.sound]`. The supplied matching task-result list was empty, so the trace served as primary evidence — logged as a process note, not a semantic failure.
+
+Both deliverables are durable: `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_4_B_4/attempt-1/milestones.jsonl` (one valid JSON line) and `.../attempt-1/summary.md` (11 lines).

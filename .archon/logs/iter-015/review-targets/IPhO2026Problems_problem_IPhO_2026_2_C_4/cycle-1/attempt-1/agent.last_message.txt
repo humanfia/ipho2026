@@ -1,0 +1,4 @@
+Review complete — **SOLVED** for `IPhO2026Problems/problem_IPhO_2026_2_C_4.lean`.
+
+Both artifacts are durable on disk:
+- `.archon/logs/iter-015/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_4/cycle-1/attempt-1/milestones.jsonl` (single JSON line, `status=so

@@ -1,0 +1,16 @@
+The iteration-008 ledger additions are pre-existing (not from this lane). Everything checks out. Task complete.
+
+**Result: re-verified, unchanged** — this was a gate-retry lane (0/3, eager) for the planner-frozen `4_B_6` contract. Full record at `.archon/task_results/problem_IPhO_2026_4_B_6.lean.md`.
+
+**Verification performed**
+- Fresh `lake env lean`: 0 errors, exactly the 5 contracted `sorry` warnings (`latent_heat_per_unit_mass_target` L304, `latent_heat_per_unit_mass_formula` L321, `computed_value_within_official_uncertainty` L333, `qv_from_clausius_clapeyron_slope` L347, `reference_temperature_calibration` L355) — matching the iter-008 sweep.
+- `lean_verify`: axiom sweep clean (only standard axioms + expected `sorryAx`; 5 `opaque` flags are the intentional catalog constants).
+- Blueprint: `% archon:physics` present; all 28 `\lean{}` pins grep-verified against on-disk declarations (28 decls ↔ 28 pins, 0 unmatched).
+- No `/- USER: -/` hints in the file; no statement/signature/sorry-count change needed or made.
+
+**Formalization summary (already on disk, audited faithful)**
+- Assumption side: Clausius–Clapeyron law (`SatisfiesClausiusClapeyron`), B.5 measurements (`s = −4700 ± 200 K`, `Qᵥ = 39 ± 2 kJ/mol`, `R = 8.31`), apparatus readouts on PhysLean types (`DimPressure`, `Temperature`, `WithDim L𝓭 ℝ`).
+- Conclusion side only: the B.6 formula `Lᵥ = Qᵥ/M₀` via existential witness `IsSpecificLatentHeatOf.conversion_eq` + band membership `|Lᵥ − 2190| ≤ 110 kJ/kg`; uncertainty and signed-slope orientation both preserved hypothesis-side.
+- LeanExplore confirmed no PhysLean molar/latent-heat API → fieldless wrappers (`MolarEnergy`, `MolarMass`, `SpecificLatentHeat`) are the sanctioned local abstraction.
+
+**Notes for the review agent**: `\leanok` markers are owned by `sync_leanok`; flagged in the task result that all seven ledger entries are sorry-only autoformalization contracts (prover-stage pending), with zero blueprint-entry debt. The `leandag`/`archon` CLIs are not on this worker's PATH, so pin verification was done by grep instead.

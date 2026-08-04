@@ -1,0 +1,12 @@
+Done. The iter-011 redraft for `1_B_2` is complete and verified.
+
+**What changed** — `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean`, routed by Proof Review (`wrong_or_weakened_target`):
+- `eccentricity_sq_eq` restated `67/4` → `49/4` and **proved** (an ~80-line exact rational-field computation from the governing-law fields: `m·a0·ke² = ℏ²`, `E·80a0 = ke²`, `L = 15ℏ`; verified axioms: only `propext`, `Classical.choice`, `Quot.sound`).
+- `asymptote_factor_certificate` restated to `1/√(49/4−1) = 2/√45` and reproved.
+- `signed_deflection_eq_formula` angle conclusion fixed to the periapsis-referenced acute value `arctan(1/√(eps²−1))` (the old `pi − 2·arctan(1/√(eps²−1))` was the apocenter-referenced Rutherford angle).
+- Main target and magnitude corollary now state the consistent exact values `∓arctan(2/√45)` (≈ 16.6015°, inside both official rounding bands); the old obstruction computations were deleted since the goals are no longer in-principle false.
+- Header comment carries an iter-011 redraft log; the kept 5 sorries are exactly the Kepler-layer bridges + band bounds.
+
+**Verification** — fresh `lake env lean`: 0 errors, 5 `sorry` warnings (down from 6), plus 2 pre-existing benign unused-`hμ` linter notes.
+
+**Task result** — `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_2.md` with the full assumption/target split, faithfulness audit, bridge inventory, and a blueprint **redraft request**: the chapter ledger (lines 260, 270, 375–478, 494–504) still states the old `67/4`/`2/√63` chain; `\lean{}` names are unchanged, so a wording-only chapter patch plus `\leanok` from `eccentricity_sq_eq` onward is owed planner/review-side (I don't edit `.tex`).

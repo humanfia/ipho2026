@@ -1,0 +1,10 @@
+Done. Summary of this iter-009 lane (`problem_IPhO_2026_4_B_4.lean`, review-gate retry 1/3):
+
+**Audit outcome — no changes needed**
+- Fresh `lake env lean` re-run: 0 errors, exactly the 2 contracted sorries at `IPhO2026Problems/problem_IPhO_2026_4_B_4.lean:216` (`vaporPressure_eq`) and `:224` (`target`). Matches the planner-frozen contract per PROGRESS.md iter-009.
+- The on-disk file is fully faithful to the blueprint chapter `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_4_B_4.tex`: official answer `P_v = P_atm·(1 − H₀T/(HT₀))` confined to the two conclusion-side theorems; Dalton + per-component ideal-gas law + zero-at-T₀ as structure law fields; Clausius–Clapeyron kept as context-only predicate for B.5/B.6.
+- All 9 `leandag` node lookups (`target`, `vaporPressure_eq`, 3 bridge lemmas, 4 defs) match the chapter ledger pins in the flat `IPhO2026_4_B_4.*` namespace; the three helper lemmas are proof-complete and marker-ready (`\leanok` left to the deterministic sync per AGENTS.md).
+
+**Task result written** to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_B_4.md`
+- The prior iter-008 lane's task-result file was lost in the iter-008 collect incident (only `task_results/physics-grounding-…` registers were preserved); I recovered its full content from the iter-008 prover `.jsonl` archive, restored it, and updated the status header for iter-009 (retry 1/3).
+- Report includes the assumption/target split, goal-faithfulness audit, derivability inventory (3 bridges covered by proved lemmas + 1 contracted sorry for the final n_air-elimination), countermodel audit, uncertainty/branch coverage (both genuinely not applicable), blueprint pins, and grounding-gap record (none — PhysLean exemption documented in chapter).

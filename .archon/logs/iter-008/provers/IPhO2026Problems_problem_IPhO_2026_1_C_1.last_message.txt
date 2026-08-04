@@ -1,0 +1,11 @@
+Done. Gate-retry redraft for `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean` is complete — the frozen spec already satisfied the iter-008 blueprint requirements, so this pass was deliberately minimal.
+
+**Outcome**
+- File compiles clean: `lake env lean` exit 0, 0 errors, exactly the 6 contracted sorry warnings (`IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:190-309`).
+- Only edit: docstring typo fix — the header referenced a non-existent `quadratic_threshold_root_T1_C1`; now points to the real `quadratic_characterization_of_threshold`.
+- All 17 chapter `\lean{}` pins script-verified as declared under `IPhO2026.Problem1.C1`; ready for the deterministic `sync_leanok` phase (I don't mark blueprint chapters by hand per write-permission rules).
+
+**Key checks**
+- Assumption/target split intact: `hbarOmegaMin` is a bare expression; thresholds appear only on conclusion sides of `minimum_angular_frequency_T1_C1` and its backward-branch twin.
+- LeanExplore re-run this iter (Mathlib+Physlib): no two-body photodissociation kinematics module — near misses (`RigidBodyMotion.linearMomentum`, `Constants.ℏ`) recorded; the iter-002 import-policy exemption stands.
+- Task result written to `.archon/task_results/problem_IPhO_2026_1_C_1.lean.md` with the full audit (bridges, countermodel audit, uncertainty n/a, branch coverage).

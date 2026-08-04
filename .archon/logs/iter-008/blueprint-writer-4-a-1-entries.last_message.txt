@@ -1,0 +1,3 @@
+4-a-1-entries: COMPLETE — ledger appended to `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_4_A_1.tex` (10 blocks, 4 subsection groups, all 17 live decls covered, pins 16/16 grep-verified, uses 7/7 resolve in-chapter, begin/end balanced, official values confined to the 4 value-theorem conclusions, markers untouched, umbrella wired); namespace deviation recorded (`IPhO2026_4_A_1` flat on disk, not `IPhO2026.Problem4.A1`).
+
+Full report: `/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/blueprint-writer-4-a-1-entries.md`

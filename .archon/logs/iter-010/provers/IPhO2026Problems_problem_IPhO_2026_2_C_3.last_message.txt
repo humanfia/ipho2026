@@ -1,0 +1,10 @@
+Done. `problem_IPhO_2026_2_C_3.lean` is fully proved — the one contracted sorry in `limitingIntersectionCoordinates` is closed with the frozen signature untouched.
+
+**Result**
+- `lake env lean IPhO2026Problems/problem_IPhO_2026_2_C_3.lean` — exit 0, 0 errors, 0 warnings, 0 sorries.
+- `lean_verify` — axioms are only `{propext, Classical.choice, Quot.sound}`; no `sorryAx`, no escape hatches.
+- The proof derives the caustic limit honestly: degrades the C.2 `O(Δθ²)` hypotheses to `o(Δθ)`, solves the intersection x-coordinate as an explicit quotient eventually on `𝓝[≠] 0` (after proving the slope difference nonzero via `Tendsto.eventually_ne`), takes `Tendsto.div`, and closes both coordinates with `field_simp`+`ring` trig identities (`X_c = R sin³θ`, `Y_c = (R/2)cosθ(2−cos2θ)`). Y goes through the exact ray-A line.
+- Blueprint `thm:...:limitingIntersectionCoordinates` (and the umbrella target) are ready for `\leanok` — left to the deterministic sync per role rules.
+- Full write-up, including four environment gotchas for other lanes (e.g. `h.symm` misparsing as `Exists.symm` on `∀ᶠ` hypotheses — use `(tendsto_congr' h).mpr`), is in `.archon/task_results/problem_IPhO_2026_2_C_3.md`.
+
+No redraft needed — the statement was provable exactly as given. Want me to run a broader `lake build` sanity check on the library target, or is the per-file green sufficient for the lane?

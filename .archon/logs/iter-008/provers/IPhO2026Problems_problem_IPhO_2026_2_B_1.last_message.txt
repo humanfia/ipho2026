@@ -1,0 +1,14 @@
+Done. Lane `IPhO2026Problems/problem_IPhO_2026_2_B_1.lean` complete.
+
+**Outcome**
+- The redraft went beyond the dispatched sorry-preserving retry: all three contracted `sorry`s (`impactParam_eq_sin`, `sin_two_pos`, `container_radius_at_extremal_angle`, `alpha_beta_in_terms_of_R`) are now **fully proved** — the statement layer is byte-identical to the planner-frozen spec (no signature, hypothesis, or structure field touched).
+- `lake env lean` on the file: **0 errors, 0 warnings, 0 sorries** (`IPhO2026Problems/problem_IPhO_2026_2_B_1.lean:1`).
+- `#print axioms`: only `propext`, `Classical.choice`, `Quot.sound` — no escape hatches.
+
+**Proof content**
+- `container_radius_at_extremal_angle`: solves the 2×2 specular linear system (`field_simp`+`nlinarith`), collapses `√(m²+1)` on the circle identity, resolves `|distToLine|` via the derived strict `b < −R/2` (preserving the sign-branch discipline), then applies `Real.sin_two_mul`.
+- `alpha_beta_in_terms_of_R`: instantiates tangency + ansatz at both extremal angles via `SecondExtremalConfig`, and discharges uniqueness with the nonvanishing determinant `2 sin θ sin θ' (cos θ' − cos θ)` using `Real.injOn_cos`.
+
+**Bookkeeping**
+- Task result written: `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_1.md` (assumption/target split, faithfulness audit, bridge inventory, countermodel audit, uncertainty/branch coverage, blueprint pins).
+- All 15 `\lean{}` pins in the chapter matched; the four proof-bearing entries are ready for `\leanok` at the deterministic sync. I did not edit the blueprint chapter (read-only for provers); flagged in the task result that the prover-mode gate may prefer the sorries reinstated, though there's no technical reason to.

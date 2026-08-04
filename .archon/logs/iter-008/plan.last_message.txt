@@ -1,0 +1,17 @@
+Iter-008 plan phase is complete.
+
+**Outcome** — coverage debt cleared 363 → 33 (design floor), doctor clean, no prover dispatch this phase (gate queue belongs to the deterministic review pass).
+
+**Landed this phase**
+- Joined the orphaned `4-a-5-entries` dispatch per the blocking-wait rule; COMPLETE in 331 s (17 blocks / 22 pins).
+- 14 blueprint-writer lanes dispatched in 4 parallel waves, all COMPLETE (`3_C_4`, `3_C_5`, `4_C_7`, `3_B_1`, `1_C_1`, `2_B_2`, `4_A_1`, `3_C_2`, `2_B_1`, `3_B_2`, `4_B_4`, `3_A_2`, `2_C_4`, `2_C_1`, `2_C_2`, `2_A_1`, `2_B_3`); directives + reports in `logs/iter-008/`.
+- 5 planner-direct graph repairs: umbrella `\uses{}` wiring for the 6 owed chapters, `2_C_3` bare-label → `\cref`, `2_B_2` 18-pin namespace repoint, `4_A_1` projection repoints, `\_`-escape stripping in 7 ledgers, `3_B_1` `\textunderscore` typo, `4_B_6` opaque pins.
+- End-state (fresh `leandag build`): `unmatched` 33 = `1_B_1` (32, deferred to its prover-stage redraft so tex never pins the false lemma) + `hello` (1, polish-stage call); ∞-holes 0; isolated umbrellas 1 (`1_B_1`, by design); live doctor clean.
+- Incident self-caught and repaired: I pruned the 28 `physics-grounding-*.md` registers with processed reports; reconstructed all 28 from the prover audit streams and re-verified doctor clean. Standing rule recorded in `task_pending.md`.
+
+**Files updated**
+- `/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/iter/iter-008/plan.md`, `objectives.md`
+- `/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/PROGRESS.md`, `task_pending.md`, `task_done.md`, `STRATEGY.md`, `ARCHON_MEMORY.md`, `TO_USER.md`
+- 28 blueprint chapters (`blueprint/src/chapters/*.tex`, tex-only; 17 touched Lean files re-verified 0 errors)
+
+Next consumer: the deterministic 26-lane formalization-review pass; on convergence the loop advances `autoformalize → prover` with `1_B_1` + `4_C_6` as the documented residuals.

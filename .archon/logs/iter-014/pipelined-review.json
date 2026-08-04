@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "iteration": 14,
+  "complete": true,
+  "status": "complete",
+  "pipeline_mode": "target_lifecycle",
+  "starts_at": "formalizer",
+  "target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+  ],
+  "settled_target_files": [
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+  ],
+  "proof_review_target_files": [],
+  "targets": 1,
+  "reviewed": 0,
+  "unresolved": [],
+  "errors": {},
+  "requested_jobs": 4,
+  "max_combined_workers": 1,
+  "max_reviewers": 1,
+  "max_attempts": 3,
+  "rounds": [],
+  "duration_secs": 601.183,
+  "preflight": {
+    "iteration": 14,
+    "jobs": 1,
+    "duration_secs": 24.404,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "targets": [
+      {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 3,
+        "duration_secs": 24.404,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:343:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:409:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:739:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:790:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:820:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1040:5: warning: Variable name `hu` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1041:5: warning: Variable name `hbranch` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      }
+    ]
+  },
+  "session_dir": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/proof-journal/sessions/session_14",
+  "formalizers": {
+    "requested": 2,
+    "materialized": 1,
+    "failed": 1
+  },
+  "formalizer_results": {
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": {
+      "iteration": 14,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "cycle": 2,
+      "status": "materialized",
+      "review_attempt": 2,
+      "runner_ok": true,
+      "baseline_sha256": "cad85f34e238b28125363737cf1330bc9e4e25febb2e289f418b506c8369f723",
+      "lean_sha256": "20ec907bb1afaad279598356dc2f5b04d26baa532530d78953a4270a4d962e13",
+      "changed": true,
+      "task_result_updated": true,
+      "task_result_fingerprints": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_2.md": "8edbe157322018ad1b8a0c01d5c6b97b868106e2ce28ad5a606d335c585d747c"
+      },
+      "preflight": {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 3,
+        "duration_secs": 17.779,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:343:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:409:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:739:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:790:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:820:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1040:5: warning: Variable name `hu` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1041:5: warning: Variable name `hbranch` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      },
+      "error": "",
+      "task_result_mtimes": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_2.md": 1785267970983362789
+      },
+      "recovered_task_result_detection": true
+    }
+  },
+  "formalizer_history": {
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": [
+      {
+        "iteration": 14,
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "cycle": 1,
+        "status": "error",
+        "review_attempt": 1,
+        "runner_ok": true,
+        "baseline_sha256": "cad85f34e238b28125363737cf1330bc9e4e25febb2e289f418b506c8369f723",
+        "lean_sha256": "cad85f34e238b28125363737cf1330bc9e4e25febb2e289f418b506c8369f723",
+        "changed": false,
+        "task_result_updated": false,
+        "task_result_fingerprints": {},
+        "preflight": {
+          "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+          "status": "passed",
+          "compiles": true,
+          "returncode": 0,
+          "sorry_count": 3,
+          "duration_secs": 17.383,
+          "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:336:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:402:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:493:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:544:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:574:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:794:5: warning: Variable name `hu` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:795:5: warning: Variable name `hbranch` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+        },
+        "error": "formalizer did not change the Lean target; formalizer did not update its task result"
+      },
+      {
+        "iteration": 14,
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "cycle": 2,
+        "status": "materialized",
+        "review_attempt": 2,
+        "runner_ok": true,
+        "baseline_sha256": "cad85f34e238b28125363737cf1330bc9e4e25febb2e289f418b506c8369f723",
+        "lean_sha256": "20ec907bb1afaad279598356dc2f5b04d26baa532530d78953a4270a4d962e13",
+        "changed": true,
+        "task_result_updated": true,
+        "task_result_fingerprints": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_2.md": "8edbe157322018ad1b8a0c01d5c6b97b868106e2ce28ad5a606d335c585d747c"
+        },
+        "preflight": {
+          "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+          "status": "passed",
+          "compiles": true,
+          "returncode": 0,
+          "sorry_count": 3,
+          "duration_secs": 17.779,
+          "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:343:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:409:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:739:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:790:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:820:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1040:5: warning: Variable name `hu` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1041:5: warning: Variable name `hbranch` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+        },
+        "error": "",
+        "task_result_mtimes": {
+          "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_2.md": 1785267970983362789
+        },
+        "recovered_task_result_detection": true
+      }
+    ]
+  },
+  "formalization_handoffs": {
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean": {
+      "iteration": 14,
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "cycle": 2,
+      "status": "materialized",
+      "review_attempt": 2,
+      "runner_ok": true,
+      "baseline_sha256": "cad85f34e238b28125363737cf1330bc9e4e25febb2e289f418b506c8369f723",
+      "lean_sha256": "20ec907bb1afaad279598356dc2f5b04d26baa532530d78953a4270a4d962e13",
+      "changed": true,
+      "task_result_updated": true,
+      "task_result_fingerprints": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_2.md": "8edbe157322018ad1b8a0c01d5c6b97b868106e2ce28ad5a606d335c585d747c"
+      },
+      "preflight": {
+        "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+        "status": "passed",
+        "compiles": true,
+        "returncode": 0,
+        "sorry_count": 3,
+        "duration_secs": 17.779,
+        "diagnostics": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:343:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:409:5: warning: Variable name `hμ` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:739:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:790:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:820:8: warning: declaration uses `sorry`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1040:5: warning: Variable name `hu` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIPhO2026Problems/problem_IPhO_2026_1_B_2.lean:1041:5: warning: Variable name `hbranch` is not explicitly referenced.\n\nThe binding can be removed (if unused) or named `_` (if used implicitly).\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`"
+      },
+      "error": "",
+      "task_result_mtimes": {
+        "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_1_B_2.md": 1785267970983362789
+      },
+      "recovered_task_result_detection": true
+    }
+  },
+  "formalization_reviews": {
+    "enabled": true,
+    "reviewed": 1,
+    "rounds": [
+      {
+        "cycle": 2,
+        "attempt": 1,
+        "submitted": 1,
+        "completed": 0,
+        "failed": 1
+      },
+      {
+        "cycle": 2,
+        "attempt": 2,
+        "submitted": 1,
+        "completed": 1,
+        "failed": 0
+      }
+    ],
+    "unresolved": []
+  },
+  "gate_events_applied": true,
+  "gate_events": [
+    {
+      "kind": "formalization",
+      "event_id": "pipeline:14:IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:formalization:2",
+      "file": "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "cycle": 2,
+      "applied": true,
+      "decision": "passed"
+    }
+  ],
+  "proof_gate_result": {
+    "solved": [],
+    "retry": [],
+    "needs_redraft": [],
+    "blocked_infrastructure": [],
+    "exhausted": [],
+    "reviewed": []
+  },
+  "formalization_gate_result": {
+    "passed": [],
+    "retry": [],
+    "exhausted": [
+      "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+    ],
+    "reviewed": [
+      "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+    ]
+  },
+  "proof_redrafts_reopened": [],
+  "pending_formalization_targets": []
+}

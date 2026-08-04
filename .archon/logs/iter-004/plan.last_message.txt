@@ -1,0 +1,14 @@
+Iter-004 plan phase is complete. Summary of what was found and dispatched:
+
+**Key adjudications**
+- The injected 19 `missing-physlib-import` doctor findings were a **stale pre-NOTE snapshot** — a direct `run_blueprint_doctor` call against live chapters returned 0 for the already-NOTEd files. The genuine residual gap was 7 chapters whose Lean files carry *genuinely-used* targeted Physlib imports (`2_C_3`, `3_A_3`, `3_B_2`, `4_A_5`, `4_B_6`, `4_C_7`, plus `3_A_2`) but had no reconciliation NOTE. All 7 got `% NOTE: PhysLean grounding reconciliation` entries; doctor now reports **0 findings across all 28 chapters**.
+- `1_B_1` re-verified broken first-hand: 3 `linarith` errors inside the iter-003 lane-added `quadratic_pos_of_large` — the `hkey` step asserts `0 ≤ E·r + k e²` for large `r`, which is sign-flipped (on the bound branch `E < 0` forces `E·r + C ≤ 0`).
+- `4_C_6`'s iter-003 quarantine **never landed** — `official_sample_value` (numerically false: 0.595 ∉ 1.17±0.03) is still on disk verbatim.
+
+**Dispatched (2 `physics-formalize` repair lanes)** — see `.archon/iter/iter-004/objectives.md` and `.archon/PROGRESS.md`
+- `problem_IPhO_2026_1_B_1.lean`: surgical sign-chain fix (no redraft — the `bound_branch` structure design is review-green); must end at `lake env lean` 0 errors as re-enrollment evidence (it sits at review-exhausted 3/3; the lane will be gate-dropped, which is expected and recorded).
+- `problem_IPhO_2026_4_C_6.lean`: finish the quarantine — delete the false theorem, documented comment, preserve inversion/propagation carriers and all 6 Physlib imports.
+
+**Gate bookkeeping**
+- Enrolled the 11 never-reviewed clean files in `formalization-review-gate.json` at reviews 0/3 (via the gate's own loader/writer) so the next deterministic review pass audits all 26 non-redraft targets.
+- Corrected stale gate reasons for `1_B_1`/`4_C_6`; state files (`task_pending.md`, `STRATEGY.md` table, `ARCHON_MEMORY.md` ≤600 chars, `TO_USER.md`) updated; full rationale in `.archon/iter/iter-004/plan.md`.

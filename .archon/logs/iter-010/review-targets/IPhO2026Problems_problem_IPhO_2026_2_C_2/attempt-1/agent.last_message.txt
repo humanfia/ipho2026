@@ -1,0 +1,10 @@
+Review complete — both artifacts are durable on disk.
+
+**Verdict: blocked / needs_redraft (`underdetermined_contract`)**
+
+- **Checks that pass** — signature preserved, statements faithful to blueprint C.2 target (coefficients conclusion-side, acute branch `θ ∈ (0, π/2)`, C.1 prerequisites per policy, `o(Δθ)` via `Mathlib.Asymptotics.IsLittleO`); compiles with rc 0; no axiom laundering, no answer-as-assumption, no weakened target.
+- **Check that fails** — 2 active `sorry`s (preflight-confirmed) at `problem_IPhO_2026_2_C_2.lean:155` and `problem_IPhO_2026_2_C_2.lean:194`. Root cause is not tactical: the frozen interface `M_first_order`/`B_first_order` only asserts *some* little-o slope exists for an arbitrary family `M B : ℝ → ℝ` tied to the specular law only at the single point `θ`. The countermodel `M φ = cot 2θ + c(φ−θ)` satisfies every hypothesis for any `c`, so `dm = -2 csc(2θ)²` is genuinely underivable as contracted.
+- **Evidence** — iter-010 prover trace (biui-0724, 76 turns) reached the identical blocker and requests redraft; the matching task-result list is empty and the referenced `.archon/task_results/...2_C_2.md` is absent — recorded as a process warning only, per instructions.
+- **Repair path** — add specular-family law fields (`∀ᶠ φ in 𝓝 θ, M φ = cot (2·φ)` / `B φ = R/(2 cos φ)`, or `HasDerivAt` fields with the recorded derivative values), then close via `hasDerivAt_iff_isLittleO_nhds_zero` + `HasDerivAt.unique`, signatures untouched.
+
+Artifacts: `milestones.jsonl` (1 schema-valid JSON line) and `summary.md` in `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_2/attempt-1/`.

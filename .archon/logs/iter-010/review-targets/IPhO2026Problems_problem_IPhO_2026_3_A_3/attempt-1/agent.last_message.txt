@@ -1,0 +1,6 @@
+Review complete. Both artifacts are durable on disk.
+
+- `milestones.jsonl` records `status: solved`, `route: solved`, and the theorem `IPhO2026.T3A3.dW_eq_mu0_V_H_dM` reviewed.
+- `summary.md` (12 lines) concisely documents the five-check audit and key proof steps.
+
+All five review checks passed: clean compile with zero sorries, signature preserved, faithful physics semantics, honest hypothesis/units/answer use, and prover trace supports the result. The empty matching task-result list was treated as a process warning, not a semantic failure, per the review instructions.

@@ -1,0 +1,14 @@
+Repair complete. `IPhO2026Problems/problem_IPhO_2026_2_C_4.lean` now compiles with exactly one expected `sorry` warning on the main target.
+
+**What was fixed**
+- Removed the wave-1 dot-notation misuse: `CausticPowerLawForm` was a free function calling `c.SmallAngleRegime θ`/`c.X_c θ` as if `c` were a structure instance. Restated against explicit `X Y : ℝ → ℝ` parameters per the planner directive; `c.X_c`/`c.Y_c` are now only projected at the theorem site.
+- Deleted the vacuous `caustic_vertical_shift : ... → True` ghost theorem.
+- Corrected a faithfulness flaw: the old predicate asserted an exact identity `Y_c θ = v·|X_c θ|^(p/q) + u` on `(0, δ)`, which is mathematically false for this caustic (Taylor terms `3Rθ²/2` vs `3Rθ²/4`). The subquestion's `θ ≪ 1` is now honestly formalized as asymptotic agreement to leading order via `Asymptotics.IsEquivalent` along `smallAngleFilter := nhdsWithin 0 (Set.Ioi 0)` — documented in the module doc's "Math note".
+
+**What was added**
+- `CausticPowerLawForm X Y u v p q` — parametric, answer-free asymptotic power-law contract (positivity of exponent, `Y ~ v·X^(p/q)+u`, plus an `X ~ w·θ^q` positive-scale clause that makes `|X_c|` well-defined on the branch).
+- `SatisfiesCausticPowerLaw` — recorded constants (`u = R/2`, `v = (3/4)·R^(1/3)`, `p=2`, `q=3`) appear conclusion-side only.
+- `smallAngleRegime_mem_filter` — proved (no sorry) bridge from the plain-English `(0,1)` regime to the asymptotic filter.
+- Main target `caustic_small_angle_power_law ... := by sorry`, unchanged physics content, now true and proof-ready.
+
+Results written to `.archon/task_results/problem_IPhO_2026_2_C_4.md` with the full assumption/target split, countermodel audit, and grounding log. The blueprint chapter already carries the `% archon:physics` marker and PhysLib exemption note; I left `\leanok` to the deterministic sync.

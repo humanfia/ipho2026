@@ -1,0 +1,8 @@
+{
+  "ran": false,
+  "error": "check_axioms_inline.sh exited 1: \u001b[0;31mError running Lean\u001b[0m\n  /root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:79:29: error: expected token\n  /root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:156:15: error: Function expecte",
+  "filesChecked": 0,
+  "durationSecs": 233,
+  "sorryLaunderings": [],
+  "otherNonStandardAxioms": []
+}

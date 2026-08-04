@@ -1,0 +1,54 @@
+{
+  "iteration": 5,
+  "stage": "autoformalize",
+  "mode": "parallel",
+  "startedAt": "2026-07-27T19:45:52Z",
+  "plan": {
+    "status": "done",
+    "sessionId": "019fa51c-cbc5-7df0-a167-bdd7cadd2da2",
+    "durationSecs": 583
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 1
+  },
+  "prover": {
+    "status": "done",
+    "formalizationReviewGateDropped": [
+      {
+        "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+        "reason": "review_exhausted"
+      }
+    ],
+    "formalizationReviewGateEligible": 0,
+    "durationSecs": 0
+  },
+  "review": {
+    "status": "done",
+    "sessionId": "019fa52b-470a-7c80-9a9f-9b123f60b69c",
+    "durationSecs": 894,
+    "physicsBlockers": 19,
+    "physicsDoctorBlockers": 19,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "retry",
+    "formalizationGatePassed": 0,
+    "formalizationGateRetry": 26,
+    "formalizationGateExhausted": 1,
+    "formalizationGateReviewed": 1
+  },
+  "sorry_count": 125,
+  "finalize": {
+    "innerGit": {
+      "sha": "d54111c"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-07-27T20:16:41Z",
+  "wallTimeSecs": 1849
+}

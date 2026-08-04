@@ -1,0 +1,9 @@
+Done. The iter-015 objective for `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean` is complete.
+
+**Outcome**
+- The reviewed elaboration failure was the dangling `/-- … -/` doc comment at old line 182 (`unexpected token '/--'; expected 'lemma'`) — its lemma `branch_denominators_ne_zero` already existed further down the file, so the orphaned block just needed removal.
+- Single repair: deleted the 6-line dangling doc block. No statement, signature, hypothesis, or proof-body touched.
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_2_C_2.lean`: exit 0, **0 errors, 0 sorries, no axioms** — both C.2 target halves (`ray_B_slope_first_order`, `ray_B_intercept_first_order`) and `ray_B_first_order_expansion` fully proved.
+
+**Recorded**
+- Results written to `.archon/task_results/problem_IPhO_2026_2_C_2.md`, incl. the `leanok` candidate list and one drift note for the writer/review pass: the blueprint's `slopeFamily_deriv` / `interceptFamily_deriv` `\lean{}` targets have no standalone Lean Prop declarations (they're the `M_specular_deriv` / `B_specular_deriv` structure fields in the current redraft), so their `\lean{}` refs may need repointing — blueprint edits are outside my lane.

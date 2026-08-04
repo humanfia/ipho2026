@@ -1,0 +1,13 @@
+The file is finished and verified. Summarizing:
+
+**Done — T3-C.4 autoformalized.** `lake env lean` on `IPhO2026Problems/problem_IPhO_2026_3_C_4.lean` exits 0 with exactly 8 expected `sorry` warnings and no errors.
+
+**What's in the file** (`IPhO2026Problems/problem_IPhO_2026_3_C_4.lean:1`)
+- **Quantities** — `opaque` scalars `T_h, T_0, T, C_c, P, t`; `TorusParams` (`μ₀, n, K, V`); `CycleCorners`/`WorkingState` preserving Figure 3b labels; `CoolingRun` with per-temperature-drop densities (`δQ_c/ΔT'`, `δQ_h/ΔT'`, `δW/ΔT'`, `δs/ΔT'`) so infinitesimal-cycle laws stay ordinary equations; `RegimeAssumptions` (ordering `0 < T < T_0 < T_h`).
+- **Governing laws (assuming, never the answer)** — EOS `T·M·V = n·K·H`, part-B isothermal heat relation, Carnot heat ratio `Q_h T_c = Q_c T_h`, first law `W = Q_h − Q_c`, constant-power and calorimetric density laws, bundled per-cycle as `InfinitesimalCycleLaw`/`IsCoolingRun`.
+- **Bridge lemmas (all `sorry`)** — per-cycle ratio/first-law/power derivations (`heatDumpedDensity_eq` → `residenceDensity_eq`), accumulation (`elapsedTime_eq_integral`), FTC evaluation (`cooling_time_integral_eval`, via `Real.log`).
+- **Main target** — `c4_elapsed_time`: `t = (C_c·T_h/P)·(ln(T_0/T) − (T_0−T)/T_h)`, conclusion-side only, labeled `thm:physics:IPhO_2026_3_C_4:target`.
+
+**Faithfulness** — recorded answer appears only in conclusions; cooling/refrigerator branch data (`T < T_0`, positive drop-densities, `0 < Q_c`) is hypothesis-borne. No uncertainty data in source (marked N/A). LeanExplore found no classical Carnot-refrigerator API in Mathlib/PhysLean at the pinned rev, so faithful local law predicates were used (same idiom as sibling C.2/C.5 files, `import Mathlib` only).
+
+Full audit written to `.archon/task_results/problem_IPhO_2026_3_C_4.md`.

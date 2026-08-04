@@ -1,0 +1,12 @@
+Lane complete for `IPhO2026Problems/problem_IPhO_2026_2_B_3.lean`.
+
+**Outcome**
+- The planner-frozen formalization already satisfies every physics-formalize rule, so no statement or signature changes were needed this lane.
+- Fresh `lake env lean` (iter-008): 0 errors, only the 4 contracted `sorry` warnings (`:168`, `:174`, `:179`, `:195`) — matches the contracted count 4 in PROGRESS.md.
+- Task result written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_3.md`.
+
+**Key audit points recorded**
+- Assumption/target split: governing laws in `HalfCylindricalMirrorPhysics` (specular reflection via Mathlib `Submodule.reflection`, cosine law, illuminated-branch inequality), B.1/B.2 previous-part equations in `PreviousPartResults`, Figure 2f readouts in `SolarCookerGeometry`; the answers (`cos θ_max = 4/5`, `a = 0.12 m = 12 cm`) appear conclusion-side only in `container_diameter_for_quintuple_power` (`IPhO2026Problems/problem_IPhO_2026_2_B_3.lean:205`).
+- All 8 derivability bridges are covered with named Lean carriers and grounded Mathlib routes; no blocked bridges, no grounding gaps.
+- All 10 chapter ledger `\lean{}` pins map to live root-level declarations; `\leanok` markers flagged for review/sync agents (prover does not touch them).
+- Report ready for the deterministic formalization-Review pass (0/3, eager).

@@ -1,0 +1,11 @@
+Done. Summary of the iter-010 prover pass on `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean`:
+
+**Closed**
+- `branch_denominators_ne_zero` — proved from the acute branch via `sin_pos_of_pos_of_lt_pi` and `cos_pos_of_mem_Ioo`; axiom check clean (`propext`, `Classical.choice`, `Quot.sound`).
+
+**Partial (honest gap, redraft requested)**
+- `ray_B_slope_first_order` at `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:155` and `ray_B_intercept_first_order` at `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:194` — full proof scaffolding in place (unpack the little-o interface, C.1 zeroth-order rewrite, `IsLittleO.congr'` transport, family membership + `ring` algebra). Each retains exactly one focused `sorry`: the identification of the interface's hidden slope `dm`/`db` with the recorded derivative values.
+
+**Blocker** — a genuine faithfulness gap, not a Mathlib gap: the frozen `M_first_order`/`B_first_order` fields only assert the existence of *some* little-o first-order coefficient for an arbitrary family `M : ℝ → ℝ`. Since nothing ties `M` to the specular family beyond its value at the single point `θ`, the claimed coefficients are underdetermined (models exist with any slope through `(θ, cot 2θ)`). The redraft section in `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_2.md` spells out two minimal fixes, the preferred one being `∀ᶠ φ in 𝓝 θ, M φ = cot (2φ)`-style family fields, which close the proofs via `hasDerivAt_iff_isLittleO_nhds_zero` + `HasDerivAt.unique` with all signatures untouched.
+
+**Verification** — fresh `lake env lean` exits 0 with exactly two `declaration uses sorry` warnings (L155, L194), no errors. Only my assigned `.lean` file and its task result were edited.

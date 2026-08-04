@@ -1,0 +1,14 @@
+Done. The lane for `IPhO2026Problems/problem_IPhO_2026_3_C_4.lean` is complete.
+
+**Outcome**
+- Re-read the role docs, PROGRESS.md, the assigned `.lean` file, and the blueprint chapter (`% archon:physics` confirmed at L2 — physics-formalize discipline applies).
+- Fresh `lake env lean` verification: **0 errors, exactly the 8 contracted `sorry` warnings** (L274, L283, L317, L325, L335, L355, L375, L401), no other diagnostics.
+- The file is a **review-gate retry lane (2/3, statements planner-frozen)**, so I made no changes to the `.lean` file — the existing frozen formalization already satisfies every physics-modeling rule, and the deterministic review pass is its next consumer.
+- Wrote the audit to `.archon/task_results/problem_IPhO_2026_3_C_4.lean.md`.
+
+**Audit highlights**
+- Assumption/target split is clean: governing laws (EOS, isothermal heat, Carnot ratio, first law, constant-power, calorimetry), figure readouts (Figure 3b corners, torus params), and regime assumptions are all assumption-side; the official answer `t = (C_c T_h/P)(ln(T₀/T) − (T₀−T)/T_h)` lives only in the conclusion of `c4_elapsed_time`.
+- All six bridges (density lemmas → accumulation → FTC evaluation → field algebra) are covered with named carriers and Mathlib anchors; none blocked.
+- Countermodel check passes: the law equations fix every density on the integrating region, so no underdetermination.
+- Uncertainty is not applicable (exact closed form); branch/orientation info (cooling direction, refrigerator heat signs, elapsed-time positivity) is explicitly covered.
+- No `\leanok` markers due (all bodies are contracted sorries); left to the deterministic sync regardless.

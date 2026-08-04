@@ -1,0 +1,15 @@
+Redraft complete. Summary of what was done:
+
+**Diagnosis (from PROGRESS.md / proof-review):** the iter-002 model parametrized the A.3 work law as `workDensity(M) = μ₀·V·M_of_H M` — substituting the magnetization function for the true field-as-a-function-of-magnetization, losing the `dM/dH` Jacobian — and the shipped witness (`witness_target_IS_FALSE.lean`) refuted all three sorried declarations.
+
+**Redraft (`IPhO2026Problems/problem_IPhO_2026_3_B_1.lean`):**
+- `IsMagneticWorkDensity` now field-parametrized: `workOnDensity H = μ₀·V·H·deriv M_of_H H`, so `dW = μ₀VH dM` keeps its Jacobian.
+- `IsothermalFieldChange` gains `hV : p.V ≠ 0` (Archon-memory neq-guard rule) and global EOS `h_eos : ∀ H, SatisfiesEOS …`; the false `leg_mem_tracked_range` lemma disappears entirely.
+- `HasHeatCapacityLaw` adds `ContDiff ℝ 1 U`; first law gives per-leg field balances `Q_in H₁ − Q_in H₀ = −∫_{H₀..H₁} workOnDensity`.
+- Bridges: `magnetization_eq_eos_solution` (proved, `field_simp`+`linear_combination`), new `magnetization_deriv`, `workOnDensity_eq_linear`, `workOnDensity_contDiff`, `q_in_eq_neg_integral`, `q_in_deriv`, `leg_work_integral_eval`, target `isothermal_heat_into_torus`, `official_answer_value` (rfl).
+
+**Validation:**
+- Fresh `lake env lean`: 0 errors, exactly 7 expected `sorry` warnings.
+- Countermodel audit: the old witness data, honestly re-expressed against the new contract, now *satisfies* the target (verified compile; stored at `.archon/task_results/witness_3_B_1_redraft_countermodel_now_agrees.lean`); the dishonest variant is excluded because the first law would force `-2H = 4H`.
+
+**Note for the plan agent:** the chapter needs redraft ledger updates (delete `LegMemTrackedRange` block, re-parametrize `IsMagneticWorkDensity`/`ObeysFirstLawMagnetic`/`IsothermalFieldChange`, add the five new bridge blocks) — full details in `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_1.md`. `\leanok` was not applicable by me (blueprint is plan/review-owned); all pinned `\lean{}` names except `LegMemTrackedRange` still exist.

@@ -1,0 +1,12 @@
+Repair complete — the file now compiles cleanly with only the three expected `sorry` warnings.
+
+**Repairs applied to `IPhO2026Problems/problem_IPhO_2026_4_C_6.lean`:**
+- Fixed the parse-level cascade: rewrote `StrictBand` as a genuine band `lo < v ≤ hi` (the old version was both syntactically broken and semantically vacuous — it never mentioned the banded value), and repaired `MeasuredValue` accordingly.
+- Fixed the `WithDim` arity/syntax misuse near line 114: added `SIQuantity.castTo` (lifting PhysLean `WithDim.cast`), cast the `c₀·m` product in `innerHeatCapacitySI`, and replaced all broken `h_dim ▸ …` transports in `CoolingModel`, `FiniteDifferenceModel`, `FourierRadialConductionLaw` with a fixed-arity `driveSI : ΔT/R_Th → watts`.
+- Added a `dim_component` tactic macro for robust dimension-identity proofs, and fixed the previously unprovable `slope_inversion_is_dimensionally_correct` (now certifies `c₀·m·R_Th` has the action dimension `T𝓭` i.e. `J·s`).
+- Redrafted `DimC5Slope` as the graph readout `(K/s)/K` (`T𝓭⁻¹`) with the action-dimension bookkeeping in the bridge lemma; added `slopeC5_pos`/`heatCapacity_pos` calibration fields.
+- Main theorem now states `R_Th = 1/(c₀·m·s)` conclusion-side (equivalent to the recorded `c₀·m·s·R_Th = 1`, with the proved pure-algebra certificate `cooling_model_inversion_key` alongside); replaced the unprovable-as-stated uncertainty budget with a provable strict-budget formulation `|1/(q·s) − R| ≤ R·(us + uq)` (change documented in the task result).
+
+**Verification:** `lake env lean` exits 0 with only warnings at lines 366, 393, 409 (`declaration uses sorry`). Targeted Physlib imports kept; no cross-imports; official answer `1.17 ± 0.03 K/W` stays conclusion-side only.
+
+Task result written to `.archon/task_results/physics-formalize-IPhO2026Problems_problem_IPhO_2026_4_C_6.md` with the full assumption/target split, bridge inventory (9 bridges, carriers + status), countermodel audit, and uncertainty/branch coverage. No `\leanok` applied (owned by the deterministic sync).

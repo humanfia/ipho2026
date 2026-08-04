@@ -1,0 +1,14 @@
+Review complete. Both artifacts are durable on disk.
+
+**Verdict:** `partial` / route `retry_proof` — contract faithful, failures purely tactic-level.
+
+**Key findings**
+- Preflight: `compiles=false`, `sorry_count=5`, 4 errors — all inside helper lemma `abs_hitOffset_eq` (`problem_IPhO_2026_2_B_2.lean:223`), none in the statements.
+- Root causes: (1) `nlinarith` hint set missing the cross-term product needed for Parseval (line 279); (2) destructive `rw ... at *` killing the pattern for `|ue| ≤ p.R` (line 295); (3) `field_simp` leaving an `R⁻¹²` normalization unsolved (line 299); (4) rewrite-ordering losing the `|wn| ^ 2` pattern (line 309).
+- The iter-011 redraft genuinely resolved the iter-010 `underdetermined_contract`: the two-sided band model yields `P/P₀ = 2·yOff/(2a) = 1/(1−cos θ_max)` via the B.1 calibration, matching the recorded answer and the B.3 spot check (cos θ=4/5 → 5). No weakening, no axiom/admit/`native_decide` laundering.
+- The target theorem `power_ratio_in_terms_of_theta_max` and 4 supporting lemmas still carry honest `sorry`s — the chain (width → `yOff = R sin θ_max` → B.1 bridge) is fully sketched in the blueprint and derivable.
+- Prover trace (294 events) shows real iteration on exactly these goals, aborted by a 429 rate-limit; no matching task-results artifact exists (recorded as process warning, not a failure).
+
+Artifacts:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/cycle-1/attempt-1/milestones.jsonl` (one JSON line, parse-verified)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_2_B_2/cycle-1/attempt-1/summary.md` (12 lines)

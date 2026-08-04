@@ -1,0 +1,16 @@
+Iter-012 plan phase complete. Both mandatory redrafts landed, compile-verified, and the next round is dispatched.
+
+**Landed this phase (refactor subagent lanes, all COMPLETE, zero divergence)**
+- `3_B_2` — missing-foundational-bridge redraft: `ParamagneticTorusLaws` gained `temp_differentiable`/`mag_differentiable` (`∀ t, DifferentiableAt ℝ …`), making the `deriv`-based first-law balance informative at every parameter so `adiabatic_invariant_along_path` is derivable via the chapter's differentiated-EOS + MVT route. Fresh `lake env lean`: 0 errors, 3 sorries (`IPhO2026Problems/problem_IPhO_2026_3_B_2.lean:159`).
+- `4_C_7` — wrong-target redraft: `acrylicConductivity_formula` re-signed (`0 < R_Th`, `0 < lam`, physical drive `T_OC < T_IC` — E1 Procedure step 2 heats the outer cylinder, verified on the official page images); `acrylicConductivity_officialSample` restated to the sound direction `0.2629 ≤ h·R_Th → |λ−0.25| ≤ 0.01` over abstract positive inputs (`IPhO2026Problems/problem_IPhO_2026_4_C_7.lean:179`). Fresh compile: 0 errors, 2 sorries. Module docstring realigned by a cosmetic follow-up lane.
+- Source adjudication first-hand: official E1 solution PDF (sibling path `hf-IPHO2026-upload/ipho_2026_source/raw/`) records the formula and `0.25±0.01` but no substitution; recomputation shows the frozen inputs are irreconcilable (λ=0.25 needs `h·R_Th ≈ 0.205`, not `0.117`) — the sound-direction contract is the faithful repair.
+
+**Dispatched next round (`PROGRESS.md` Current Objectives)**
+- 12 mandatory proof-Review retries `[prover-mode: physics]` (e.g. `1_A_1` 12 sorries, `3_B_1` 7, `2_B_2` 6, `2_C_4` last sorry at L145).
+- 2 post-redraft re-gate+proof lanes: `3_B_2`, `4_C_7` (contracts frozen; fill contracted sorries while the formalization gate re-reviews).
+- Explicitly not dispatched: `1_B_1` (broken build, gate-exhausted) and `4_C_6` (provenance).
+
+**Bookkeeping**
+- Sidecars written: `.archon/iter/iter-012/plan.md` + `objectives.md`; `task_pending.md`/`task_done.md` updated; `STRATEGY.md` rows refreshed (gate closeout now 1 iter; prover stage ACTIVE); `TO_USER.md` updated (vendor-the-PDF decision for `4_C_6`); `ARCHON_MEMORY.md` curated to 8 bullets/597 chars.
+- `task_results/` collected (13 review-consumed iter-011 reports removed; grounding registers + witness probes preserved per standing rule); gate JSON reasons for the two repaired targets annotated with the iter-012 repair evidence.
+- `config.json` subagent `refactor` enablement reverted after the dispatches per the classic-loop setting.

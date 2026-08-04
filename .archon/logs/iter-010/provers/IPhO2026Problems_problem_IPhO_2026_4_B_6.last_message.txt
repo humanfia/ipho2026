@@ -1,0 +1,14 @@
+Done. Summary of the iter-010 prover lane for `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean`:
+
+**Result: 4 of 5 targets fully proved, file compiles with exactly 1 remaining sorry (honest partial, statement defect).**
+
+Closed proofs:
+- `latent_heat_per_unit_mass_formula` — existential with catalog witnesses; `39/18.0e-3 = 2166.6̄`, band `|2166.6̄ − 2190| ≤ 110` via `abs_le` + `norm_num`
+- `computed_value_within_official_uncertainty` — same scalar bound
+- `qv_from_clausius_clapeyron_slope` — field equations substituted: `4700·8.31/1000 = 39.057`, `|39.057 − 39| ≤ 2`
+- `reference_temperature_calibration` — `exact input.T₀_value_K_eq`
+
+Remaining sorry (recorded with redraft request in `.archon/task_results/problem_IPhO_2026_4_B_6.md`):
+- `latent_heat_per_unit_mass_target` — the conversion witness and both catalog-matching conjuncts are fully proved, but the final conjunct `Lv_reported.withinUncertainty officialSpecificLatentHeatValue` is unprovable: `Lv_reported` is universally quantified with no hypothesis tying it to `Qᵥ/M₀` (countermodel: central value 10000). This is the same "readout struct without guard" pattern as the 4_A_5 memory entry. Smallest fix: one hypothesis `Lv_reported.central_kJ_per_kg = catalogQvValue / catalogMolarMassWaterValue`; close is then one line.
+
+Verified by fresh `lake env lean` (0 errors, one sorry warning at `IPhO2026Problems/problem_IPhO_2026_4_B_6.lean:296`) and `#print axioms` on a deleted `/tmp` scratch copy — the four closed targets depend only on `[propext, Classical.choice, Quot.sound]`, no `sorryAx` laundering.

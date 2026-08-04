@@ -1,0 +1,12 @@
+Review complete — verdict: **solved**. Both artifacts are durable on disk.
+
+**Findings**
+- **Compile**: preflight rc=0, sorry_count=0; my source audit confirms no `sorry`/`admit`/`axiom`/`native_decide`/macro tricks (only a stale doc comment).
+- **Contract**: the iter-011 field-parametrized redraft (`workOnDensity H = μ₀·V·H·deriv M_of_H H`, EOS at every field with `hV`/`hT`, universally quantified per-leg first-law balances) faithfully repairs the iter-010 `underdetermined_contract` defect — the `linProc` countermodel is now genuinely excluded.
+- **Proof**: the full bridge chain `magnetization_eq_eos_solution` → `magnetization_deriv` → `workOnDensity_eq_linear` → `leg_work_integral_eval` (FTC + `field_simp`/`ring` with `hV`/`hT`) → `isothermal_heat_into_torus` is complete; the target derives `Q = -(μ₀nK/2T)(H_f²-H_i²)` with no answer-as-assumption; `official_answer_value` is conclusion-side `rfl`.
+- **Trace**: the iter-013 prover log documents closing all 7 sorries with `#print axioms` = `[propext, Classical.choice, Quot.sound]` everywhere and a final clean `lake env lean` run; the empty task-results list is logged as a process warning, with the trace as primary evidence.
+- **Cosmetic only** (non-blocking, not edited per scope): the module docstring still says bodies are `by sorry`, and the blueprint's `ObeysFirstLawMagnetic` entry keeps a stale M-parametrized display formula.
+
+Artifacts written:
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_B_1/attempt-1/milestones.jsonl` (1 JSON line, validated, `status=solved`, `route=solved`)
+- `.archon/logs/iter-013/review-targets/IPhO2026Problems_problem_IPhO_2026_3_B_1/attempt-1/summary.md` (9 lines)

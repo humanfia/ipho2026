@@ -1,0 +1,10 @@
+The lane is complete. Summary of what I did and found:
+
+**Outcome for `3_B_1` (autoformalize, physics-formalize mode):**
+- This is a **retry-gate lane (2/3)** with planner-frozen statements per `PROGRESS.md` — "Deterministic review pass is the next consumer", so per the frozen-statement discipline I made **no changes** to the `.lean` file.
+- Re-verified with a fresh `lake env lean` run: **0 errors**, exactly the 3 contracted `sorry` warnings (`leg_mem_tracked_range` L201, `leg_work_integral_eval` L223, `isothermal_heat_into_torus` L263). No `axiom`/`admit`/`native_decide`.
+- Audited faithfulness against the blueprint chapter: all 16 declarations match their `\lean{...}` pins name-for-name; the target closed form lives strictly conclusion-side; the two non-sorry proofs are legitimately complete (`magnetization_eq_eos_solution` via `field_simp` + `linear_combination`, `official_answer_value` by `rfl` on the answer carrier, which is a naming pin only).
+- The gate certificate shows all six checks `passed`/`not_applicable`; the sole retry reason (PhysLean import) is already resolved by the iter-002 planner exemption NOTE documented in the chapter and grounding log.
+- Wrote the full audit to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_1.md` with the required sections (assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit, uncertainty/branch coverage, declarations↔labels, grounding record, no new gaps, no redraft requested).
+
+Note: the harness flagged my `apply_patch`-via-shell call — it succeeded, and the task-result file is in place; I'll use the dedicated tool if any further edits are needed.

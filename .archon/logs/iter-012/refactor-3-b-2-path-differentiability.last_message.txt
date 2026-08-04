@@ -1,0 +1,7 @@
+3-b-2-path-differentiability: COMPLETE — added `temp_differentiable` / `mag_differentiable` fields to `ParamagneticTorusLaws`; the three sorries remain sorried and are now logically provable.
+
+- New sorries introduced: none
+- Divergence from directive: none
+- Verification: fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_3_B_2.lean` → 0 errors, exactly 3 `sorry` warnings (L159, L170, L201 — same theorems as before)
+- No other construction site of `ParamagneticTorusLaws` exists (grep over all `.lean` sources)
+- Full report: `.archon/task_results/refactor-3-b-2-path-differentiability.md`

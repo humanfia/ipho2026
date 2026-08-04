@@ -1,0 +1,14 @@
+Done. Both sorries in `IPhO2026Problems/problem_IPhO_2026_3_C_5.lean` are closed and the file compiles clean.
+
+**Result**
+- `overall_coefficient_of_performance` (`IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:225`) — proved via the energy-balance route: combine `hist.carnot_heat` with `hist.energy` to get `W = Q_c·(T_h·ln(T₀/T)/(T₀−T) − 1)`, establish `Q_c ≠ 0` from `regime.heatCapacity_pos`/`final_lt_initial`, then finish with `div_mul_eq_div_div`, `div_self`, `one_div` after a `show … by ring` bracket rewrite.
+- `coefficient_of_performance_via_energy_balance` (`IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:272`) — same argument against the standalone hypotheses; no C.4-time law needed, exactly as the blueprint describes.
+
+**Verification**
+- Fresh `lake env lean`: 0 errors, 0 warnings (the shallow `div_self hQc_ne` covers `W = 0` for free, so no case split and no `B > 1` log-bound chain was needed).
+- `#print axioms` on both theorems: only `[propext, Classical.choice, Quot.sound]` — no `sorryAx`, no new axioms. Statements untouched; only proof bodies edited.
+
+**Notes for review**
+- Pitfall recorded in the task result: `(mul_lt_mul_right …)` now demands a nonexistent `MulLeftStrictMono ℝ` instance on current Mathlib — avoid it.
+- Both blueprint theorems are ready for `\leanok` (markers owned by review/sync; I did not edit the chapter per prover rules).
+- Task result written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_5.md`; no redraft needed — the file is now sorry-free.

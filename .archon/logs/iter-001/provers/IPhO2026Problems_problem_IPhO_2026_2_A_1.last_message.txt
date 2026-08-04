@@ -1,0 +1,11 @@
+Done. The file compiles cleanly with exit 0 and only the 5 expected `sorry` warnings.
+
+**Summary**
+
+- Created `IPhO2026Problems/problem_IPhO_2026_2_A_1.lean` (self-contained, `import Mathlib` only) — formalizes IPhO 2026 T2 Part A.1: the threshold `x_N` for at most `N` reflections inside a half-cylindrical mirror.
+- **Model**: structure `HalfCylindricalMirror` carries the radius `R` (a length), the reflection-count staircase `N_refl : ℝ → ℕ` of Figure 2e, and the threshold sequence `x_NAt` (0-based index for the positive integer `N`).
+- **Governing law** (assumption): `reflection_count_law` — by the law of reflection the impacts sit at standard polar angles `α, 3α, …, (2k+1)α` with constant step `2α`, escape at the rim angle `π`, whence `N_refl (R * cos α) = Set.ncard {k : ℕ | (2k+1)*α ≤ π}`.
+- **Figure readouts** (assumptions): threshold-extremal property, edge/filled-dot value `N_refl (x_NAt n) = n + 2`, symmetry `N_refl (-x) = N_refl x`, axial ray count `N_refl 0 = 1`, `0 < x_N < R`.
+- **Target conclusions** (conclusion-side only, all `by sorry`): `threshold_x_N_cos` (`x_N = R * cos (π/(2N+1))`), `threshold_x_N_sin` (`x_N = R * sin ((2N−1)π/(4N+2))`), combined `threshold_x_N`, plus bridge lemmas `limiting_ray_reflection_count` and `threshold_forms_agree`.
+- The recorded answer appears nowhere in hypotheses/fields; `x_NAt` is an opaque field pinned only by its defining extremal property (countermodel-checked).
+- Task result with full assumption/target split, bridge inventory, and grounding gaps written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_A_1.md`. Blueprint chapter left untouched per prover rules; the umbrella node `thm:physics:IPhO_2026_2_A_1:target` is ready for the deterministic `\leanok` sync.

@@ -1,0 +1,13 @@
+Done. Summary of this iteration's lane:
+
+**State found**
+- `IPhO2026Problems/problem_IPhO_2026_2_B_1.lean` already contains the iter-008 redraft landed by the prior prover round: the full frozen statement layer (15 `\lean{}`-pinned declarations) *plus* complete proofs of all four obligations — the file has zero `sorry`s.
+- Review-gate certificate (retry 2/3): every semantic check and all bridge obligations already `passed`; the only recorded `reason` is the stale "no Physlib import" macro note.
+
+**Actions taken**
+- Verified fresh compile: `lake env lean` exits 0 with zero diagnostics; also ran with `-DwarningAsError=true` → exit 0 (a control file with `sorry` fails under the same flag, confirming the file is genuinely sorry-free). 31 s per run.
+- Confirmed the Physlib exemption is factual: `.lake/packages/PhysLean/Physlib/Optics/Basic.lean` is an explicit placeholder module, so the `import Mathlib` baseline with the Cartesian incidence model stands; no edit warranted.
+- Made **no changes** to the `.lean` file (statements planner-frozen; no edit was due from a prover dispatch).
+- Wrote `.archon/task_results/problem_IPhO_2026_2_B_1.md` with the full assumption/target split, goal-faithfulness audit, bridge-obligation table, countermodel audit, uncertainty/branch coverage, declaration↔label map, grounding record, and a flag that the lane's residual gate reason is resolved (exemption NOTEs iter-002) so the deterministic review re-pass can close it.
+
+Next consumer: the deterministic review re-pass at gate retry 2/3 — expected convergent per the iter-009 plan ledger.

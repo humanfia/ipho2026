@@ -1,0 +1,11 @@
+Review complete for `IPhO2026Problems/problem_IPhO_2026_3_C_5.lean` — verdict: **solved**.
+
+**Findings**
+- **Compilation/sorry-freedom**: Preflight passed (rc=0, `sorry_count: 0`); my grep confirms the only `sorry` occurrence is a stale docstring — no active sorry/admit/axiom laundering.
+- **Contract fidelity**: Both theorem statements match the blueprint exactly, with the official answer `COP = [(T_h/(T_0 − T))·ln(T_0/T) − 1]⁻¹` appearing conclusion-side only; no weakening or answer-as-assumption.
+- **Proof honesty**: `overall_coefficient_of_performance` derives `W = Q_c·(T_h·ln(T_0/T)/(T_0−T) − 1)` from the Carnot accumulation + energy-balance bridges, establishes `Q_c ≠ 0` from regime positivity, and closes with `div_self`/`one_div` after ring normalization — all hypotheses used honestly; the unused `W = P·t` and C.4-time bridges in `OperatingHistory` are harmless.
+- **Trace support**: Iter-010 prover session ends with `COMPILE_OK` and an axiom audit of `[propext, Classical.choice, Quot.sound]`. The supplied task-result list was empty — recorded as a process warning only, per instructions. Blueprint `\leanok` markers await the post-review sync; not held against the target.
+
+Artifacts durable on disk:
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_5/attempt-1/milestones.jsonl` (validated JSON, 1 line)
+- `.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_5/attempt-1/summary.md` (9 lines)

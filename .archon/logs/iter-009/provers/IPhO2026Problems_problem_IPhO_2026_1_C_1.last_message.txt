@@ -1,0 +1,9 @@
+Done. Audited `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean` (review-gate retry lane, 2/3 used; statements planner-frozen, deterministic review re-pass is the next consumer).
+
+**Findings**
+- Fresh `lake env lean` on `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean`: 0 errors, exit 0, exactly the 6 contracted `sorry` warnings (`momentum_q_sq_of_vector_balance`, `two_sin_sq_add_one_eq`, `quadratic_characterization_of_threshold`, `minimum_angular_frequency_T1_C1`, `minimum_angular_frequency_backward_branch_T1_C1`, `hbarOmegaMin_pi_sub`).
+- No source edit made — the file is already a faithful, compiling by-sorry formalization matching the chapter's physics contracts (assumption/target split clean: the recorded `ω_min` formula lives conclusion-side only).
+- The lane's recorded retry reason is the generic `missing-physlib-import` check, already resolved by the chapter's import-policy exemption NOTE; all six semantic review checks passed at iter-008 — no redraft requested.
+- Chapter still has 0 `\leanok` markers, correct per sync policy (bodies are `sorry`).
+
+**Result written**: `.archon/task_results/problem_IPhO_2026_1_C_1.md` with assumption/target split, goal-faithfulness audit, six bridge obligations (all `covered`), abstraction/countermodel audit, uncertainty (`not applicable`) and branch coverage (`covered`), declaration-to-blueprint-label mapping, and the recorded grounding gaps.

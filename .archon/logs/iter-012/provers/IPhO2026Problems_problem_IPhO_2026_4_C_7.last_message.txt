@@ -1,0 +1,7 @@
+Done. Task result written to `.archon/task_results/problem_IPhO_2026_4_C_7.md`.
+
+**Summary**
+- Re-read `.archon/AGENTS.md`, `PROGRESS.md`, the blueprint chapter (`% archon:physics` confirmed), and the assigned file — no `/- USER: ... -/` hints present.
+- The iter-012 mandatory redraft is on disk and matches the restated chapter 1:1 (formula theorem with `0 < R_Th`, `0 < lam`, drive `T_OC < T_IC`; sample theorem as the sound-direction realizability contract `0.2629 ≤ h·R_Th → |λ−0.25| ≤ 0.01`). No Lean changes were needed from this lane — modifying a matching frozen contract would break the planned re-gate.
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` confirms **0 errors, only the 2 expected `sorry` warnings** at lines 179 and 203 (`acrylicConductivity_formula`, `acrylicConductivity_officialSample`). `RadialFourierConduction.wall_current` is fully proved.
+- The task result documents the full assumption/target split, goal-faithfulness audit (no target conclusion smuggled into hypotheses; `±0.01` band conclusion-side only), 6 bridge obligations (all `covered`, 2 sorried by design at this stage), countermodel audit (the iter-010/011 refutation witness is now excluded by the sign repair), uncertainty/branch coverage, declaration↔blueprint-label table, grounding log reference, and `\leanok` readiness flags for the review agent (definitions + `wall_current` eligible; the two sorried value theorems not).

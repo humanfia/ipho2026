@@ -1,0 +1,8 @@
+1-b-2-helper-entries: COMPLETE — moved the three iter-014 helper lemmas into their natural positions and wired the two new `\uses{}` edges; fidelity spot-check confirms all three statements match the Lean signatures.
+
+Report: .archon/task_results/blueprint-writer-1-b-2-helper-entries.md
+
+Details:
+- `arctan_poly_squeeze` + `arctan_deg_band` now sit inside "Official answer (conclusion side only)", after `roundsToOfficialDegreesAbs` and before the unsigned corollary; `signed_deflection_certificate` immediately after `signed_deflection_angle_T1_B2`. All `\label`/`\lean`/content byte-identical (git diff confirms pure moves + two `\uses` edits); the now-empty wrapper subsection was removed.
+- `\uses` wiring: `signed_deflection_certificate` added to the main target theorem; `arctan_deg_band` added to the unsigned corollary. All 32 edges resolve; no new isolated nodes; begin/end balanced.
+- Fidelity check against `IPhO2026Problems/problem_IPhO_2026_1_B_2.lean:632,714,792` passed with no mismatches — no wording fixes needed. No `\leanok`/`\mathlibok` added, no other files touched.

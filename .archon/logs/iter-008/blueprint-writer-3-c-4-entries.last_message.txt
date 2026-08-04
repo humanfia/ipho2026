@@ -1,0 +1,15 @@
+All done. Summary of the completed blueprint-writer task:
+
+**3-c-4-entries: COMPLETE** — 22 blocks added (28 `\lean{}` pins), all verifications pass; report at `.archon/task_results/blueprint-writer-3-c-4-entries.md`.
+
+**What was done**
+- Read the full 414-line Lean file firsthand; skeleton of `blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_4.tex` kept verbatim (source paragraphs, umbrella theorem, iter-002 PhysLean-exemption NOTE), adding only the mandated import-policy mirror NOTE and the coverage ledger.
+- 22 new blocks in dependency order across 5 ledger subsections: named quantities → governing-law structures → EOS/isothermal-heat consequences → per-cycle density bridges → value theorems.
+- The 6 opaque scalars are family-grouped into `def:...:globalQuantities` (6 `\lean{}` pins); governing-law/Prop carriers are explicitly marked as assumption-side; official C.4 value lives only in `thm:...:c4_elapsed_time` (plus the pre-existing recorded-answer skeleton paragraph).
+- Umbrella `thm:physics:IPhO_2026_3_C_4:target` now `\uses{thm:IPhO2026Problems_problem_IPhO_2026_3_C_4:c4_elapsed_time}`.
+
+**Verification**
+- 28/28 pins match exact on-disk declaration names under namespace `IPhO2026.Problem3.C4`; 0 uncovered disk decls.
+- `\uses{}`: 21 targets, 0 unknown in-chapter; 25 unique labels; environments balanced (15 def / 5 lem / 4 thm / 24 proof).
+- No `\leanok`/`\mathlibok` markers touched; no other file modified.
+- Deviation noted: `leandag` CLI is not on PATH in this worker, so `\uses` resolution was verified by an extraction script (same fallback sibling writer 1-a-1 recorded).

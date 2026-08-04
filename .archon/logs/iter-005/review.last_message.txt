@@ -1,0 +1,12 @@
+Session 5 review complete. All four output files are written and validated.
+
+**Iter-005 adjudication — 1 failed / 0 passed**
+
+- **No lane executed**: `1_B_1`'s repair lane was gate-dropped as predicted (`review_exhausted`, 3/3 — `meta.json` + `no_prover_lane` confirm). The verdict is a first-hand adjudication of the on-disk state: I re-ran `lake env lean` (same 3 linarith errors at L401/L419/L427) and confirmed the file is untouched.
+- **Root cause is statement-level**: `quadratic_pos_of_large` is mathematically false under the file's own `bound_branch : E < 0` — the turning quadratic is a downward parabola, so `0 < q(r)` at large r cannot hold. The linarith failures are a false-premise symptom, not a tactic gap. Full structured verdict (6 checks + 5 bridge obligations, 3 covered / 2 blocked) is in `milestones.jsonl`.
+- **Stale doctor snapshot retired a 4th time**: the injected 19 `missing-physlib-import` findings are the same pre-NOTE snapshot; my live re-run (`source science-mango/run_env.sh; archon blueprint-doctor`) reports **0 findings** on all 28 chapters. Quoted in `recommendations.md` so the next planner doesn't route from it.
+- **sync_leanok verified**: removed=1 from 2_C_3 `limitingIntersectionCoordinates` — correct, its decl is `constructor <;> sorry` (2 open goals). No `\leanok` remains anywhere; no laundering.
+
+**Key routing recommendation**: stop redispatching `1_B_1` in autoformalize (gate-drops are deterministic); its reopen channel is the prover stage's proof-Review redraft, which fits since the defect is a false statement. The complete repair spec is frozen in `iter/iter-005/objectives.md` O1. The 26 gate-enrolled targets are live-doctor-clean and ready for the final deterministic review pass; `4_C_6`'s last attempt still needs on-disk microdata provenance.
+
+Files: `.archon/proof-journal/sessions/session_5/{milestones.jsonl,summary.md,recommendations.md}`, `.archon/iter/iter-005/review.md`, and two durable KB additions in `.archon/PROJECT_STATUS.md:47`.

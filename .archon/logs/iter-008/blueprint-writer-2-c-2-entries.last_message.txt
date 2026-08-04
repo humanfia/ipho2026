@@ -1,0 +1,3 @@
+2-c-2-entries: COMPLETE — appended the 5-decl C.2 ledger (structure, branch bridge, two conclusion-side value theorems, joint target) to the C.2 chapter with all pins 5/5 disk-matched, `\uses` 0-unknown, markers/NOTE untouched, and the umbrella wired.
+
+Report: `.archon/task_results/blueprint-writer-2-c-2-entries.md`

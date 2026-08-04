@@ -1,0 +1,11 @@
+All done — the file is fully proved and clean.
+
+**Result** — `IPhO2026Problems/problem_IPhO_2026_3_A_3.lean`: 5/5 sorries closed, fresh `lake env lean` compiles in ~9 s with 0 errors.
+
+- `meanCircumference_eq` — `V = 2πR·A` + cancel `A > 0` via `mul_div_cancel_right₀`.
+- `dB_of_vacuum_core` — `mul_zero, add_zero` collapse the vacuum `dM = 0` term.
+- `dW_eq_sub_vac` — `linarith` off the `split` identity.
+- `dW_eq_VH_dB_sub_mu0_dH` — substitute A.2 law + vacuum part, then `ring`.
+- `dW_eq_mu0_V_H_dM` (A.3 target) — rewrite with the previous lemma and the linearized constitutive law `v.dBH`; `ring` cancels the `μ₀dH` terms, leaving `dW = μ₀·V·H·dM` exactly as the official answer.
+
+Signatures and hypotheses untouched (bodies only, after `:= by`). Axiom audit shows only `[propext, Classical.choice, Quot.sound]` — no `sorryAx` or new axioms. Task result written to `.archon/task_results/problem_IPhO_2026_3_A_3.md`, including the four lemma/theorem blueprint environments ready for `\leanok` (left for the review agent/sync to apply).

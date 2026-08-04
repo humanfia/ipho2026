@@ -1,0 +1,8 @@
+# Review: IPhO2026Problems/problem_IPhO_2026_2_C_2.lean — iter-010 attempt-1
+
+- Verdict: **blocked / needs_redraft** (root cause: `underdetermined_contract`), not a tactic/budget failure.
+- Preflight confirmed: file compiles (rc 0) with exactly 2 active `sorry`s at L155 (`ray_B_slope_first_order`, `hdmval : dm = -2 csc(2θ)²`) and L194 (`ray_B_intercept_first_order`, `hdbval : db = (R/(2 cos θ)) tan θ`).
+- Contract check: statements are faithful to the blueprint C.2 target — coefficients kept conclusion-side, acute branch `θ ∈ (0, π/2)` with nonzero-denominator bridge proved, C.1 prerequisites restated per policy, `o(Δθ)` via `Asymptotics.IsLittleO` honestly renders the official `O(Δθ²)`. No axiom laundering, no weakened signature, no answer-as-assumption.
+- Semantic gap: the frozen regularity fields `M_first_order`/`B_first_order` only give *some* little-o slope for an arbitrary family `M B : ℝ → ℝ` tied to specular reflection only at the single point `θ`. Models `M φ = cot 2θ + c(φ−θ)`, `B φ = R/(2cos θ) + d(φ−θ)` satisfy all hypotheses for any `c, d`, so the two `sorry` goals are genuinely underivable as contracted.
+- Evidence: iter-010 prover trace (biui-0724, 76 turns) reached the same blocker and documented a minimal redraft; newest matching task-result list is empty and the referenced task-result markdown is absent — process warning only, trace used as primary evidence.
+- Suggested repair: add family-law fields `∀ᶠ φ in 𝓝 θ, M φ = cot (2*φ)` / `B φ = R/(2*cos φ)` (or `HasDerivAt` fields at `θ` with the recorded derivative values), then close L155/L194 via `hasDerivAt_iff_isLittleO_nhds_zero` + `HasDerivAt.unique`; all theorem signatures unchanged.

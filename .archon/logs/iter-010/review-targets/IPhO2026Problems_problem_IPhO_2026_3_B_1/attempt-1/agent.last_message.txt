@@ -1,0 +1,12 @@
+Review complete. Both artifacts are durable: `milestones.jsonl` (1 valid JSON line) and `summary.md` (11 lines).
+
+**Verdict: blocked / needs_redraft (underdetermined_contract)**
+
+- The file compiles with 3 active sorries — `leg_mem_tracked_range` (problem_IPhO_2026_3_B_1.lean:208), `leg_work_integral_eval` (:232), `isothermal_heat_into_torus` (:272); only `official_answer_value` is proved by `rfl`.
+- All three sorried declarations are **false as stated**, not merely unproved: the work density is parametrized as `workDensity M = mu0*V*M_of_H(M)`, substituting the magnetization function for the true `H_of_M` and sampling it at magnetization values off the EOS-constrained field range — losing the `dM/dH` Jacobian. The iter-010 prover produced compiling negation witnesses:
+  - `witness_target_IS_FALSE.lean` — `linProc` satisfies every hypothesis yet Q = −12 vs closed form −3
+  - `witness_leg_integral_eval_IS_FALSE.lean` — `weirdProc` gives integral = 0 vs required −16
+  - `witness_leg_mem_IS_FALSE.lean` — leg point −1.5 outside the field range under `badProc`
+- No answer-as-assumption, no axiom laundering; hypotheses are honest and signatures match the frozen contract — but that contract is not derivable, failing checks 1, 2, and 3.
+- The empty matching task-artifact list is recorded as a process warning only; the prover trace (session `019fa6d4`, 133 turns) plus persisted witnesses are the primary evidence.
+- `next_steps` specifies the exact repair (global-EOS hypothesis or H-parametrized work integral), reusable as regression tests via the witnesses.

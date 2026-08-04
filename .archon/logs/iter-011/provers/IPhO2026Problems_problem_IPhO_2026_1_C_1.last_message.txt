@@ -1,0 +1,13 @@
+Done. The Proof-Review redraft for `1_C_1` has landed.
+
+**Compile state**
+- Fresh `lake env lean IPhO2026Problems/problem_IPhO_2026_1_C_1.lean`: exit 0, **0 errors**, 3 contracted `sorry` warnings (L281, L306, L320) — matching the autoformalize by-sorry contract.
+
+**Redraft applied** (both PROGRESS.md defects resolved)
+- `quadratic_characterization_of_threshold` gained `(hb : 0 < hbar)` (`IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:283`), closing the reported `hbar = 0` countermodel; since `hbar` is `opaque`, the positivity must be an explicit hypothesis, and it matches `ConstantRegime.hbar_pos` which both main theorems already assume via `reg`.
+- Replaced the broken partial proof containing the unknown identifier `le_or_lt` (absent in this Mathlib pin — verified by direct grep over `.lake/packages/mathlib`) with a clean `sorry`, per the by-sorry discipline.
+- No other declaration touched: both target theorems keep their frozen statements; `momentum_q_sq_of_vector_balance`, `two_sin_sq_add_one_eq`, `hbarOmegaMin_pi_sub` keep their complete proofs.
+
+**Bookkeeping**
+- Results written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.md` with the full assumption/target split, goal-faithfulness audit, bridge inventory, countermodel audit, and grounding log.
+- Blueprint chapter not edited (outside write permissions): the redrafted lemma block at `lem:…:quadratic_characterization_of_threshold` should get a one-clause doc sync mentioning positive ℏ at the next planner pass; the `\lean{}` pin still resolves unchanged, and all 14 declarations are flagged ready-for-marker in the task result.

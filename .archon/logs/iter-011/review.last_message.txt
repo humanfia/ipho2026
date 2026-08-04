@@ -1,0 +1,16 @@
+Review complete. All required artifacts are written.
+
+**Verdicts: 11 passed / 2 failed** (13 targets, compile 13/13 from the orchestrator preflight; no re-runs issued)
+
+- **Passed**: `1_A_1` (factor-2 couple repaired on the official-solution model), `1_B_2` (eps² = 49/4 now proved, periapsis-referenced arctan(2/√45)), `1_C_1` (hbar-positivity added, compile repaired), `2_B_2` (two-sided band rebuild), `2_C_2` (real `HasDerivAt` contracts; 2 sorries honestly escalated), `3_A_1` (unsummed Ampère circulation, sorry-free), `3_B_1` (Jacobian-restored work law + `hV` neq-guard), `3_C_2` (all three defects corrected; target chain fully proved), `3_C_4` (RegimeAssumptions closes degenerate branches, sorry-free), `4_A_5` (`hvar` added, sorry-free), `4_B_6` (tying conjunct pins the band).
+- **Failed (statement-level, redraft-required)**: `3_B_2` — missing path-differentiability field, `deriv`-based adiabatic balance degenerates to 0 = 0 off the differentiable locus (iter-010 finding re-verified on disk; both bridges blocked); `4_C_7` — both theorems provably false with in-file constructive countermodels (sign convention + sample band λ ≈ 0.438 vs 0.25 ± 0.01), second consecutive failure.
+- **Doctor**: iter-011 JSON empty on all finding lists — no live modeling/grounding blockers. **sync_leanok**: iter=11, added=0/removed=0, no laundering.
+
+**Artifacts**
+- `.archon/proof-journal/sessions/session_11/milestones.jsonl` — 13 entries, all with full 6-check `formalization_review` + non-empty bridge inventories (machine-validated: no `passed` with a blocked bridge)
+- `.archon/proof-journal/sessions/session_11/summary.md` — metrics, gate outcomes, per-target adjudications
+- `.archon/proof-journal/sessions/session_11/recommendations.md` — R1 `3_B_2` differentiability repair, R2 `2_C_2` field wave (lane-verified zero-rewrite closure), R3 blueprint restatements (4 chapters, `1_B_2` chapter contradicts Lean), R4 `4_C_7` redraft + provenance flag, R5 ledger bookkeeping, R6 closeout discipline
+- `.archon/iter/iter-011/review.md` — iter narrative
+- `.archon/PROJECT_STATUS.md` — Knowledge Base appended with 6 durable findings (repair recipes, deriv-junk countermodel detector, false-band escalation rule, loop-vs-filament discipline); narrative log untouched
+
+Stage advance was **not** written: `3_B_2` and `4_C_7` re-enter the autoformalize redraft queue; both are statement-level and must not be redispatched at frozen text.

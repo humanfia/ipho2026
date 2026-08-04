@@ -1,0 +1,3 @@
+3-a-2-entries: COMPLETE — all 8 `IPhO2026_3_A_2.*` declarations now have blueprint blocks (pins 8/8, uses 0 unknown), umbrella wired, official `dW_emf = V·H·dB` identity confined to `thm:IPhO2026Problems_problem_IPhO_2026_3_A_2:work_emf_eq_V_mul_H_mul_dB`, skeleton and markers untouched.
+
+Report: /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/blueprint-writer-3-a-2-entries.md

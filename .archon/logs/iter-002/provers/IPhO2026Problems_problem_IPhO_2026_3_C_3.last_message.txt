@@ -1,0 +1,9 @@
+Lane complete. The iter-002 redraft of `IPhO2026Problems/problem_IPhO_2026_3_C_3.lean` was already on disk and faithful (the garbaged scratch is fully gone), so no file edits were needed — I ran the per-file gate instead:
+
+**Gate results**
+- `lake env lean IPhO2026Problems/problem_IPhO_2026_3_C_3.lean` exits 0 with exactly the eight expected `declaration uses 'sorry'` warnings (5 bridge lemmas + 3 target theorems), no other diagnostics.
+- Import policy honored: `import Mathlib` baseline only, no Physlib (chapter `% NOTE:` exemption covers paramagnet thermo-cycles).
+- Answer-side audit: `1.29e-1` / `9.92e-3` / `0.99008` appear only in doc-comments and as conclusions of `absorbed_heat_value`, `temperature_drop_value`, `final_temperature_value` (`IPhO2026Problems/problem_IPhO_2026_3_C_3.lean:448`), never in `PotassiumChromateCoolingRun` fields. Stripping sorries in a scratch copy leaves all 8 goals unsolved — nothing is true-by-construction; only `torus_volume_value` proves, and it's a definitional naming certificate for the B-part volume.
+- Governing laws (EOS `T·M·V = n·K·H`, B.1 isothermal heat law, Carnot ratio `Qh·Tc = Qc·Th`, calorimetry, figure-3b branch/orientation) are all hypothesis-side Prop abstractions with elimination-ready equations.
+
+**Task result** — updated `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_3.md` with the iter-002 confirmation (clean diagnostics, answer-side audit, axiom status carried over from the prior clean `#print axioms` run). Blueprint chapter already has `% archon:physics` and the umbrella target; `\leanok` markers are left to the deterministic sync per policy.

@@ -1,0 +1,19 @@
+Done. The autoformalization for IPhO 2026 Problem 4, Part C.7 is complete and compiles.
+
+**Outcome**
+- Created `IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` (201 lines): compiles cleanly with exactly the two expected `sorry` warnings (lines 172, 193), no errors. Verified via `lake env lean` and the LSP diagnostics.
+- Wrote the full audit report to `.archon/task_results/problem_IPhO_2026_4_C_7.md`.
+
+**Formalization content** (namespace `IPhO2026.Problem4.C7`)
+- `CylindricalWallGeometry` + `lateralArea` — Figure 17 geometry (r₁ = 16.85 mm bore radius, r₂ = 23.25 mm after the 6.4 mm wall, wetted height h = 10 cm) with positivity guards; `A(r) = 2πrh`.
+- `ThermalExperimentData` — C.6 resistance readout (R_Th = 1.17 ± 0.03 K/W) and IC/OC water temperatures.
+- `LumpedHeatFlowLaw` — Eq. (4): `dQ/dt = (T_OC − T_IC)/R_Th` as a governing-law predicate.
+- `RadialFourierConduction` — Eq. (6): `P(r) = −λ·A(r)·T′(r)` pointwise on `[r₁,r₂]`, plus steady-current constancy, with a proved elimination theorem `wall_current`.
+- `acrylicConductivity_formula` (sorry) — the C.7 target `λ = ln(r₂/r₁)/(2·π·h·R_Th)`, kept strictly on the conclusion side.
+- `acrylicConductivity_officialSample` (sorry) — official sample `λ = 0.25 ± 0.01 W/(m·K)` with the propagated R_Th uncertainty window.
+
+**Key fidelity decisions**
+- Target conclusions appear only in conclusions; no premise/`Satisfies`-field smuggling (full audit in the task result).
+- PhysLean has no heat-conduction/Fourier module (`Physlib.Thermodynamics.Basic` is a placeholder), so laws are faithful local Prop interfaces with quantified equations — the gap and the prover-stage Mathlib carriers (`integral_one_div`, `intervalIntegral.integral_const_mul`, `deriv_inv`) are recorded under bridge obligations.
+- Outward heat-flow branch (OC hot → IC cold) preserved via `T_IC < T_OC`; radial orientation via `r₁ < r₂` so `ln(r₂/r₁) > 0`.
+- The chapter's `\leanok` markers are untouched (sorries remain), ready for the deterministic sync; the `archon` CLI wasn't on PATH in this lane, noted in the task result.

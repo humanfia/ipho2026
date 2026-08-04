@@ -1,0 +1,13 @@
+Done. Verification pass complete for the frozen `2_A_1` review-gate retry lane.
+
+**Outcome**
+- `IPhO2026Problems/problem_IPhO_2026_2_A_1.lean` — **no edit made** (statements planner-frozen per `PROGRESS.md`; the deterministic review pass is the next consumer). File is untracked in git, so the working tree confirms zero drift this lane.
+- Fresh `lake env lean` (x2): **0 errors**, exactly the **5 contracted `sorry` warnings** at `IPhO2026Problems/problem_IPhO_2026_2_A_1.lean:125`, `:134`, `:144`, `:152`, `:160`. No axioms, no `/- USER: -/` hints.
+- Blueprint chapter `% archon:physics` confirmed; all 6 `\lean{}` pins match the on-disk declarations; no `\leanok` change proposed (markers owned by `sync_leanok`; all 5 theorems retain `sorry` by design).
+
+**Task result written** — `.archon/task_results/problem_IPhO_2026_2_A_1.md` with the full split/audit inventories:
+- Assumption/target split: governing law (`reflection_count_law` specular odd-multiples law), Figure-2e readouts (`x_NAt_is_threshold`, `x_NAt_edge_count`, symmetry, axial-ray anchor), answers strictly conclusion-side.
+- Bridge inventory: 5 bridges, all `covered` by named in-file carriers (limiting-ray count, sin/cos forms-agree, threshold squeeze).
+- Countermodel audit: structure fields over-determine each `x_NAt n`; shifted/ wrong-edge staircases are excluded by the equational fields.
+- Uncertainty: not applicable (exact closed form). Branch coverage: symmetry hypothesis + rim-impact convention preserved.
+- Grounding gap: the gate's standing "does not import Physlib/PhysLean" reason is the retired iter-003 stale-snapshot finding — the chapter carries the iter-002 PhysLean exemption NOTE (no geometric-optics module exists in Physlib), re-confirmed. No redraft requested.

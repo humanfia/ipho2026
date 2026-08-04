@@ -1,0 +1,10 @@
+All done. Final state verified: the file compiles (exit 0), with exactly one focused sorry remaining — the one I proved unprovable as stated.
+
+**Summary**
+
+Worked on `IPhO2026Problems/problem_IPhO_2026_3_A_1.lean` (6 sorries at start, the iter-008 audit count).
+
+- **Proved 5 of 6**: `ampere_uniform_eq` (Bridge 1, via `ampere_sum_const` + bundled `winding.card` + `Finset.sum_const` and `linear_combination`), `mean_circumference_eq` and `meanRadius_form_eq_volume_form` (Bridges 3–4, `field_simp` after the geometry rewrite), and both target theorems `paramagneticTorus_H_eq` / `paramagneticTorus_H_eq_meanRadius` (as transitivity chains through Bridges 2–4).
+- **1 sorry remains** in `fieldMagnitude_eq_meanRadius_form` (`IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:548`), with all sound progress kept in the body (`hF : 2πR·H = I` is fully proved). I verified with two machine-checked `norm_num` countermodels (e.g. `2πR=2, N=2, H=1, I=2` satisfies the bundled Ampère law `2πR·(N·H) = N·I` but falsifies the goal `H = N·I/(2πR)`) that the goal is semantically false given the law field `ampere_sum`, which sums the circulation over turns and hence carries a spurious factor N on the field side.
+
+Full details, the redraft request (smallest fix: take the loop circulation once, `(2πR)·HOf t₀ = Σ turnCurrents`, which then closes the official answer `H = NIA/V` with no further changes), and `leanok` recommendations are in `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_1.md`. No axioms, no `native_decide`, no signature changes; scratch files cleaned up.

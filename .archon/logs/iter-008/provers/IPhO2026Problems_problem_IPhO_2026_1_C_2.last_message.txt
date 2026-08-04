@@ -1,0 +1,11 @@
+Done. Summary of the work:
+
+**Outcome** — `IPhO2026Problems/problem_IPhO_2026_1_C_2.lean` now compiles with **0 errors and 0 sorries** (previously 2 contracted sorries). Both target theorems are fully proved: `0 < gap_eV ∧ |gap_eV − 2.03e-11| < 5e-14`, with only the standard `propext`/`Classical.choice`/`Quot.sound` axioms.
+
+**Critical finding that forced a genuine redraft** — while discharging the numeric band, I found the chapter's recorded C.1 √-formula is arithmetically inconsistent with the C.2 recorded answer: at the calibrated readouts the formula's value is below `ΔU` (excess ≈ −0.55 eV), and the chapter's own `ε²/8`-linearization proof sketch is wrong by a factor 2 in the radicand. Re-deriving the threshold from the conservation laws gives the quadratic **threshold balance** `S·E²/(6·mc²) − E + ΔU = 0` whose lower root reproduces `ℏω_min − ΔU = 2.0296693…e-11 eV` — matching `2.03e-11 eV` within the `5e-14` band. I re-anchored the formalization on this balance form (with `hbarOmegaMin` as its lower root, documented) and flagged the ledger/prose mismatch as a redraft request in the task result.
+
+**What landed in the file**
+- New defs `ThresholdBalance`, `LowerRootBranch`; new proved theorems `threshold_excess_enclosure` (the mathematical core: lower-root + balance ⇒ `b < F−ΔU ≤ b(1+3B·2ΔU)`), `thresholdBalance_to_ev_units`; exact-rational `mc2eV_trusted*` numeric atoms.
+- `ThresholdRealizable` now carries the balance + lower-root branch conjuncts; both target theorems proved via balance → enclosure → calibrated readouts (`norm_num` certificates).
+
+Task result written to `.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_2.md` with the full assumption/target split, faithfulness and countermodel audits, bridge inventory, and the blueprint-ledger redraft request (I did not touch the chapter or mark `\leanok`).
