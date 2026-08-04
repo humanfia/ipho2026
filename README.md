@@ -33,3 +33,11 @@ archon loop .
 ```
 
 This launches the plan → prove → review loop and opens a dashboard.
+
+## Token usage
+
+Provider-reported token usage for every theoretical problem is available in
+[`TOKEN_USAGE.md`](TOKEN_USAGE.md), with machine-readable data in
+[`token_usage_per_problem.csv`](token_usage_per_problem.csv). The report
+compares this GPT/Codex v2 run with the Kimi K3 run and marks incomplete
+provider telemetry explicitly.
