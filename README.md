@@ -43,3 +43,11 @@ scripts/status_ipho_2026_k3.sh
 The launcher validates the pinned K3 Anthropic harness, starts the LeanExplore
 endpoint, and runs a queue of 29 targets with up to four concurrent target
 lifecycles. Secrets remain in the ignored `.archon/.env` file.
+
+## Token usage
+
+Provider-reported token usage for every theoretical problem is available in
+[`TOKEN_USAGE.md`](TOKEN_USAGE.md), with machine-readable data in
+[`token_usage_per_problem.csv`](token_usage_per_problem.csv). The report
+compares this Kimi K3 run with the GPT/Codex v2 run and marks incomplete
+provider telemetry explicitly.
