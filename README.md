@@ -6,21 +6,19 @@
 > targets (100%). Every released theory file passes Lean verification with no
 > active sorry.**
 >
-> **Known provider-reported token cost: GPT/Codex v2 ≥150,279,368 tokens;
-> Kimi K3 ≥64,381,419 tokens. These are lower bounds, not directly comparable
-> totals.**
+> **Cost data: complete per-problem token figures are available for 22/23
+> GPT/Codex v2 targets and 1/23 Kimi K3 targets. Incomplete rows and partial
+> run totals are not published.**
 
-| Run | Theoretical result | Lean verification | Token-session coverage | Known token cost |
-|---|---:|---:|---:|---:|
-| GPT/Codex v2 | **23/23 (100%)** | 23/23 pass; sorry = 0 | 79/80 (98.75%) | **≥150,279,368** |
-| Kimi K3 | **23/23 (100%)** | 23/23 pass; sorry = 0 | 23/289 (7.96%) | **≥64,381,419** |
+| Run | Theoretical result | Lean verification | Complete per-problem Token rows |
+|---|---:|---:|---:|
+| GPT/Codex v2 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **22/23** |
+| Kimi K3 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **1/23** |
 
-Kimi K3 has 266 direct sessions without provider usage telemetry, while
-GPT/Codex v2 has one. Missing usage is not counted as zero, so the current
-data cannot support a token-efficiency ranking. A reliable USD cost is also
-not reported: the exact GPT model ID was not pinned and Kimi telemetry is
-incomplete. See [MODEL_COMPARISON.md](MODEL_COMPARISON.md) for the conclusions
-and [TOKEN_USAGE.md](TOKEN_USAGE.md) for every problem.
+Neither run has complete data for all 23 problems, so no whole-run Token or
+USD cost is reported and no efficiency ranking is made. See
+[MODEL_COMPARISON.md](MODEL_COMPARISON.md) for the conclusions and
+[TOKEN_USAGE.md](TOKEN_USAGE.md) for the complete per-problem table.
 
 ## Results by theory paper
 
@@ -47,7 +45,7 @@ as solved, and may contain proof placeholders.
   formalization notes, official source material, and per-run source metadata.
 - [scripts](scripts): verification plus the namespaced run harnesses.
 - [token_usage_per_problem.csv](token_usage_per_problem.csv): machine-readable
-  per-problem token data.
+  data containing only fully metered problems.
 
 The main branch is the canonical side-by-side release, following the layout of
 [humanfia/imo2026](https://github.com/humanfia/imo2026). The original
@@ -83,3 +81,5 @@ Token accounting includes only sessions uniquely attributable to one theory
 target, including retries, failed attempts, per-target review, and repair.
 Shared planning and orchestration are not force-allocated across problems.
 Provider-reported cached input, non-cached input, and output are summed once.
+Only problems whose every direct session has provider usage are published;
+partial values and lower bounds are omitted.
