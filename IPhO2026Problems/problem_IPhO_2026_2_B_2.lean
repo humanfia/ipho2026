@@ -161,8 +161,9 @@ structure AbsorbedRays (p : CookerParams) (g : CookerGeometry p) where
   collected band is realized by an absorbed ray, and the extreme absorbed
   rays are tangent to the container (sides of the band match the container
   silhouette, Figure 2f and part B.3). -/
-  hit_offsets_fill : ∀ z ∈ Set.Ioo (-yOff) yOff,
-    ∃ x ∈ hitSet, @inner ℝ _ _ (incidentPt x - g.C) g.n = z
+  hit_offsets_fill : ∀ {yOff : ℝ}, hitSet = Set.Ioo (-yOff) yOff →
+    ∀ z ∈ Set.Ioo (-yOff) yOff,
+      ∃ x ∈ hitSet, @inner ℝ _ _ (incidentPt x - g.C) g.n = z
 
 /-- Transverse width (impact-parameter support) of the rays that the mirror
 concentrates onto the container: `sup - inf` of the transverse incidence
@@ -359,7 +360,7 @@ lemma collectedWidth_eq_two_mul_yOff (p : CookerParams) (g : CookerGeometry p)
       rw [r.readout_eq y hy]
       rwa [hhit] at hy
     · intro z hz
-      obtain ⟨x, hx, hz'⟩ := r.hit_offsets_fill z hz
+      obtain ⟨x, hx, hz'⟩ := r.hit_offsets_fill hhit z hz
       exact ⟨x, hx, hz'⟩
   unfold collectedWidth
   rw [himage, csSup_Ioo (by linarith : -yOff < yOff),
@@ -526,4 +527,3 @@ end IPhO2026_2_B_2
 
 
 end
-
