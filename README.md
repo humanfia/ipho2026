@@ -6,19 +6,25 @@
 > targets (100%). Every released theory file passes Lean verification with no
 > active sorry.**
 >
-> **Cost data: complete per-problem token figures are available for 22/23
-> GPT/Codex v2 targets and 1/23 Kimi K3 targets. Incomplete rows and partial
-> run totals are not published.**
+> **Token cost on the 22 directly comparable targets: GPT/Codex v2 used
+> 146,641,757 provider-reported tokens; Kimi K3 used 1,189,135,736 tokens by
+> exact usage plus trajectory reconstruction. Kimi K3 used 8.11× as many.**
+>
+> **Across all 23 Kimi K3 targets, the complete trajectory total is
+> 1,220,581,322 tokens. GPT/Codex v2 T3-B1 is omitted from cost comparison
+> because one session lacks complete usage.**
 
-| Run | Theoretical result | Lean verification | Complete per-problem Token rows |
-|---|---:|---:|---:|
-| GPT/Codex v2 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **22/23** |
-| Kimi K3 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **1/23** |
+| Run | Theoretical result | Lean verification | Provider-exact rows | Complete trajectory rows |
+|---|---:|---:|---:|---:|
+| GPT/Codex v2 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **22/23** | **22/23** |
+| Kimi K3 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **1/23** | **23/23** |
 
-Neither run has complete data for all 23 problems, so no whole-run Token or
-USD cost is reported and no efficiency ranking is made. See
-[MODEL_COMPARISON.md](MODEL_COMPARISON.md) for the conclusions and
-[TOKEN_USAGE.md](TOKEN_USAGE.md) for the complete per-problem table.
+See [MODEL_COMPARISON.md](MODEL_COMPARISON.md) for the conclusions,
+[TOKEN_USAGE.md](TOKEN_USAGE.md) for provider-exact rows, and
+[TOKEN_USAGE_RECONSTRUCTED.md](TOKEN_USAGE_RECONSTRUCTED.md) for Kimi K3's
+complete per-problem trajectory reconstruction. USD cost is not reported
+because the reconstructed early Kimi K3 calls do not retain cache-billing
+categories.
 
 ## Results by theory paper
 
@@ -44,8 +50,14 @@ as solved, and may contain proof placeholders.
 - [blueprints](blueprints), [references](references), and [reports](reports):
   formalization notes, official source material, and per-run source metadata.
 - [scripts](scripts): verification plus the namespaced run harnesses.
+- [TOKEN_USAGE.md](TOKEN_USAGE.md) and
+  [TOKEN_USAGE_RECONSTRUCTED.md](TOKEN_USAGE_RECONSTRUCTED.md): provider-exact
+  and trajectory-reconstructed Token reports.
 - [token_usage_per_problem.csv](token_usage_per_problem.csv): machine-readable
-  data containing only fully metered problems.
+  data containing only provider-metered problems.
+- [token_usage_reconstructed_per_problem.csv](token_usage_reconstructed_per_problem.csv):
+  machine-readable Kimi K3 exact-plus-reconstructed data for all 23 theory
+  targets.
 
 The main branch is the canonical side-by-side release, following the layout of
 [humanfia/imo2026](https://github.com/humanfia/imo2026). The original
@@ -78,8 +90,12 @@ pre-provisioned Linux environment and contain environment-specific paths; they
 are provenance artifacts, not portable one-command installers.
 
 Token accounting includes only sessions uniquely attributable to one theory
-target, including retries, failed attempts, per-target review, and repair.
-Shared planning and orchestration are not force-allocated across problems.
-Provider-reported cached input, non-cached input, and output are summed once.
-Only problems whose every direct session has provider usage are published;
-partial values and lower bounds are omitted.
+target, including retries, per-target review, and repair. Shared planning is
+not force-allocated across problems. The provider-exact report sums cached
+input, non-cached input, and output once and publishes only fully metered
+problems. The reconstruction report replays every successful saved Kimi K3
+request with the pinned official tokenizer; calls without a successful model
+output or reliable usage are counted and disclosed but are not assigned a
+Token value.
+Raw conversations, request bodies, credentials, and private environment paths
+are not included in this release.

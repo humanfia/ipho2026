@@ -3,6 +3,11 @@
 统计日期：2026-08-04（UTC）。代码快照：GPT/Codex v2 9b42912，
 Kimi K3 91dbe9c。
 
+> 本页只保留 provider 返回的精确 usage。Kimi K3 全部 23 题的独立
+> 轨迹重算结果见
+> [TOKEN_USAGE_RECONSTRUCTED.md](TOKEN_USAGE_RECONSTRUCTED.md)；重算值不会
+> 混入下方精确表。
+
 ## 发布口径
 
 - 只列出该题全部直接会话都返回 provider token 计数的题目。
@@ -11,7 +16,7 @@ Kimi K3 91dbe9c。
 - 六道实验题全部排除。
 - 总计 = 非缓存输入 + 缓存输入 + 输出。reasoning output 是输出
   token 的子集，不重复相加。
-- 不发布部分计量值、下界或基于缺失数据推算的整轮总量。
+- 本页不发布部分计量值、下界或基于缺失数据推算的整轮总量。
 
 ## GPT/Codex v2
 
