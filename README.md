@@ -7,6 +7,21 @@
 
 <!-- One paragraph: what is being formalized and why. -->
 
+## Performance and token comparison
+
+| Metric | GPT/Codex v2 | Kimi K3 |
+|---|---:|---:|
+| Theoretical proof score | **23/23 (100%)** | **23/23 (100%)** |
+| Full lake build | Passed | Passed |
+| Active sorry | 0 | 0 |
+| Provider-token session coverage | 79/80 (98.75%) | 23/289 (7.96%) |
+| Known token total | ≥150,279,368 | ≥64,381,419 |
+
+The token totals are lower bounds, not an efficiency ranking: most Kimi K3
+sessions have no provider usage telemetry. See
+[MODEL_COMPARISON.md](MODEL_COMPARISON.md) for the conclusions and
+methodology.
+
 ## References
 
 See [`references/summary.md`](references/summary.md) for a description of each source.
