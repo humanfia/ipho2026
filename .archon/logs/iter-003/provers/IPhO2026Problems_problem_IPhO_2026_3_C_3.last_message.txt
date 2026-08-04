@@ -1,0 +1,6 @@
+Completed the proof in [problem_IPhO_2026_3_C_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_3.lean:249).
+
+- All `sorry` placeholders closed.
+- Direct Lean compilation and full `lake build` passed.
+- No unsafe proof mechanisms introduced.
+- Results recorded in [task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_3.lean.md).

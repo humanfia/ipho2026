@@ -1,0 +1,9 @@
+Completed the typed-physics autoformalization in [problem_IPhO_2026_2_C_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_C_1.lean:1).
+
+- Radius, coordinates, and intercept now use Physlib dimensionful lengths.
+- Added the named SI projection `lengthInMetres`.
+- Preserved reflection law, orientations, down-left branch, ray B, and caustic context.
+- Target formulas remain conclusions, not assumptions.
+- Lean compilation passes with exactly four intentional `sorry` warnings.
+
+The full grounding and faithfulness audit is in [task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_1.lean.md:1). Blueprint declarations are ready for automatic `\leanok` synchronization.

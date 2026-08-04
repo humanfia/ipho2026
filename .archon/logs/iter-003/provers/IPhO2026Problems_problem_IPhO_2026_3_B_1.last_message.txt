@@ -1,0 +1,6 @@
+Completed all four proofs in [problem_IPhO_2026_3_B_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_B_1.lean:151).
+
+- Exact file compilation succeeded.
+- No `sorry`, `admit`, new axioms, or signature changes.
+- Result recorded in [task results](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_1.lean.md).
+- Blueprint markers are ready for the automatic `sync_leanok` phase.

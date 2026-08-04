@@ -1,0 +1,3 @@
+Created the dimension-aware hydrostatic-gate formalization in [problem_IPhO_2026_1_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:262).
+
+It compiles successfully with exactly six expected `sorry` warnings and no errors. The required audits and blueprint-mapping request are recorded in [the task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_A_1.lean.md:1). The blueprint was not edited, per prover permissions.

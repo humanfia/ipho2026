@@ -1,0 +1,8 @@
+Iteration 009 planning is complete.
+
+- `3_C_1` is the sole autoformalization objective: add direct `Mathlib` import and run its Lake module build.
+- Blueprint coverage now includes all 22 helpers plus the target with resolved dependencies.
+- Strategy now covers all 23 theory targets.
+- All six E1 targets remain paused.
+
+Updated: [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/PROGRESS.md), [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/iter/iter-009/plan.md), and [C.1 blueprint](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_1.tex).

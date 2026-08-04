@@ -1,0 +1,1 @@
+Review completed with verdict `solved`. Both required files are durable, valid, and within formatting constraints.

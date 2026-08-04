@@ -1,0 +1,8 @@
+Iteration 006 planning is complete.
+
+- Advanced stage from `prover` to `polish`.
+- Scheduled the first 10 of 22 accepted theory targets.
+- Kept all six E1 targets user-skipped.
+- Recorded `4_B_6` and bootstrap-node deferrals.
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/PROGRESS.md) and [iteration plan](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/iter/iter-006/plan.md).
+- Validation confirms exactly 10 objectives and zero experimental targets.

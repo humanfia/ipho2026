@@ -1,0 +1,6 @@
+Created the physics formalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_A_2.lean)
+- [Task-result audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_2.lean.md)
+
+Verification succeeds with only the two expected autoformalization `sorry` warnings. The target \(dW_{\mathrm{emf}}=VH\,dB\) appears only as the main theorem conclusion.

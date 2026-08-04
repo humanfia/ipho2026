@@ -1,0 +1,6 @@
+Completed both proofs in [problem_IPhO_2026_2_C_4.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_C_4.lean).
+
+- No `sorry` or unsafe axioms remain.
+- Standalone Lean check passed.
+- `lake build IPhO2026Run` passed.
+- Results recorded in [task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_2_C_4.lean.md).

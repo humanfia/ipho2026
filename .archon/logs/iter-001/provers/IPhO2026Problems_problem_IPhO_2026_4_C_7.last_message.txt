@@ -1,0 +1,6 @@
+Created the physics-faithful Lean formalization:
+
+- [problem_IPhO_2026_4_C_7.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_4_C_7.lean)
+- [task result audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_C_7.lean.md)
+
+`lake env lean IPhO2026Problems/problem_IPhO_2026_4_C_7.lean` succeeds with exactly three intended `sorry` warnings and no errors. The blueprint was left untouched for automatic `\leanok` synchronization.

@@ -1,0 +1,6 @@
+Created the physics formalization and required audit report:
+
+- [Lean formalization](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_C_3.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_3.lean.md)
+
+Verification passed with `lake env lean`; only the six expected `sorry` warnings remain. The blueprint was not edited, per prover write restrictions.

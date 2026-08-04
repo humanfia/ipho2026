@@ -1,0 +1,7 @@
+Completed the physics autoformalization.
+
+- [Lean module](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_A_1.lean) defines the mirror, rays, threshold, specular law, limiting geometry, bridge lemmas, and final formula theorem.
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_A_1.lean.md) contains all required audits and grounding details.
+- `lake env lean` succeeds with exactly four expected `sorry` warnings and no errors.
+
+The blueprint was left unchanged per prover write permissions; the report records the required Lean mapping and redraft request.

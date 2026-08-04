@@ -1,0 +1,6 @@
+Completed all six proofs in [problem_IPhO_2026_2_C_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_C_3.lean).
+
+- File compiles successfully.
+- No `sorry`, `admit`, or added axioms.
+- Axiom checks report only standard Mathlib axioms.
+- Results recorded in [task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_3.lean.md).

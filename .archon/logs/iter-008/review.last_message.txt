@@ -1,0 +1,13 @@
+Review complete for exactly `problem_IPhO_2026_3_C_1.lean`.
+
+Verdict: **formalization failed** solely due to the live `missing-mathlib-import` doctor blocker. All six semantic checks otherwise pass. No Lean or DAG checks were rerun.
+
+Artifacts:
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/proof-journal/sessions/session_8/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/proof-journal/sessions/session_8/summary.md)
+- [recommendations.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/proof-journal/sessions/session_8/recommendations.md)
+- [review.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/iter/iter-008/review.md)
+- [PROJECT_STATUS.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/PROJECT_STATUS.md)
+
+The JSON schema, evidence fields, and bridge obligations were validated successfully.

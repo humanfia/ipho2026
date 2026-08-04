@@ -1,0 +1,4 @@
+Review completed with status `solved`. Both required files are durable and validated:
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_1/attempt-1/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/logs/iter-010/review-targets/IPhO2026Problems_problem_IPhO_2026_3_C_1/attempt-1/summary.md)

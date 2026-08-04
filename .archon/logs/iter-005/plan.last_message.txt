@@ -1,0 +1,1 @@
+Wrote the bounded per-target proof strategy to [plan.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/iter/iter-005/plan.md). Objectives and ordering are preserved; no blueprint corrections were necessary.

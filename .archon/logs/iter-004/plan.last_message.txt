@@ -1,0 +1,7 @@
+Iteration 004 planning is complete.
+
+- Two theory redrafts dispatched in [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/PROGRESS.md).
+- Six experimental targets remain user-skipped, not failed.
+- Added all six missing blueprint helper entries and fixed both malformed labels.
+- Updated strategy, task state, durable memory, and the [iteration plan](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/iter/iter-004/plan.md).
+- Structural checks passed; no Lean files or blueprint markers were edited.

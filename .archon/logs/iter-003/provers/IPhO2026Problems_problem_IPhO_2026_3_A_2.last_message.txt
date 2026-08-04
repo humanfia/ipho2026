@@ -1,0 +1,6 @@
+Closed both `sorry` placeholders without changing signatures.
+
+- Proofs: [problem_IPhO_2026_3_A_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_A_2.lean:173)
+- Report: [task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_3_A_2.lean.md)
+
+Verification passed: Lean diagnostics clean, direct file compilation succeeded, project build succeeded, and no forbidden placeholders remain.

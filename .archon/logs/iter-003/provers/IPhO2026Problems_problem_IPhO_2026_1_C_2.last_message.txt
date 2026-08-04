@@ -1,0 +1,6 @@
+Completed the proof with the theorem signature unchanged.
+
+- [Lean proof](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_1_C_2.lean:194)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_2.lean.md:1)
+
+`lake env lean` succeeds, diagnostics are clean, and no `sorry`, `admit`, or nonstandard axioms remain. The theorem is ready for the automated `\leanok` sync.

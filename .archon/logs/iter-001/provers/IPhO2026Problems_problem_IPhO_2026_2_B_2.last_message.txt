@@ -1,0 +1,6 @@
+Created the faithful by-sorry physics formalization:
+
+- [Lean module](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_B_2.lean)
+- [Task-result audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/problem_IPhO_2026_2_B_2.lean.md)
+
+Both LSP and `lake env lean` confirm compilation with exactly three expected `sorry` warnings and no errors. The blueprint was left untouched per prover permissions; the report identifies the main theorem for later `\lean{...}`/`\leanok` synchronization.

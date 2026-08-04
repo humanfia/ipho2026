@@ -1,0 +1,21 @@
+{
+  "iteration": 10,
+  "jobs": 1,
+  "duration_secs": 9.014,
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "targets": [
+    {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean",
+      "status": "passed",
+      "compiles": true,
+      "returncode": 0,
+      "sorry_count": 0,
+      "duration_secs": 9.008,
+      "diagnostics": ""
+    }
+  ]
+}

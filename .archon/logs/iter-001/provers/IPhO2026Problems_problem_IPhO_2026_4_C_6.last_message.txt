@@ -1,0 +1,6 @@
+Created the physics formalization and audit:
+
+- [problem_IPhO_2026_4_C_6.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_4_C_6.lean:1)
+- [task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/problem_IPhO_2026_4_C_6.lean.md:1)
+
+The file models dimensionful thermal quantities, Figure 17 parameters, governing laws, C.5 graph data, resistance determination, and uncertainty propagation. `lake env lean` succeeds with only the three expected `sorry` warnings. The blueprint remains untouched per prover permissions and is ready for `sync_leanok`.

@@ -1,0 +1,6 @@
+Closed all four `sorry` placeholders in [problem_IPhO_2026_2_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_A_1.lean).
+
+- `lake env lean` passes without warnings.
+- No `sorry`, unsafe escape hatches, or added axioms.
+- Required [task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_A_1.lean.md) written.
+- No redraft needed.

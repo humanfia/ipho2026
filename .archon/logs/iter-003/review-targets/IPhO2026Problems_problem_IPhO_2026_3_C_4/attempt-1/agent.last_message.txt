@@ -1,0 +1,4 @@
+Review completed with status `solved`. Both authorized files were written, validated, and synced to disk:
+
+- `milestones.jsonl`: exactly one valid JSON object
+- `summary.md`: 9 lines

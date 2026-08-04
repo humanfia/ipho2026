@@ -1,0 +1,10 @@
+Closed the sole `sorry` in [problem_IPhO_2026_3_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_A_1.lean:155) without changing its signature.
+
+Verification passed:
+
+- Direct Lean compilation
+- `lake build IPhO2026Run`
+- No remaining `sorry`, `admit`, or introduced axioms
+- Axiom check contains only standard Mathlib axioms
+
+Result recorded in [task results](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_1.lean.md).

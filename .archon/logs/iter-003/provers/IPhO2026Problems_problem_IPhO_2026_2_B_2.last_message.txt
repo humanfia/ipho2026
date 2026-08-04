@@ -1,0 +1,7 @@
+Completed all three proofs in [problem_IPhO_2026_2_B_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_B_2.lean:152).
+
+- No `sorry`, `admit`, axioms, or escape hatches remain.
+- Standalone Lean compilation and `lake build` both succeed.
+- Only warning: frozen `hRays` is stronger than required and unused.
+
+Results recorded in [task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_2_B_2.lean.md:1).

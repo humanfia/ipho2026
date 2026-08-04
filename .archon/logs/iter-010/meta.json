@@ -1,0 +1,76 @@
+{
+  "iteration": 10,
+  "stage": "prover",
+  "mode": "parallel",
+  "startedAt": "2026-07-27T16:50:25Z",
+  "plan": {
+    "status": "done",
+    "deterministic": true,
+    "deterministicCandidates": [
+      "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean"
+    ],
+    "promptOriginalChars": 2216,
+    "promptCompressedChars": 2216,
+    "promptCompressionOmittedChars": 0,
+    "promptCompressionChanged": false,
+    "sessionId": "019fa47c-25ab-7563-97db-a2f4a6d51a16",
+    "durationSecs": 117
+  },
+  "planValidate": {
+    "status": "ok",
+    "objectives": 1
+  },
+  "prover": {
+    "status": "done",
+    "durationSecs": 245
+  },
+  "provers": {
+    "IPhO2026Problems_problem_IPhO_2026_3_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean",
+      "status": "done",
+      "mode": "physics",
+      "sessionId": "019fa47e-06fd-7332-8b05-70b752b520b9"
+    }
+  },
+  "review": {
+    "status": "done",
+    "deterministic": true,
+    "preflightJobs": 1,
+    "preflightDurationSecs": 9.014,
+    "preflightPassed": 1,
+    "preflightFailed": 0,
+    "preflightPath": "/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/logs/iter-010/review-preflight.md",
+    "candidatePackPath": "/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/logs/iter-010/deterministic-review-candidates.md",
+    "parallelTargetEnabled": true,
+    "parallelTargetRequestedJobs": 28,
+    "parallelTargetTargets": 1,
+    "parallelTargetReviewed": 1,
+    "parallelTargetUnresolved": 0,
+    "parallelTargetRounds": [
+      {
+        "attempt": 1,
+        "jobs": 1,
+        "submitted": 1,
+        "completed": 1,
+        "failed": 0
+      }
+    ],
+    "parallelTargetDurationSecs": 134.751,
+    "parallelTargetReport": "/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/logs/iter-010/parallel-review.json",
+    "durationSecs": 143,
+    "physicsBlockers": 1,
+    "physicsDoctorBlockers": 1,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "proofGateEnabled": true,
+    "proofGateSolved": 1,
+    "proofGateRetry": 0,
+    "proofGateNeedsRedraft": 0,
+    "proofGateInfrastructureBlocked": 0,
+    "proofGateRedraftsReopened": 0,
+    "proofGateExhausted": 0,
+    "proofGateReviewed": 1
+  },
+  "sorry_count": 17
+}

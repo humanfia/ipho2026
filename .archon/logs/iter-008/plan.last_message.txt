@@ -1,0 +1,7 @@
+Iteration 008 planning is complete.
+
+- Marked the 22-target theory scope `COMPLETE`.
+- Removed out-of-scope `3_C_1` from dispatch and its isolated blueprint target node.
+- Kept all six E1 targets user-skipped, not failed.
+- Updated [PROGRESS.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/PROGRESS.md) and the [iteration plan](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/iter/iter-008/plan.md).
+- No prover or subagent dispatch is scheduled.

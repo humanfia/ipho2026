@@ -1,0 +1,6 @@
+Review completed and durably written.
+
+- Verdict: `solved`
+- Milestones: 1 valid JSON line
+- Summary: 10 lines
+- No files outside the permitted paths were edited.

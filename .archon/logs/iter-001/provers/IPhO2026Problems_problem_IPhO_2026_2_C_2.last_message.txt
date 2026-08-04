@@ -1,0 +1,3 @@
+Created the faithful C.2 physics formalization in [problem_IPhO_2026_2_C_2.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_C_2.lean:1).
+
+It compiles successfully with exactly one expected `sorry` warning on `rayB_firstOrderExpansion`. The required modeling, bridge, uncertainty, branch, and countermodel audits are recorded in [the task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_2.lean.md:1). The blueprint was left untouched per local prover permissions.

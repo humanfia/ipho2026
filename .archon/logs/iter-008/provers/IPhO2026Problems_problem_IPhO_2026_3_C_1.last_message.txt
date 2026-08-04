@@ -1,0 +1,6 @@
+Created the physics formalization with two intended `by sorry` obligations:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_1.lean)
+- [Task result and audits](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_3_C_1.lean.md)
+
+`lake env lean` succeeds with exactly two expected `sorry` warnings and no errors. The blueprint was left unchanged per prover permissions; the result records the required `\lean{...}` link for synchronization.

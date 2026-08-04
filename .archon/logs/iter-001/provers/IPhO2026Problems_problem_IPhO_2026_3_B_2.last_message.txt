@@ -1,0 +1,6 @@
+Completed the physics autoformalization.
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_B_2.lean)
+- [Task audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_B_2.lean.md)
+
+`lake env lean` succeeds with only the three intentional `sorry` warnings. The blueprint was left unchanged because project-local instructions reserve `\leanok` updates for automated sync.

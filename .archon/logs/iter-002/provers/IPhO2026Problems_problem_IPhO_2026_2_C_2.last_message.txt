@@ -1,0 +1,13 @@
+Completed the physics-formalization redraft.
+
+- Added Physlib-backed dimensionful lengths and named SI projection.
+- Preserved Figure 2g orientation, exact reflection laws, and both quadratic `IsBigO` targets.
+- Only the expected main-theorem `sorry` remains.
+- `lake build IPhO2026Run` succeeds.
+
+Files:
+
+- [Lean formalization](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_C_2.lean)
+- [Task result and audits](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_2.lean.md)
+
+The blueprint was not edited because prover permissions reserve marker updates for synchronization/review.

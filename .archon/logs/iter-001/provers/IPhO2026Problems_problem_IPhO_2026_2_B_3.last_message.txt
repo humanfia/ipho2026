@@ -1,0 +1,3 @@
+Created the dimension-aware by-sorry formalization in [problem_IPhO_2026_2_B_3.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_B_3.lean).
+
+It compiles successfully with only the three expected `sorry` warnings. The required faithfulness and bridge audit is in [task results](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_3.lean.md). Blueprint marker readiness is recorded there for the synchronization step.

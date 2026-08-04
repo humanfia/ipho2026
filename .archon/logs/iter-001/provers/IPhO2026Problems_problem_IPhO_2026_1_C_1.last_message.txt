@@ -1,0 +1,8 @@
+Created the physics formalization and audit report:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_1.lean.md)
+
+Verification passes with only seven expected `sorry` warnings; `lake build IPhO2026Run` also succeeds.
+
+The report flags that the blueprint omitted a factor of 2 under the square root. The formalization follows the conservation laws, official solution, and C.2 numerical result.

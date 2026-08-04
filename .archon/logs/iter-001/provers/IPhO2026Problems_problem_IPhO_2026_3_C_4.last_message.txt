@@ -1,0 +1,6 @@
+Created and verified the physics formalization.
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_4.lean)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_4.lean.md)
+
+`lake env lean` succeeds with only the two expected `sorry` warnings. The report records the missing blueprint `\lean{...}` mapping for later synchronization.

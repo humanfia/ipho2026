@@ -1,0 +1,15 @@
+Review complete for exactly the two listed targets.
+
+- Formalization Review: 2 passed.
+- Proof status: `1_C_1` partial with one expected `sorry`; `2_B_1` solved.
+- No Lean checks were rerun.
+- JSONL structure and exact target coverage validated.
+- Whole-project completion remains blocked by the user-paused `4_B_6` doctor finding.
+
+Artifacts:
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/proof-journal/sessions/session_4/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/proof-journal/sessions/session_4/summary.md)
+- [recommendations.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/proof-journal/sessions/session_4/recommendations.md)
+- [review.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/iter/iter-004/review.md)
+- [PROJECT_STATUS.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/PROJECT_STATUS.md)

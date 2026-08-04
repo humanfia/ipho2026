@@ -1,0 +1,6 @@
+Created and validated the physics formalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_1_C_2.lean)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_C_2.lean.md)
+
+`lake env lean` succeeds with only the expected `sorry` warning. The report flags the missing factor of 2 in the recorded C.1 formula and requests the missing blueprint `\lean{...}` annotation.

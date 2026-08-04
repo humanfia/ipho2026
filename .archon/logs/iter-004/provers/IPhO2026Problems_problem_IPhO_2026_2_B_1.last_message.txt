@@ -1,0 +1,12 @@
+Redrafted and fully proved `coefficients_from_solar_cooker_geometry`:
+
+- Removed answer-bearing hypotheses.
+- Derived the radius equation from maximal-ray tangency and canonical geometry.
+- Exhibited \(\alpha=R\) and \(\beta=-R/2\).
+- Preserved all supporting declarations and proofs.
+- Lean compilation and LSP diagnostics pass with no `sorry`.
+
+Files:
+
+- [Lean formalization](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_B_1.lean:410)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_B_1.lean.md:1)

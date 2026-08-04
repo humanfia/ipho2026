@@ -1,0 +1,6 @@
+Proved `IPhO2026_3_C_5.overall_coefficient_of_performance` with no remaining `sorry`.
+
+- [Lean proof](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_5.lean:215)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_5.lean.md)
+
+Verification passed via `lake env lean`; LSP reports no diagnostics, and the axiom scan found only standard Mathlib axioms. Blueprint readiness was recorded for the automatic `sync_leanok` phase.

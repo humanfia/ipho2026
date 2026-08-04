@@ -1,0 +1,6 @@
+Created the physics-faithful by-sorry formalization:
+
+- [problem_IPhO_2026_2_C_4.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_C_4.lean)
+- [task result audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_2_C_4.lean.md)
+
+`lake env lean IPhO2026Problems/problem_IPhO_2026_2_C_4.lean` succeeds with exactly two expected `sorry` warnings and no errors. The blueprint was left unchanged per prover permissions.

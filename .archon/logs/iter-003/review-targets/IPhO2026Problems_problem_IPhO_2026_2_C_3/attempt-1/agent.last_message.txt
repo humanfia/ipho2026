@@ -1,0 +1,6 @@
+Review completed with status `solved` and route `solved`.
+
+- [milestones.jsonl](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_3/attempt-1/milestones.jsonl)
+- [summary.md](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/logs/iter-003/review-targets/IPhO2026Problems_problem_IPhO_2026_2_C_3/attempt-1/summary.md)
+
+Both files were validated and synced to disk.

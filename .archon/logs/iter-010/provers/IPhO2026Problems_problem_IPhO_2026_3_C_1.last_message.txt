@@ -1,0 +1,7 @@
+Completed both proofs in [problem_IPhO_2026_3_C_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_1.lean:277).
+
+- No remaining `sorry` or escape hatches.
+- Direct Lean compilation succeeded.
+- `lake build IPhO2026Run` succeeded.
+- Blueprint declarations are ready for automated `\leanok` synchronization.
+- Results recorded in [task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_3_C_1.lean.md:1).

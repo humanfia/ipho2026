@@ -1,0 +1,6 @@
+Redrafted `event_scalar_energy_balance` with the required `Parameters.Valid` premise and explicit photon-momentum positivity bridge.
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:187)
+- [Task result](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_1_C_1.lean.md)
+
+Verification succeeded with `lake env lean`. The revised helper contains the sole expected `sorry`; all other signatures and closed proofs remain unchanged.

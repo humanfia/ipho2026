@@ -1,0 +1,10 @@
+Completed all six proofs in [problem_IPhO_2026_1_A_1.lean](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_1_A_1.lean:198).
+
+Verification passed:
+
+- No Lean diagnostics.
+- Direct compilation succeeded.
+- No `sorry`, `admit`, axioms, or escape hatches.
+- Only standard foundational axioms reported.
+
+Results are documented in [the task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_1_A_1.lean.md).

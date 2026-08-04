@@ -1,0 +1,6 @@
+Created the faithful physics formalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_1_B_1.lean:1)
+- [Audit report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_1_B_1.lean.md:1)
+
+`lake env lean` succeeds with only the intended `sorry` warning. The blueprint was not edited because project-local prover rules reserve `\leanok` updates for automatic synchronization.

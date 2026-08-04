@@ -1,0 +1,6 @@
+Created the physics-faithful autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_5.lean)
+- [Task result audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_5.lean.md)
+
+`lake env lean` succeeds with only the expected `sorry` warning on the target theorem. The blueprint was left unchanged per the prover-role permissions; the report records the required `\lean` handoff.

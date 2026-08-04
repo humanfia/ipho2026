@@ -1,0 +1,6 @@
+Completed the physics autoformalization.
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_2.lean)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_2.lean.md)
+
+The file compiles successfully with exactly two expected `sorry` warnings. Project `lake build` also succeeds.

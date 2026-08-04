@@ -1,0 +1,8 @@
+Created and validated:
+
+- [Lean formalization](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_4_A_1.lean)
+- [Task result and faithfulness audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_4_A_1.lean.md)
+
+`lake env lean` succeeds with exactly three expected `sorry` warnings.
+
+The numerical proof bridge is documented as blocked because the supplied page omits Figure 17’s numerical dimensions and input uncertainties; no values or target-equivalent assumptions were invented.

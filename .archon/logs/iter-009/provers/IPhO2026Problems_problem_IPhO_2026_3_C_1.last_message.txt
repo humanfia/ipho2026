@@ -1,0 +1,6 @@
+Added the direct `Mathlib` import while preserving the entire formalization contract.
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_C_1.lean)
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_C_1.lean.md)
+
+`lake env lean` succeeds with exactly the two intended `sorry` warnings. The requested dotted Lake target is not registered in `lakefile.toml`; this configuration gap is documented in the report.

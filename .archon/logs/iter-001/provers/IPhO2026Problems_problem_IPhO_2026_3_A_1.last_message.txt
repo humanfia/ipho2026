@@ -1,0 +1,6 @@
+Completed the physics autoformalization:
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_3_A_1.lean)
+- [Task result audit](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems_problem_IPhO_2026_3_A_1.lean.md)
+
+`lake env lean` succeeds with only the expected `sorry` warning. The blueprint was not edited due to prover write restrictions; the report identifies the declaration ready for synchronization.

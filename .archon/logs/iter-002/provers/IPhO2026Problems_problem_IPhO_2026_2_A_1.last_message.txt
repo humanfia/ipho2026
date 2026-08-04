@@ -1,0 +1,5 @@
+Completed the typed-physics formalization.
+
+- [Lean file](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/IPhO2026Problems/problem_IPhO_2026_2_A_1.lean) now uses Physlib dimensionful lengths and explicit SI projections.
+- [Task report](/root/proposal_for_physic/science-mango-ipho-2026-v2-run/.archon/task_results/IPhO2026Problems/problem_IPhO_2026_2_A_1.lean.md) contains the required audits and grounding inventory.
+- `lake env lean` succeeds with only the four expected autoformalization `sorry` warnings.
