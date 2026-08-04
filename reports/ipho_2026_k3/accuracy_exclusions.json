@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
-  "metric_scope": "IPhO 2026 theoretical subproblems plus experimental subproblem E1 B.6",
-  "reason": "User requested all IPhO 2026 experimental subproblems except E1 B.6 be excluded from proof accuracy on 2026-07-29.",
-  "excluded_source": "IPhO_2026_E1 except B.6",
+  "metric_scope": "IPhO 2026 theoretical subproblems only",
+  "reason": "User requested all IPhO 2026 experimental subproblems be excluded from proof accuracy on 2026-07-29.",
+  "excluded_source": "IPhO_2026_E1",
   "excluded_targets": [
     "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean",
     "IPhO2026Problems/problem_IPhO_2026_4_A_5.lean",
     "IPhO2026Problems/problem_IPhO_2026_4_B_4.lean",
+    "IPhO2026Problems/problem_IPhO_2026_4_B_6.lean",
     "IPhO2026Problems/problem_IPhO_2026_4_C_6.lean",
     "IPhO2026Problems/problem_IPhO_2026_4_C_7.lean"
   ]

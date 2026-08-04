@@ -2,15 +2,11 @@
 
 - State version: 2
 - Maximum reviewed proof attempts per target: 6
-- Solved: 25
-- Retry proof: 1
+- Solved: 26
+- Retry proof: 0
 - Needs statement redraft: 1
 - Infrastructure blocked: 0
 - Review exhausted: 0
-
-## Retry in the next proof batch
-
-- `IPhO2026Problems/problem_IPhO_2026_1_C_1.lean` — attempts 0/6; formalization redraft passed at iter 17; proof attempt budget reset
 
 ## Return to autoformalize
 

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "iteration": 17,
-  "complete": false,
-  "status": "incomplete",
+  "complete": true,
+  "status": "complete",
   "pipeline_mode": "target_lifecycle",
   "starts_at": "mixed",
   "target_files": [
@@ -20,7 +20,8 @@
   "review_only_target_files": [],
   "settled_target_files": [
     "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
-    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
   ],
   "proof_review_target_files": [
     "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
@@ -29,12 +30,8 @@
   ],
   "targets": 3,
   "reviewed": 3,
-  "unresolved": [
-    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
-  ],
-  "errors": {
-    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean": "formalizer did not change the Lean target"
-  },
+  "unresolved": [],
+  "errors": {},
   "requested_jobs": 4,
   "max_combined_workers": 3,
   "max_reviewers": 3,
@@ -365,7 +362,7 @@
   },
   "formalization_reviews": {
     "enabled": true,
-    "reviewed": 0,
+    "reviewed": 3,
     "rounds": [
       {
         "cycle": 1,
@@ -382,9 +379,7 @@
         "failed": 0
       }
     ],
-    "unresolved": [
-      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
-    ]
+    "unresolved": []
   },
   "gate_events_applied": true,
   "gate_events": [
@@ -430,9 +425,9 @@
     },
     {
       "kind": "proof",
-      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:proof:1",
+      "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_1_C_1.lean:proof:2",
       "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
-      "cycle": 1,
+      "cycle": 2,
       "applied": true,
       "route": "solved"
     },
@@ -446,23 +441,37 @@
     }
   ],
   "proof_gate_result": {
-    "solved": [],
+    "solved": [
+      "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+    ],
     "retry": [],
     "needs_redraft": [],
     "blocked_infrastructure": [],
     "exhausted": [],
-    "reviewed": []
+    "reviewed": [
+      "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+    ]
   },
   "formalization_gate_result": {
-    "passed": [],
+    "passed": [
+      "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+    ],
     "retry": [],
     "exhausted": [],
-    "reviewed": []
+    "reviewed": [
+      "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
+      "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
+    ]
   },
   "proof_redrafts_reopened": [
     "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
   ],
-  "pending_formalization_targets": [
-    "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean"
-  ]
+  "pending_formalization_targets": []
 }
