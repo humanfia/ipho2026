@@ -1,0 +1,335 @@
+% --- Archon physics formalization source begin ---
+% archon:physics
+% archon:covers IPhO2026Problems/problem_IPhO_2026_3_C_1.lean
+% archon:source-report reports/ipho_2026/problem_IPhO_2026_3_C_1.source.json
+% archon:problem-id IPhO_2026_3
+% archon:part-id C.1
+
+\chapter{Physics problem IPhO\_2026\_3\_C\_1}
+\label{ch:IPhO2026Problems_problem_IPhO_2026_3_C_1}
+
+\paragraph{Problem source.}
+The paramagnetic torus executes the Carnot refrigeration cycle
+1 -> 2 -> 3 -> 4 -> 1 shown in Figure 3b in the H-versus-T plane.  T\_h and T\_c
+are the hot- and cold-reservoir temperatures; Q\_h is the magnitude of heat
+delivered to the hot reservoir and Q\_c is the magnitude absorbed from the cold
+reservoir.  The equation of state is T*M*V = n*K*H and the isothermal heat
+relation from part B may be reused.
+
+Current subquestion:
+Label T\_h and T\_c on Figure 3b and identify the processes on which Q\_h and Q\_c are transferred.
+
+\paragraph{Current subquestion.}
+Label T\_h and T\_c on Figure 3b and identify the processes on which Q\_h and Q\_c are transferred.
+
+\paragraph{Recorded answer/context.}
+States 1 and 4 lie at T\_h; states 2 and 3 lie at T\_c. Q\_c is absorbed on 2->3, and Q\_h is delivered on 4->1.
+
+\paragraph{Figure/image path.}
+/root/proposal\_for\_physic/science-mango/ipho\_2026\_source/image/T3\_page-3.png
+
+\paragraph{Formalized contract.}
+Temperatures and heats retain their Physlib carriers.  Volume, magnetic
+intensity, and vacuum permeability retain explicit physical dimensions, while
+the scalar equations use named SI-coordinate projections.  The figure,
+reservoir contacts, heat-transfer directions, equation of state, and
+isothermal heat law are separate interfaces so that the requested labels must
+be derived rather than assumed.
+
+\begin{theorem}[Temperature labels and heat processes]
+  \label{thm:physics:IPhO_2026_3_C_1:target}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.identify_temperature_labels_and_heat_processes}
+  \uses{def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux008, def:physics:IPhO_2026_3_C_1:aux013, def:physics:IPhO_2026_3_C_1:aux014, def:physics:IPhO_2026_3_C_1:aux016, def:physics:IPhO_2026_3_C_1:aux018, def:physics:IPhO_2026_3_C_1:aux019, def:physics:IPhO_2026_3_C_1:aux020, def:physics:IPhO_2026_3_C_1:aux021, lem:physics:IPhO_2026_3_C_1:aux022}
+  In the directed cycle, states 1 and 4 have the hot-reservoir
+  temperature, states 2 and 3 have the cold-reservoir temperature,
+  the torus absorbs the cold heat on \(2\to3\), and it delivers the hot
+  heat on \(4\to1\).  The two adiabatic legs carry no heat.
+\end{theorem}
+\begin{proof}
+  First use the reservoir-identification lemma to assign the cold reservoir
+  to \(2\to3\) and the hot reservoir to \(4\to1\).  Endpoint equilibrium on
+  those contacts gives the four temperature labels.  The general
+  reservoir-transfer law gives the two directed heat processes.  Finally,
+  the figure marks \(1\to2\) and \(3\to4\) as adiabatic; the isolation and
+  no-contact laws therefore give zero heat transfer on both.
+\end{proof}
+
+\section*{Formal declaration index}
+The following blocks record the typed carriers, figure data, and bridge
+declarations used by the target.  Dependencies follow the declarations
+actually referenced by the covered Lean model.
+
+\begin{definition}[Dimensionful volume]
+  \label{def:physics:IPhO_2026_3_C_1:aux001}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.DimVolume}
+  Physical volume is represented with dimension \(L^3\).
+\end{definition}
+\begin{proof}
+  This is the product of three length dimensions, so its physical role is
+  volume.
+\end{proof}
+
+\begin{definition}[Dimensionful magnetic intensity]
+  \label{def:physics:IPhO_2026_3_C_1:aux002}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.DimMagneticIntensity}
+  Magnetic-field strength and magnetization use the common SI dimension
+  \(A/m\).
+\end{definition}
+\begin{proof}
+  The charge, time, and length dimensions combine as
+  \(C\,T^{-1}L^{-1}=A/m\).
+\end{proof}
+
+\begin{definition}[Dimensionful vacuum permeability]
+  \label{def:physics:IPhO_2026_3_C_1:aux003}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.DimVacuumPermeability}
+  Vacuum permeability is represented with SI dimension
+  \(M L C^{-2}\).
+\end{definition}
+\begin{proof}
+  This is the dimension \(kg\,m/C^2\) used by the magnetic-energy law.
+\end{proof}
+
+\begin{definition}[SI coordinate]
+  \label{def:physics:IPhO_2026_3_C_1:aux004}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.siValue}
+  A dimensionful real quantity has a named scalar coordinate in the SI unit
+  system.
+\end{definition}
+\begin{proof}
+  Evaluate the quantity in the SI unit choice and retain its real coordinate.
+\end{proof}
+
+\begin{definition}[Temperature coordinate]
+  \label{def:physics:IPhO_2026_3_C_1:aux005}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.temperatureValue}
+  An absolute temperature has a named real readout for scalar physical laws.
+\end{definition}
+\begin{proof}
+  Use the underlying real value of the absolute-temperature carrier.
+\end{proof}
+
+\begin{definition}[Heat in joules]
+  \label{def:physics:IPhO_2026_3_C_1:aux006}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.heatInJoules}
+  A dimensionful heat has a named real coordinate in SI joules.
+\end{definition}
+\begin{proof}
+  Evaluate the energy in SI units and retain its real coordinate.
+\end{proof}
+
+\begin{definition}[Cycle points]
+  \label{def:physics:IPhO_2026_3_C_1:aux007}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.CyclePoint}
+  The state labels are the four points \(1,2,3,4\) of Figure 3b.
+\end{definition}
+\begin{proof}
+  The four constructors reproduce exactly the four displayed state labels.
+\end{proof}
+
+\begin{definition}[Oriented cycle legs]
+  \label{def:physics:IPhO_2026_3_C_1:aux008}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.CycleLeg}
+  The directed processes are \(1\to2\), \(2\to3\), \(3\to4\), and
+  \(4\to1\).
+\end{definition}
+\begin{proof}
+  The four constructors reproduce the stated cyclic orientation.
+\end{proof}
+
+\begin{definition}[Initial point of a leg]
+  \label{def:physics:IPhO_2026_3_C_1:aux009}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.CycleLeg.initial}
+  \uses{def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux008}
+  Each oriented leg is assigned its displayed initial state.
+\end{definition}
+\begin{proof}
+  Read the first endpoint from each of the four directed process labels.
+\end{proof}
+
+\begin{definition}[Final point of a leg]
+  \label{def:physics:IPhO_2026_3_C_1:aux010}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.CycleLeg.final}
+  \uses{def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux008}
+  Each oriented leg is assigned its displayed final state.
+\end{definition}
+\begin{proof}
+  Read the second endpoint from each of the four directed process labels.
+\end{proof}
+
+\begin{definition}[Process kind]
+  \label{def:physics:IPhO_2026_3_C_1:aux011}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.ProcessKind}
+  A cycle leg is classified as adiabatic or isothermal before its reservoir
+  is identified.
+\end{definition}
+\begin{proof}
+  These are precisely the two process kinds used in the displayed Carnot
+  cycle.
+\end{proof}
+
+\begin{definition}[Reservoir labels]
+  \label{def:physics:IPhO_2026_3_C_1:aux012}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.Reservoir}
+  The refrigerator has a cold reservoir and a hot reservoir.
+\end{definition}
+\begin{proof}
+  The two constructors reproduce the two reservoirs named in the problem.
+\end{proof}
+
+\begin{definition}[Directed heat transfer]
+  \label{def:physics:IPhO_2026_3_C_1:aux013}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.HeatTransfer}
+  Heat transfer is either absent, absorbed from the cold reservoir with a
+  dimensionful magnitude, or delivered to the hot reservoir with a
+  dimensionful magnitude.
+\end{definition}
+\begin{proof}
+  The alternatives preserve both the physical direction and the energy
+  magnitude of each process.
+\end{proof}
+
+\begin{definition}[Torus state]
+  \label{def:physics:IPhO_2026_3_C_1:aux014}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.TorusState}
+  \uses{def:physics:IPhO_2026_3_C_1:aux002}
+  A uniform scalar state records absolute temperature, magnetic-field
+  strength, and magnetization.
+\end{definition}
+\begin{proof}
+  The three typed fields are exactly the state variables in the equation of
+  state and Figure 3b.
+\end{proof}
+
+\begin{definition}[Paramagnetic torus data]
+  \label{def:physics:IPhO_2026_3_C_1:aux015}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.ParamagneticTorus}
+  \uses{def:physics:IPhO_2026_3_C_1:aux001, def:physics:IPhO_2026_3_C_1:aux003}
+  The fixed material data comprise dimensionful volume and vacuum
+  permeability together with named coherent-SI readouts for amount of
+  substance and the Curie constant.
+\end{definition}
+\begin{proof}
+  These fields retain every fixed quantity entering the paramagnetic equation
+  of state and the isothermal heat relation.
+\end{proof}
+
+\begin{definition}[Figure 3b Carnot-cycle data]
+  \label{def:physics:IPhO_2026_3_C_1:aux016}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.Figure3bCarnotCycle}
+  \uses{def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux008, def:physics:IPhO_2026_3_C_1:aux011, def:physics:IPhO_2026_3_C_1:aux012, def:physics:IPhO_2026_3_C_1:aux013, def:physics:IPhO_2026_3_C_1:aux014, def:physics:IPhO_2026_3_C_1:aux015}
+  The cycle record attaches typed torus states, reservoir temperatures, heat
+  magnitudes, process kinds, reservoir contacts, qualitative transfers, and
+  signed heat to the four oriented legs.
+\end{definition}
+\begin{proof}
+  The fields gather the physical data of the figure without preassigning
+  either isotherm to a reservoir.
+\end{proof}
+
+\begin{definition}[Reservoir temperature]
+  \label{def:physics:IPhO_2026_3_C_1:aux017}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.Figure3bCarnotCycle.reservoirTemperature}
+  \uses{def:physics:IPhO_2026_3_C_1:aux012, def:physics:IPhO_2026_3_C_1:aux016}
+  The cold reservoir is assigned the cycle's cold temperature and the hot
+  reservoir its hot temperature.
+\end{definition}
+\begin{proof}
+  Select the corresponding recorded temperature for each of the two
+  reservoir labels.
+\end{proof}
+
+\begin{definition}[Figure 3b geometry]
+  \label{def:physics:IPhO_2026_3_C_1:aux018}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.Figure3bGeometry}
+  \uses{def:physics:IPhO_2026_3_C_1:aux005, def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux008, def:physics:IPhO_2026_3_C_1:aux009, def:physics:IPhO_2026_3_C_1:aux010, def:physics:IPhO_2026_3_C_1:aux011, def:physics:IPhO_2026_3_C_1:aux014, def:physics:IPhO_2026_3_C_1:aux016}
+  The figure marks \(1\to2\) and \(3\to4\) as adiabatic,
+  \(2\to3\) and \(4\to1\) as isothermal, and places state 2 at a
+  lower temperature coordinate than state 1.
+\end{definition}
+\begin{proof}
+  These five facts are the process and ordering readouts visible in Figure
+  3b; no reservoir assignment is included.
+\end{proof}
+
+\begin{definition}[Paramagnetic equation of state]
+  \label{def:physics:IPhO_2026_3_C_1:aux019}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.SatisfiesParamagneticEquationOfState}
+  \uses{def:physics:IPhO_2026_3_C_1:aux001, def:physics:IPhO_2026_3_C_1:aux002, def:physics:IPhO_2026_3_C_1:aux004, def:physics:IPhO_2026_3_C_1:aux005, def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux014, def:physics:IPhO_2026_3_C_1:aux015, def:physics:IPhO_2026_3_C_1:aux016}
+  Volume, amount of substance, and the Curie constant are positive, and every
+  labeled state satisfies \(T M V=n K H\) in the named SI coordinates.
+\end{definition}
+\begin{proof}
+  The positivity fields and the statewise equation explicitly state the
+  governing paramagnetic law.
+\end{proof}
+
+\begin{definition}[Isothermal heat relation]
+  \label{def:physics:IPhO_2026_3_C_1:aux020}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.SatisfiesIsothermalHeatRelation}
+  \uses{def:physics:IPhO_2026_3_C_1:aux002, def:physics:IPhO_2026_3_C_1:aux003, def:physics:IPhO_2026_3_C_1:aux004, def:physics:IPhO_2026_3_C_1:aux005, def:physics:IPhO_2026_3_C_1:aux006, def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux008, def:physics:IPhO_2026_3_C_1:aux009, def:physics:IPhO_2026_3_C_1:aux010, def:physics:IPhO_2026_3_C_1:aux011, def:physics:IPhO_2026_3_C_1:aux014, def:physics:IPhO_2026_3_C_1:aux015, def:physics:IPhO_2026_3_C_1:aux016}
+  Vacuum permeability is positive, and on any oriented isothermal leg the
+  signed heat entering the torus equals the part-B field-strength expression
+  with its stated sign convention.
+\end{definition}
+\begin{proof}
+  The structure records positivity and the reusable isothermal equation for
+  every leg classified as isothermal.
+\end{proof}
+
+\begin{definition}[Carnot refrigerator laws]
+  \label{def:physics:IPhO_2026_3_C_1:aux021}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.SatisfiesCarnotRefrigeratorLaws}
+  \uses{def:physics:IPhO_2026_3_C_1:aux005, def:physics:IPhO_2026_3_C_1:aux006, def:physics:IPhO_2026_3_C_1:aux008, def:physics:IPhO_2026_3_C_1:aux009, def:physics:IPhO_2026_3_C_1:aux010, def:physics:IPhO_2026_3_C_1:aux011, def:physics:IPhO_2026_3_C_1:aux012, def:physics:IPhO_2026_3_C_1:aux013, def:physics:IPhO_2026_3_C_1:aux014, def:physics:IPhO_2026_3_C_1:aux016, def:physics:IPhO_2026_3_C_1:aux017}
+  Both reservoir temperatures are positive, the cold temperature is strictly
+  below the hot temperature, and the heat magnitudes are nonnegative.
+  Isothermal legs have reservoir contacts, contacted endpoints equilibrate
+  with that reservoir, and the contact fixes the heat direction.  Adiabatic
+  legs have no contact and no transfer, and the qualitative transfer agrees
+  with signed heat into the torus.
+\end{definition}
+\begin{proof}
+  Each stated thermodynamic consequence is an explicit field of the
+  refrigerator-law interface, uniformly quantified over the cycle legs.
+\end{proof}
+
+\begin{lemma}[Identify the two reservoir contacts]
+  \label{lem:physics:IPhO_2026_3_C_1:aux022}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.identify_isothermal_reservoir_contacts}
+  \uses{def:physics:IPhO_2026_3_C_1:aux005, def:physics:IPhO_2026_3_C_1:aux007, def:physics:IPhO_2026_3_C_1:aux008, def:physics:IPhO_2026_3_C_1:aux012, def:physics:IPhO_2026_3_C_1:aux016, def:physics:IPhO_2026_3_C_1:aux017, def:physics:IPhO_2026_3_C_1:aux018, def:physics:IPhO_2026_3_C_1:aux021}
+  The isothermal leg \(2\to3\) contacts the cold reservoir, and the
+  isothermal leg \(4\to1\) contacts the hot reservoir.
+\end{lemma}
+\begin{proof}
+  The figure and the isothermal-contact law give one of the two finite
+  reservoir labels for each isotherm.  If both contacts used the same
+  reservoir, endpoint equilibrium would make the temperatures of states 2
+  and 1 equal, contradicting the strict figure ordering.  If \(2\to3\)
+  contacted the hot reservoir and \(4\to1\) the cold reservoir, endpoint
+  equilibrium would turn the figure ordering into \(T_h<T_c\), contradicting
+  \(T_c<T_h\).  The only remaining assignment is cold on \(2\to3\) and hot
+  on \(4\to1\).
+\end{proof}
+
+\begin{theorem}[IPhO 2026 Problem 3 C.1]
+  \label{thm:physics:IPhO_2026_3_C_1}
+  \lean{IPhO2026Problems.ProblemIPhO2026_3_C_1.identify_temperature_labels_and_heat_processes}
+  \uses{def:physics:IPhO_2026_3_C_1:aux018, def:physics:IPhO_2026_3_C_1:aux019, def:physics:IPhO_2026_3_C_1:aux020, def:physics:IPhO_2026_3_C_1:aux021, lem:physics:IPhO_2026_3_C_1:aux022}
+  For a Figure 3b Carnot refrigerator satisfying the paramagnetic equation
+  of state, the isothermal heat relation, and the refrigerator laws, states
+  \(1\) and \(4\) have temperature \(T_h\), while states \(2\) and \(3\)
+  have temperature \(T_c\).  The torus absorbs \(Q_c\) on \(2\to3\),
+  delivers \(Q_h\) on \(4\to1\), and has no heat transfer on the adiabatic
+  legs \(1\to2\) and \(3\to4\).
+\end{theorem}
+\begin{proof}
+  Apply the reservoir-contact lemma to identify the two isotherms.  Endpoint
+  equilibrium at those contacts gives the four temperature labels, and the
+  reservoir heat-direction law gives absorption on \(2\to3\) and delivery
+  on \(4\to1\).  Finally, the two adiabatic classifications read from the
+  figure and the adiabatic isolation law give no heat transfer on the
+  remaining legs.  The equation of state and isothermal heat relation remain
+  part of the physical contract; the refrigerator-law interface already
+  packages the qualitative consequences needed here.
+\end{proof}
+% --- Archon physics formalization source end ---

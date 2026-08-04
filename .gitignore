@@ -1,0 +1,11 @@
+# Lean and Lake build products
+.lake/
+base/.lake/
+
+# Python runtime products
+__pycache__/
+*.py[cod]
+
+# Local editor and operating-system files
+.DS_Store
+*.swp
