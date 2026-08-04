@@ -4,9 +4,15 @@
 
 ## Project
 
-An isolated Archon run that formalizes all 28 IPhO 2026 targets with Moonshot
-K3 (`biui-0724`) through the OpenAI-compatible Chat Completions API. Each
-target has its own worker and Lean file.
+An isolated Archon run that formalizes all 29 selected IPhO 2026 targets with
+Moonshot Kimi K3 through the Anthropic Messages API. The benchmark contains
+23 theoretical targets and 6 experimental targets; proof accuracy is reported
+on the theoretical targets only.
+
+Current verified theoretical score: **23/23 (100%)**. All six experimental
+targets are excluded from this metric. The added T3-C.1 target and the
+source-corrected T3-C.2 target both compile with zero `sorry` and passed
+independent Kimi K3 review.
 
 ## References
 
@@ -14,7 +20,7 @@ See [`references/summary.md`](references/summary.md) for a description of each s
 
 ## Structure
 
-- `IPhO2026Run/` — main Lean source
+- `IPhO2026Problems/` — main Lean source
 - `blueprint/` — leanblueprint source (build with `leanblueprint pdf` and `leanblueprint web`)
 - `references/` — PDFs, papers, and informal notes backing the formalization
 - `archon-protected.yaml` — declarations agents must not modify
@@ -34,6 +40,6 @@ scripts/start_ipho_2026_k3.sh --resume
 scripts/status_ipho_2026_k3.sh
 ```
 
-The launcher validates the pinned Codex Chat harness, starts the local
-compatibility proxy and LeanExplore endpoint, then runs 28 target workers.
-Secrets and Archon runtime state remain under the ignored `.archon/` directory.
+The launcher validates the pinned K3 Anthropic harness, starts the LeanExplore
+endpoint, and runs a queue of 29 targets with up to four concurrent target
+lifecycles. Secrets remain in the ignored `.archon/.env` file.

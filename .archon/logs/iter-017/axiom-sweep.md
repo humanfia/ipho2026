@@ -1,10 +1,10 @@
 # Axiom sweep
 
 - Scope: current-objectives
-- Jobs: 2
-- Selected targets: 2
+- Jobs: 1
+- Selected targets: 1
 
-Checked 2 file(s) in 20s.
+Checked 1 file(s) in 9s.
 
 No `sorryAx` laundering detected.
 

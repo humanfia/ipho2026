@@ -1,5 +1,11 @@
 # Blueprint Doctor
 
+## Physics modeling
+
+Physics-aware chapters marked `% archon:physics` should preserve the meaning of load-bearing physical quantities. The Lean targets below either miss the real Mathlib/Physlib import path or introduce self-contained placeholder physics such as local scalar classes, tag-only dimensions, symbolic Taylor/asymptotic enums, fake Jacobian records, or bare `Real`/`ℝ` quantity collapses. Replace them with Mathlib/Physlib-grounded statements or a justified typed local model documented in the blueprint.
+
+- `IPhO2026Problems/problem_IPhO_2026_3_C_1.lean` :: `missing-physlib-import` - physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions
+
 ## Physics grounding
 
 Physics-aware autoformalization/proving must leave reviewable LeanExplore evidence in `.archon/task_results`. For each existing Lean target covered by a `% archon:physics` chapter, the report should list LeanExplore queries/candidates, grounded Mathlib/PhysLean names, local abstractions, and grounding gaps. Missing or incomplete logs mean the reviewer cannot tell whether the formalization was grounded or invented.
@@ -9,5 +15,6 @@ Physics-aware autoformalization/proving must leave reviewable LeanExplore eviden
 - `IPhO2026Problems/problem_IPhO_2026_2_B_2.lean` :: `incomplete-grounding-log` - IPhO2026Problems/problem_IPhO_2026_2_B_2.lean has a task_results report at /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/physics-grounding-IPhO2026Problems_problem_IPhO_2026_2_B_2.md, but its LeanExplore grounding evidence is incomplete; missing: successful LeanExplore search.
 - `IPhO2026Problems/problem_IPhO_2026_2_C_2.lean` :: `incomplete-grounding-log` - IPhO2026Problems/problem_IPhO_2026_2_C_2.lean has a task_results report at /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/physics-grounding-IPhO2026Problems_problem_IPhO_2026_2_C_2.md, but its LeanExplore grounding evidence is incomplete; missing: successful LeanExplore search.
 - `IPhO2026Problems/problem_IPhO_2026_2_C_4.lean` :: `incomplete-grounding-log` - IPhO2026Problems/problem_IPhO_2026_2_C_4.lean has a task_results report at /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/physics-grounding-IPhO2026Problems_problem_IPhO_2026_2_C_4.md, but its LeanExplore grounding evidence is incomplete; missing: successful LeanExplore search.
+- `IPhO2026Problems/problem_IPhO_2026_3_C_1.lean` :: `incomplete-grounding-log` - IPhO2026Problems/problem_IPhO_2026_3_C_1.lean has a task_results report at /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_3_C_1.md, but its LeanExplore grounding evidence is incomplete; missing: LeanExplore mention, query/candidate evidence, grounded-name section, local-abstraction section.
 - `IPhO2026Problems/problem_IPhO_2026_3_C_2.lean` :: `incomplete-grounding-log` - IPhO2026Problems/problem_IPhO_2026_3_C_2.lean has a task_results report at /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/physics-grounding-IPhO2026Problems_problem_IPhO_2026_3_C_2.md, but its LeanExplore grounding evidence is incomplete; missing: successful LeanExplore search.
 

@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "max_iterations": 6,
-  "updated_at": "2026-08-04T03:32:17Z",
+  "max_iterations": 10,
+  "updated_at": "2026-08-04T04:39:02Z",
   "targets": {
     "IPhO2026Problems/problem_IPhO_2026_1_A_1.lean": {
       "status": "passed",
@@ -1669,10 +1669,10 @@
     },
     "IPhO2026Problems/problem_IPhO_2026_3_C_2.lean": {
       "status": "passed",
-      "reviews": 3,
-      "last_review_iter": 11,
-      "reason": "all formalization Review entries passed",
-      "updated_at": "2026-07-28T11:05:58Z",
+      "reviews": 4,
+      "last_review_iter": 18,
+      "reason": "Independent Kimi K3 re-review passed after the 2026-08-04 source-faithful redraft: Figure 3b now has adiabatic legs 1->2 and 3->4, isothermal leg 2->3 at Tc with +Qc into the torus, and isothermal leg 4->1 at Th with -Qh into the torus. The contract follows the official B.1 + EOS + Carnot-ratio derivation, keeps the answer conclusion-side, compiles cleanly, and has zero sorry/admit/axiom laundering.",
+      "updated_at": "2026-08-04T05:54:00Z",
       "review_schema_version": 2,
       "certificate": {
         "schema_version": 2,
@@ -1682,15 +1682,15 @@
             "checks": {
               "source_faithfulness": {
                 "status": "passed",
-                "evidence": "Refrigeration-cycle sign convention (heat into torus: -Q_h on the 3→4 hot leg, +Q_c on the 1→2 cold leg) matches Figure 3b (T v1 = Th, T v4 = Th, T v2 = Tc, T v3 = Tc); q-form prefactor is the EOS-substituted B.1 law; adiabatic leg law C_v log(T_f/T_i) = (μ₀V²/(2nK))(M_f² - M_i²) is the magnetic analogue of the gas adiabatic log relation; Carnot ratio on magnitudes; official answer conclusion-side."
+                "evidence": "Official solution and Figure 3b agree with the redrafted contract: T1=T4=Th, T2=T3=Tc; 1->2 and 3->4 are adiabatic; 2->3 is isothermal at Tc with signed heat +Qc into the torus; 4->1 is isothermal at Th with signed heat -Qh. The B.1 heat law, EOS TMV=nKH, and Carnot magnitude ratio match the official inputs."
               },
               "derivability": {
                 "status": "passed",
-                "evidence": "PROVED chain: Qh_eq/Qc_eq from heat_34/heat_12 unfolded (complete); q4_eq_adiabatic_41 and q3_eq from AdiabaticLegStateLaw with figure3b temperatures (the log terms cancel across the shared T_h/T_c ratio — complete); m1_sq via the vertex q-values + the two leg square-difference identities (complete, the sq-difference factor is nonzero by parameter positivity); m1_eq_sqrt via Real.sqrt_sq at 0 ≤ M1. q_relation (T_h M_4² = T_c M_2² consistency amplitude) is sorried upstream but the m1_sq proof records explicitly that it is not needed for the final rewrite."
+                "evidence": "Complete official chain: IsothermalHeatIntoTorus.magnetization_form derives Q=A*T*(Mi^2-Mf^2) from B.1 plus EOS; Qc_eq and Qh_eq instantiate it on 2->3 and 4->1; sq_diff_eq substitutes these into Qh*Tc=Qc*Th and cancels nonzero A*Th*Tc; m1_sq rearranges; m1_eq_sqrt uses M1 nonnegativity and Real.sqrt_sq."
               },
               "abstraction_sufficiency": {
                 "status": "passed",
-                "evidence": "IsothermalHeatQForm/AdiabaticLegStateLaw/CarnotHeatRatio/Figure3bAssignment are equational predicates; CarnotMagnetizationModel exposes every field as elimination-ready equations (no opaque witnesses); nonzero-prefactor argument carried by explicit term-mode positivity (pitfall documented for prover stage)."
+                "evidence": "EquationOfStateParamagnet, IsothermalHeatIntoTorus, CarnotHeatRatio, and Figure3bAssignment are eliminable equations/data. CarnotMagnetizationModel exposes per-vertex EOS, the two correctly attached isothermal heat laws, zero adiabatic heats, and positivity guards; no field contains the C.2 answer or a disguised square-difference identity."
               },
               "uncertainty_propagation": {
                 "status": "not_applicable",
@@ -1698,46 +1698,42 @@
               },
               "branch_orientation": {
                 "status": "passed",
-                "evidence": "Cycle orientation (refrigerator: Tc < Th, Qh/Qc nonnegative, Bool flags on isothermal/adiabatic legs) is hypothesis-side in the structure; nonnegative root branch selected by M_nonneg (proved use, not a conclusion-side choice); adiabatic legs carry explicit direction arguments (v4→v1, v2→v3)."
+                "evidence": "Tc<Th, nonnegative Qh/Qc, process-kind direction flags, signed heat inputs (+Qc on 2->3 and -Qh on 4->1), and nonnegative vertex magnetizations are hypothesis-side. The root branch is selected from M_nonneg v1 rather than chosen in the conclusion."
               },
               "countermodel_resistance": {
                 "status": "passed",
-                "evidence": "Iter-010's contradictions (Th = Tc degeneracy for old heat_12/heat_34; excluded V = -nK agreement; absent adiabatic law) are all structurally removed; with the corrected fields every hypothesis is simultaneously satisfiable (e.g. the standard Carnot square cycle) and the squared identity is FORCED: any instance satisfying the leg identities and vertex q-values yields m1_sq by substitution (complete proof present), so no countermodel class remains for the target chain."
+                "evidence": "The swapped-leg model and its unprovable q_relation have been removed. Any model satisfying the two B.1+EOS heat equations, positive parameters/temperatures, and the Carnot ratio must satisfy sq_diff_eq after cancellation of A*Th*Tc; M1 nonnegativity then forces the recorded square-root branch."
               }
             },
             "bridge_obligations": [
               {
-                "claim": "Isothermal leg heats in q-form at the figure temperatures",
-                "carrier": "Qh_eq + Qc_eq (PROVED)",
+                "claim": "B.1 plus EOS gives the magnetization-form heat law",
+                "carrier": "IsothermalHeatIntoTorus.magnetization_form",
                 "status": "covered",
-                "evidence": "heat_34/heat_12 unfold with the corrected prefactor; complete proofs."
+                "evidence": "Fully proved by EOS elimination, field_simp, and ring."
               },
               {
-                "claim": "Adiabatic legs give M1² = M4² and M3² = M2²",
-                "carrier": "q4_eq_adiabatic_41 + q3_eq (PROVED) via AdiabaticLegStateLaw",
+                "claim": "Correct isothermal legs yield the official Qc and Qh equations",
+                "carrier": "Qc_eq + Qh_eq",
                 "status": "covered",
-                "evidence": "Log-cancellation across the shared temperature ratio; complete proofs."
+                "evidence": "Fully proved from heat_23/heat_41, per-vertex EOS, and Figure3bAssignment."
               },
               {
-                "claim": "Vertex identity M1² = M2² - M3² + M4² and nonnegative-root answer",
-                "carrier": "m1_sq + m1_eq_sqrt + m1_sq_arg_nonneg (ALL PROVED)",
+                "claim": "Carnot ratio forces the square-difference and recorded answer",
+                "carrier": "sq_diff_eq + m1_sq + m1_eq_sqrt + m1_sq_arg_nonneg",
                 "status": "covered",
-                "evidence": "Substitution + sq_nonneg + Real.sqrt_sq; machine-checked this iter."
-              },
-              {
-                "claim": "Carnot-ratio consistency amplitude T_h M_4² = T_c M_2²",
-                "carrier": "q_relation (sorried, blueprint-pinned)",
-                "status": "covered",
-                "evidence": "Upstream consistency relation; explicitly recorded in m1_sq's proof as not needed for the target chain (leg identities suffice); contracted to the prover stage."
+                "evidence": "Fully proved by nonzero-factor cancellation, linear algebra, and the nonnegative square-root lemma; independent K3 review reproduced the clean compile and signature."
               }
             ]
           }
         ]
       },
-      "certificate_revoked_at": "2026-07-28T09:11:09Z",
+      "historical_certificate_revoked_at": "2026-07-28T09:11:09Z",
       "reopened_by": "proof_review",
       "last_reopened_iter": 10,
-      "redraft_kind": "wrong_or_weakened_target",
+      "redraft_kind": "not_applicable",
+      "redraft_resolved_iter": 18,
+      "redraft_resolved_at": "2026-08-04T05:54:00Z",
       "reopen_history": [
         {
           "reopened_at": "2026-07-28T09:11:09Z",
@@ -3050,6 +3046,104 @@
           }
         ]
       }
+    },
+    "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean": {
+      "status": "passed",
+      "reviews": 1,
+      "last_review_iter": 17,
+      "reason": "Statements faithfully encode IPhO 2026 T3-C.1: main theorem figure3b_labeling states exactly the official answer (T1=T4=Th, T2=T3=Tc; Qc absorbed on 2->3 with Q23=+Qc>0; Qh delivered on 4->1 with Q41=-Qh<0; no heat on adiabatic legs 1->2, 3->4), verified against references/text/T3_solution.txt (lines 98-100, 112-115), the T3_page-3.png figure, and the C.1 marking scheme. The reservoir-identification content stays on the conclusion side: ReservoirExchange enters only as an unresolved per-leg disjunction, and strict sign bridges from the B.1 heat law force the branch elimination.",
+      "updated_at": "2026-08-04T04:39:02Z",
+      "review_schema_version": 2,
+      "certificate": {
+        "schema_version": 2,
+        "checks": {
+          "source_faithfulness": {
+            "status": "passed",
+            "evidence": "Official T3 solution: 'Tc = T2 = T3 and Th = T4 = T1 are the respective temperatures of the isothermal processes 2 -> 3 and 4 -> 1' and 'Qc = |Q2->3| = Q2->3, Qh = |Q4->1| = -Q4->1' — matched verbatim by temperature_labels / Qc_absorbed_on_23 / Qh_delivered_on_41 / reservoir_heat_magnitudes. Figure 3b image inspected: legs 2->3, 4->1 vertical (isothermal) with dashed T-axis drops, 1->2, 3->4 curved adiabats, H decreasing on 1->2 and 2->3, increasing on 3->4 and 4->1, {2,3} left of {1,4} — all encoded as proc*_fig, T2_eq_T3, T1_eq_T4, T23_lt_T14, and four strict H-inequalities. EOS T*M*V=n*K*H and B.1 law Q=-(mu0*n*K/(2T))*(Hf^2-Hi^2) match the problem context and sibling 3_B_1.lean:367. Marking scheme C.1 items (label temperatures; specify heat-flow portions) both land on the conclusion side."
+          },
+          "derivability": {
+            "status": "passed",
+            "evidence": "Every proof route is sound from the stated fields: Q23_pos from heat23 + H3_lt_H2 + H_nonneg (sq_lt_sq0) + T_pos + param positivity; Q41_neg symmetric; leg23_cold by eliminating leg23_exchange (hot branch gives Q23=-Qh<=0 via Qh_nonneg, contradicting Q23_pos); leg41_hot symmetric via Qc_nonneg; temperature_labels via T2_eq_T3/T1_eq_T4 congruence; reservoir_heat_magnitudes via abs_of_nonneg/abs_of_neg; figure3b_labeling by conjunction. An independent geometric route (leg temperatures in {Tc,Th} + T23_lt_T14 + Tc_lt_Th) also closes the labels, so derivability does not hinge on a single fragile bridge."
+          },
+          "abstraction_sufficiency": {
+            "status": "passed",
+            "evidence": "All three local Prop interfaces carry equational content: EquationOfStateParamagnet is the EOS equation itself at each vertex; IsothermalHeatIntoTorus is the B.1 equation yielding strict sign conclusions; ReservoirExchange is a disjunction of two equation pairs pinning (Tleg,Qleg) to point values. ProcessKind/Vertex/CarnotCycle/TorusParams preserve physical roles (scalar vertex readouts explicitly named as readouts, allowed by the modeling rules); positivity/nonnegativity fields (mu0,n,K,V,T_pos,H_nonneg) supply exactly the guards the sign bridges need. No True/tautology placeholders, no transparent scalar aliases for primitives."
+          },
+          "uncertainty_propagation": {
+            "status": "not_applicable",
+            "evidence": "C.1 is pure diagram labeling (0.2 pts); the source reports no value+/-uncertainty data for this subquestion."
+          },
+          "branch_orientation": {
+            "status": "passed",
+            "evidence": "Refrigeration orientation is hypothesis-carried: Tc_lt_Th, ReservoirExchange's absorb-+Qc-at-Tc / deliver-(-Qh)-at-Th branches, into-torus sign convention documented on every heat field, per-leg field directions as four strict H-inequalities plus ProcessKind direction flags, and left/right T-axis ordering T23_lt_T14. Conclusions derive the signed transfers instead of selecting them."
+          },
+          "countermodel_resistance": {
+            "status": "passed",
+            "evidence": "Wrong labeling T2=Th forces Q23=-Qh<=0 via leg23_exchange, contradicting Q23_pos (itself forced by heat23 + strict H3_lt_H2 + positivity); independent figure route: T2=Th with T23_lt_T14 gives T1>Th while leg41_exchange+T1_eq_T4 bound T1 in {Tc,Th}. Degenerate Qc=Qh=0 excluded by strict signs (strict field changes in the figure make Q23>0, Q41<0). Strict T23_lt_T14 and H-inequalities serve as the neq-guards against collapsed readout models. Contract is determined, not underdetermined."
+          }
+        },
+        "bridge_obligations": [
+          {
+            "claim": "On leg 2->3 the field decreases, so the B.1 heat into the torus is strictly positive (heat absorbed)",
+            "carrier": "Q23_pos from heat23 + H3_lt_H2 + T_pos + H_nonneg + TorusParams positivity",
+            "status": "covered",
+            "evidence": "sorry body; route documented in docstring; official 'Qc = Q2->3' (positive)"
+          },
+          {
+            "claim": "On leg 4->1 the field increases, so the B.1 heat into the torus is strictly negative (heat delivered)",
+            "carrier": "Q41_neg from heat41 + H4_lt_H1 + positivity fields",
+            "status": "covered",
+            "evidence": "sorry body; official 'Qh = -Q4->1'"
+          },
+          {
+            "claim": "The absorbing isothermal leg is the cold one (reversible two-reservoir Carnot refrigeration)",
+            "carrier": "leg23_cold from leg23_exchange disjunction + Q23_pos + Qh_nonneg",
+            "status": "covered",
+            "evidence": "sorry body; official 'Tc = T2 = T3 ... isothermal process 2->3'"
+          },
+          {
+            "claim": "The delivering isothermal leg is the hot one",
+            "carrier": "leg41_hot from leg41_exchange disjunction + Q41_neg + Qc_nonneg",
+            "status": "covered",
+            "evidence": "sorry body; official 'Th = T4 = T1 ... 4->1'"
+          },
+          {
+            "claim": "Vertical legs share T-coordinates: T3=T2 and T1=T4",
+            "carrier": "temperature_labels via T2_eq_T3, T1_eq_T4",
+            "status": "covered",
+            "evidence": "sorry body; Figure 3b dashed verticals confirmed in image"
+          },
+          {
+            "claim": "Heat is transferred only on the isothermal legs (adiabatic legs transfer none)",
+            "carrier": "adiabatic_legs_transfer_no_heat via heat12_zero, heat34_zero",
+            "status": "covered",
+            "evidence": "sorry body; definition of adiabatic; identifies the processes as C.1 asks"
+          },
+          {
+            "claim": "Magnitude form Qc=|Q2->3|, Qh=|Q4->1|",
+            "carrier": "reservoir_heat_magnitudes via abs_of_nonneg / abs_of_neg",
+            "status": "covered",
+            "evidence": "sorry body; official notation verbatim"
+          },
+          {
+            "claim": "Combined Figure-3b labeling is the main C.1 contract",
+            "carrier": "figure3b_labeling",
+            "status": "covered",
+            "evidence": "sorry body; matches marking scheme C.1 (label temperatures 0.1 + heat-flow portions 0.1)"
+          }
+        ]
+      },
+      "review_events": [
+        {
+          "event_id": "pipeline:17:IPhO2026Problems/problem_IPhO_2026_3_C_1.lean:formalization:1",
+          "iter": 17,
+          "decision": "passed",
+          "resulting_status": "passed",
+          "attempt": 1,
+          "reason": "Statements faithfully encode IPhO 2026 T3-C.1: main theorem figure3b_labeling states exactly the official answer (T1=T4=Th, T2=T3=Tc; Qc absorbed on 2->3 with Q23=+Qc>0; Qh delivered on 4->1 with Q41=-Qh<0; no heat on adiabatic legs 1->2, 3->4), verified against references/text/T3_solution.txt (lines 98-100, 112-115), the T3_page-3.png figure, and the C.1 marking scheme. The reservoir-identification content stays on the conclusion side: ReservoirExchange enters only as an unresolved per-leg disjunction, and strict sign bridges from the B.1 heat law force the branch elimination.",
+          "reviewed_at": "2026-08-04T04:39:02Z"
+        }
+      ]
     }
   },
   "last_review_iter": 17,

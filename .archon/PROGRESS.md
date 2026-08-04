@@ -2,7 +2,7 @@
 
 ## Current Stage
 
-autoformalize
+prover
 
 ## Stages
 - [x] init
@@ -12,9 +12,7 @@ autoformalize
 
 ## Current Objectives
 
-1. **`IPhO2026Problems/problem_IPhO_2026_1_B_1.lean`** — User-authorized redraft after correcting the reversed radial allowed-region inequality. Preserve `Q(r) >= 0` on realized motion and `Q(r) < 0` beyond the energy threshold; complete the remaining bridges. Formalization Review budget: 3/6 used. [prover-mode: physics-formalize]
-2. **`IPhO2026Problems/problem_IPhO_2026_1_B_2.lean`** — User-authorized redraft for the missing Kepler/Binet and `Filter.Tendsto` asymptotic-velocity bridges. Preserve `eps^2 = 49/4` and signed deflection `-arctan(2/sqrt 45)`; never restore the refuted `67/4` contract. Formalization Review budget: 3/6 used. [prover-mode: physics-formalize]
-3. **`IPhO2026Problems/problem_IPhO_2026_1_C_1.lean`** — Formalization Review already passed; continue the interrupted proof attempt directly, repair the two tactic-level failures in `quadratic_characterization_of_threshold`, and close the forward/backward threshold theorems. Proof Review budget: 1/3 used. [prover-mode: physics]
+(no dispatch — selected target lifecycles are settled; plan the next eligible frontier)
 
 ## Explicitly not dispatched
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "metric_scope": "IPhO 2026 theoretical subproblems only",
-  "reason": "User requested all IPhO 2026 experimental subproblems be excluded from proof accuracy on 2026-07-29.",
+  "reason": "User requested all IPhO 2026 experimental subproblems be excluded from proof accuracy.",
   "excluded_source": "IPhO_2026_E1",
   "excluded_targets": [
     "IPhO2026Problems/problem_IPhO_2026_4_A_1.lean",

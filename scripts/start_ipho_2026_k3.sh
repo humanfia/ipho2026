@@ -63,7 +63,7 @@ jq -e '
   and .loop.parallel_formalization_review_jobs == 4
   and .loop.parallel_formalization_review_max_attempts == 3
   and .loop.parallel_formalization_review_backoff_sec == 30
-  and .loop.max_objectives == 28
+  and .loop.max_objectives == 29
   and .loop.pipeline_target_review == true
   and .loop.pipeline_target_lifecycle_jobs == 4
   and .loop.parallel_target_review_jobs == 4
@@ -84,9 +84,9 @@ set +a
 nohup setsid env PATH="$CLAUDE_SHIM_DIR:$ARCHON_VENV/bin:$PATH" \
     CLAUDE_REAL_BIN="$CLAUDE_REAL_BIN" PYTHONUNBUFFERED=1 \
     "$ARCHON_BIN" loop "$RUN_ROOT" \
-    --max-iterations 100 \
+    --max-iterations 120 \
     --max-parallel 28 \
-    --max-objectives 28 \
+    --max-objectives 29 \
     --no-dashboard \
     "${loop_start_args[@]}" \
     >>"$LOG_FILE" 2>&1 < /dev/null &
@@ -100,7 +100,7 @@ if ! kill -0 "$archon_pid" 2>/dev/null; then
     exit 1
 fi
 
-echo "IPhO 2026 K3 Archon started with queue depth 28 and 4 active target lifecycles (PID $archon_pid)."
+echo "IPhO 2026 K3 Archon started with queue depth 29 and 4 active target lifecycles (PID $archon_pid)."
 echo "Model: kimi-k3"
 echo "Harness: Claude Code (Anthropic Messages API)"
 echo "Upstream: https://api.moonshot.cn/anthropic/v1/messages"

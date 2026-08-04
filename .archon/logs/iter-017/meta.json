@@ -8,27 +8,27 @@
   },
   "prover": {
     "status": "done",
-    "dispatchEligible": 3,
+    "dispatchEligible": 1,
     "dispatchSkippedNoEligible": false,
     "pipelineReviewEnabled": true,
     "pipelineImmediateRedraftEnabled": true,
     "pipelineFormalizationReviewEnabled": true,
-    "pipelineStartsAt": "mixed",
-    "pipelineReviewMaxCombined": 3,
-    "pipelineReviewMaxReviewers": 3,
+    "pipelineStartsAt": "formalizer",
+    "pipelineReviewMaxCombined": 1,
+    "pipelineReviewMaxReviewers": 1,
     "pipelineReviewComplete": true,
-    "pipelineReviewTargets": 3,
-    "pipelineReviewReviewed": 3,
+    "pipelineReviewTargets": 1,
+    "pipelineReviewReviewed": 1,
     "pipelineReviewUnresolved": 0,
     "pipelineReviewReport": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-017/pipelined-review.json",
-    "pipelineFormalizersRequested": 4,
-    "pipelineFormalizersMaterialized": 3,
-    "pipelineFormalizersFailed": 1,
-    "pipelineFormalizationReviews": 3,
+    "pipelineFormalizersRequested": 1,
+    "pipelineFormalizersMaterialized": 1,
+    "pipelineFormalizersFailed": 0,
+    "pipelineFormalizationReviews": 1,
     "pipelineFormalizationPending": 0,
     "pipelineGateEventsApplied": true,
-    "pipelineGateEvents": 7,
-    "durationSecs": 35635
+    "pipelineGateEvents": 2,
+    "durationSecs": 4216
   },
   "pipelineFormalizers": {
     "IPhO2026Problems_problem_IPhO_2026_1_B_1": {
@@ -65,30 +65,74 @@
     },
     "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
       "status": "error",
-      "cycle": 3,
+      "cycle": 4,
       "file": "IPhO2026Problems/problem_IPhO_2026_1_C_1.lean",
-      "reviewAttempt": 3,
-      "sessionId": "010db64c-4739-4d56-ac72-50249d634149",
+      "reviewAttempt": 4,
+      "sessionId": "c71f2496-9190-4c89-b0be-10dcda4a1608",
       "runnerOk": true,
       "changed": false,
       "compiles": true,
       "taskResultUpdated": true,
       "leanSha256": "f3e66545ce9ff7c3173604f3030711b715258b8dd31d4e612075fe347cb6267d",
       "error": "formalizer did not change the Lean target"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean",
+      "status": "materialized",
+      "cycle": 1,
+      "origin": "initial",
+      "baselineSha256": "",
+      "mode": "physics-formalize",
+      "sessionId": "0ccaf7ef-432f-43c7-8fc5-2c6572128d03",
+      "runnerOk": true,
+      "changed": true,
+      "compiles": true,
+      "taskResultUpdated": true,
+      "leanSha256": "8b30125bc38497b60f13110d60591ce381297fc26f2a5ee6d91dab495155ce6e",
+      "error": ""
     }
   },
   "axiomSweep": {
     "status": "done",
     "scope": "current-objectives",
-    "jobs": 2,
-    "targets": 2,
-    "filesChecked": 2,
+    "jobs": 1,
+    "targets": 1,
+    "filesChecked": 1,
     "failedFiles": 0,
-    "durationSecs": 20,
+    "durationSecs": 9,
     "sorryLaunderings": 0
   },
   "review": {
-    "status": "running"
+    "status": "done",
+    "pipelineTargetConsumed": true,
+    "pipelineTargetReport": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/logs/iter-017/pipelined-review.json",
+    "deterministic": true,
+    "preflightJobs": 1,
+    "preflightDurationSecs": 10.047,
+    "preflightPassed": 1,
+    "preflightFailed": 0,
+    "pipelineGateEventsConsumed": true,
+    "pipelineFormalizationPending": 0,
+    "durationSecs": 0,
+    "physicsBlockers": 8,
+    "physicsDoctorBlockers": 8,
+    "physicsReviewerBlockers": 0,
+    "physicsReviewAgentBlockers": 0,
+    "physicsGateResetComplete": false,
+    "formalizationGateEnabled": true,
+    "formalizationGateStatus": "passed",
+    "formalizationGatePassed": 1,
+    "formalizationGateRetry": 0,
+    "formalizationGateExhausted": 0,
+    "formalizationGateReviewed": 1,
+    "proofGateEnabled": true,
+    "proofGateSolved": 1,
+    "proofGateRetry": 0,
+    "proofGateNeedsRedraft": 0,
+    "proofGateInfrastructureBlocked": 0,
+    "proofGateRedraftsReopened": 0,
+    "proofGateExhausted": 0,
+    "proofGateReviewed": 1
   },
   "provers": {
     "IPhO2026Problems_problem_IPhO_2026_1_C_1": {
@@ -114,6 +158,14 @@
       "stage": "prover",
       "mode": "physics",
       "sessionId": "b6f11d1e-7d0c-418b-901a-8b95a74889bd"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_1": {
+      "file": "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean",
+      "status": "done",
+      "cycle": 1,
+      "stage": "prover",
+      "mode": "physics",
+      "sessionId": "01a8d8ef-6987-4f4a-874a-e0d3e83b9d75"
     }
   },
   "pipelineFormalizationReviews": {
@@ -137,6 +189,13 @@
       "attempt": 1,
       "reviews": 4,
       "reason": "Iter-017 redraft repaired both certificate defects in the contract, and the file now faithfully and derivably encodes T1-C1. Root cause: IsScatteringAngle is now exactly the cosine law (vacuous at p = 0), admitting the official degenerate critical configuration (O2 at rest) that T1_solution.txt counts as attaining the threshold at every theta >= pi/2 (90-degree tangent point = velocity-circle origin) \u2014 the pre-redraft p != 0 readout made both main theorems refutable, and the redraft lane machine-checked the repair (backward reachability fully proved in scratch, EXIT=0, axioms [propext, Classical.choice, Quot.sound]). Secondary defect: backward hdisc strengthened to the pi/2 reality condition 0 <= 1 - 2*dU/(m*c^2), excluding the vacuous regime dU in (mc^2/2, 3mc^2/2]. The Lean hbarOmegaMin carries the correct official factor 2*dU/(3*m*c^2) (blueprint recorded-answer paragraph is stale, missing the 2; blueprint def prose still says p != 0 \u2014 blueprint-side re-keying debt routed to plan/blueprint-doctor, not a Lean infidelity). Both minimality conjuncts and all helper lemmas are proved in-file; the two remaining sorries are the reachability conjuncts, now true statements with a compiled route (backward) and an explicit coordinate witness route (forward, P0 = 2(E0/c)cos(theta)/3 >= 0 double root). Answer appears only on conclusion sides; no smuggling into assumptions."
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_1": {
+      "status": "passed",
+      "cycle": 1,
+      "attempt": 1,
+      "reviews": 1,
+      "reason": "Statements faithfully encode IPhO 2026 T3-C.1: main theorem figure3b_labeling states exactly the official answer (T1=T4=Th, T2=T3=Tc; Qc absorbed on 2->3 with Q23=+Qc>0; Qh delivered on 4->1 with Q41=-Qh<0; no heat on adiabatic legs 1->2, 3->4), verified against references/text/T3_solution.txt (lines 98-100, 112-115), the T3_page-3.png figure, and the C.1 marking scheme. The reservoir-identification content stays on the conclusion side: ReservoirExchange enters only as an unresolved per-leg disjunction, and strict sign bridges from the B.1 heat law force the branch elimination."
     }
   },
   "pipelinePreflights": {
@@ -151,6 +210,11 @@
       "compiles": true
     },
     "IPhO2026Problems_problem_IPhO_2026_1_B_2": {
+      "status": "done",
+      "cycle": 1,
+      "compiles": true
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_1": {
       "status": "done",
       "cycle": 1,
       "compiles": true
@@ -175,6 +239,24 @@
       "attempt": 1,
       "cycle": 1,
       "route": "solved"
+    },
+    "IPhO2026Problems_problem_IPhO_2026_3_C_1": {
+      "status": "done",
+      "attempt": 1,
+      "cycle": 1,
+      "route": "solved"
     }
-  }
+  },
+  "sorry_count": 7,
+  "finalize": {
+    "innerGit": {
+      "sha": "cfd2d16"
+    },
+    "lake": {
+      "ok": true,
+      "durationSecs": 1
+    }
+  },
+  "completedAt": "2026-08-04T05:04:40Z",
+  "wallTimeSecs": 4229
 }

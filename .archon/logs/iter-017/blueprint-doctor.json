@@ -20,6 +20,7 @@
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_A_3.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_B_1.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_B_2.tex",
+    "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_1.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_2.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_3.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_4.tex",
@@ -51,6 +52,7 @@
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_A_3.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_B_1.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_B_2.tex",
+    "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_1.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_2.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_3.tex",
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/IPhO2026Problems_problem_IPhO_2026_3_C_4.tex",
@@ -64,12 +66,18 @@
     "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/blueprint/src/chapters/_preamble.tex"
   ],
   "orphan_chapters": [],
-  "labels_defined_count": 484,
+  "labels_defined_count": 486,
   "broken_refs": [],
   "malformed_refs": [],
   "axiom_decls": [],
   "covers_problems": [],
-  "physics_modeling_problems": [],
+  "physics_modeling_problems": [
+    {
+      "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_C_1.lean",
+      "kind": "missing-physlib-import",
+      "reason": "physics target does not import Physlib/PhysLean; grounding should use the configured domain library before introducing local abstractions"
+    }
+  ],
   "physics_grounding_problems": [
     {
       "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_1_B_2.lean",
@@ -95,6 +103,11 @@
       "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_2_C_4.lean",
       "kind": "incomplete-grounding-log",
       "reason": "IPhO2026Problems/problem_IPhO_2026_2_C_4.lean has a task_results report at /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/physics-grounding-IPhO2026Problems_problem_IPhO_2026_2_C_4.md, but its LeanExplore grounding evidence is incomplete; missing: successful LeanExplore search."
+    },
+    {
+      "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_C_1.lean",
+      "kind": "incomplete-grounding-log",
+      "reason": "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean has a task_results report at /root/proposal_for_physic/science-mango-ipho-2026-k3-run/.archon/task_results/problem_IPhO_2026_3_C_1.md, but its LeanExplore grounding evidence is incomplete; missing: LeanExplore mention, query/candidate evidence, grounded-name section, local-abstraction section."
     },
     {
       "file": "/root/proposal_for_physic/science-mango-ipho-2026-k3-run/IPhO2026Problems/problem_IPhO_2026_3_C_2.lean",

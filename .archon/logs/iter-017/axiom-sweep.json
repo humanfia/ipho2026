@@ -1,13 +1,12 @@
 {
   "ran": true,
   "error": null,
-  "filesChecked": 2,
-  "durationSecs": 20,
-  "jobs": 2,
+  "filesChecked": 1,
+  "durationSecs": 9,
+  "jobs": 1,
   "scope": "current-objectives",
   "targetFiles": [
-    "IPhO2026Problems/problem_IPhO_2026_1_B_1.lean",
-    "IPhO2026Problems/problem_IPhO_2026_1_B_2.lean"
+    "IPhO2026Problems/problem_IPhO_2026_3_C_1.lean"
   ],
   "failedFiles": [],
   "sorryLaunderings": [],
