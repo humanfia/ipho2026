@@ -19,6 +19,8 @@
 | GPT/Codex v2 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **22/23** | **22/23** |
 | Kimi K3 | **23/23 (100%)** | 23/23 pass; sorry = 0 | **1/23** | **23/23** |
 
+Full token counts for both runs are listed under
+[Token usage](#token-usage) below.
 See [MODEL_COMPARISON.md](MODEL_COMPARISON.md) for the conclusions,
 [TOKEN_USAGE.md](TOKEN_USAGE.md) for provider-exact rows, and
 [TOKEN_USAGE_RECONSTRUCTED.md](TOKEN_USAGE_RECONSTRUCTED.md) for Kimi K3's
@@ -38,6 +40,58 @@ categories.
 The six experimental targets are excluded from this score. Their snapshots
 are kept under [experimental](experimental) for completeness, are not claimed
 as solved, and may contain proof placeholders.
+
+## Token usage
+
+The totals below are sums of the published per-problem data in
+[token_usage_per_problem.csv](token_usage_per_problem.csv) and
+[token_usage_reconstructed_per_problem.csv](token_usage_reconstructed_per_problem.csv).
+Total = non-cached input + cached input + output. Reasoning tokens are a
+subset of output and are not added again.
+
+### Side by side, on the 22 directly comparable targets
+
+| Run | Input | Output | Total tokens | Relative |
+|---|---:|---:|---:|---:|
+| GPT/Codex v2 | 145,594,784 | 1,046,973 | **146,641,757** | **1.00×** |
+| Kimi K3 | 1,182,905,613 | 6,230,123 | **1,189,135,736** | **8.11×** |
+
+T3-B1 is excluded from this comparison: one GPT/Codex v2 session lacks
+complete usage, so no 23-target GPT total is published.
+
+### GPT/Codex v2 — provider-exact, 22 of 23 targets
+
+| Category | Tokens |
+|---|---:|
+| Non-cached input | 7,715,232 |
+| Cached input | 137,879,552 |
+| Input subtotal | 145,594,784 |
+| Output | 1,046,973 |
+| **Total** | **146,641,757** |
+
+Cached input is 94.7% of all input on these 22 targets.
+
+### Kimi K3 — provider-exact plus trajectory reconstruction, 23 of 23 targets
+
+| Source | Input | Output | Total |
+|---|---:|---:|---:|
+| Provider-exact | 66,499,412 | 1,384,798 | 67,884,210 |
+| Trajectory-reconstructed | 1,147,622,258 | 5,074,854 | 1,152,697,112 |
+| **All 23 targets** | **1,214,121,670** | **6,459,652** | **1,220,581,322** |
+| Common 22 targets | 1,182,905,613 | 6,230,123 | 1,189,135,736 |
+
+Only T3-C1 is fully provider-metered; the remaining targets are wholly or
+partly replayed with the pinned official tokenizer, which does not retain a
+cached / non-cached split. Input is 99.48% of the common-22 total, which is
+where the gap with GPT/Codex v2 comes from: on those 22 targets Kimi K3 ran
+302 attributable sessions and 13,273 successful model calls against 76
+sessions and 2,825 metered turns for GPT/Codex v2, and each additional call
+re-sends the accumulated context.
+
+Per-problem tables are in [TOKEN_USAGE.md](TOKEN_USAGE.md) (provider-exact)
+and [TOKEN_USAGE_RECONSTRUCTED.md](TOKEN_USAGE_RECONSTRUCTED.md) (Kimi K3
+full trajectory). These are token counts only; no per-token price is recorded
+in this repository, so no USD figure is derived from them.
 
 ## Released contents
 
